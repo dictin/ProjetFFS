@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63b1cb15-f66e-4474-9425-63ab89712284" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ProjetFFS.iws" />
@@ -274,7 +273,11 @@
       <created>1392908129376</created>
       <updated>1392908129376</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Correcting .gitignore">
+      <created>1392908283577</created>
+      <updated>1392908283577</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -320,7 +323,8 @@
     </option>
     <MESSAGE value="Added &quot;Main&quot; class + XML changes" />
     <MESSAGE value="Testing .gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing .gitignore" />
+    <MESSAGE value="Correcting .gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correcting .gitignore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
