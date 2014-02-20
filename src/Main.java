@@ -9,5 +9,6 @@ public class Main {
         System.out.println("5th");
         System.out.println("6th");
         System.out.println("7th");
+        System.out.println("8th");
     }
 }
