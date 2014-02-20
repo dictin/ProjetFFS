@@ -1,4 +1,6 @@
-ProjetFFS
-=========
+<h1>ProjetFFS</h1>
+<hr/>
 
-An integration project for the SIM program at Bois-de-Boulogne College, Canada, QC
+<p>
+An integration project for the <b>SIM</b> program at <i>Bois-de-Boulogne</i> College, Canada, QC
+</p>
