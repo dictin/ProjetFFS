@@ -5,5 +5,6 @@ public class Main {
         System.out.println("Testing gitingnore");
         System.out.println("2nd test for .gitignore");
         System.out.println("3rd test");
+        System.out.println("4th");
     }
 }
