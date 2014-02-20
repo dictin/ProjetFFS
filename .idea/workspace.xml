@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63b1cb15-f66e-4474-9425-63ab89712284" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="$PROJECT_DIR$/src/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
     </list>
     <ignored path="ProjetFFS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -67,19 +66,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="51" selection-start="210" selection-end="210" vertical-scroll-proportion="0.13535032" vertical-offset="0" max-vertical-offset="628">
+            <state line="5" column="51" selection-start="210" selection-end="210" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="238">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="14" selection-start="112" selection-end="112" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+            <state line="3" column="20" selection-start="118" selection-end="118" vertical-scroll-proportion="0.08121019" vertical-offset="0" max-vertical-offset="628">
               <folding />
             </state>
           </provider>
@@ -98,8 +97,8 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -278,7 +277,11 @@
       <created>1392908283577</created>
       <updated>1392908283577</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Second test for .gitignore">
+      <created>1392908477931</created>
+      <updated>1392908477931</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -325,22 +328,23 @@
     <MESSAGE value="Added &quot;Main&quot; class + XML changes" />
     <MESSAGE value="Testing .gitignore" />
     <MESSAGE value="Correcting .gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correcting .gitignore" />
+    <MESSAGE value="Second test for .gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Second test for .gitignore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="14" selection-start="112" selection-end="112" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+        <state line="5" column="51" selection-start="210" selection-end="210" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="238">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="51" selection-start="210" selection-end="210" vertical-scroll-proportion="0.13535032" vertical-offset="0" max-vertical-offset="628">
+        <state line="3" column="20" selection-start="118" selection-end="118" vertical-scroll-proportion="0.08121019" vertical-offset="0" max-vertical-offset="628">
           <folding />
         </state>
       </provider>
