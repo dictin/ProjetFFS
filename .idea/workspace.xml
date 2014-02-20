@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63b1cb15-f66e-4474-9425-63ab89712284" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ProjetFFS.iws" />
@@ -66,10 +67,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Main.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="39" selection-start="105" selection-end="105" vertical-scroll-proportion="0.08121019" vertical-offset="0" max-vertical-offset="628">
+            <state line="4" column="46" selection-start="155" selection-end="155" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="14" selection-start="112" selection-end="112" vertical-scroll-proportion="0.08121019" vertical-offset="0" max-vertical-offset="628">
               <folding />
             </state>
           </provider>
@@ -89,6 +99,7 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -259,11 +270,15 @@
       <created>1392907135652</created>
       <updated>1392907135652</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Testing .gitignore">
+      <created>1392908129376</created>
+      <updated>1392908129376</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="784" extended-state="1" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -304,7 +319,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="Added &quot;Main&quot; class + XML changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added &quot;Main&quot; class + XML changes" />
+    <MESSAGE value="Testing .gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing .gitignore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -312,7 +328,14 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="39" selection-start="105" selection-end="105" vertical-scroll-proportion="0.08121019" vertical-offset="0" max-vertical-offset="628">
+        <state line="4" column="46" selection-start="155" selection-end="155" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="14" selection-start="112" selection-end="112" vertical-scroll-proportion="0.08121019" vertical-offset="0" max-vertical-offset="628">
           <folding />
         </state>
       </provider>
