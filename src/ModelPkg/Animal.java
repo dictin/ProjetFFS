@@ -20,8 +20,19 @@ public abstract class Animal {
     public Animal(){
 
     }
+    public void setPosition(Point position) {
+        this.position = position;
+    }
 
-    public void smellSurroundings(){
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public  void smellSurroundings(){
 
     }
 
