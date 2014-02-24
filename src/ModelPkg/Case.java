@@ -22,14 +22,14 @@ public class Case {
 
     public void addSmell(Smell smell){
         this.smellArrayList.add(smell);
-        this.optimizeSmellArray();
+        this.optimizeSmellArray();         //TODO Create this method
     }
 
     public void dilluteSmell(){
-        Iterator iterator = this.smellArrayList.iterator();
+        Iterator<Smell> iterator = this.smellArrayList.iterator();
 
         while(iterator.hasNext()){
-            (Smell)iterator.next().
+            iterator.next().diminish();
         }
     }
 }
