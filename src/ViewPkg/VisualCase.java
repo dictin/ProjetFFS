@@ -10,11 +10,11 @@ public class VisualCase extends JComponent {
 
     public static final int CASE_SIDE_PIXEL_SIZE=20;
     private Point caseCoord;
-    public VisualCase(int i, int j){
+    public VisualCase(int i, int j, Point visualCaseOrigin){
         caseCoord=new Point(i, j);
         this.setSize(new Dimension(CASE_SIDE_PIXEL_SIZE, CASE_SIDE_PIXEL_SIZE));
         System.out.println(i*CASE_SIDE_PIXEL_SIZE+";"+j*CASE_SIDE_PIXEL_SIZE);
-        this.setLocation(i*CASE_SIDE_PIXEL_SIZE, j*CASE_SIDE_PIXEL_SIZE);
+        this.setLocation((int) (visualCaseOrigin.getX()+i*CASE_SIDE_PIXEL_SIZE), (int) (visualCaseOrigin.getY()+j*CASE_SIDE_PIXEL_SIZE));
     }
     @Override
     public void paintComponent(Graphics graphics){
