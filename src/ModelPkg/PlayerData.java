@@ -10,9 +10,11 @@ import java.util.Iterator;
 public class PlayerData {
     //TODO modifier le nombre de nourritures de départ selon la difficultée du jeu :)
     private int food = 300;
+    // Que représente Score???
     private int score = 0;
     private int population = 0;
     private int nbLottery = 0;
+    private int nbBooster = 0;
     private ArrayList<Item> inventory = new ArrayList<Item>();
 
     public int getFood() {
@@ -44,7 +46,7 @@ public class PlayerData {
     }
 
     public void setInventory(ArrayList<Item> inventory) {
-        int numberLottery =0;
+        int numberLottery = 0;
         int numberBooster = 0;
        Iterator<Item> list = this.inventory.iterator();
         while(list.hasNext()){
@@ -56,7 +58,7 @@ public class PlayerData {
                 numberBooster ++;
             }
         }
-        this
+        this.nbBooster = numberBooster;
         this.nbLottery = numberLottery;
         this.inventory = inventory;
     }
