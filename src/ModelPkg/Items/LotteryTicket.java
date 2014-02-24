@@ -17,6 +17,7 @@ public class LotteryTicket extends Item {
     }
 
     public void setnumberBonty(int numberBonty) {
+        //TODO à modifier les quatités de nourritures dans l'inventaire
         this.numberBonty = numberBonty;
     }
     public void activation (){
