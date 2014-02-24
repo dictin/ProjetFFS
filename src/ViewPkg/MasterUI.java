@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MasterUI extends JPanel{
+
+    public static final Point ORIGIN_POINT_OF_GRID = (new Point());
+
     public MasterUI(){
         this.setSize(MasterFrame.GAME_FRAME_SIZE);
         this.setLocation(0,0);
@@ -12,6 +15,8 @@ public class MasterUI extends JPanel{
         int tailleXGrille=30;
         int tailleYGrille=30;
         VisualCase[][] visualCasesGrid=new VisualCase[tailleXGrille][tailleYGrille];
+//        Point visualCasesGridOrigin;
+
         for (int i=0; i<tailleXGrille; i++){
             for (int j=0; j<tailleYGrille; j++){
                 visualCasesGrid[i][j]=new VisualCase(i, j);
