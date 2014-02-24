@@ -62,6 +62,22 @@ public class Smell {
 
     }
 
+    public int totalSmell(){
+        int total = 0;
+        Iterator<SmellID> iterator = this.contributors.iterator();
+
+        while(iterator.hasNext()){
+            total+=iterator.next().getIntensity();
+        }
+
+        if (total > 100){
+            total = 100;
+        }
+
+        return total;
+
+    }
+
 
 
     public int getIntensity() {
