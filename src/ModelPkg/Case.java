@@ -70,4 +70,10 @@ public class Case {
             iterator.next().diminish();
         }
     }
+
+    public Smell getStrongestSmell(){
+        Smell returnValue;
+        returnValue = this.sortedSmellArrayList.get(0);
+        return returnValue;
+    }
 }
