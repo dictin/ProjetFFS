@@ -11,6 +11,7 @@ public class PlayerData {
     //TODO modifier le nombre de nourritures de départ selon la difficultée du jeu :)
     private int food = 300;
     // Que représente Score???
+    //Dictin: une valeur numerique qui depend de la nourriture recupere, du nombre fourmilliers perdus et du niveau atteint. TODO determiner l'algorithme qui calcule le score
     private int score = 0;
     private int population = 0;
     private int nbLottery = 0;
