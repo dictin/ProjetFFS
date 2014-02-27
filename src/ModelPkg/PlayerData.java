@@ -52,15 +52,17 @@ public class PlayerData {
        Iterator<Item> list = this.inventory.iterator();
         while(list.hasNext()){
             Item actualItem = list.next();
-            if(actualItem.equals(LotteryTicket)){
+            if(actualItem instanceof LotteryTicket){            //Verifie si le actual item est une instance de la classe "LotteryTicket"
                 numberLottery ++;
             }
-            else if( actualItem.equals(Booster)){
+            else if( actualItem instanceof Booster){           //Voir ci-haut
                 numberBooster ++;
             }
         }
         this.nbBooster = numberBooster;
         this.nbLottery = numberLottery;
         this.inventory = inventory;
+
+        //TODO optimiser cette methode pour faciliter l'implementation d'une multitude d'items different. Je pensais un modele "fork/joint". (voir tutoriel sdz)
     }
 }
