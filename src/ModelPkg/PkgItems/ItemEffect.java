@@ -1,4 +1,4 @@
-package ModelPkg.Items;
+package ModelPkg.PkgItems;
 
 public interface ItemEffect {
 

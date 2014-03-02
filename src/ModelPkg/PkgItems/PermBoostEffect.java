@@ -1,9 +1,9 @@
-package ModelPkg.Items;
+package ModelPkg.PkgItems;
 
 /**
  * Created by Dictin on 14-03-02.
  */
-public enum TempBoostEffect implements ItemEffect{
+public enum PermBoostEffect implements ItemEffect {
 
     LOW_HP_BOOST(0, 3),
     MED_HP_BOOST(0, 5),
@@ -42,9 +42,8 @@ public enum TempBoostEffect implements ItemEffect{
 
     private int boostValue;
     private int statID;
-    private final int DURATION = 30000;
 
-    private TempBoostEffect(int statID, int boostValue){
+    private PermBoostEffect(int statID, int boostValue){
         this.statID = statID;
         this.boostValue = boostValue;
     }

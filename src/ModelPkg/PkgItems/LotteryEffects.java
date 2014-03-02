@@ -1,4 +1,4 @@
-package ModelPkg.Items;
+package ModelPkg.PkgItems;
 
 import java.util.Random;
 
