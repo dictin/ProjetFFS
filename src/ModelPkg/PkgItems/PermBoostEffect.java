@@ -3,7 +3,7 @@ package ModelPkg.PkgItems;
 /**
  * Created by Dictin on 14-03-02.
  */
-public enum PermBoostEffect implements ItemEffect {
+public enum PermBoostEffect {
 
     LOW_HP_BOOST(0, 3),
     MED_HP_BOOST(0, 5),
