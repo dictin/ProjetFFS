@@ -24,7 +24,8 @@ public class Case {
 
     public void addSmell(Smell smell){
         this.smellArrayList.add(smell);
-        this.optimizeSmellArray();         //TODO Create this method
+        this.optimizeSmellArray();
+        this.setStrongestSmell();
     }
 
     private void optimizeSmellArray() {
@@ -64,16 +65,21 @@ public class Case {
     }
 
     public void dilluteSmell(){
-        Iterator<Smell> iterator = this.smellArrayList.iterator();
+        ArrayList<Smell> dilutedSmells = new ArrayList<Smell>();
+        Smell tempSmell = null;
+        for(int i = 0; i < this.smellArrayList.size(); i++){
+            tempSmell = this.smellArrayList.get(i);
+            tempSmell.diminish();
+            dilutedSmells.add(tempSmell);
 
-        while(iterator.hasNext()){
-            iterator.next().diminish();
         }
+
+        this.smellArrayList.clear();
+        this.smellArrayList.addAll(dilutedSmells);
+        this.optimizeSmellArray();
     }
 
-    public Smell getStrongestSmell(){
-        Smell returnValue;
-        returnValue = this.sortedSmellArrayList.get(0);
-        return returnValue;
+    public void setStrongestSmell(){
+        this.dominantSmell = this.sortedSmellArrayList.get(0);
     }
 }
