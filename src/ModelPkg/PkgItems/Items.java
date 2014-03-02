@@ -5,7 +5,13 @@ package ModelPkg.PkgItems;
  */
 public enum Items {
 
-    private Items()
+    POTION_1(PermBoostEffect.LOW_ATK_BOOST);
+
+
+
+    private Items(ItemEffect effect){
+
+    }
 
 
 }
