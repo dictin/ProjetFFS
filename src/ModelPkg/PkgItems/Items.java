@@ -7,15 +7,15 @@ public enum Items {
 
     //Équipement permanent qui peut être installé entre les niveaux pour un boost constant
 
-    GENMOD_HP_0(0, "Coagulation rapide", BoostEffect.LOW_HP_BOOST),
-    GENMOD_HP_1(1, "Redondance organique", BoostEffect.MED_HP_BOOST),
-    GENMOD_HP_2(2, "R\u00E9g\u00E9n\u00E9r\u00E9scence c\u00E9lulaire", BoostEffect.HIGH_HP_BOOST),
-    GENMOD_SPD_3(3,"Syst\u00E8me nerveux autonomique", BoostEffect.LOW_SPD_BOOST),
-    GENMOD_SPD_4(4, "Pivot d'articulation ind\u00E9pendant", BoostEffect.MED_SPD_BOOST),
-    GENMOD_SPD_5(5, "Mouvement bip\u00E9dal", BoostEffect.HIGH_SPD_BOOST),
-    GENMOD_ATK_6(6, "Griffes perforantes", BoostEffect.LOW_ATK_BOOST),
-    GENMOD_ATK_7(7, "Enzymes Anticoagullants", BoostEffect.MED_ATK_BOOST),
-    GENMOD_ATK_8(8, "Machoire renforc\u00E9e", BoostEffect.HIGH_ATK_BOOST),;
+    GENMOD_HP_0(0, "Coagulation rapide", PermBoostEffect.LOW_HP_BOOST),
+    GENMOD_HP_1(1, "Redondance organique", PermBoostEffect.MED_HP_BOOST),
+    GENMOD_HP_2(2, "R\u00E9g\u00E9n\u00E9r\u00E9scence c\u00E9lulaire", PermBoostEffect.HIGH_HP_BOOST),
+    GENMOD_SPD_3(3,"Syst\u00E8me nerveux autonomique", PermBoostEffect.LOW_SPD_BOOST),
+    GENMOD_SPD_4(4, "Pivot d'articulation ind\u00E9pendant", PermBoostEffect.MED_SPD_BOOST),
+    GENMOD_SPD_5(5, "Mouvement bip\u00E9dal", PermBoostEffect.HIGH_SPD_BOOST),
+    GENMOD_ATK_6(6, "Griffes perforantes", PermBoostEffect.LOW_ATK_BOOST),
+    GENMOD_ATK_7(7, "Enzymes Anticoagullants", PermBoostEffect.MED_ATK_BOOST),
+    GENMOD_ATK_8(8, "Machoire renforc\u00E9e", PermBoostEffect.HIGH_ATK_BOOST),
 
 
     /*
@@ -58,17 +58,5 @@ public enum Items {
 
     }
 
-    public ItemEffect getEffect() {
-        return effect;
-    }
 
-    public void firstActivation(){
-        ItemEffect effect = this.getEffect();
-        if (effect instanceof BoostEffect){
-            TempItemInstance instance = ((BoostEffect) effect).getTempInstance();
-            //Ajouter l'instance temporaire au arraylist du joueur
-        }else if (effect instanceof LotteryEffects){
-            effect.activate();
-        }
-    }
 }

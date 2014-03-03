@@ -1,6 +1,8 @@
 package ModelPkg;
 
-import ModelPkg.PkgItems.TempItemInstance;
+import ModelPkg.PkgItems.Booster;
+import ModelPkg.PkgItems.Item;
+import ModelPkg.PkgItems.LotteryTicket;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -15,59 +17,6 @@ public class PlayerData {
     private int nbLottery = 0;
     private int nbBooster = 0;
     private ArrayList<Item> inventory = new ArrayList<Item>();
-    private ArrayList<TempItemInstance> permanentInstances = new ArrayList<TempItemInstance>();
-    private ArrayList<TempItemInstance> tempItemInstances = new ArrayList<TempItemInstance>();
-    private int[] statModifiers = new int[]{0,0,0,0,0,0,0,0};
-
-
-
-
-
-
-
-
-
-    public void addItemInstance(TempItemInstance itemInstance){
-        if (itemInstance.getDuration() < 0){
-            this.permanentInstances.add(itemInstance);
-        }else{
-            this.tempItemInstances.add(itemInstance);
-        }
-
-    }
-
-    public void tempItemTurn(){
-        for(int i = 0; i < this.tempItemInstances.size(); i++){
-            this.tempItemInstances.get(i).turn();
-        }
-    }
-
-    public void cleanTempItemInstances(){
-        ArrayList<TempItemInstance> toClean = new ArrayList<TempItemInstance>();
-        Iterator<TempItemInstance> iterator = this.tempItemInstances.iterator();
-        while(iterator.hasNext()){
-            TempItemInstance instance = iterator.next();
-            if (instance.getDuration() < 0){
-                toClean.add(instance);
-            }
-        }
-
-        this.tempItemInstances.removeAll(toClean);
-    }
-
-    public void activateInstances(){
-        Iterator<TempItemInstance> iterator;
-
-        iterator = this.tempItemInstances.iterator();
-        while(iterator.hasNext()){
-            iterator.next().activate();
-        }
-
-        iterator = this.permanentInstances.iterator();
-        while(iterator.hasNext()){
-            iterator.next().activate();
-        }
-    }
 
     public int getFood() {
         return food;
@@ -115,19 +64,5 @@ public class PlayerData {
         this.inventory = inventory;
 
         //TODO optimiser cette methode pour faciliter l'implementation d'une multitude d'items different. Je pensais un modele "fork/joint". (voir tutoriel sdz)
-    }
-
-    public void addMod(int stat, int value){
-        this.statModifiers[stat] += value;
-    }
-
-    public void clearStatMod(){
-        for(int i = 0; i < this.statModifiers.length; i++){
-            this.statModifiers[i] = 0;
-        }
-    }
-
-    public int getStatMod(int stat){
-        return this.statModifiers[stat];
     }
 }
