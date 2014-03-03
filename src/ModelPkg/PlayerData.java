@@ -9,23 +9,12 @@ public class PlayerData {
     //TODO modifier le nombre de nourritures de départ selon la difficultée du jeu :)
     private int food = 300;
     // Que représente Score???
-    //Dictin: une valeur numerique qui depend de la nourriture recupere, du nombre fourmilliers perdus et du niveau atteint. TODO determiner l'algorithme qui calcule le score
+    //Dictin: une valeur numerique qui depend de la nourriture recupere over all, du nombre fourmilliers perdus et du niveau atteint. TODO determiner l'algorithme qui calcule le score
     private int score = 0;
     private int population = 0;
-    private int nbLottery = 0;
-    private int nbBooster = 0;
-    private ArrayList<Item> inventory = new ArrayList<Item>();
     private ArrayList<TempItemInstance> permanentInstances = new ArrayList<TempItemInstance>();
     private ArrayList<TempItemInstance> tempItemInstances = new ArrayList<TempItemInstance>();
     private int[] statModifiers = new int[]{0,0,0,0,0,0,0,0};
-
-
-
-
-
-
-
-
 
     public void addItemInstance(TempItemInstance itemInstance){
         if (itemInstance.getDuration() < 0){
@@ -33,7 +22,6 @@ public class PlayerData {
         }else{
             this.tempItemInstances.add(itemInstance);
         }
-
     }
 
     public void tempItemTurn(){
@@ -51,18 +39,15 @@ public class PlayerData {
                 toClean.add(instance);
             }
         }
-
         this.tempItemInstances.removeAll(toClean);
     }
 
     public void activateInstances(){
         Iterator<TempItemInstance> iterator;
-
         iterator = this.tempItemInstances.iterator();
         while(iterator.hasNext()){
             iterator.next().activate();
         }
-
         iterator = this.permanentInstances.iterator();
         while(iterator.hasNext()){
             iterator.next().activate();
@@ -81,10 +66,6 @@ public class PlayerData {
         return population;
     }
 
-    public ArrayList<Item> getInventory() {
-        return inventory;
-    }
-
     public void setFood(int food) {
         this.food = food;
     }
@@ -97,25 +78,6 @@ public class PlayerData {
         this.population = population;
     }
 
-    public void setInventory(ArrayList<Item> inventory) {
-        int numberLottery = 0;
-        int numberBooster = 0;
-       Iterator<Item> list = this.inventory.iterator();
-        while(list.hasNext()){
-            Item actualItem = list.next();
-            if(actualItem instanceof LotteryTicket){            //Verifie si le actual item est une instance de la classe "LotteryTicket"
-                numberLottery ++;
-            }
-            else if( actualItem instanceof Booster){           //Voir ci-haut
-                numberBooster ++;
-            }
-        }
-        this.nbBooster = numberBooster;
-        this.nbLottery = numberLottery;
-        this.inventory = inventory;
-
-        //TODO optimiser cette methode pour faciliter l'implementation d'une multitude d'items different. Je pensais un modele "fork/joint". (voir tutoriel sdz)
-    }
 
     public void addMod(int stat, int value){
         this.statModifiers[stat] += value;

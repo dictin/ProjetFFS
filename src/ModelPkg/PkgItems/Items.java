@@ -16,11 +16,8 @@ public enum Items {
     GENMOD_ATK_8(8, "Machoire renforc\u00E9e", BoostEffect.HIGH_ATK_BOOST),;
 
 
-    /*
 
-    LOW_ATK_BOOST(2, 1),
-    MED_ATK_BOOST(2, 3),
-    HIGH_ATK_BOOST(2, 5),
+    /*
 
     LOW_SMELLSENS_BOOST(3, 1),
     MED_SMELLSENS_BOOST(3, 2),

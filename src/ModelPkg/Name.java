@@ -26,6 +26,7 @@ public  class Name {
                     genList.add(1);
                     line = fileEnter.readLine();
                 }
+                fileEnter.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
