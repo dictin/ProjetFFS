@@ -1,8 +1,8 @@
 package ModelPkg;
 
-import ModelPkg.Items.Booster;
-import ModelPkg.Items.Item;
-import ModelPkg.Items.LotteryTicket;
+import ModelPkg.PkgItems.Booster;
+import ModelPkg.PkgItems.Item;
+import ModelPkg.PkgItems.LotteryTicket;
 
 import java.util.ArrayList;
 import java.util.Iterator;

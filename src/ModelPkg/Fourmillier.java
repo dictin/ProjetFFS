@@ -1,6 +1,6 @@
 package ModelPkg;
 
-import ModelPkg.Items.*;
+import ModelPkg.PkgItems.*;
 
 public class Fourmillier extends Animal {
 
