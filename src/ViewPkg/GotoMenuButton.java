@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 /**
  * Created by Xav on 24/02/14.
  */
-public class QuitButton extends JComponent {
+public class GotoMenuButton extends JComponent {
 
     private Controller controller;
     private boolean isAnimatedNow=false;
@@ -21,30 +21,33 @@ public class QuitButton extends JComponent {
     private int anmtnWaitTime=10;
     private int numberOfSprites =2;
     private int currentSpriteIndex=0;
-    private String name="quit_button";
+    private String menuButtonName ="quit_button";
 
-    public QuitButton(final Controller controller){
+    public GotoMenuButton(final Controller controller, String menuButtonName, Dimension buttonMaxSize){
         this.controller=controller;
-        this.setSize(new Dimension(25,25));
+        this.menuButtonName= menuButtonName;
+        this.setSize(buttonMaxSize);
 
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                QuitButton quitButton =(QuitButton)e.getSource();
-                quitButton.setAnimated(true);
-                quitButton.setAnmtnStartTime(controller.getTime());
+                GotoMenuButton gotoMenuButton =(GotoMenuButton)e.getSource();
+                gotoMenuButton.setAnimated(true);
+                gotoMenuButton.setAnmtnStartTime(controller.getTime());
             }
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                QuitButton quitButton =(QuitButton)e.getSource();
-                quitButton.setAnimated(false);
+                GotoMenuButton gotoMenuButton =(GotoMenuButton)e.getSource();
+                gotoMenuButton.setAnimated(false);
+                gotoMenuButton.currentSpriteIndex=0;
             }
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                controller.quitGame();
+                GotoMenuButton gotoMenuButton =(GotoMenuButton)e.getSource();
+                controller.menuButtonClick(gotoMenuButton.getMenuButtonName());
             }
         });
         this.setVisible(true);
@@ -77,9 +80,13 @@ public class QuitButton extends JComponent {
         }
     }
 
+    public String getMenuButtonName(){
+        return this.menuButtonName;
+    }
+
     @Override
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
-        graphics.drawImage(Toolkit.getDefaultToolkit().getImage(name + currentSpriteIndex + ".gif"), 0, 0, this);
+        graphics.drawImage(Toolkit.getDefaultToolkit().getImage(menuButtonName + currentSpriteIndex + ".gif"), 0, 0, this);
     }
 }

@@ -15,9 +15,11 @@ public class MasterFrame extends JFrame {
     //TODO choisir taille fenetre.
 
     private MasterUI mUI;
-    private JMenuBar menuBar = new JMenuBar();
-    private JMenu menu1 = new JMenu("Menu");
-    private JMenuItem quit = new JMenuItem("Quitter");
+
+// TODO remove or update menuBar
+//    private JMenuBar menuBar = new JMenuBar();
+//    private JMenu menu1 = new JMenu("Menu");
+//    private JMenuItem quit = new JMenuItem("Quitter");
 
     public MasterFrame(final Controller controller){
         this.setSize(GAME_FRAME_SIZE);
@@ -30,12 +32,6 @@ public class MasterFrame extends JFrame {
         this.setLocationRelativeTo(null);
 
 
-        quit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.quitGame();
-            }
-        });
 
         //TODO Implement load and save game.
 //        private JMenuItem load = new JMenuItem("Charger");

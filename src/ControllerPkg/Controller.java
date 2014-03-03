@@ -45,7 +45,16 @@ public class Controller extends Thread{
         this.mUI=mUI;
     }
 
-    public void quitGame(){
-        mF.dispose();
+    public void menuButtonClick(String menuButtonName){
+
+        //TODO remplacer chaîne de ifs par un switch
+        if (menuButtonName=="quit_button"){
+            System.exit(0);
+        }
+        else {
+            String menuName=menuButtonName.split("_")[0];
+            mUI.popMenu(menuName);
+        }
+//        mF.dispose();
     }
 }
