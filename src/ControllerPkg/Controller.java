@@ -52,9 +52,8 @@ public class Controller extends Thread{
             System.exit(0);
         }
         else {
-            String menuName=menuButtonName.split("_")[0];
+            String menuName=menuButtonName.split("_")[0]+"_menu";
             mUI.popMenu(menuName);
         }
-//        mF.dispose();
     }
 }

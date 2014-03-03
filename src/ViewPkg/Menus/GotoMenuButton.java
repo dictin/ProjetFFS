@@ -1,4 +1,4 @@
-package ViewPkg;
+package ViewPkg.Menus;
 
 import ControllerPkg.Controller;
 

@@ -1,8 +1,7 @@
-package ViewPkg;
+package ViewPkg.Menus;
 
 import ControllerPkg.Controller;
 
-import javax.naming.Context;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -13,9 +12,9 @@ import java.awt.event.MouseEvent;
  */
 public class ContextualMenu extends JComponent {
 
-    private Dimension size=new Dimension(350, 650);
     private Image backgroundImage;
     private String menuName;
+    private Dimension menuZone=new Dimension();
 
     public ContextualMenu(final Controller controller, String menuName){
         this.addMouseListener(new MouseAdapter() {
@@ -27,13 +26,13 @@ public class ContextualMenu extends JComponent {
         this.menuName=menuName;
         backgroundImage=Toolkit.getDefaultToolkit().getImage(menuName+ ".gif");
 
-        if (menuName=="shop_menu"){
-            GotoMenuButton gtmb=new GotoMenuButton(controller, "quit_button", new Dimension(25,25) );
-            this.add(gtmb);
-            gtmb.setLocation(0,0);
-        }
         this.setVisible(false);
     }
+
+    public String getMenuName() {
+        return menuName;
+    }
+
 
     @Override
     public void paintComponent(Graphics graphics){
