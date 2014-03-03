@@ -13,7 +13,7 @@ public enum Items {
     GENMOD_SPD_5(5, "Mouvement bip\u00E9dal", BoostEffect.HIGH_SPD_BOOST),
     GENMOD_ATK_6(6, "Griffes perforantes", BoostEffect.LOW_ATK_BOOST),
     GENMOD_ATK_7(7, "Enzymes Anticoagullants", BoostEffect.MED_ATK_BOOST),
-    GENMOD_ATK_8(8, "Machoire renforc\u00E9e", BoostEffect.HIGH_ATK_BOOST),;
+    GENMOD_ATK_8(8, "Machoire renforc\u00E9e", BoostEffect.HIGH_ATK_BOOST),
 
 
 
@@ -41,6 +41,33 @@ public enum Items {
     HIGH_GBQT_BOOST(7, 30),
     SUPER_GBQT_BOOST(7, 50);
      */
+
+    //Items Temporaires
+
+    POTION_HP_26(26, "Potion de vie, petite", BoostEffect.TEMP_LOW_HP_BOOST),
+    POTION_HP_27(27, "Potion de vie, moyenne", BoostEffect.TEMP_MED_HP_BOOST),
+    POTION_HP_28(28, "Potion de vie, grande", BoostEffect.TEMP_HIGH_HP_BOOST),
+
+    POTION_SPD_29(29, "Potion de vitesse, petite", BoostEffect.TEMP_LOW_SPD_BOOST),
+    POTION_SPD_30(30, "Potion de vitesse, moyenne", BoostEffect.TEMP_MED_SPD_BOOST),
+    POTION_SPD_31(31, "Potion de vitesse, grande", BoostEffect.TEMP_HIGH_SPD_BOOST),
+
+    POTION_ATK_32(32, "Potion d'attaque, petite", BoostEffect.TEMP_LOW_ATK_BOOST),
+    POTION_ATK_33(33, "Potion d'attaque, moyenne", BoostEffect.TEMP_MED_ATK_BOOST),
+    POTION_ATK_34(34, "Potion d'attaque, grande", BoostEffect.TEMP_HIGH_ATK_BOOST),
+
+    POTION_SMELLSENS_35(35, "Potion de sensibilit\u00E9, petite", BoostEffect.TEMP_LOW_SMELLSENS_BOOST),
+    POTION_SMELLSENS_36(36, "Potion de sensibilit\u00E9, moyenne", BoostEffect.TEMP_MED_SMELLSENS_BOOST),
+    POTION_SMELLSENS_37(37, "Potion de sensibilit\u00E9, grande", BoostEffect.TEMP_HIGH_SMELLSENS_BOOST),
+
+    POTION_SMELLSTR_38(35, "Potion de sensibilit\u00E9, petite", BoostEffect.TEMP_LOW_SMELLSENS_BOOST),
+    POTION_SMELLSTR_39(36, "Potion de sensibilit\u00E9, moyenne", BoostEffect.TEMP_MED_SMELLSENS_BOOST),
+    POTION_SMELLSTR_40(37, "Potion de sensibilit\u00E9, grande", BoostEffect.TEMP_HIGH_SMELLSENS_BOOST),
+
+
+
+
+
 
 
 
