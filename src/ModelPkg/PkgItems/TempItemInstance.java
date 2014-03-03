@@ -1,5 +1,6 @@
 package ModelPkg.PkgItems;
 
+//
 public class TempItemInstance {
 
     private ItemEffect itemEffect;

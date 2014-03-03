@@ -1,8 +1,6 @@
 package ModelPkg.PkgItems;
 
-/**
- * Created by Dictin on 14-03-02.
- */
+
 public enum BoostEffect implements ItemEffect {
 
     LOW_HP_BOOST(0, 3, -1),

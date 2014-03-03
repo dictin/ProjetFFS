@@ -1,8 +1,6 @@
 package ModelPkg.PkgItems;
 
-/**
- * Created by Dictin on 14-03-02.
- */
+
 public enum Items {
 
     //Équipement permanent qui peut être installé entre les niveaux pour un boost constant
