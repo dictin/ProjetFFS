@@ -25,31 +25,8 @@ public abstract class Animal {
     //Création du nom de l'animal
         Random random = new Random(20);
         int noName = random.nextInt();
-        int compteur = 0;
-        BufferedReader fichierEntree = null;
-        PrintWriter fichierSortie = null;
-        try {
-            fichierEntree = new BufferedReader(new FileReader("Names.txt"));
-            fichierSortie = new PrintWriter(new FileOutputStream("name.txt",true));
-            String line = null;
-            String lineNull = null;
-            line = fichierEntree.readLine();
-            while (line != null)
-            {
-                if(compteur == noName){
-                this.name = line;
-                    fichierSortie.print(lineNull);
-                }
-                compteur++;
-                line = fichierEntree.readLine();
-            }
-            fichierEntree.close();
-            fichierSortie.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }  catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.name = Name.getName(noName);
+        this.nameGen = Name.getGen(noName);
 
     }
 
