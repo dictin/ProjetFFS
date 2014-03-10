@@ -1,7 +1,6 @@
 package ModelPkg;
 
 import java.awt.*;
-import java.io.*;
 import java.util.Random;
 
 public abstract class Animal {
@@ -19,14 +18,16 @@ public abstract class Animal {
     private int defence;
     private int endurance;
     private int grabQuantity;
+    private int team; // -1: player, 1: enemy 1, 2: enemy 2
 
 
-    public Animal(){
+    public Animal(int team){
     //Création du nom de l'animal
         Random random = new Random(20);
         int noName = random.nextInt();
         this.name = Name.getName(noName);
         this.nameGen = Name.getGen(noName);
+        this.team = team;
 
     }
 

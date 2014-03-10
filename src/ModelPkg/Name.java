@@ -1,7 +1,6 @@
 package ModelPkg;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,16 +8,11 @@ import java.util.ArrayList;
 /**
  * Created by Chloé on 14-03-03.
  */
-<<<<<<< HEAD
-public  class Name {
+
+public class Name {
 
     private static ArrayList<String> nameList = new ArrayList<String>();
     private static ArrayList<Integer> genList = new ArrayList<Integer>();
-=======
-public class Name {
-    private ArrayList<String> nameList = new ArrayList<String>();
-    private ArrayList<Integer> genList = new ArrayList<Integer>();
->>>>>>> UI-WIP
 
     public Name(){
 
