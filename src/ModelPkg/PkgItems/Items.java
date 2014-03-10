@@ -8,39 +8,36 @@ public enum Items {
     GENMOD_HP_0(0, "Coagulation rapide", BoostEffect.LOW_HP_BOOST),
     GENMOD_HP_1(1, "Redondance organique", BoostEffect.MED_HP_BOOST),
     GENMOD_HP_2(2, "R\u00E9g\u00E9n\u00E9r\u00E9scence c\u00E9lulaire", BoostEffect.HIGH_HP_BOOST),
+
     GENMOD_SPD_3(3,"Syst\u00E8me nerveux autonomique", BoostEffect.LOW_SPD_BOOST),
     GENMOD_SPD_4(4, "Pivot d'articulation ind\u00E9pendant", BoostEffect.MED_SPD_BOOST),
     GENMOD_SPD_5(5, "Mouvement bip\u00E9dal", BoostEffect.HIGH_SPD_BOOST),
+
     GENMOD_ATK_6(6, "Griffes perforantes", BoostEffect.LOW_ATK_BOOST),
     GENMOD_ATK_7(7, "Enzymes Anticoagullants", BoostEffect.MED_ATK_BOOST),
     GENMOD_ATK_8(8, "Machoire renforc\u00E9e", BoostEffect.HIGH_ATK_BOOST),
 
+    GENMOD_SMELLSENS_9(9, "Gel\u00E9 pour nez am\u00E9lior\u00E9", BoostEffect.LOW_SMELLSENS_BOOST),
+    GENMOD_SMELLSENS_10(10, "Narines r\u00E9tractives", BoostEffect.MED_SMELLSENS_BOOST),
+    GENMOD_SMELLSENS_11(11, "Double piff", BoostEffect.HIGH_SMELLSENS_BOOST),
 
+    GENMOD_SMELLSTR_12(12, "Bouche qui pue", BoostEffect.LOW_SMELLSTR_BOOST),
+    GENMOD_SMELLSTR_13(13, "Fourrure avec odeur de pourritures", BoostEffect.MED_SMELLSTR_BOOST),
+    GENMOD_SMELLSTR_14(14, "D\u00E9odorisant à senteur de melon d'eau", BoostEffect.HIGH_SMELLSTR_BOOST),
+    GENMOD_SMELLSTR_15(15, "Parfum Chanel no5", BoostEffect.SUPER_SMELLSTR_BOOST),
 
-    /*
+    GENMOD_DEF__16(16, "Tunique moisie", BoostEffect.LOW_DEF_BOOST),
+    GENMOD_DEF__17(17, "Plastron ancestrale des chamans du d\u00E9sert", BoostEffect.MED_DEF_BOOST),
+    GENMOD_DEF__18(18, "Armure d'Adamantium", BoostEffect.HIGH_DEF_BOOST),
 
-    LOW_SMELLSENS_BOOST(3, 1),
-    MED_SMELLSENS_BOOST(3, 2),
-    HIGH_SMELLSENS_BOOST(3, 3),
+    GENMOD_END_19(19, "Chest/Bras Chest/Bras Dos Chest/Bras Chest/Bras", BoostEffect.LOW_END_BOOST),
+    GENMOD_END_20(20, "Articulations robotis\u00E9es", BoostEffect.MED_END_BOOST),
+    GENMOD_END_21(21, "Abdominaux de Chuck Norris", BoostEffect.HIGH_END_BOOST),
 
-    LOW_SMELLSTR_BOOST(4, 5),
-    MED_SMELLSTR_BOOST(4, 10),
-    HIGH_SMELLSTR_BOOST(4, 20),
-    SUPER_SMELLSTR_BOOST(4, 30),
-
-    LOW_DEF_BOOST(5, 1),
-    MED_DEF_BOOST(5, 3),
-    HIGH_DEF_BOOST(5, 5),
-
-    LOW_END_BOOST(6, 10),
-    MED_END_BOOST(6, 20),
-    HIGH_END_BOOST(6, 30),
-
-    LOW_GBQT_BOOST(7, 10),
-    MED_GBQT_BOOST(7, 20),
-    HIGH_GBQT_BOOST(7, 30),
-    SUPER_GBQT_BOOST(7, 50);
-     */
+    GENMOD_GBQT_22(22, "Pierre du destrier", BoostEffect.LOW_GBQT_BOOST),
+    GENMOD_GBQT_23(23, "Poche de kangourou", BoostEffect.MED_GBQT_BOOST),
+    GENMOD_GBQT_24(24, "Tenser's floating disk", BoostEffect.HIGH_GBQT_BOOST),
+    GENMOD_GBQT_25(25, "Sac sans fond", BoostEffect.SUPER_GBQT_BOOST),
 
     //Items Temporaires
 
@@ -60,15 +57,23 @@ public enum Items {
     POTION_SMELLSENS_36(36, "Potion de sensibilit\u00E9, moyenne", BoostEffect.TEMP_MED_SMELLSENS_BOOST),
     POTION_SMELLSENS_37(37, "Potion de sensibilit\u00E9, grande", BoostEffect.TEMP_HIGH_SMELLSENS_BOOST),
 
-    POTION_SMELLSTR_38(35, "Potion de sensibilit\u00E9, petite", BoostEffect.TEMP_LOW_SMELLSENS_BOOST),
-    POTION_SMELLSTR_39(36, "Potion de sensibilit\u00E9, moyenne", BoostEffect.TEMP_MED_SMELLSENS_BOOST),
-    POTION_SMELLSTR_40(37, "Potion de sensibilit\u00E9, grande", BoostEffect.TEMP_HIGH_SMELLSENS_BOOST),
+    POTION_SMELLSTR_38(38, "Potion d'odeur, petite", BoostEffect.TEMP_LOW_SMELLSTR_BOOST),
+    POTION_SMELLSTR_39(39, "Potion d'odeur, moyenne", BoostEffect.TEMP_MED_SMELLSTR_BOOST),
+    POTION_SMELLSTR_40(40, "Potion d'odeur, grande", BoostEffect.TEMP_HIGH_SMELLSTR_BOOST),
+    POTION_SMELLSTR_41(41, "Potion d'odeur, super", BoostEffect.TEMP_SUPER_SMELLSTR_BOOST),
 
+    POTION_DEF_42(42, "Potion de d\u00E9fense, petite", BoostEffect.TEMP_LOW_DEF_BOOST),
+    POTION_DEF_43(43, "Potion de d\u00E9fense, moyenne", BoostEffect.TEMP_MED_DEF_BOOST),
+    POTION_DEF_44(44, "Potion de d\u00E9fense, grande", BoostEffect.TEMP_HIGH_DEF_BOOST),
 
+    POTION_END_45(45, "Potion d'endurance, petite", BoostEffect.TEMP_LOW_END_BOOST),
+    POTION_END_46(46, "Potion d'endurance, moyenne", BoostEffect.TEMP_MED_END_BOOST),
+    POTION_END_47(47, "Potion d'endurance, grande", BoostEffect.TEMP_HIGH_END_BOOST),
 
-
-
-
+    POTION_GBQT_48(48, "Potion de portage, petite", BoostEffect.TEMP_LOW_GBQT_BOOST),
+    POTION_GBQT_49(49, "Potion de portage, moyenne", BoostEffect.TEMP_MED_GBQT_BOOST),
+    POTION_GBQT_50(50, "Potion de portage, grande", BoostEffect.TEMP_HIGH_GBQT_BOOST),
+    POTION_GBQT_51(51, "Potion de portage, super", BoostEffect.TEMP_SUPER_GBQT_BOOST),;
 
 
 
