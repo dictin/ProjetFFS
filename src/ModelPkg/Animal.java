@@ -47,7 +47,10 @@ public abstract class Animal {
 
     }
 
-    public void attact(Point location){
+    public void attack(Point location){
+        Animal animal = MapData.getCase(location).getOccupant();
+        int damageAmount = (int)Math.ceil(this.attack/animal.getDefence());               //TODO Balancing of this algorithm
+        animal.getHit(damageAmount);
 
     }
 
@@ -57,6 +60,10 @@ public abstract class Animal {
 
     public void drop(Point location){
 
+    }
+
+    public void getHit(int amount){
+        this.health-= amount;
     }
 
     public Point getPosition() {

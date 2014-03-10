@@ -82,4 +82,8 @@ public class Case {
     public void setStrongestSmell(){
         this.dominantSmell = this.sortedSmellArrayList.get(0);
     }
+
+    public Animal getOccupant() {
+        return occupant;
+    }
 }

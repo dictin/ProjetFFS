@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class MapData {
 
-    private Case[][] map = new Case[30][30];
+    private static Case[][] map = new Case[30][30];
 
 
     public MapData(){
@@ -44,20 +44,25 @@ public class MapData {
 
     }
 
-    public Case[][] getSubsection(Point origin, int radius){
+    public static Case[][] getSubsection(Point origin, int radius){
         Case[][] returnArray = new Case[(2*radius)+1][(2*radius)+1];
         int subI = 0;
         int subJ = 0;
 
         for (int i = origin.x-radius; i <= origin.x+radius; i++){
             for (int j = origin.y-radius; j <= origin.y+radius; j++){
-                returnArray[subI][subJ] = map[i][j];
+                returnArray[subI][subJ] = MapData.map[i][j];
                 subJ++;
             }
             subI++;
         }
 
         return returnArray;
+    }
+
+    public static Case getCase(Point point){
+        return MapData.map[point.x][point.y];
+
     }
 
 }
