@@ -1,8 +1,5 @@
 package ModelPkg;
 
-import ModelPkg.Items.Booster;
-import ModelPkg.Items.LotteryTicket;
-import ModelPkg.PkgItems.Item;
 import ModelPkg.PkgItems.TempItemInstance;
 
 import java.util.ArrayList;
@@ -15,9 +12,20 @@ public class PlayerData {
     //Dictin: une valeur numerique qui depend de la nourriture recupere over all, du nombre fourmilliers perdus et du niveau atteint. TODO determiner l'algorithme qui calcule le score
     private int score = 0;
     private int population = 0;
+    private ArrayList<TempItemInstance> passiveInstances = new ArrayList<TempItemInstance>(); //Contient les items innactifs de l'inventaire du joueur
     private ArrayList<TempItemInstance> permanentInstances = new ArrayList<TempItemInstance>();
     private ArrayList<TempItemInstance> tempItemInstances = new ArrayList<TempItemInstance>();
     private int[] statModifiers = new int[]{0,0,0,0,0,0,0,0};
+
+    public void addPassiveItem(TempItemInstance instance){
+        this.passiveInstances.add(instance);
+
+    }
+
+    public void activateInstance(int index){
+        this.addItemInstance(this.passiveInstances.get(index));
+        this.passiveInstances.remove(index);
+    }
 
     public void addItemInstance(TempItemInstance itemInstance){
         if (itemInstance.getDuration() < 0){
