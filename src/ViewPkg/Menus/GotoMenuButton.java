@@ -1,4 +1,4 @@
-package ViewPkg;
+package ViewPkg.Menus;
 
 import ControllerPkg.Controller;
 
@@ -45,6 +45,7 @@ public class GotoMenuButton extends JComponent {
             }
             @Override
             public void mouseClicked(MouseEvent e) {
+
                 super.mouseClicked(e);
                 GotoMenuButton gotoMenuButton =(GotoMenuButton)e.getSource();
                 controller.menuButtonClick(gotoMenuButton.getMenuButtonName());

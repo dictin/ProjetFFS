@@ -1,5 +1,8 @@
 package ModelPkg;
 
+import ModelPkg.Items.Booster;
+import ModelPkg.Items.LotteryTicket;
+import ModelPkg.PkgItems.Item;
 import ModelPkg.PkgItems.TempItemInstance;
 
 import java.util.ArrayList;

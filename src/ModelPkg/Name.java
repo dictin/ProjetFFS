@@ -9,12 +9,22 @@ import java.util.ArrayList;
 /**
  * Created by Chloé on 14-03-03.
  */
+<<<<<<< HEAD
 public  class Name {
 
     private static ArrayList<String> nameList = new ArrayList<String>();
     private static ArrayList<Integer> genList = new ArrayList<Integer>();
+=======
+public class Name {
+    private ArrayList<String> nameList = new ArrayList<String>();
+    private ArrayList<Integer> genList = new ArrayList<Integer>();
+>>>>>>> UI-WIP
 
     public Name(){
+
+        //TODO Read file.
+        String ligne="";
+
         BufferedReader fileEnter = null;
             try {
                 fileEnter = new BufferedReader(new FileReader("Names.txt"));
