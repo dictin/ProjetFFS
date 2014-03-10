@@ -26,13 +26,13 @@ public enum Items {
     GENMOD_SMELLSTR_14(14, "D\u00E9odorisant à senteur de melon d'eau", BoostEffect.HIGH_SMELLSTR_BOOST),
     GENMOD_SMELLSTR_15(15, "Parfum Chanel no5", BoostEffect.SUPER_SMELLSTR_BOOST),
 
-    GENMOD_DEF__16(16, "Tunique moisie", BoostEffect.LOW_DEF_BOOST),
-    GENMOD_DEF__17(17, "Plastron ancestrale des chamans du d\u00E9sert", BoostEffect.MED_DEF_BOOST),
-    GENMOD_DEF__18(18, "Armure d'Adamantium", BoostEffect.HIGH_DEF_BOOST),
+    GENMOD_DEF_16(16, "Tunique moisie", BoostEffect.LOW_DEF_BOOST),
+    GENMOD_DEF_17(17, "Plastron ancestrale des chamans du d\u00E9sert", BoostEffect.MED_DEF_BOOST),
+    GENMOD_DEF_18(18, "Armure d'Adamantium", BoostEffect.HIGH_DEF_BOOST),
 
     GENMOD_END_19(19, "Chest/Bras Chest/Bras Dos Chest/Bras Chest/Bras", BoostEffect.LOW_END_BOOST),
     GENMOD_END_20(20, "Articulations robotis\u00E9es", BoostEffect.MED_END_BOOST),
-    GENMOD_END_21(21, "Abdominaux de Chuck Norris", BoostEffect.HIGH_END_BOOST),
+    GENMOD_END_21(21, "Abdominaux de Clint Eastwood", BoostEffect.HIGH_END_BOOST),
 
     GENMOD_GBQT_22(22, "Pierre du destrier", BoostEffect.LOW_GBQT_BOOST),
     GENMOD_GBQT_23(23, "Poche de kangourou", BoostEffect.MED_GBQT_BOOST),
