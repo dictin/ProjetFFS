@@ -1,6 +1,8 @@
 package ModelPkg.PkgItems;
 
 
+import ModelPkg.PlayerData;
+
 public enum BoostEffect implements ItemEffect {
 
     LOW_HP_BOOST(0, 3, -1),
@@ -86,6 +88,7 @@ public enum BoostEffect implements ItemEffect {
     }
 
     public void activate(){
+        PlayerData.addMod(this.statID, this.boostValue);
 
     }
 

@@ -7,15 +7,17 @@ import java.util.Iterator;
 
 public class PlayerData {
     //TODO modifier le nombre de nourritures de départ selon la difficultée du jeu :)
-    private int food = 300;
+    private static int food = 300;
     // Que représente Score???
     //Dictin: une valeur numerique qui depend de la nourriture recupere over all, du nombre fourmilliers perdus et du niveau atteint. TODO determiner l'algorithme qui calcule le score
     private int score = 0;
+    private int niveau = 1;
     private int population = 0;
+    private int dead = 0;
     private ArrayList<TempItemInstance> passiveInstances = new ArrayList<TempItemInstance>(); //Contient les items innactifs de l'inventaire du joueur
     private ArrayList<TempItemInstance> permanentInstances = new ArrayList<TempItemInstance>();
     private ArrayList<TempItemInstance> tempItemInstances = new ArrayList<TempItemInstance>();
-    private int[] statModifiers = new int[]{0,0,0,0,0,0,0,0};
+    private static int[] statModifiers = new int[]{0,0,0,0,0,0,0,0};
 
     public void addPassiveItem(TempItemInstance instance){
         this.passiveInstances.add(instance);
@@ -77,21 +79,33 @@ public class PlayerData {
         return population;
     }
 
-    public void setFood(int food) {
-        this.food = food;
+    public static void addFood(int food) {
+        PlayerData.food += food;
+    }
+
+    public void removeFood(int food){
+        PlayerData.food -= food;
+        if (PlayerData.food < 0){
+            PlayerData.food =0;
+        }
     }
 
     public void setScore(int score) {
-        this.score = score;
+        this.score = (PlayerData.food * this.niveau) - (2*this.dead);
     }
 
-    public void setPopulation(int population) {
-        this.population = population;
+    public void newBorn(){
+        this.population++;
+    }
+
+    public void death(){
+        this.population--;
+        this.dead++;
     }
 
 
-    public void addMod(int stat, int value){
-        this.statModifiers[stat] += value;
+    public static void addMod(int stat, int value){
+        PlayerData.statModifiers[stat] += value;
     }
 
     public void clearStatMod(){

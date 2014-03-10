@@ -1,5 +1,7 @@
 package ModelPkg.PkgItems;
 
+import ModelPkg.PlayerData;
+
 import java.util.Random;
 
 
@@ -28,5 +30,7 @@ public enum LotteryEffects implements ItemEffect {
         }else{
             winnings = 0;
         }
+
+        PlayerData.addFood(winnings);
     }
 }
