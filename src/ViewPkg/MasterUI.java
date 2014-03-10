@@ -1,22 +1,31 @@
 package ViewPkg;
 
 import ControllerPkg.Controller;
+import ViewPkg.Menus.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
-public class MasterUI extends JPanel{
+public class MasterUI extends JLayeredPane{
 
 
+    private int gridEndPointX;
     private Controller controller;
     private GotoMenuButton quitIcon;
-    private GotoMenuButton shopIcon;
+
+    private MenuTriggerZone menuTriggerZone;
+    private ContextualMenu selectedMenu;
+    private ContextualMenu mainMenu;
     private ContextualMenu shopMenu;
+
+    private int getGridEndPointX;
 
     public MasterUI(final Controller controller){
         this.controller=controller;
 
-        shopMenu=new ContextualMenu(controller, "shop_menu");
+        mainMenu= new MainMenu(controller);
+        shopMenu=new ShopMenu(controller);
 
         this.setSize(MasterFrame.GAME_FRAME_SIZE);
         this.setLocation(0,0);
@@ -37,21 +46,42 @@ public class MasterUI extends JPanel{
         this.add(quitIcon);
         quitIcon.setLocation(0, 0);
 
-        int visualGridXEnd=25+xGridSize*VisualCase.CASE_SIDE_PIXEL_SIZE;
+        gridEndPointX=25+xGridSize*VisualCase.CASE_SIDE_PIXEL_SIZE;
 
-        shopIcon = new GotoMenuButton(controller, "shop_button", new Dimension(250,100));
-        this.add(shopIcon);
-        shopIcon.setLocation(visualGridXEnd, 25);
+        selectedMenu=mainMenu;
+        this.add(selectedMenu);
+        selectedMenu.setLocation(gridEndPointX, 25);
+        selectedMenu.setVisible(true);
+
+        menuTriggerZone=new MenuTriggerZone(controller);
+        this.add(menuTriggerZone, 1, 0);
+        menuTriggerZone.setLocation(gridEndPointX, 25);
+
         //TODO Ajouter éléments visuels d'un niveau de jeu.
     }
 
     public void popMenu(String menuName){
+        System.out.println(menuName);
+        System.out.println("pop");
+        if (menuName=="main_menu"){
+            selectedMenu=mainMenu;
+            selectedMenu.setVisible(true);
+        }
+        else if (menuName=="shop_menu"){
+            selectedMenu.add(shopMenu);
+        }
+    }
 
+    public void closeMenus(){
+        selectedMenu.setVisible(false);
+        selectedMenu=null;
     }
 
     public void actualiser(){
         quitIcon.actualiser();
-        shopIcon.actualiser();
+        if (selectedMenu!=null){
+            selectedMenu.actualiser();
+        }
         this.invalidate();
         this.repaint();
     }

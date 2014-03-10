@@ -10,9 +10,13 @@ import java.util.ArrayList;
  */
 public class Name {
     private ArrayList<String> nameList = new ArrayList<String>();
-    private ArrayList<Int> genList = new ArrayList<Int>();
+    private ArrayList<Integer> genList = new ArrayList<Integer>();
 
     public Name(){
+
+        //TODO Read file.
+        String ligne="";
+
         BufferedReader fileEnter = null;
             try {
                 fileEnter = new BufferedReader(new FileReader("Names.txt"));

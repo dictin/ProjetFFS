@@ -10,11 +10,11 @@ import java.awt.event.MouseEvent;
 /**
  * Created by Xav on 03/03/14.
  */
-public class ContextualMenu extends JComponent {
+public abstract class ContextualMenu extends JComponent {
 
     private Image backgroundImage;
     private String menuName;
-    private Dimension menuZone=new Dimension();
+    private Dimension menuZone=new Dimension(1000,1000);
 
     public ContextualMenu(final Controller controller, String menuName){
         this.addMouseListener(new MouseAdapter() {
@@ -26,6 +26,8 @@ public class ContextualMenu extends JComponent {
         this.menuName=menuName;
         backgroundImage=Toolkit.getDefaultToolkit().getImage(menuName+ ".gif");
 
+        this.setSize(menuZone);
+
         this.setVisible(false);
     }
 
@@ -33,6 +35,7 @@ public class ContextualMenu extends JComponent {
         return menuName;
     }
 
+    public abstract void actualiser();
 
     @Override
     public void paintComponent(Graphics graphics){

@@ -8,6 +8,8 @@ import ViewPkg.MasterUI;
  */
 public class Controller extends Thread{
 
+
+    private int testCounter=0;
     private MasterFrame mF;
     private MasterUI mUI=null;
     private int sleepTime;
@@ -41,8 +43,16 @@ public class Controller extends Thread{
         return time;
     }
 
+    public void openMainMenu(){
+        mUI.popMenu("main_menu");
+    }
+
     public void setMUI(MasterUI mUI){
         this.mUI=mUI;
+    }
+
+    public void closeAllMenus(){
+        mUI.closeMenus();
     }
 
     public void menuButtonClick(String menuButtonName){
@@ -52,6 +62,7 @@ public class Controller extends Thread{
             System.exit(0);
         }
         else {
+            System.out.println("else");
             String menuName=menuButtonName.split("_")[0]+"_menu";
             mUI.popMenu(menuName);
         }

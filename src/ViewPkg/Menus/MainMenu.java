@@ -14,10 +14,23 @@ public class MainMenu extends ContextualMenu{
 
     public MainMenu(final Controller controller){
         super(controller, "main_menu");
-        this.setVisible(true);
 
         shopIcon = new GotoMenuButton(controller, "shop_button", new Dimension(250,100));
         this.add(shopIcon);
         shopIcon.setLocation(0, 25);
+        this.setBackground(Color.black);
+    }
+
+    public void actualiser(){
+        shopIcon.actualiser();
+        this.invalidate();
+        this.repaint();
+    }
+
+    @Override
+    public void paintComponent(Graphics graphics){
+        super.paintComponent(graphics);
+        graphics.setColor(Color.BLUE);
+        graphics.fillRect(0,0,300,300);
     }
 }
