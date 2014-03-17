@@ -13,7 +13,7 @@ public class Case {
     private WildObject terrain;
     private ArrayList<Smell> smellArrayList = new ArrayList<Smell>();
     private ArrayList<Smell> sortedSmellArrayList = new ArrayList<Smell>();
-    private Smell dominantSmell = null;
+
 
     public Case(Point location, Animal occupant , WildObject terrain){
         this.position = position;
@@ -25,7 +25,6 @@ public class Case {
     public void addSmell(Smell smell){
         this.smellArrayList.add(smell);
         this.optimizeSmellArray();
-        this.setStrongestSmell();
     }
 
     private void optimizeSmellArray() {
@@ -79,11 +78,12 @@ public class Case {
         this.optimizeSmellArray();
     }
 
-    public void setStrongestSmell(){
-        this.dominantSmell = this.sortedSmellArrayList.get(0);
-    }
 
     public Animal getOccupant() {
         return occupant;
+    }
+
+    public ArrayList<Smell> getSortedSmellArrayList() {
+        return sortedSmellArrayList;
     }
 }

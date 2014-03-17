@@ -44,7 +44,8 @@ public class MapData {
 
     }
 
-    public static Case[][] getSubsection(Point origin, int radius){
+    public static Case[][] getSubsection(Point origin){
+        int radius = 3;
         Case[][] returnArray = new Case[(2*radius)+1][(2*radius)+1];
         int subI = 0;
         int subJ = 0;
