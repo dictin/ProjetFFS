@@ -3,6 +3,7 @@ package ModelPkg;
 public class Critter extends Animal {
 
     public Critter(){
-        super();
+        //TODO remove placeholder int in constructor.
+        super(0);
     }
 }

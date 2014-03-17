@@ -67,4 +67,12 @@ public class Controller extends Thread{
             mUI.popMenu(menuName);
         }
     }
+
+    public void enterMenuTriggerZone(){
+        mUI.popMenu("main_menu");
+    }
+
+    public void pointAtVisualCase(){
+        mUI.closeMenus();
+    }
 }

@@ -1,6 +1,8 @@
 package ViewPkg.Menus;
 
 import ControllerPkg.Controller;
+import ModelPkg.Case;
+import ViewPkg.VisualCase;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +16,7 @@ import java.awt.event.MouseListener;
 public class MenuTriggerZone extends JComponent{
 
     private Controller controller;
+    private int currentState=0;
 
     public MenuTriggerZone(final Controller controller){
         this.controller=controller;
@@ -21,12 +24,7 @@ public class MenuTriggerZone extends JComponent{
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                controller.openMainMenu();
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e){
-                controller.closeAllMenus();
+                controller.enterMenuTriggerZone();
             }
         });
         this.setBackground(Color.blue);

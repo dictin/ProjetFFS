@@ -17,7 +17,6 @@ public class ShopMenu extends ContextualMenu{
 
     @Override
     public void actualiser() {
-        System.out.println("blabla");
     }
 
     @Override

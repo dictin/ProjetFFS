@@ -51,7 +51,6 @@ public class GotoMenuButton extends JComponent {
                 controller.menuButtonClick(gotoMenuButton.getMenuButtonName());
             }
         });
-        this.setVisible(true);
     }
 
     public void setAnimated(boolean isAnimatedNow){

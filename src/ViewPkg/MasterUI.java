@@ -5,7 +5,6 @@ import ViewPkg.Menus.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class MasterUI extends JLayeredPane{
 
@@ -38,7 +37,7 @@ public class MasterUI extends JLayeredPane{
 
         for (int i=0; i<xGridSize; i++){
             for (int j=0; j<tailleYGrille; j++){
-                visualCasesGrid[i][j]=new VisualCase(i, j, visualCasesGridOrigin);
+                visualCasesGrid[i][j]=new VisualCase(i, j, visualCasesGridOrigin, controller);
                 this.add(visualCasesGrid[i][j]);
             }
         }
@@ -50,31 +49,48 @@ public class MasterUI extends JLayeredPane{
 
         selectedMenu=mainMenu;
         this.add(selectedMenu);
-        selectedMenu.setLocation(gridEndPointX, 25);
+        selectedMenu.setLocation(gridEndPointX+25, 25);
         selectedMenu.setVisible(true);
 
-        menuTriggerZone=new MenuTriggerZone(controller);
-        this.add(menuTriggerZone, 1, 0);
+        menuTriggerZone =new MenuTriggerZone(controller);
+//        gridTriggerZone= new GridTriggerZone(controller, xGridSize);
+
+        this.add(menuTriggerZone);
         menuTriggerZone.setLocation(gridEndPointX, 25);
+//TODO kill gridTriggerZone from all of existence.
+//        this.add(gridTriggerZone);
+//        gridTriggerZone.setLocation(25, 25);
 
         //TODO Ajouter éléments visuels d'un niveau de jeu.
     }
 
     public void popMenu(String menuName){
-        System.out.println(menuName);
-        System.out.println("pop");
-        if (menuName=="main_menu"){
+        if (menuName.equals("main_menu")){
             selectedMenu=mainMenu;
             selectedMenu.setVisible(true);
         }
-        else if (menuName=="shop_menu"){
-            selectedMenu.add(shopMenu);
+        else if (menuName.equals("shop_menu")){
+            System.out.println("where is shop?");
+            selectedMenu.setVisible(false);
+            selectedMenu=null;
+            selectedMenu=shopMenu;
+            selectedMenu.setVisible(true);
         }
+        selectedMenu.invalidate();
+        selectedMenu.repaint();
+        menuTriggerZone.setVisible(false);
+    }
+
+    public void setGridToActive(){
+        closeMenus();
+        menuTriggerZone.setVisible(true);
     }
 
     public void closeMenus(){
+        if (selectedMenu!=null){
         selectedMenu.setVisible(false);
         selectedMenu=null;
+        }
     }
 
     public void actualiser(){
