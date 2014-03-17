@@ -2,6 +2,7 @@ package ViewPkg.Menus;
 
 import ControllerPkg.Controller;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -10,10 +11,14 @@ import java.awt.*;
 public class ShopMenu extends ContextualMenu{
 
 
+    JComponent shopInfoMenu = new ShopMenuInfo();
 
     public ShopMenu(final Controller controller){
         super(controller, "shop_menu");
         this.setBackground(Color.green);
+        this.shopInfoMenu.setLocation(0, 275);
+        this.add(this.shopInfoMenu);
+
     }
 
     @Override
@@ -24,6 +29,6 @@ public class ShopMenu extends ContextualMenu{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         g.setColor(Color.GREEN);
-        g.fillRect(0,0,500,500);
+        g.fillRect(0,0,320,325);
     }
 }

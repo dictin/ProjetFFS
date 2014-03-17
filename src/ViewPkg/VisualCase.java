@@ -19,10 +19,10 @@ public class VisualCase extends JComponent {
         this.controller=controller;
         caseCoord=new Point(i, j);
         this.setSize(new Dimension(CASE_SIDE_PIXEL_SIZE, CASE_SIDE_PIXEL_SIZE));
-        this.setLocation((int) (visualCaseOrigin.getX()+i*CASE_SIDE_PIXEL_SIZE), (int) (visualCaseOrigin.getY()+j*CASE_SIDE_PIXEL_SIZE));
+        this.setLocation((int) (visualCaseOrigin.getX() + i * CASE_SIDE_PIXEL_SIZE), (int) (visualCaseOrigin.getY() + j * CASE_SIDE_PIXEL_SIZE));
         this.addMouseListener(new MouseAdapter() {
             @Override
-        public void mouseEntered(MouseEvent e){
+            public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
                 controller.pointAtVisualCase();
             }
@@ -30,7 +30,8 @@ public class VisualCase extends JComponent {
     }
     @Override
     public void paintComponent(Graphics graphics){
-        super.paintComponent(graphics);
+
+        graphics.setColor(new Color(Integer.parseInt("FFFFF0", 16)));
         graphics.drawRect(0, 0, CASE_SIDE_PIXEL_SIZE-1, CASE_SIDE_PIXEL_SIZE-1);
     }
 }

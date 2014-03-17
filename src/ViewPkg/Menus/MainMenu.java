@@ -1,7 +1,6 @@
 package ViewPkg.Menus;
 
 import ControllerPkg.Controller;
-import com.sun.org.apache.bcel.internal.generic.GOTO;
 
 import java.awt.*;
 
@@ -18,7 +17,7 @@ public class MainMenu extends ContextualMenu{
         shopIcon = new GotoMenuButton(controller, "shop_button", new Dimension(250,100));
         this.add(shopIcon);
         shopIcon.setLocation(0, 25);
-        this.setBackground(Color.black);
+
     }
 
     public void actualiser(){
@@ -30,7 +29,8 @@ public class MainMenu extends ContextualMenu{
     @Override
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
-        graphics.setColor(Color.BLUE);
+        graphics.setColor(new Color(Integer.parseInt("271828", 16)));
         graphics.fillRect(0,0,300,300);
+
     }
 }

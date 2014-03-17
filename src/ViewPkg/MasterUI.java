@@ -6,7 +6,7 @@ import ViewPkg.Menus.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class MasterUI extends JLayeredPane{
+public class MasterUI extends JPanel{
 
 
     private int gridEndPointX;
@@ -27,6 +27,7 @@ public class MasterUI extends JLayeredPane{
         shopMenu=new ShopMenu(controller);
 
         this.setSize(MasterFrame.GAME_FRAME_SIZE);
+        this.setBackground(new Color(Integer.parseInt("314159", 16)));
         this.setLocation(0,0);
         this.setLayout(null);
 
@@ -74,7 +75,7 @@ public class MasterUI extends JLayeredPane{
             selectedMenu=shopMenu;
             this.remove(selectedMenu);
             this.add(selectedMenu);
-            selectedMenu.setLocation(gridEndPointX+25, 25);
+            selectedMenu.setLocation(gridEndPointX + 25, 25);
             selectedMenu.setVisible(true);
             System.out.println("potatost");
             System.out.println(selectedMenu.getBackground());
