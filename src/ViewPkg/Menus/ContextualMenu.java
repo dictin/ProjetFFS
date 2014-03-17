@@ -12,7 +12,7 @@ public abstract class ContextualMenu extends JComponent {
 
     private Image backgroundImage;
     private String menuName;
-    private Dimension menuZone=new Dimension(1000,1000);
+    private Dimension menuZone=new Dimension(325,650);
 
     public ContextualMenu(final Controller controller, String menuName){
         this.menuName=menuName;
