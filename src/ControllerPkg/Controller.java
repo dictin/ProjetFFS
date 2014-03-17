@@ -62,17 +62,18 @@ public class Controller extends Thread{
             System.exit(0);
         }
         else {
-            System.out.println("else");
             String menuName=menuButtonName.split("_")[0]+"_menu";
+            System.out.println(menuName);
             mUI.popMenu(menuName);
         }
     }
 
     public void enterMenuTriggerZone(){
+        System.out.println("EMTZ");
         mUI.popMenu("main_menu");
     }
 
     public void pointAtVisualCase(){
-        mUI.closeMenus();
+        mUI.setGridToActive();
     }
 }

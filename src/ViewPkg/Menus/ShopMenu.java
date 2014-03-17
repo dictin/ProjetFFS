@@ -13,6 +13,7 @@ public class ShopMenu extends ContextualMenu{
 
     public ShopMenu(final Controller controller){
         super(controller, "shop_menu");
+        this.setBackground(Color.green);
     }
 
     @Override
@@ -22,7 +23,7 @@ public class ShopMenu extends ContextualMenu{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.setColor(Color.BLACK);
+        g.setColor(Color.GREEN);
         g.fillRect(0,0,500,500);
     }
 }

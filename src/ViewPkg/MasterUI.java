@@ -70,11 +70,14 @@ public class MasterUI extends JLayeredPane{
             selectedMenu.setVisible(true);
         }
         else if (menuName.equals("shop_menu")){
-            System.out.println("where is shop?");
             selectedMenu.setVisible(false);
-            selectedMenu=null;
             selectedMenu=shopMenu;
+            this.remove(selectedMenu);
+            this.add(selectedMenu);
+            selectedMenu.setLocation(gridEndPointX+25, 25);
             selectedMenu.setVisible(true);
+            System.out.println("potatost");
+            System.out.println(selectedMenu.getBackground());
         }
         selectedMenu.invalidate();
         selectedMenu.repaint();
