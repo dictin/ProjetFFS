@@ -43,7 +43,7 @@ public class MasterUI extends JLayeredPane{
         }
         quitIcon = new GotoMenuButton(controller, "quit_button", new Dimension(25,25));
         this.add(quitIcon);
-        quitIcon.setLocation(0, 0);
+        quitIcon.setLocation(this.getWidth()-quitIcon.getWidth(), 0);
 
         gridEndPointX=25+xGridSize*VisualCase.CASE_SIDE_PIXEL_SIZE;
 

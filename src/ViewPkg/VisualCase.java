@@ -31,6 +31,6 @@ public class VisualCase extends JComponent {
     @Override
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
-        graphics.drawRect(0, 0, CASE_SIDE_PIXEL_SIZE, CASE_SIDE_PIXEL_SIZE);
+        graphics.drawRect(0, 0, CASE_SIDE_PIXEL_SIZE-1, CASE_SIDE_PIXEL_SIZE-1);
     }
 }
