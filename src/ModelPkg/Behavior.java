@@ -1,5 +1,7 @@
 package ModelPkg;
 
+import com.sun.xml.internal.bind.v2.TODO;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -22,6 +24,7 @@ public class Behavior {
         return objectif;
     }
 
+//TODO Vérifier s'il n'y a pas de null pointer exception (vérification d'une case inexistante)
     public Point search(Case [][] table, int odorat, int typeOdeur){
         int goodLigne = 0;
         int goodColonne = 0;
@@ -31,8 +34,8 @@ public class Behavior {
             for(int colonne = 0; colonne < 3 ; colonne++){
                 //La boucle for se fait plusieurs fois tout dépendament de la puissance de l'odorat du fourmilier
                 for(int i =0; i<= odorat; i++ ){
-                    //On ne veut pas vérifier la case du milieu (l'endroit où est le fourmilier)
-                    if(ligne !=0 && colonne != 0){
+                    //On ne veut pas vérifier la case du milieu (l'endroit où est le fourmilier) et que la cas n'est pas null
+                    if(ligne !=0 && colonne != 0 && table[ligne][colonne] != null){
                     //Le type de smell ( ex: 1 est de la nourriture, 2 est un ennemi... (voir Smell pour tous les détails))
                    if(table[ligne][colonne].getSortedSmellArrayList().get(i).getType() == typeOdeur){
                        //Si l'intensité de cette odeur est plus forte que l'odeur déjà enregistrée
