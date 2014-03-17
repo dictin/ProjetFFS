@@ -3,6 +3,8 @@ package ControllerPkg;
 import ViewPkg.MasterFrame;
 import ViewPkg.MasterUI;
 
+import java.awt.*;
+
 /**
  * Created by Xav on 24/02/14.
  */
@@ -75,5 +77,10 @@ public class Controller extends Thread{
 
     public void pointAtVisualCase(){
         mUI.setGridToActive();
+        mUI.showCaseContents();
+    }
+
+    public void clickVisualCase(Point caseCoord){
+
     }
 }

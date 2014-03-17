@@ -17,6 +17,7 @@ public class MasterUI extends JPanel{
     private ContextualMenu selectedMenu;
     private ContextualMenu mainMenu;
     private ContextualMenu shopMenu;
+    private ContextualMenu inventoryMenu;
 
     private int getGridEndPointX;
 
@@ -25,7 +26,7 @@ public class MasterUI extends JPanel{
 
         mainMenu= new MainMenu(controller);
         shopMenu=new ShopMenu(controller);
-
+        inventoryMenu= new InventoryMenu(controller);
         this.setSize(MasterFrame.GAME_FRAME_SIZE);
         this.setBackground(new Color(Integer.parseInt("314159", 16)));
         this.setLocation(0,0);
@@ -42,7 +43,7 @@ public class MasterUI extends JPanel{
                 this.add(visualCasesGrid[i][j]);
             }
         }
-        quitIcon = new GotoMenuButton(controller, "quit_button", new Dimension(25,25));
+        quitIcon = new GotoMenuButton(controller, "quit_button", new Dimension(25,25), Color.black);
         this.add(quitIcon);
         quitIcon.setLocation(this.getWidth()-quitIcon.getWidth(), 0);
 
@@ -80,6 +81,14 @@ public class MasterUI extends JPanel{
             System.out.println("potatost");
             System.out.println(selectedMenu.getBackground());
         }
+        else if (menuName.equals("inventory_menu")){
+            selectedMenu.setVisible(false);
+            selectedMenu=inventoryMenu;
+            this.remove(selectedMenu);
+            this.add(selectedMenu);
+            selectedMenu.setLocation(gridEndPointX+25, 25);
+            selectedMenu.setVisible(true);
+        }
         selectedMenu.invalidate();
         selectedMenu.repaint();
         menuTriggerZone.setVisible(false);
@@ -95,6 +104,11 @@ public class MasterUI extends JPanel{
         selectedMenu.setVisible(false);
         selectedMenu=null;
         }
+    }
+
+    public void showCaseContents(){
+        //TODO link visualCases to contained items and display informations on them.
+        System.out.println("wow such show");
     }
 
     public void actualiser(){

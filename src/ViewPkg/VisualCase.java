@@ -26,8 +26,19 @@ public class VisualCase extends JComponent {
                 super.mouseEntered(e);
                 controller.pointAtVisualCase();
             }
+
+            @Override
+        public void mouseClicked(MouseEvent e){
+                Point caseCoord=((VisualCase)e.getSource()).getCaseCoord();
+                controller.clickVisualCase(caseCoord);
+            }
         });
     }
+
+    public Point getCaseCoord(){
+        return this.caseCoord;
+    }
+
     @Override
     public void paintComponent(Graphics graphics){
 

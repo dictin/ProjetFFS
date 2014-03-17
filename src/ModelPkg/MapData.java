@@ -1,6 +1,7 @@
 package ModelPkg;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MapData {
@@ -10,6 +11,16 @@ public class MapData {
 
     public MapData(){
         this.initialize();
+    }
+
+    private void initialize2(int nbOfTrees, int nbOfRocks, int nbOfWater, int nbOfHoles){
+        Random casePicker=new Random(30*30);
+        int nbOfSpecialCases=nbOfHoles+nbOfRocks+nbOfTrees+nbOfWater;
+        ArrayList<Integer> specialCases=new ArrayList<Integer>();
+        ArrayList<Integer> alreadyPicked;
+        for (int i=0; i<nbOfSpecialCases; i++){
+
+        }
     }
 
     private void initialize() { //8% arbre 2% roche 3% eau 2% trou
