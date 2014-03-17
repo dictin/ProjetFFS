@@ -1,5 +1,8 @@
 package ModelPkg;
 
+import com.sun.xml.internal.bind.v2.TODO;
+
+import java.awt.*;
 import java.util.Random;
 
 /**
@@ -7,49 +10,48 @@ import java.util.Random;
  */
 public class Behavior {
 
-    private int objectif;
-    private int [][] table1 = new int [3][3];
-    private int [][] table2 = new int [5][5];
-    private int [][] table3 = new int [7][7];
+    //objectif est composé de -1,0 et 1. il indique le déplacement à faire. Donc coordonné + objectif = noulles coordonneé du fourmilier après le déplacement
+    private Point objectif;
 
     public Behavior(){
-        //remplir la table1 avec des ints
-        int i = 1;
-        for (int ligne = 0; ligne < 3; ligne++) {
-            for (int colonne = 0; colonne < 3; colonne++) {
-                if(ligne == 1 && colonne ==1){
-                    table1[ligne][colonne] = 0;
-                }
-                else{
-                    table1[ligne][colonne] = i;
-                    i++;
-                }
-            }
-        }
     }
 
-    public int drunk(){
+    public Point drunk(){
         Random random = new Random();
-        int rndobjectif = random.nextInt(8);
+        int rndobjectifX = random.nextInt(2);
+        int rndobjectifY = random.nextInt(2);
+        objectif.setLocation(rndobjectifX-1,rndobjectifY-1);
         return objectif;
     }
-    //TODO Modifier le code pour que le table soit de type 'Case' et pour aller chercher le SmellID du Smell dominant de cette case
-    public int nourriture(Case [][] table, int odorat){
-        int ligne = 0, colonne = 0;
+
+//TODO Vérifier s'il n'y a pas de null pointer exception (vérification d'une case inexistante)
+    public Point search(Case [][] table, int odorat, int typeOdeur){
+        int goodLigne = 0;
+        int goodColonne = 0;
+
+        int goodSmell = 0;
         for(int ligne = 0; ligne < 3; ligne++){
             for(int colonne = 0; colonne < 3 ; colonne++){
-                for(int )
+                //La boucle for se fait plusieurs fois tout dépendament de la puissance de l'odorat du fourmilier
+                for(int i =0; i<= odorat; i++ ){
+                    //On ne veut pas vérifier la case du milieu (l'endroit où est le fourmilier) et que la cas n'est pas null
+                    if(ligne !=0 && colonne != 0 && table[ligne][colonne] != null){
+                    //Le type de smell ( ex: 1 est de la nourriture, 2 est un ennemi... (voir Smell pour tous les détails))
+                   if(table[ligne][colonne].getSortedSmellArrayList().get(i).getType() == typeOdeur){
+                       //Si l'intensité de cette odeur est plus forte que l'odeur déjà enregistrée
+                       if(table[ligne][colonne].getSortedSmellArrayList().get(i).getIntensity() > goodSmell){
+                          goodSmell = table[ligne][colonne].getSortedSmellArrayList().get(i).getIntensity();
+                           goodLigne = ligne;
+                           goodColonne = colonne;
+                       }
+                   }
+                }
             }
         }
-
-
-            }
-            //Goodsmell équivaut à la case où l'odeur de nourriture est la plus forte
-           // objectif =table1[ligne][colonne];
-        }
-
-
-      //  return objectif;
+    }
+        //Maintenant ligne et colonne ont les coordonnées de la case où la senteur de nourriture est la plus forte.
+        objectif.setLocation(goodLigne-1,goodColonne-1);
+        return objectif;
     }
 
 }

@@ -52,7 +52,11 @@ public class MapData {
 
         for (int i = origin.x-radius; i <= origin.x+radius; i++){
             for (int j = origin.y-radius; j <= origin.y+radius; j++){
+                try{
                 returnArray[subI][subJ] = MapData.map[i][j];
+                } catch (ArrayIndexOutOfBoundsException e){
+                    returnArray[subI][subJ] = null;
+                }
                 subJ++;
             }
             subI++;

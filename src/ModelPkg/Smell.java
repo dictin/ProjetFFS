@@ -9,6 +9,15 @@ public class Smell {
     private int intensity;
     private ArrayList<SmellID> contributors = new ArrayList<SmellID>();
     private int type;
+    /*
+      le type de senteur:
+      1-Nourriture
+      2-Ennemi
+      3-Fourmilier ami
+      4-Maison
+
+     */
+
 
     public Smell(int intensity, long sourceID, int type){
         this.contributors.add(new SmellID(sourceID,intensity));
