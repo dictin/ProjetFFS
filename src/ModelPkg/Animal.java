@@ -1,7 +1,6 @@
 package ModelPkg;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class Animal {
@@ -124,7 +123,7 @@ public abstract class Animal {
         //Si Behavior est appelé et qu'il retourne 0,0, alors on rappel Behavior avec la méthode Drunk pour qu'il retourne un mouvement aléatoire
         do{
             if(!doItAgain){
-            direction = Behavior.search(table,this.smellSensitivity,action); //TODO Création d'un tableau 2D avec les senteurs à proximité de l'animal
+            direction = Behavior.search(MapData.getSubsection(this.position),this.smellSensitivity,action);
             doItAgain = !doItAgain;
             }
             else{
