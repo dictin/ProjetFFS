@@ -82,6 +82,9 @@ public enum Items {
     private ItemEffect effect;
 
     private Items(int itemID, String name, ItemEffect effect){
+        this.itemID =itemID;
+        this.name = name;
+        this.effect =effect;
 
     }
 
@@ -100,6 +103,6 @@ public enum Items {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 }
