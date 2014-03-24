@@ -31,7 +31,7 @@ public class MasterController extends Thread{
             try {
 
                 this.sleep(sleepTime);
-
+                time++;
                 mUI.actualiser();
                 mUI.invalidate();
                 mUI.repaint();
