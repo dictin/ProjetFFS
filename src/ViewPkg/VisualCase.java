@@ -6,6 +6,7 @@ import java.awt.*;
 /**
  * Created by Xav on 24/02/14.
  */
+
 public class VisualCase extends JComponent {
 
     public static final int CASE_SIDE_PIXEL_SIZE=20;
