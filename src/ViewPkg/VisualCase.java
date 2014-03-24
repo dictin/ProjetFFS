@@ -1,6 +1,6 @@
 package ViewPkg;
 
-import ControllerPkg.Controller;
+import ControllerPkg.ViewController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,8 +14,8 @@ public class VisualCase extends JComponent {
 
     public static final int CASE_SIDE_PIXEL_SIZE=20;
     private Point caseCoord;
-    private Controller controller;
-    public VisualCase(int i, int j, Point visualCaseOrigin, final Controller controller){
+    private ViewController controller;
+    public VisualCase(int i, int j, Point visualCaseOrigin, final ViewController controller){
         this.controller=controller;
         caseCoord=new Point(i, j);
         this.setSize(new Dimension(CASE_SIDE_PIXEL_SIZE, CASE_SIDE_PIXEL_SIZE));
@@ -28,8 +28,8 @@ public class VisualCase extends JComponent {
             }
 
             @Override
-        public void mouseClicked(MouseEvent e){
-                Point caseCoord=((VisualCase)e.getSource()).getCaseCoord();
+            public void mouseClicked(MouseEvent e) {
+                Point caseCoord = ((VisualCase) e.getSource()).getCaseCoord();
                 controller.clickVisualCase(caseCoord);
             }
         });

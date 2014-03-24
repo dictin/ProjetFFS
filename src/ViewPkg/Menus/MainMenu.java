@@ -1,6 +1,6 @@
 package ViewPkg.Menus;
 
-import ControllerPkg.Controller;
+import ControllerPkg.ViewController;
 
 import java.awt.*;
 
@@ -11,7 +11,7 @@ public class MainMenu extends ContextualMenu{
 
     private GotoMenuButton shopIcon;
 
-    public MainMenu(final Controller controller){
+    public MainMenu(final ViewController controller){
         super(controller, "main_menu");
 
         shopIcon = new GotoMenuButton(controller, "shop_button", new Dimension(250,100), Color.BLACK);

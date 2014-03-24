@@ -1,6 +1,6 @@
 package ViewPkg;
 
-import ControllerPkg.Controller;
+import ControllerPkg.ViewController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +21,7 @@ public class MasterFrame extends JFrame {
 //    private JMenu menu1 = new JMenu("Menu");
 //    private JMenuItem quit = new JMenuItem("Quitter");
 
-    public MasterFrame(final Controller controller){
+    public MasterFrame(final ViewController controller){
         this.setSize(GAME_FRAME_SIZE);
         mUI =new MasterUI(controller);
         this.add(mUI);

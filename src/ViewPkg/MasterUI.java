@@ -1,6 +1,6 @@
 package ViewPkg;
 
-import ControllerPkg.Controller;
+import ControllerPkg.ViewController;
 import ViewPkg.Menus.*;
 
 import javax.swing.*;
@@ -10,7 +10,7 @@ public class MasterUI extends JPanel{
 
 
     private int gridEndPointX;
-    private Controller controller;
+    private ViewController controller;
     private GotoMenuButton quitIcon;
 
     private MenuTriggerZone menuTriggerZone;
@@ -21,7 +21,7 @@ public class MasterUI extends JPanel{
 
     private int getGridEndPointX;
 
-    public MasterUI(final Controller controller){
+    public MasterUI(final ViewController controller){
         this.controller=controller;
 
         mainMenu= new MainMenu(controller);

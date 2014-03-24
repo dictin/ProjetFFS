@@ -1,6 +1,6 @@
 package ViewPkg.Menus;
 
-import ControllerPkg.Controller;
+import ControllerPkg.ViewController;
 
 import java.awt.*;
 
@@ -12,7 +12,7 @@ public class InventoryMenu extends ContextualMenu{
     private GotoMenuButton consumablesButton;
     private GotoMenuButton reusablesButton;
 
-    public InventoryMenu(Controller controller) {
+    public InventoryMenu(ViewController controller) {
         super(controller, "inventory_menu");
         consumablesButton= new GotoMenuButton(controller, "consumables_button", new Dimension(this.getWidth()-10, this.getHeight()/2-10), Color.cyan);
         this.add(consumablesButton);

@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * Created by Xav on 24/02/14.
  */
-public class Controller extends Thread{
+public class ViewController extends Thread{
 
 
     private int testCounter=0;
@@ -17,7 +17,7 @@ public class Controller extends Thread{
     private int sleepTime;
     private int time=0;
 
-    public Controller(int FPS){
+    public ViewController(int FPS){
         this.sleepTime=1000/FPS;
         mF=new MasterFrame(this);
         this.start();

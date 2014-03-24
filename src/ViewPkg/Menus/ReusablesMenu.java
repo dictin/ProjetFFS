@@ -1,13 +1,13 @@
 package ViewPkg.Menus;
 
-import ControllerPkg.Controller;
+import ControllerPkg.ViewController;
 
 /**
  * Created by Xav on 17/03/14.
  */
 public class ReusablesMenu extends ContextualMenu {
 
-    public ReusablesMenu(Controller controller, String menuName) {
+    public ReusablesMenu(ViewController controller, String menuName) {
         super(controller, menuName);
 
 
