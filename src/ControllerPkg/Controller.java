@@ -1,6 +1,6 @@
 package ControllerPkg;
 
-import ModelPkg.Time;
+import ModelPkg.PkgEvents.AtomicBomb;
 import ViewPkg.MasterFrame;
 import ViewPkg.MasterUI;
 
@@ -15,7 +15,7 @@ public class Controller extends Thread{
     private MasterUI mUI=null;
     private int sleepTime;
     //private int time=0;
-    private Time time;
+    private AtomicBomb.Time time;
 
     public Controller(int FPS){
         this.sleepTime=1000/FPS;

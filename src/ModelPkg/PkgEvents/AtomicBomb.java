@@ -6,7 +6,8 @@ package ModelPkg.PkgEvents;
 public class AtomicBomb extends Events {
 
     public AtomicBomb(){
-       super("Bombe Atomique","Une vraiment pas gentille bombe");
+       super("Bombe Atomique","Une vraiment pas gentille bombe",10);
 
     }
+
 }

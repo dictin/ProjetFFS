@@ -1,25 +1,25 @@
-package ModelPkg;
+package ModelPkg.PkgEvents;
 
 /**
- * Created by Chloé on 14-03-17.
+ * Created by Chloé on 14-03-24.
  */
 public class Time{
 
     // À chaque x tours, on change de jour
     int day = 1;
-    int turn = 0;
-    
+    static int turn = 0;
+
     public Time(){
-        
+
     }
     public int getDay() {
         return day;
     }
 
-    public int getTurn() {
+    public static int getTurn() {
         return turn;
-    }   
-    
+    }
+
     public void addDay() {
         this.day = day++;
     }
@@ -28,3 +28,4 @@ public class Time{
         this.turn = turn++;
     }
 }
+

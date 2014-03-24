@@ -11,12 +11,12 @@ import java.util.Random;
 public class Behavior {
 
     //objectif est composé de -1,0 et 1. il indique le déplacement à faire. Donc coordonné + objectif = noulles coordonneé du fourmilier après le déplacement
-    private Point objectif;
+    private static Point objectif;
 
     public Behavior(){
     }
 
-    public Point drunk(){
+    public static Point drunk(){
         Random random = new Random();
         int rndobjectifX = random.nextInt(2);
         int rndobjectifY = random.nextInt(2);
@@ -25,7 +25,7 @@ public class Behavior {
     }
 
 //TODO Vérifier s'il n'y a pas de null pointer exception (vérification d'une case inexistante)
-    public Point search(Case [][] table, int odorat, int typeOdeur){
+    public static Point search(Case [][] table, int odorat, int typeOdeur){
         int goodLigne = 0;
         int goodColonne = 0;
 
