@@ -2,8 +2,8 @@ package ModelPkg;
 
 public class Critter extends Animal {
 
-    public Critter(){
+    public Critter(int team, Integer[] meanStats, String species){
         //TODO remove placeholder int in constructor.
-        super(0);
+        super(team, meanStats, species);
     }
 }

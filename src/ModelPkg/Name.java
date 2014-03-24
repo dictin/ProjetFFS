@@ -16,7 +16,6 @@ public class Name {
 
     public Name(){
 
-        //TODO Read file.
         String ligne="";
 
         BufferedReader fileEnter = null;
@@ -45,9 +44,4 @@ public class Name {
             Name.genList.add(index, generation++);
             return generation;
         }
-
-
         }
-
-
-
