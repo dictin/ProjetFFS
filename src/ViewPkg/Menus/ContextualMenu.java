@@ -1,6 +1,6 @@
 package ViewPkg.Menus;
 
-import ControllerPkg.ViewController;
+import ControllerPkg.MasterController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +14,7 @@ public abstract class ContextualMenu extends JComponent {
     private String menuName;
     private Dimension menuZone=new Dimension(325,650);
 
-    public ContextualMenu(final ViewController controller, String menuName){
+    public ContextualMenu(final MasterController controller, String menuName){
         this.menuName=menuName;
         backgroundImage=Toolkit.getDefaultToolkit().getImage(menuName+ ".gif");
 

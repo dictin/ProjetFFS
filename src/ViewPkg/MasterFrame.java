@@ -1,11 +1,9 @@
 package ViewPkg;
 
-import ControllerPkg.ViewController;
+import ControllerPkg.MasterController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by Xav on 24/02/14.
@@ -21,7 +19,7 @@ public class MasterFrame extends JFrame {
 //    private JMenu menu1 = new JMenu("Menu");
 //    private JMenuItem quit = new JMenuItem("Quitter");
 
-    public MasterFrame(final ViewController controller){
+    public MasterFrame(final MasterController controller){
         this.setSize(GAME_FRAME_SIZE);
         mUI =new MasterUI(controller);
         this.add(mUI);

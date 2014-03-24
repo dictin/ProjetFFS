@@ -1,14 +1,11 @@
 package MainPkg;
 
-import ControllerPkg.Controller;
-import ViewPkg.MasterFrame;
-
-import javax.swing.*;
-import java.awt.*;
+import ControllerPkg.MasterController;
 
 public class Main {
 
     public static void main(String[] args) {
-        Controller controller = new Controller(60);
+        MasterController masterController = new MasterController(60);
+
     }
 }

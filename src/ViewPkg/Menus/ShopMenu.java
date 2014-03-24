@@ -1,6 +1,7 @@
 package ViewPkg.Menus;
 
-import ControllerPkg.Controller;
+import ControllerPkg.ItemController;
+import ControllerPkg.MasterController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,13 +11,15 @@ import java.awt.*;
  */
 public class ShopMenu extends ContextualMenu{
 
-
+    ItemController itemController;
     JComponent shopInfoMenu = new ShopMenuInfo();
+
     JComponent shopList = new JList();
 
-    public ShopMenu(final Controller controller){
+    public ShopMenu(final MasterController controller){
         super(controller, "shop_menu");
-        shopList.sets
+        this.itemController = controller.getItemController();
+        //shopList.sets
         this.setBackground(Color.green);
         this.shopInfoMenu.setLocation(0, 275);
         this.add(this.shopInfoMenu);

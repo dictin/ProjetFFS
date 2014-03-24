@@ -8,8 +8,9 @@ import java.awt.*;
 /**
  * Created by Xav on 24/02/14.
  */
-public class ViewController extends Thread{
+public class MasterController extends Thread{
 
+    ItemController itemController = new ItemController();
 
     private int testCounter=0;
     private MasterFrame mF;
@@ -17,7 +18,7 @@ public class ViewController extends Thread{
     private int sleepTime;
     private int time=0;
 
-    public ViewController(int FPS){
+    public MasterController(int FPS){
         this.sleepTime=1000/FPS;
         mF=new MasterFrame(this);
         this.start();
@@ -82,5 +83,9 @@ public class ViewController extends Thread{
 
     public void clickVisualCase(Point caseCoord){
 
+    }
+
+    public ItemController getItemController() {
+        return itemController;
     }
 }

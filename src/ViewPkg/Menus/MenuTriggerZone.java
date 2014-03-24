@@ -1,6 +1,6 @@
 package ViewPkg.Menus;
 
-import ControllerPkg.ViewController;
+import ControllerPkg.MasterController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,10 +12,10 @@ import java.awt.event.MouseEvent;
  */
 public class MenuTriggerZone extends JComponent{
 
-    private ViewController controller;
+    private MasterController controller;
     private int currentState=0;
 
-    public MenuTriggerZone(final ViewController controller){
+    public MenuTriggerZone(final MasterController controller){
         this.controller=controller;
         this.setSize(new Dimension(350, 650));
         this.addMouseListener(new MouseAdapter() {

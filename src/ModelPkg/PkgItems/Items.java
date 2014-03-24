@@ -98,4 +98,8 @@ public enum Items {
             effect.activate();
         }
     }
+
+    public String getName() {
+        return name;
+    }
 }

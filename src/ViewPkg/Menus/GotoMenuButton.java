@@ -1,6 +1,6 @@
 package ViewPkg.Menus;
 
-import ControllerPkg.ViewController;
+import ControllerPkg.MasterController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,7 @@ import java.awt.event.MouseEvent;
  */
 public class GotoMenuButton extends JComponent {
 
-    private ViewController controller;
+    private MasterController controller;
     //TODO remove bgColor and put realz sprites
     private Color defBGColor;
     private boolean isAnimatedNow=false;
@@ -25,7 +25,7 @@ public class GotoMenuButton extends JComponent {
     private int currentSpriteIndex=0;
     private String menuButtonName ="quit_button";
 
-    public GotoMenuButton(final ViewController controller, String menuButtonName, Dimension buttonMaxSize, Color defBGColor){
+    public GotoMenuButton(final MasterController controller, String menuButtonName, Dimension buttonMaxSize, Color defBGColor){
         this.controller=controller;
         this.defBGColor=defBGColor;
         this.menuButtonName= menuButtonName;

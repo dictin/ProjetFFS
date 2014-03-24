@@ -1,6 +1,6 @@
 package ViewPkg;
 
-import ControllerPkg.ViewController;
+import ControllerPkg.MasterController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,8 +14,8 @@ public class VisualCase extends JComponent {
 
     public static final int CASE_SIDE_PIXEL_SIZE=20;
     private Point caseCoord;
-    private ViewController controller;
-    public VisualCase(int i, int j, Point visualCaseOrigin, final ViewController controller){
+    private MasterController controller;
+    public VisualCase(int i, int j, Point visualCaseOrigin, final MasterController controller){
         this.controller=controller;
         caseCoord=new Point(i, j);
         this.setSize(new Dimension(CASE_SIDE_PIXEL_SIZE, CASE_SIDE_PIXEL_SIZE));
