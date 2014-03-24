@@ -12,9 +12,11 @@ public class ShopMenu extends ContextualMenu{
 
 
     JComponent shopInfoMenu = new ShopMenuInfo();
+    JComponent shopList = new JList();
 
     public ShopMenu(final Controller controller){
         super(controller, "shop_menu");
+        shopList.sets
         this.setBackground(Color.green);
         this.shopInfoMenu.setLocation(0, 275);
         this.add(this.shopInfoMenu);
