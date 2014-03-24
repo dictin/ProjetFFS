@@ -35,6 +35,7 @@ public class ShopMenu extends ContextualMenu{
         this.shopInfoMenu.setLocation(0, 275);
         this.add(this.shopInfoMenu);
 
+
     }
 
     @Override
@@ -44,7 +45,7 @@ public class ShopMenu extends ContextualMenu{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.setColor(Color.GREEN);
+        g.setColor(Color.BLUE);
         g.fillRect(0,0,320,325);
     }
 }

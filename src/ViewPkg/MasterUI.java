@@ -27,6 +27,13 @@ public class MasterUI extends JPanel{
 
         mainMenu= new MainMenu(controller);
         shopMenu=new ShopMenu(controller);
+        JLabel labelFood = new JLabel("#nourriture: ");
+        labelFood.setSize(500,50);
+        labelFood.setForeground(Color.white);
+        labelFood.setLocation(50,10);
+
+
+        this.add(labelFood);
         inventoryMenu= new InventoryMenu(controller);
         this.setSize(MasterFrame.GAME_FRAME_SIZE);
         this.setBackground(new Color(Integer.parseInt("314159", 16)));
