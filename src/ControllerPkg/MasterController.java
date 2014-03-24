@@ -1,6 +1,5 @@
 package ControllerPkg;
 
-import ModelPkg.PkgEvents.AtomicBomb;
 import ViewPkg.MasterFrame;
 import ViewPkg.MasterUI;
 
@@ -17,8 +16,8 @@ public class MasterController extends Thread{
     private MasterFrame mF;
     private MasterUI mUI=null;
     private int sleepTime;
-    //private int time=0;
-    private AtomicBomb.Time time;
+    private int time=0;
+
 
     public MasterController(int FPS){
         this.sleepTime=1000/FPS;
@@ -32,7 +31,7 @@ public class MasterController extends Thread{
             try {
 
                 this.sleep(sleepTime);
-                time.addTurn(); //addTurn ajoute automatiquement 1 tour au compteur
+
                 mUI.actualiser();
                 mUI.invalidate();
                 mUI.repaint();
@@ -45,11 +44,11 @@ public class MasterController extends Thread{
     }
 
 //NOTE DE CHLOÉ: Cette méthode n'est plus nécessaire parce qu'elle existe déjà dans la classe Time. Est-ce que c'est ok de la supprimée?
-/*
+
     public int getTime(){
         return time;
     }
-*/
+
     public void openMainMenu(){
         mUI.popMenu("main_menu");
     }

@@ -28,16 +28,16 @@ public abstract class Animal {
     private int smellStrength;
 
     private int grabQuantity;
-<<<<<<< HEAD
-    private int team; // -1: player, 1: enemy 1, 2: enemy 2
-    private int action =1; // par défaut, ils cherchent de la nourriture
-=======
-    private int equipQuantity;
 
     private int team; // -1: player, 1: enemy 1, 2: enemy 2
+    private int action =1; // par défaut, ils cherchent de la nourriture
+
+    private int equipQuantity;
+
+
     private String spriteName;
     private Image sprite;
->>>>>>> origin/View-test-branch
+
 
     public Animal(int team, Integer[] meanStats, String species){
     //Création du nom de l'animal
@@ -120,7 +120,7 @@ public abstract class Animal {
 
     public void setMouvement(){
         Point direction;
-        boolean doItAgain = flase;
+        boolean doItAgain = false;
         //Si Behavior est appelé et qu'il retourne 0,0, alors on rappel Behavior avec la méthode Drunk pour qu'il retourne un mouvement aléatoire
         do{
             if(!doItAgain){
