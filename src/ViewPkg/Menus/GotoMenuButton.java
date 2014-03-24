@@ -1,6 +1,6 @@
 package ViewPkg.Menus;
 
-import ControllerPkg.Controller;
+import ControllerPkg.MasterController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +12,9 @@ import java.awt.event.MouseEvent;
  */
 public class GotoMenuButton extends JComponent {
 
-    private Controller controller;
+    private MasterController controller;
+    //TODO remove bgColor and put realz sprites
+    private Color defBGColor;
     private boolean isAnimatedNow=false;
     private int anmtnStartTime=0;
     /**
@@ -23,8 +25,9 @@ public class GotoMenuButton extends JComponent {
     private int currentSpriteIndex=0;
     private String menuButtonName ="quit_button";
 
-    public GotoMenuButton(final Controller controller, String menuButtonName, Dimension buttonMaxSize){
+    public GotoMenuButton(final MasterController controller, String menuButtonName, Dimension buttonMaxSize, Color defBGColor){
         this.controller=controller;
+        this.defBGColor=defBGColor;
         this.menuButtonName= menuButtonName;
         this.setSize(buttonMaxSize);
 
@@ -32,26 +35,27 @@ public class GotoMenuButton extends JComponent {
             @Override
             public void mouseEntered(MouseEvent e) {
                 super.mouseEntered(e);
-                GotoMenuButton gotoMenuButton =(GotoMenuButton)e.getSource();
+                GotoMenuButton gotoMenuButton = (GotoMenuButton) e.getSource();
                 gotoMenuButton.setAnimated(true);
                 gotoMenuButton.setAnmtnStartTime(controller.getTime());
             }
+
             @Override
             public void mouseExited(MouseEvent e) {
                 super.mouseExited(e);
-                GotoMenuButton gotoMenuButton =(GotoMenuButton)e.getSource();
+                GotoMenuButton gotoMenuButton = (GotoMenuButton) e.getSource();
                 gotoMenuButton.setAnimated(false);
-                gotoMenuButton.currentSpriteIndex=0;
+                gotoMenuButton.currentSpriteIndex = 0;
             }
+
             @Override
             public void mouseClicked(MouseEvent e) {
 
                 super.mouseClicked(e);
-                GotoMenuButton gotoMenuButton =(GotoMenuButton)e.getSource();
+                GotoMenuButton gotoMenuButton = (GotoMenuButton) e.getSource();
                 controller.menuButtonClick(gotoMenuButton.getMenuButtonName());
             }
         });
-        this.setVisible(true);
     }
 
     public void setAnimated(boolean isAnimatedNow){
@@ -88,6 +92,8 @@ public class GotoMenuButton extends JComponent {
     @Override
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
+        graphics.setColor(defBGColor);
+        graphics.fillRect(0, 0, this.getWidth(), this.getHeight());
         graphics.drawImage(Toolkit.getDefaultToolkit().getImage(menuButtonName + currentSpriteIndex + ".gif"), 0, 0, this);
     }
 }

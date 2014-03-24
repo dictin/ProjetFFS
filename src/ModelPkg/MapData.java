@@ -1,6 +1,7 @@
 package ModelPkg;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MapData {
@@ -10,6 +11,34 @@ public class MapData {
 
     public MapData(){
         this.initialize();
+    }
+
+    private void initialize2(int nbOfTrees, int nbOfRocks, int nbOfWater, int nbOfHoles){
+        Random casePicker=new Random(30*30);
+        int nbOfSpecialCases=nbOfHoles+nbOfRocks+nbOfTrees+nbOfWater;
+        if (nbOfSpecialCases>30*30){
+            System.out.println("Erreur: Trop de cases speciales, loupe infinie creee.");
+        }
+        ArrayList<Integer> specialCases=new ArrayList<Integer>();
+        ArrayList<Integer> alreadyPicked=new ArrayList<Integer>();
+        for (int i=0; i<nbOfSpecialCases; i++){
+            boolean caseAlreadyFull=false;
+            do {
+                caseAlreadyFull=false;
+                int caseID=casePicker.nextInt();
+                if (alreadyPicked.size()!=0){
+                for (int j=0;j<alreadyPicked.size();j++){
+                    if (caseID==alreadyPicked.get(j)){
+                        caseAlreadyFull=true;
+                    }
+                }
+                    if (!caseAlreadyFull){
+                        specialCases.add(caseID);
+                    }
+                }
+            }while (caseAlreadyFull);
+        }
+        //TODO utiliser les ID du arrayList pour remplir les cases appropriées (posiX=ID%30, posiY=floor(ID/30))
     }
 
     private void initialize() { //8% arbre 2% roche 3% eau 2% trou

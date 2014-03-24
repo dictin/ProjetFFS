@@ -1,7 +1,9 @@
 package ViewPkg.Menus;
 
-import ControllerPkg.Controller;
+import ControllerPkg.ItemController;
+import ControllerPkg.MasterController;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -9,21 +11,40 @@ import java.awt.*;
  */
 public class ShopMenu extends ContextualMenu{
 
+    ItemController itemController;
+    JComponent shopInfoMenu = new ShopMenuInfo();
 
+    JList<String> shopList;
+    JScrollPane scrollPane;
 
-    public ShopMenu(final Controller controller){
+    public ShopMenu(final MasterController controller){
         super(controller, "shop_menu");
+        this.itemController = controller.getItemController();
+        this.shopList = new JList<String>(itemController.getItemList());
+        this.shopList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.shopList.setLayoutOrientation(JList.VERTICAL);
+        this.shopList.setVisibleRowCount(-1);
+        this.shopList.setFixedCellHeight(25);
+        this.shopList.setSize(new Dimension(300, 250));
+        this.shopList.setLocation(10, 12);
+        scrollPane = new JScrollPane(this.shopList, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        this.scrollPane.setLocation(10,12);
+        this.scrollPane.setSize(300,250);
+        this.add(this.scrollPane);
+        this.setBackground(Color.green);
+        this.shopInfoMenu.setLocation(0, 275);
+        this.add(this.shopInfoMenu);
+
     }
 
     @Override
     public void actualiser() {
-        System.out.println("blabla");
     }
 
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.setColor(Color.BLACK);
-        g.fillRect(0,0,500,500);
+        g.setColor(Color.GREEN);
+        g.fillRect(0,0,320,325);
     }
 }

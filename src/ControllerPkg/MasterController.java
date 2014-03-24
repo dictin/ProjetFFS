@@ -4,11 +4,14 @@ import ModelPkg.PkgEvents.AtomicBomb;
 import ViewPkg.MasterFrame;
 import ViewPkg.MasterUI;
 
+import java.awt.*;
+
 /**
  * Created by Xav on 24/02/14.
  */
-public class Controller extends Thread{
+public class MasterController extends Thread{
 
+    ItemController itemController = new ItemController();
 
     private int testCounter=0;
     private MasterFrame mF;
@@ -17,7 +20,7 @@ public class Controller extends Thread{
     //private int time=0;
     private AtomicBomb.Time time;
 
-    public Controller(int FPS){
+    public MasterController(int FPS){
         this.sleepTime=1000/FPS;
         mF=new MasterFrame(this);
         this.start();
@@ -66,9 +69,27 @@ public class Controller extends Thread{
             System.exit(0);
         }
         else {
-            System.out.println("else");
             String menuName=menuButtonName.split("_")[0]+"_menu";
+            System.out.println(menuName);
             mUI.popMenu(menuName);
         }
+    }
+
+    public void enterMenuTriggerZone(){
+        System.out.println("EMTZ");
+        mUI.popMenu("main_menu");
+    }
+
+    public void pointAtVisualCase(){
+        mUI.setGridToActive();
+        mUI.showCaseContents();
+    }
+
+    public void clickVisualCase(Point caseCoord){
+
+    }
+
+    public ItemController getItemController() {
+        return itemController;
     }
 }

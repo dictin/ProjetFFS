@@ -1,11 +1,9 @@
 package ViewPkg.Menus;
 
-import ControllerPkg.Controller;
+import ControllerPkg.MasterController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  * Created by Xav on 03/03/14.
@@ -14,15 +12,9 @@ public abstract class ContextualMenu extends JComponent {
 
     private Image backgroundImage;
     private String menuName;
-    private Dimension menuZone=new Dimension(1000,1000);
+    private Dimension menuZone=new Dimension(325,650);
 
-    public ContextualMenu(final Controller controller, String menuName){
-        this.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseExited(MouseEvent e) {
-                ((ContextualMenu)e.getSource()).setVisible(false);
-            }
-        });
+    public ContextualMenu(final MasterController controller, String menuName){
         this.menuName=menuName;
         backgroundImage=Toolkit.getDefaultToolkit().getImage(menuName+ ".gif");
 

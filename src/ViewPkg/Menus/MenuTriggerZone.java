@@ -1,32 +1,27 @@
 package ViewPkg.Menus;
 
-import ControllerPkg.Controller;
+import ControllerPkg.MasterController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 /**
  * Created by Xav on 05/03/14.
  */
 public class MenuTriggerZone extends JComponent{
 
-    private Controller controller;
+    private MasterController controller;
+    private int currentState=0;
 
-    public MenuTriggerZone(final Controller controller){
+    public MenuTriggerZone(final MasterController controller){
         this.controller=controller;
         this.setSize(new Dimension(350, 650));
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                controller.openMainMenu();
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e){
-                controller.closeAllMenus();
+                controller.enterMenuTriggerZone();
             }
         });
         this.setBackground(Color.blue);
