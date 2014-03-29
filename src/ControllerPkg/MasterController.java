@@ -16,7 +16,7 @@ public class MasterController extends Thread{
     private MasterFrame mF;
     private MasterUI mUI=null;
     private int sleepTime;
-    private int time=0;
+    private int animationTime=0;
 
 
     public MasterController(int FPS){
@@ -31,7 +31,7 @@ public class MasterController extends Thread{
             try {
 
                 this.sleep(sleepTime);
-                time++;
+                this.animationTime++;
                 mUI.actualiser();
                 mUI.invalidate();
                 mUI.repaint();
@@ -45,8 +45,8 @@ public class MasterController extends Thread{
 
 //NOTE DE CHLOÉ: Cette méthode n'est plus nécessaire parce qu'elle existe déjà dans la classe Time. Est-ce que c'est ok de la supprimée?
 
-    public int getTime(){
-        return time;
+    public int getAnimationTime(){
+        return animationTime;
     }
 
     public void openMainMenu(){
