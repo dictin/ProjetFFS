@@ -92,6 +92,8 @@ public enum Items {
         return effect;
     }
 
+
+
     public void firstActivation(){
         ItemEffect effect = this.getEffect();
         if (effect instanceof BoostEffect){
