@@ -12,10 +12,9 @@ import java.util.ArrayList;
 public class Name {
 
     private static ArrayList<String> nameList = new ArrayList<String>();
-    private static ArrayList<Integer> genList = new ArrayList<Integer>();
+    private static int[] genList = new int[25];
 
     public static void initialize(){
-
 
         String line="";
 
@@ -28,7 +27,7 @@ public class Name {
                 name = line;
                 System.out.println(line);
                 nameList.add(name);
-                genList.add(1);
+                genList[nameList.indexOf(name)] = 1;
                 line = fileEnter.readLine();
             }
             fileEnter.close();
@@ -37,15 +36,18 @@ public class Name {
         }
     }
 
-        public static String getName (int index){
-            String name = Name.nameList.get(index);
-            System.out.println(name);
-            return name;
-        }
-        public static int getGen (int index){
-            int generation = Name.genList.get(index);
-            Name.genList.remove(index);
-            Name.genList.add(index, generation++);
-            return generation;
-        }
-        }
+    public static String getName (int index){
+
+        String name = Name.nameList.get(index);
+        return name;
+    }
+
+    public static int getGen (int index){
+
+        int generation = Name.genList[index];
+        Name.genList[index] = generation +1;
+        return generation;
+    }
+
+
+}
