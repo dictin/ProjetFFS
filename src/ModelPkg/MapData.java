@@ -8,11 +8,6 @@ public class MapData {
 
     private static Case[][] map = new Case[30][30];
 
-
-    public MapData(){
-        this.initialize();
-    }
-
     private void initialize2(int nbOfTrees, int nbOfRocks, int nbOfWater, int nbOfHoles){
         Random casePicker=new Random(30*30);
         int nbOfSpecialCases=nbOfHoles+nbOfRocks+nbOfTrees+nbOfWater;
@@ -41,7 +36,7 @@ public class MapData {
         //TODO utiliser les ID du arrayList pour remplir les cases appropriées (posiX=ID%30, posiY=floor(ID/30))
     }
 
-    private void initialize() { //8% arbre 2% roche 3% eau 2% trou
+    public static void initialize() { //8% arbre 2% roche 3% eau 2% trou
         Random random = new Random(100);
         int maxLength = 30;
         int hivePosition = maxLength/2;

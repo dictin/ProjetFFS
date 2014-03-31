@@ -1,39 +1,33 @@
 package ViewPkg;
 
 import ControllerPkg.MasterController;
+import ControllerPkg.VisualCaseHandler;
+import ObserverPkg.Observer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 /**
  * Created by Xav on 24/02/14.
  */
 
-public class VisualCase extends JComponent {
+public class VisualCase extends JComponent implements Observer {
 
     public static final int CASE_SIDE_PIXEL_SIZE=20;
     private Point caseCoord;
     private MasterController controller;
+    private Image occupantImage = null;
+
+
+
     public VisualCase(int i, int j, Point visualCaseOrigin, final MasterController controller){
         this.controller=controller;
         caseCoord=new Point(i, j);
         this.setSize(new Dimension(CASE_SIDE_PIXEL_SIZE, CASE_SIDE_PIXEL_SIZE));
         this.setLocation((int) (visualCaseOrigin.getX() + i * CASE_SIDE_PIXEL_SIZE), (int) (visualCaseOrigin.getY() + j * CASE_SIDE_PIXEL_SIZE));
-        this.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                super.mouseEntered(e);
-                controller.pointAtVisualCase();
-            }
+        this.addMouseListener(new VisualCaseHandler());
 
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                Point caseCoord = ((VisualCase) e.getSource()).getCaseCoord();
-                controller.clickVisualCase(caseCoord);
-            }
-        });
+        this.controller.getMapController().addObserver(this);
     }
 
     public Point getCaseCoord(){
@@ -43,7 +37,16 @@ public class VisualCase extends JComponent {
     @Override
     public void paintComponent(Graphics graphics){
 
+        if (this.occupantImage != null){
+            graphics.drawImage(this.occupantImage,0,0,this);
+        }
         graphics.setColor(new Color(Integer.parseInt("FFFFF0", 16)));
         graphics.drawRect(0, 0, CASE_SIDE_PIXEL_SIZE-1, CASE_SIDE_PIXEL_SIZE-1);
+    }
+
+    @Override
+    public void update() {
+        this.occupantImage = controller.getMapController().getOccupancy(caseCoord);
+        this.repaint();
     }
 }

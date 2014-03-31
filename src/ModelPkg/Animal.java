@@ -6,8 +6,8 @@ import java.util.Random;
 public abstract class Animal {
 
     private Point position;
-    private Integer[] meanStats;
-    private Integer[] mainStats;
+    private int[] meanStats;
+    private int[] mainStats;
     private String name;
     //NameGen = génération du nom ex: Eustache IIème du nom
     private int nameGen;
@@ -38,10 +38,10 @@ public abstract class Animal {
     private Image sprite;
 
 
-    public Animal(int team, Integer[] meanStats, String species){
+    public Animal(int team, int[] meanStats, String species){
     //Création du nom de l'animal
-        Random random = new Random(20);
-        int noName = random.nextInt();
+        Random random = new Random();
+        int noName = random.nextInt(20);
         this.name = Name.getName(noName);
         this.nameGen = Name.getGen(noName);
         this.team = team;
@@ -60,8 +60,8 @@ public abstract class Animal {
         sprite=Toolkit.getDefaultToolkit().getImage(species+".gif");
     }
 
-    private Integer[] rollStats(){
-        Integer[] finalStats= {0,0,0,0};
+    private int[] rollStats(){
+        int[] finalStats= {0,0,0,0};
         Random coinFlip = new Random();
         for (int i=0; i<meanStats.length; i++){
             if (coinFlip.nextBoolean()){
@@ -208,4 +208,7 @@ public abstract class Animal {
         return smell;
     }
 
+    public Image getSprite() {
+        return sprite;
+    }
 }

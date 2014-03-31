@@ -14,28 +14,32 @@ public class Name {
     private static ArrayList<String> nameList = new ArrayList<String>();
     private static ArrayList<Integer> genList = new ArrayList<Integer>();
 
-    public Name(){
+    public static void initialize(){
 
-        String ligne="";
+
+        String line="";
 
         BufferedReader fileEnter = null;
-            try {
-                fileEnter = new BufferedReader(new FileReader("Names.txt"));
-                String line = fileEnter.readLine();
-                String name;
-                while (line != null){
-                    name = line;
-                    nameList.add(name);
-                    genList.add(1);
-                    line = fileEnter.readLine();
-                }
-                fileEnter.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                }
+        try {
+            fileEnter = new BufferedReader(new FileReader("Names.txt"));
+            line = fileEnter.readLine();
+            String name;
+            while (line != null){
+                name = line;
+                System.out.println(line);
+                nameList.add(name);
+                genList.add(1);
+                line = fileEnter.readLine();
+            }
+            fileEnter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
         public static String getName (int index){
-           String name = Name.nameList.get(index);
+            String name = Name.nameList.get(index);
+            System.out.println(name);
             return name;
         }
         public static int getGen (int index){

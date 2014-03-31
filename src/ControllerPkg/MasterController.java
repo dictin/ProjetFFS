@@ -1,5 +1,6 @@
 package ControllerPkg;
 
+import ModelPkg.Name;
 import ViewPkg.MasterFrame;
 import ViewPkg.MasterUI;
 
@@ -12,6 +13,7 @@ public class MasterController extends Thread{
 
     ItemController itemController = new ItemController();
     ShopInfoController shopInfoController = new ShopInfoController();
+    MapController mapController = new MapController();
 
     private int testCounter=0;
     private MasterFrame mF;
@@ -21,6 +23,7 @@ public class MasterController extends Thread{
 
 
     public MasterController(int FPS){
+        Name.initialize();
         this.sleepTime=1000/FPS;
         mF=new MasterFrame(this);
         this.start();
@@ -95,5 +98,9 @@ public class MasterController extends Thread{
 
     public ShopInfoController getShopInfoController() {
         return shopInfoController;
+    }
+
+    public MapController getMapController() {
+        return mapController;
     }
 }

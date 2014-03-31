@@ -2,11 +2,14 @@ package ModelPkg;
 
 
 
+import ObserverPkg.Observable;
+import ObserverPkg.Observer;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Case {
+public class Case implements Observable {
 
     private Point position;
     private Animal occupant;
@@ -14,9 +17,11 @@ public class Case {
     private ArrayList<Smell> smellArrayList = new ArrayList<Smell>();
     private ArrayList<Smell> sortedSmellArrayList = new ArrayList<Smell>();
 
+    private ArrayList<Observer> observers = new ArrayList<Observer>();
+
 
     public Case(Point location, Animal occupant , WildObject terrain){
-        this.position = position;
+        this.position = location;
         this.occupant = null;
         this.terrain = terrain;
 
@@ -85,5 +90,22 @@ public class Case {
 
     public ArrayList<Smell> getSortedSmellArrayList() {
         return sortedSmellArrayList;
+    }
+
+    public void setOccupant(Animal occupant) {
+        this.occupant = occupant;
+        this.updateObservers();
+    }
+
+    @Override
+    public void addObserver(Observer observer) {
+        this.observers.add(observer);
+    }
+
+    @Override
+    public void updateObservers() {
+        for(int i = 0; i< observers.size(); i++){
+            this.observers.get(i).update();
+        }
     }
 }
