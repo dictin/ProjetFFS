@@ -88,6 +88,10 @@ public class Case implements Observable {
         return occupant;
     }
 
+    public WildObject getWildObject(){
+        return this.terrain;
+    }
+
     public ArrayList<Smell> getSortedSmellArrayList() {
         return sortedSmellArrayList;
     }

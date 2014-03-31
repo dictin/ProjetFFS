@@ -21,4 +21,9 @@ public class MapController {
         Case selectedCase = MapData.getCase(point);
         return selectedCase.getOccupant().getSprite();
     }
+
+    public Image getVisualWildObject(Point point){
+        Case selectedCase = MapData.getCase(point);
+        return selectedCase.getWildObject().getSprite();
+    }
 }

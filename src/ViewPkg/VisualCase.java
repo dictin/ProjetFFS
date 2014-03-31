@@ -17,6 +17,7 @@ public class VisualCase extends JComponent implements Observer {
     private Point caseCoord;
     private MasterController controller;
     private Image occupantImage = null;
+    private Image backgroundImage;
 
 
 
@@ -28,6 +29,8 @@ public class VisualCase extends JComponent implements Observer {
         this.addMouseListener(new VisualCaseHandler(this.controller));
 
         this.controller.getMapController().addObserver(this);
+
+        this.backgroundImage = this.controller.getMapController().getVisualWildObject(caseCoord);
     }
 
     public Point getCaseCoord(){
@@ -36,6 +39,7 @@ public class VisualCase extends JComponent implements Observer {
 
     @Override
     public void paintComponent(Graphics graphics){
+        graphics.drawImage(this.backgroundImage, 0,0,this);
 
         if (this.occupantImage != null){
             graphics.drawImage(this.occupantImage,0,0,this);
@@ -46,6 +50,7 @@ public class VisualCase extends JComponent implements Observer {
 
     @Override
     public void update() {
+        this.backgroundImage = controller.getMapController().getVisualWildObject(caseCoord);
         this.occupantImage = controller.getMapController().getOccupancy(caseCoord);
         this.repaint();
     }

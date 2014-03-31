@@ -94,6 +94,6 @@ public class GotoMenuButton extends JComponent {
         super.paintComponent(graphics);
         graphics.setColor(defBGColor);
         graphics.fillRect(0, 0, this.getWidth(), this.getHeight());
-        graphics.drawImage(Toolkit.getDefaultToolkit().getImage(menuButtonName + currentSpriteIndex + ".gif"), 0, 0, this);
+        graphics.drawImage(Toolkit.getDefaultToolkit().getImage("IMG/"+menuButtonName + currentSpriteIndex + ".gif"), 0, 0, this);
     }
 }

@@ -1,6 +1,5 @@
 package ViewPkg;
 
-import ControllerPkg.ItemController;
 import ControllerPkg.MasterController;
 import ViewPkg.Menus.*;
 
@@ -51,7 +50,7 @@ public class MasterUI extends JPanel{
                 this.add(visualCasesGrid[i][j]);
             }
         }
-        quitIcon = new GotoMenuButton(controller, "quit_button", new Dimension(25,25), Color.black);
+        quitIcon = new GotoMenuButton(controller, "quit_button", new Dimension(25,25), new Color(Integer.parseInt("314159",16)));
         this.add(quitIcon);
         quitIcon.setLocation(this.getWidth()-quitIcon.getWidth(), 0);
 
