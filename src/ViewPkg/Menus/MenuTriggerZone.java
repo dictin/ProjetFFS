@@ -24,6 +24,6 @@ public class MenuTriggerZone extends JComponent{
                 controller.enterMenuTriggerZone();
             }
         });
-        this.setBackground(Color.blue);
+        this.setBackground(Color.BLUE);
     }
 }

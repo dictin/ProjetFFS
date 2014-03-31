@@ -2,6 +2,7 @@ package ViewPkg.Menus;
 
 import ControllerPkg.MasterController;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -10,13 +11,21 @@ import java.awt.*;
 public class MainMenu extends ContextualMenu{
 
     private GotoMenuButton shopIcon;
+    private GotoMenuButton inventoryIcon;
+    private GotoMenuButton creationButton;
 
     public MainMenu(final MasterController controller){
         super(controller, "main_menu");
 
         shopIcon = new GotoMenuButton(controller, "shop_button", new Dimension(250,100), Color.BLACK);
+        inventoryIcon = new GotoMenuButton(controller, "inventory_button", new Dimension(250,100),Color.YELLOW);
+        creationButton = new GotoMenuButton((controller),"creation_button", new Dimension(250,100), Color.CYAN);
+        this.add(inventoryIcon);
         this.add(shopIcon);
+        this.add(creationButton);
         shopIcon.setLocation(0, 25);
+        inventoryIcon.setLocation(0, 160);
+        creationButton.setLocation(0,400);
         this.setBackground(Color.BLACK);
     }
 
@@ -31,5 +40,7 @@ public class MainMenu extends ContextualMenu{
         super.paintComponent(graphics);
         graphics.setColor(Color.BLUE);
         graphics.fillRect(0,0,300,300);
+        graphics.setColor(Color.PINK);
+        graphics.fillRect(0,350,300,350);
     }
 }

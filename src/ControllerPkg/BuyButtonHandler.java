@@ -18,6 +18,5 @@ public class BuyButtonHandler implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.list.getSelectedIndex();
         System.out.println(this.list.getSelectedIndex());
-
     }
 }
