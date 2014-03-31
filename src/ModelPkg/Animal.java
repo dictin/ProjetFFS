@@ -94,6 +94,7 @@ public abstract class Animal {
     }
 
     public void setPosition(Point position) {
+
         this.position = position;
     }
 

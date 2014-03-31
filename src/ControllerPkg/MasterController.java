@@ -1,7 +1,11 @@
 package ControllerPkg;
 
+import ModelPkg.Animal;
+import ModelPkg.Fourmillier;
 import ViewPkg.MasterFrame;
 import ViewPkg.MasterUI;
+import ViewPkg.Menus.VisualAnimal;
+import ViewPkg.VisualCase;
 
 import java.awt.*;
 
@@ -84,8 +88,11 @@ public class MasterController extends Thread{
         mUI.showCaseContents();
     }
 
-    public void clickVisualCase(Point caseCoord){
-
+    public void clickVisualCase(VisualCase vc){
+        Integer[] mmdStats={25,25,25,25};
+        Animal testMyrmidon = new Fourmillier(0, mmdStats, "Myrmidon");
+        testMyrmidon.setPosition(vc.getCaseCoord());
+        vc.setAnimal("Myrmidon");
     }
 
     public ItemController getItemController() {

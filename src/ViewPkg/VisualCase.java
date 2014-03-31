@@ -16,6 +16,7 @@ public class VisualCase extends JComponent {
     public static final int CASE_SIDE_PIXEL_SIZE=20;
     private Point caseCoord;
     private MasterController controller;
+    private Image animalSpeciesInCase;
     public VisualCase(int i, int j, Point visualCaseOrigin, final MasterController controller){
         this.controller=controller;
         caseCoord=new Point(i, j);
@@ -30,10 +31,14 @@ public class VisualCase extends JComponent {
 
             @Override
             public void mouseClicked(MouseEvent e) {
-                Point caseCoord = ((VisualCase) e.getSource()).getCaseCoord();
-                controller.clickVisualCase(caseCoord);
+                VisualCase sourceCase = (VisualCase)e.getSource();
+                controller.clickVisualCase(sourceCase);
             }
         });
+    }
+
+    public void setAnimal(String imageName){
+        animalSpeciesInCase=Toolkit.getDefaultToolkit().getImage(imageName);
     }
 
     public Point getCaseCoord(){
@@ -42,8 +47,8 @@ public class VisualCase extends JComponent {
 
     @Override
     public void paintComponent(Graphics graphics){
-
         graphics.setColor(new Color(Integer.parseInt("FFFFF0", 16)));
         graphics.drawRect(0, 0, CASE_SIDE_PIXEL_SIZE-1, CASE_SIDE_PIXEL_SIZE-1);
+        graphics.drawImage(animalSpeciesInCase, 0, 0, this);
     }
 }

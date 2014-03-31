@@ -20,6 +20,9 @@ public class MasterUI extends JPanel{
     private ContextualMenu shopMenu;
     private ContextualMenu inventoryMenu;
 
+    //TODO déplacer dans le modèle
+    private int food=300;
+
     private int getGridEndPointX;
 
     public MasterUI(final MasterController controller){
@@ -27,13 +30,39 @@ public class MasterUI extends JPanel{
 
         mainMenu= new MainMenu(controller);
         shopMenu=new ShopMenu(controller);
-        JLabel labelFood = new JLabel("#nourriture: ");
-        labelFood.setSize(500,50);
+
+        //TODO lier les labels à leur valeur.
+        //labelFood.setText(labelFood.split(":")[0]+" "+nourriture);
+        JLabel labelFood = new JLabel("Nourriture: 9999");
+        labelFood.setSize(92,9);
         labelFood.setForeground(Color.white);
-        labelFood.setLocation(50,10);
-
-
+        labelFood.setLocation(25,35);
         this.add(labelFood);
+
+        JLabel labelPopulation = new JLabel("Population: 999");
+        labelPopulation.setSize(87,16);
+        labelPopulation.setForeground(Color.white);
+        labelPopulation.setLocation(25+labelFood.getWidth()+5,15);
+        this.add(labelPopulation);
+
+        JLabel labelDeaths = new JLabel("Victimes: 999");
+        labelDeaths.setSize(77,9);
+        labelDeaths.setForeground(Color.white);
+        labelDeaths.setLocation(labelFood.getX()+labelFood.getWidth()+15,35);
+        this.add(labelDeaths);
+
+        JLabel labelLevel = new JLabel("Niveau: 99");
+        labelLevel.setSize(58,9);
+        labelLevel.setForeground(Color.white);
+        labelLevel.setLocation(labelDeaths.getX()+labelDeaths.getWidth()+15,35);
+        this.add(labelLevel);
+
+        JLabel labelScore = new JLabel("Score: 99999");
+        labelScore.setSize(87,9);
+        labelScore.setForeground(Color.white);
+        labelScore.setLocation(labelLevel.getX()+labelLevel.getWidth()+15,35);
+        this.add(labelScore);
+
         inventoryMenu= new InventoryMenu(controller);
         this.setSize(MasterFrame.GAME_FRAME_SIZE);
         this.setBackground(new Color(Integer.parseInt("314159", 16)));
@@ -72,6 +101,10 @@ public class MasterUI extends JPanel{
 //        gridTriggerZone.setLocation(25, 25);
 
         //TODO Ajouter éléments visuels d'un niveau de jeu.
+    }
+
+    public void setFood(int newFoodValue){
+        this.food=newFoodValue;
     }
 
     public void popMenu(String menuName){
@@ -116,7 +149,6 @@ public class MasterUI extends JPanel{
 
     public void showCaseContents(){
         //TODO link visualCases to contained items and display informations on them.
-        System.out.println("wow such show");
     }
 
     public void actualiser(){
