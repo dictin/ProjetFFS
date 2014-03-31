@@ -11,6 +11,12 @@ import java.awt.event.MouseListener;
 public class VisualCaseHandler implements MouseListener {
 
 
+    MasterController controller;
+
+    public VisualCaseHandler(MasterController controller){
+        this.controller = controller;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         Point coords = ((VisualCase)e.getSource()).getCaseCoord();
@@ -30,6 +36,8 @@ public class VisualCaseHandler implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent e) {
+        this.controller.setGridToActive();
+
 
     }
 
