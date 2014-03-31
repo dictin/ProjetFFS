@@ -33,37 +33,6 @@ public class MasterUI extends JPanel{
         shopMenu=new ShopMenu(controller);
         creationMenu = new CreationMenu(controller);
 
-        //TODO lier les labels à leur valeur.
-        //labelFood.setText(labelFood.split(":")[0]+" "+nourriture);
-        JLabel labelFood = new JLabel("Nourriture: 9999");
-        labelFood.setSize(92,9);
-        labelFood.setForeground(Color.white);
-        labelFood.setLocation(660,550);
-        this.add(labelFood);
-
-        JLabel labelPopulation = new JLabel("Population: 999");
-        labelPopulation.setSize(87,16);
-        labelPopulation.setForeground(Color.white);
-        labelPopulation.setLocation(660,560);
-        this.add(labelPopulation);
-
-        JLabel labelDeaths = new JLabel("Victimes: 999");
-        labelDeaths.setSize(77,9);
-        labelDeaths.setForeground(Color.white);
-        labelDeaths.setLocation(660,577);
-        this.add(labelDeaths);
-
-        JLabel labelLevel = new JLabel("Niveau: 99");
-        labelLevel.setSize(58,9);
-        labelLevel.setForeground(Color.white);
-        labelLevel.setLocation(660,590);
-        this.add(labelLevel);
-
-        JLabel labelScore = new JLabel("Score: 99999");
-        labelScore.setSize(87,9);
-        labelScore.setForeground(Color.white);
-        labelScore.setLocation(660,602);
-        this.add(labelScore);
 
         inventoryMenu= new InventoryMenu(controller);
         this.setSize(MasterFrame.GAME_FRAME_SIZE);
