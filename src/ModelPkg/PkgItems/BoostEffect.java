@@ -99,4 +99,12 @@ public enum BoostEffect implements ItemEffect {
     public int getDuration() {
         return duration;
     }
+
+    public int getBoostValue() {
+        return boostValue;
+    }
+
+    public int getStatID() {
+        return statID;
+    }
 }

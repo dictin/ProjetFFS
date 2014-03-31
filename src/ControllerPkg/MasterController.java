@@ -15,6 +15,7 @@ import java.awt.*;
 public class MasterController extends Thread{
 
     ItemController itemController = new ItemController();
+    ShopInfoController shopInfoController = new ShopInfoController();
 
     private int testCounter=0;
     private MasterFrame mF;
@@ -97,5 +98,9 @@ public class MasterController extends Thread{
 
     public ItemController getItemController() {
         return itemController;
+    }
+
+    public ShopInfoController getShopInfoController() {
+        return shopInfoController;
     }
 }

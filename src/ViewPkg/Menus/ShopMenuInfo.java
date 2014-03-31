@@ -1,16 +1,24 @@
 package ViewPkg.Menus;
 
+import ControllerPkg.ShopInfoController;
+import ObserverPkg.Observer;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class ShopMenuInfo extends JComponent {
+public class ShopMenuInfo extends JComponent implements Observer {
 
     private JLabel itemName = new JLabel("Nom: ---");
     private JLabel itemCost = new JLabel("Co\u00FBt: ---");
     private JLabel boost = new JLabel("Bonus: ---");
     private JLabel permanant = new JLabel("Permanant: ---");
 
-    public ShopMenuInfo(){
+    private ShopInfoController shopInfoController;
+
+    public ShopMenuInfo(ShopInfoController shopInfoController){
+        this.shopInfoController = shopInfoController;
+        this.shopInfoController.addObserver(this);
+
         this.setSize(new Dimension(320, 50));
         this.setBackground(Color.ORANGE);
 
@@ -39,6 +47,44 @@ public class ShopMenuInfo extends JComponent {
     public void paintComponent(Graphics graphics){
         graphics.setColor(Color.ORANGE);
         graphics.fillRect(0,0,this.getWidth(), this.getHeight());
+
+    }
+
+    private String getStatTitle(int statID){
+        String returnValue = "";
+        switch (statID){
+            case 0: returnValue ="HP";
+                break;
+            case 1: returnValue = "SPD";
+                break;
+            case 2: returnValue = "ATK";
+                break;
+            case 3: returnValue = "SMELLSENS";
+                break;
+            case 4: returnValue = "SMELLSTR";
+                break;
+            case 5: returnValue = "DEF";
+                break;
+            case 6: returnValue = "END";
+                break;
+            case 7: returnValue = "GBQT";
+                break;
+            default: returnValue = "---";
+        }
+
+        return returnValue;
+    }
+
+    @Override
+    public void update() {
+        this.itemName.setText("Nom: "+this.shopInfoController.getName());
+        this.itemCost.setText("Co\u00FBt: "+this.shopInfoController.getCost());
+        this.boost.setText("Bonus: "+this.getStatTitle(this.shopInfoController.getStatID())+" +"+this.shopInfoController.getModValue());
+        if (this.shopInfoController.isPermanent()){
+            this.permanant.setText("Permanant: oui");
+        }else{
+            this.permanant.setText("Permanant: non");
+        }
 
     }
 }
