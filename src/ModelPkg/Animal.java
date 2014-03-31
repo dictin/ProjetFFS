@@ -44,6 +44,10 @@ public abstract class Animal {
         int noName = random.nextInt(20);
         this.name = Name.getName(noName);
         this.nameGen = Name.getGen(noName);
+
+        this.name +=" le "+this.nameGen;
+        System.out.println(this.name);
+
         this.team = team;
         this.meanStats=meanStats;
         this.mainStats=rollStats();

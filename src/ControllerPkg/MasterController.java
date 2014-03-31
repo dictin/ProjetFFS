@@ -92,6 +92,10 @@ public class MasterController extends Thread{
 
     }
 
+    public void setGridToActive(){
+        this.mUI.setGridToActive();
+    }
+
     public ItemController getItemController() {
         return itemController;
     }

@@ -25,7 +25,7 @@ public class VisualCase extends JComponent implements Observer {
         caseCoord=new Point(i, j);
         this.setSize(new Dimension(CASE_SIDE_PIXEL_SIZE, CASE_SIDE_PIXEL_SIZE));
         this.setLocation((int) (visualCaseOrigin.getX() + i * CASE_SIDE_PIXEL_SIZE), (int) (visualCaseOrigin.getY() + j * CASE_SIDE_PIXEL_SIZE));
-        this.addMouseListener(new VisualCaseHandler());
+        this.addMouseListener(new VisualCaseHandler(this.controller));
 
         this.controller.getMapController().addObserver(this);
     }
