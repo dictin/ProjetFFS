@@ -36,8 +36,15 @@ public class MasterUI extends JPanel{
         inventoryMenu= new InventoryMenu(controller);
         this.setSize(MasterFrame.GAME_FRAME_SIZE);
         this.setBackground(new Color(Integer.parseInt("314159", 16)));
+
         this.setLocation(0,0);
         this.setLayout(null);
+
+      // Pour enlever les questions du chaman, mettre en commentaire ci-dessous
+        JLabel questionLabel = new Chaman();
+        questionLabel.setLocation(75,100);
+        this.add(questionLabel);
+
 
         int xGridSize=30;
         int tailleYGrille=30;
@@ -61,8 +68,11 @@ public class MasterUI extends JPanel{
         selectedMenu.setLocation(gridEndPointX+25, 25);
         selectedMenu.setVisible(true);
 
+
+
         menuTriggerZone =new MenuTriggerZone(controller);
 //        gridTriggerZone= new GridTriggerZone(controller, xGridSize);
+
 
         this.add(menuTriggerZone);
         menuTriggerZone.setLocation(gridEndPointX, 25);
@@ -72,6 +82,8 @@ public class MasterUI extends JPanel{
 
         //TODO Ajouter éléments visuels d'un niveau de jeu.
     }
+
+
 
     public void setFood(int newFoodValue){
         this.food=newFoodValue;
