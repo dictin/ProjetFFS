@@ -37,17 +37,17 @@ public class MapData {
     }
 
     public static void initialize() { //8% arbre 2% roche 3% eau 2% trou
-        Random random = new Random(100);
+        Random random = new Random();
         int maxLength = 30;
         int hivePosition = maxLength/2;
         for (int i = 0; i < maxLength; i++){
             for(int j = 0; j < maxLength; j++){
-                int caseType = random.nextInt();
-                if (caseType < 85){
+                int caseType = random.nextInt(100);
+                if (caseType < 93){
                     map[i][j] = new Case(new Point(i,j), null, new WildObject(0, true));
-                }else if (caseType < 93){
-                    map[i][j] = new Case(new Point(i,j), null, new WildObject(2, true));
                 }else if (caseType < 96){
+                    map[i][j] = new Case(new Point(i,j), null, new WildObject(2, true));
+                }else if (caseType < 97){
                     map[i][j] = new Case(new Point(i,j), null, new WildObject(3, true));
                 }else if (caseType < 98){
                     map[i][j] = new Case(new Point(i,j), null, new WildObject(1, true));
