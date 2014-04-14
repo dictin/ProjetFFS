@@ -114,6 +114,7 @@ public abstract class Animal {
 
     }
     public void setAction(Case [][] table){
+        //TODO Déterminer le comportement de l'animal
         //Doit déterminé si l'animal veut soit trouver de la nourriture, soit un ennemi, soit la base ect.
         //Pour le moment, l'action par défault est 1:Chercher de la nourriture
 
