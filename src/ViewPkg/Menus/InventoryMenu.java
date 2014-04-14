@@ -32,7 +32,6 @@ public class InventoryMenu extends ContextualMenu{
         consumablesLabel.setFont(new Font("Arial", Font.PLAIN, 30));
 
 
-
         consumables = new GotoMenuButton(controller, "consumables_button", new Dimension(this.getWidth()-10, this.getHeight()/2-10), Color.cyan);
         consumables.setLocation(5, 5);
         this.add(consumables);

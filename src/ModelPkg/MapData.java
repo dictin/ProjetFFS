@@ -7,6 +7,7 @@ import java.util.Random;
 public class MapData {
 
     private static Case[][] map = new Case[30][30];
+    private static int hivePosition;
 
     private void initialize2(int nbOfTrees, int nbOfRocks, int nbOfWater, int nbOfHoles){
         Random casePicker=new Random(30*30);
@@ -39,7 +40,7 @@ public class MapData {
     public static void initialize() { //8% arbre 2% roche 3% eau 2% trou
         Random random = new Random();
         int maxLength = 30;
-        int hivePosition = maxLength/2;
+        MapData.hivePosition = maxLength/2;
         for (int i = 0; i < maxLength; i++){
             for(int j = 0; j < maxLength; j++){
                 int caseType = random.nextInt(100);
@@ -87,6 +88,20 @@ public class MapData {
         }
 
         return returnArray;
+    }
+
+    public static Point getSpawnPoint(){
+        Point spawn = null;
+        for(int i = -1; i < 3; i++){
+            for(int j = -1; j < 3; j++){
+                Point point = new Point(MapData.hivePosition+i,MapData.hivePosition+j);
+                if(MapData.getCase(point).getOccupant() == null && MapData.getCase(point).getWildObject().getType() == 0){
+                    spawn = point;
+                }
+            }
+        }
+
+        return spawn;
     }
 
     public static Case getCase(Point point){
