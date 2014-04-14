@@ -16,7 +16,7 @@ Brun
 Napoléon avait un poney
 C'est qui Napoléon?
 *
-Deux charges sont placés sur l’axe des x avec une distance r entre les deux. La première a une charge de Q et la deuxième a une charge de -Q. À quel endroit le champ électrique sera t-il nul?
+Deux charges sont placés sur l’axe <html>Line1 <br/> Line2 <br/> Line3</html> des x avec une distance r entre les deux. La première a une charge de Q et la deuxième a une charge de -Q. À quel endroit le champ électrique sera t-il nul?
 à la gauche de q1
 à la droite de q2
 au centre entre q1 et q2
