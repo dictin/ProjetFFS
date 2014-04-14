@@ -61,7 +61,7 @@ public abstract class Animal {
         this.grabQuantity=mainStats[3];
         this.equipQuantity=25-mainStats[3];
 
-        sprite=Toolkit.getDefaultToolkit().getImage("IMG/"+species+".gif");
+        sprite=Toolkit.getDefaultToolkit().getImage("IMG/"+species+".png");
     }
 
     private int[] rollStats(){
