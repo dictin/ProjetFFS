@@ -41,9 +41,9 @@ public class MasterUI extends JPanel{
         this.setLayout(null);
 
       // Pour enlever les questions du chaman, mettre en commentaire ci-dessous
-        JLabel questionLabel = new Chaman();
-        questionLabel.setLocation(75,100);
-        this.add(questionLabel);
+       JLabel questionLabel = new Chaman(controller);
+       questionLabel.setLocation(75,100);
+       this.add(questionLabel);
 
 
         int xGridSize=30;
