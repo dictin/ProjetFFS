@@ -22,7 +22,6 @@ public class CreationController implements ActionListener {
         if (spawn != null){
             animalType = CreationHashTable.getAssociatedValue(source);
             MapData.getCase(new Point(MapData.getSpawnPoint())).setOccupant(new Fourmillier(0, new int[]{13,13,13}, animalType));
-            System.out.println("Banana");
 
         }
 
