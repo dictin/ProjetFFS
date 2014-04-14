@@ -13,21 +13,23 @@ public class Chaman extends JLabel{
     private String answer3;
     private String answer4;
     
-public Chaman(){
-    this.setOpaque(true);
-    this.setBackground(Color.PINK);
-    this.setSize(500,500);
-    JLabel numberQuestion = new JLabel("Question noX");
-    numberQuestion.setFont(new Font("Impact", Font.PLAIN, 20));
-    numberQuestion.setSize(300,20);
-    numberQuestion.setLocation(5,5);
-    this.add(numberQuestion);
-    JLabel question = new JLabel ("La question est....");
-    question.setFont(new Font("Courier New", Font.PLAIN, 20));
-    question.setSize(495,20);
-    question.setLocation(5, 50);
-    this.add(question);
-    this.addMouseListener(new MouseAdapter() {
+    public Chaman(){
+        this.setOpaque(true);
+        this.setBackground(Color.PINK);
+        this.setSize(500,500);
+        JLabel numberQuestion = new JLabel("Question noX");
+        numberQuestion.setFont(new Font("Impact", Font.PLAIN, 20));
+        numberQuestion.setSize(300,20);
+        numberQuestion.setLocation(5,5);
+        this.add(numberQuestion);
+        JLabel question = new JLabel ("La question est....");
+        question.setFont(new Font("Courier New", Font.PLAIN, 20));
+        question.setSize(495,20);
+        question.setLocation(5, 50);
+        this.add(question);
+
+        this.addMouseListener(new MouseAdapter() {
+
         @Override
         public void mouseEntered(MouseEvent e) {
         }
