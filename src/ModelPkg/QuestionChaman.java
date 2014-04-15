@@ -14,6 +14,9 @@ public class QuestionChaman {
     private String answer1;
     private String answer2;
     private String answer3;
+    private int questionSize;
+
+
 
     public  QuestionChaman(String q, String a0, String a1, String a2, String a3){
         this.question = q;
@@ -21,8 +24,11 @@ public class QuestionChaman {
         this.answer1 = a1;
         this.answer2 = a2;
         this.answer3 = a3 ;
+        questionSize =question.length();
     }
-
+    public int getQuestionSize() {
+        return questionSize;
+    }
     public String getAnswer1() {
         return answer1;
     }
