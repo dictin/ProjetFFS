@@ -2,23 +2,23 @@ Quelle est la dérivée de 3(n^2)?
 3n
 2n
 6n
-Nabuchodonosor roi de babylone
+Nabuchodonosor
 *
 Combien de coin y-a-t-il  sur une pièce de 1$?
 Aucune c’est un cercle
-2 * (3,1416) * le rayon de la pièce
+2 * (3,1416) * le rayon
 1 seul coin coin
 Je ne sais pas
 *
-Quelle était le couleur du cheval blanc de napoléon
+Quelle était le couleur du cheval blanc de napoléon?
 Blanc
 Brun
 Napoléon avait un poney
 C'est qui Napoléon?
 *
 Deux charges sont placés sur l’axe des x avec une distance r entre les deux. La première a une charge de Q et la deuxième a une charge de -Q. À quel endroit le champ électrique sera t-il nul?
-à la gauche de q1
-à la droite de q2
-au centre entre q1 et q2
-Dans un galaxie très très lointaine
+À la gauche de q1
+À la droite de q2
+Au centre entre q1 et q2
+À l'infini!
 *

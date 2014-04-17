@@ -29,8 +29,8 @@ public Chaman(final MasterController controller){
     this.controller=controller;
     this.questionsHandler = new QuestionsHandler();
     this.setOpaque(true);
-    this.setBackground(Color.PINK);
-    this.setSize(500,500);
+    this.setBackground(new Color(Integer.parseInt("324159", 19)));
+    this.setSize(500,375);
     JLabel numberQuestion = new JLabel("Question noX");
     numberQuestion.setFont(new Font("Impact", Font.PLAIN, 20));
     numberQuestion.setSize(300,20);
@@ -82,19 +82,19 @@ this.addMouseListener(this.questionsHandler);
 
     answer0.setText(actualQuestion.getAnswer0());
     answer0.setFont(new Font("Arial Black", Font.PLAIN, 15));
-    answer0.setSize(200, 75);
+    answer0.setSize(240, 75);
     answer0.setLocation(5, 150);
     answer0.setOpaque(true);
-    answer0.setBackground(Color.YELLOW);
+    answer0.setBackground( new Color(Integer.parseInt("054659", 21)));
     this.add(answer0);
     answer1.setText(actualQuestion.getAnswer1());
     answer1.setFont(new Font("Arial Black", Font.PLAIN, 15));
-    answer1.setSize(200,75);
-    answer1.setLocation(295,150);
+    answer1.setSize(240,75);
+    answer1.setLocation(255,150);
 
     answer1.setOpaque(true);
     answer1.setForeground(Color.white);
-    answer1.setBackground(Color.BLUE);
+    answer1.setBackground( new Color(Integer.parseInt("254659", 30)));
     this.add(answer1);
     answer1.addMouseListener(new MouseAdapter() {
         @Override
@@ -113,11 +113,11 @@ this.addMouseListener(this.questionsHandler);
     });
     answer2.setText(actualQuestion.getAnswer2());
     answer2.setFont(new Font("Arial Black", Font.PLAIN, 15));
-    answer2.setSize(200,75);
+    answer2.setSize(240,75);
     answer2.setLocation(5,250);
     answer2.setOpaque(true);
     answer2.setForeground(Color.white);
-    answer2.setBackground(Color.RED);
+    answer2.setBackground( new Color(Integer.parseInt("254659", 21)));
     this.add(answer2);
     answer2.addMouseListener(new MouseAdapter() {
         @Override
@@ -137,10 +137,10 @@ this.addMouseListener(this.questionsHandler);
 
     answer3.setText(actualQuestion.getAnswer3());
     answer3.setFont(new Font("Arial Black", Font.PLAIN, 15));
-    answer3.setSize(200,75);
-    answer3.setLocation(295,250);
+    answer3.setSize(240,75);
+    answer3.setLocation(255,250);
     answer3.setOpaque(true);
-    answer3.setBackground(Color.GREEN);
+    answer3.setBackground(new Color(Integer.parseInt("115351", 20)));
     this.add(answer3);
     answer3.addMouseListener(new MouseAdapter() {
         @Override
