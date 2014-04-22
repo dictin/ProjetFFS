@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Random;
 
 public class Chaman extends JLabel{
     private int noQuestion;
@@ -49,7 +50,6 @@ public Chaman(final MasterController controller){
         questionNext.setSize(495,20);
         questionNext.setLocation(5, 70);
         if(actualQuestion.getQuestionSize() > 110){
-
             question2 = actualQuestion.getQuestion().substring(55,110);
             question3 = actualQuestion.getQuestion().substring(110);
             questionNext.setText(question2);
@@ -57,7 +57,6 @@ public Chaman(final MasterController controller){
             questionNext2.setFont(new Font("Courier New", Font.PLAIN, 15));
             questionNext2.setSize(495,20);
             questionNext2.setLocation(5, 90);
-
         }
         if(actualQuestion.getQuestionSize() > 165){
             question3 = actualQuestion.getQuestion().substring(110,165);
@@ -79,19 +78,63 @@ public Chaman(final MasterController controller){
 
 
 this.addMouseListener(this.questionsHandler);
+    Random random = new Random();
+    int answerMix = random.nextInt(3);
+    switch(answerMix){
+        case 0:
+            answer0.setText(actualQuestion.getAnswer0());
+            answer1.setText(actualQuestion.getAnswer1());
+            answer2.setText(actualQuestion.getAnswer2());
+            answer3.setText(actualQuestion.getAnswer3());
+            break;
+        case 1:
+            answer0.setText(actualQuestion.getAnswer1());
+            answer1.setText(actualQuestion.getAnswer2());
+            answer2.setText(actualQuestion.getAnswer3());
+            answer3.setText(actualQuestion.getAnswer0());
+            break;
+        case 2:
+            answer0.setText(actualQuestion.getAnswer2());
+            answer1.setText(actualQuestion.getAnswer3());
+            answer2.setText(actualQuestion.getAnswer0());
+            answer3.setText(actualQuestion.getAnswer1());
+            break;
+        case 3:
+            answer0.setText(actualQuestion.getAnswer3());
+            answer1.setText(actualQuestion.getAnswer0());
+            answer2.setText(actualQuestion.getAnswer1());
+            answer3.setText(actualQuestion.getAnswer2());
+            break;
+    }
 
-    answer0.setText(actualQuestion.getAnswer0());
     answer0.setFont(new Font("Arial Black", Font.PLAIN, 15));
     answer0.setSize(240, 75);
     answer0.setLocation(5, 150);
     answer0.setOpaque(true);
     answer0.setBackground( new Color(Integer.parseInt("054659", 21)));
     this.add(answer0);
-    answer1.setText(actualQuestion.getAnswer1());
+    answer0.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseEntered(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            super.mouseClicked(e);
+            if(answer0.getText().equals(actualQuestion.getAnswer2())){
+                System.out.println("bonne réponse!");
+            }else{
+                System.out.println("mauvaise réponse");
+            }
+        }
+    });
     answer1.setFont(new Font("Arial Black", Font.PLAIN, 15));
     answer1.setSize(240,75);
     answer1.setLocation(255,150);
-
     answer1.setOpaque(true);
     answer1.setForeground(Color.white);
     answer1.setBackground( new Color(Integer.parseInt("254659", 30)));
@@ -108,10 +151,14 @@ this.addMouseListener(this.questionsHandler);
         @Override
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
-            System.out.println("Réponse 2!");
+            if(answer1.getText().equals(actualQuestion.getAnswer2())){
+                System.out.println("bonne réponse!");
+            }else{
+                System.out.println("mauvaise réponse");
+            }
         }
     });
-    answer2.setText(actualQuestion.getAnswer2());
+
     answer2.setFont(new Font("Arial Black", Font.PLAIN, 15));
     answer2.setSize(240,75);
     answer2.setLocation(5,250);
@@ -131,11 +178,13 @@ this.addMouseListener(this.questionsHandler);
         @Override
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
-            System.out.println("Réponse 3!");
+            if(answer2.getText().equals(actualQuestion.getAnswer2())){
+                System.out.println("bonne réponse!");
+            }else{
+                System.out.println("mauvaise réponse");
+            }
         }
     });
-
-    answer3.setText(actualQuestion.getAnswer3());
     answer3.setFont(new Font("Arial Black", Font.PLAIN, 15));
     answer3.setSize(240,75);
     answer3.setLocation(255,250);
@@ -154,7 +203,11 @@ this.addMouseListener(this.questionsHandler);
         @Override
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
-            System.out.println("Réponse 4!");
+            if(answer3.getText().equals(actualQuestion.getAnswer2())){
+                System.out.println("bonne réponse!");
+            }else{
+                System.out.println("mauvaise réponse");
+            }
         }
     });
 }

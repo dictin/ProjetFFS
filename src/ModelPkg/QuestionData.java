@@ -8,9 +8,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by Chloé on 14-04-14.
- */
 public class QuestionData implements Observable {
 
     private ArrayList<Observer> observers = new ArrayList<Observer>();
