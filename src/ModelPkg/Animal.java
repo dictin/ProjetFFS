@@ -37,6 +37,10 @@ public abstract class Animal {
     private String spriteName;
     private Image sprite;
 
+    private int behaviorID;
+
+    private int foodInventory = 0;
+
 
     public Animal(int team, int[] meanStats, String species){
     //Création du nom de l'animal
@@ -54,6 +58,7 @@ public abstract class Animal {
 
         this.speed=mainStats[0];
         this.endurance=25-mainStats[0];
+        this.health = this.endurance;
         this.attack=mainStats[1];
         this.defence=25-mainStats[1];
         this.smellSensitivity=mainStats[2];
@@ -216,5 +221,14 @@ public abstract class Animal {
 
     public Image getSprite() {
         return sprite;
+    }
+
+    public void decideBehavior(){//TODO
+        if (this.health <= this.endurance/4){
+            this.behaviorID = 1;
+        }else if(this.foodInventory > 1){
+            this.behaviorID = 2;
+        }else if(this.)
+
     }
 }
