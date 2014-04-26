@@ -3,9 +3,6 @@ package ViewPkg.Menus;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by Xav on 24/03/14.
- */
 public class VisualAnimal extends JComponent {
 
     private Image sprite;
