@@ -111,7 +111,6 @@ public class MasterUI extends JPanel{
             this.add(selectedMenu);
             selectedMenu.setLocation(gridEndPointX + 25, 25);
             selectedMenu.setVisible(true);
-            System.out.println("potatost");
             System.out.println(selectedMenu.getBackground());
         }
         else if (menuName.equals("inventory_menu")){
