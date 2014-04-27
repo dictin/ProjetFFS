@@ -9,9 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-/**
- * Created by Xav on 17/03/14.
- */
 public class InventoryMenu extends ContextualMenu{
 
     private GotoMenuButton consumables;
@@ -27,9 +24,11 @@ public class InventoryMenu extends ContextualMenu{
 
     JList<String> reusableShopList;
     JScrollPane reusableScrollPane;
+    private MasterController controller;
 
     public InventoryMenu(MasterController controller) {
         super(controller, "inventory_menu");
+        this.controller = controller;
         this.itemController = controller.getItemController();
         consumablesLabel.setSize(400,35);
         consumablesLabel.setLocation(25,0);
@@ -37,7 +36,12 @@ public class InventoryMenu extends ContextualMenu{
         consumables = new GotoMenuButton(controller, "consumables_button", new Dimension(this.getWidth()-10, this.getHeight()/2-10), Color.cyan);
         consumables.setLocation(5, 5);
         this.add(consumables);
-        watata();
+    }
+
+
+        public void inventoryyyy(){
+
+        actualInventory();
         this.consumableShopList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.consumableShopList.setLayoutOrientation(JList.VERTICAL);
         this.consumableShopList.setVisibleRowCount(-1);
@@ -91,30 +95,13 @@ public class InventoryMenu extends ContextualMenu{
 
     }
 
-    public void watata(){
-
-        System.out.println("Et cest le temps d'afficher l'inventaire!");
-        String[] objetsInventory = new String[2];
-        //String[] objetsInventory = new String[itemController.getObjetBougthList().size()];
-        System.out.println("longueur: "+itemController.getObjetBougthList().size());
+    public void actualInventory(){
+        String[] objetsInventory = new String[itemController.getObjetBougthList().size()];
         for(int i = 0; i < itemController.getObjetBougthList().size(); i++){
             Items item = itemController.getBougthItem(itemController.getObjetBougth(i));
-            objetsInventory[0]= "Allo";
-
+            objetsInventory[i]= item.getName();
         }
-
-        //objetsInventory[i]= item.getName();
-        objetsInventory[0]= "Coucou";
-        System.out.println(objetsInventory[0]);
         this.consumableShopList = new JList<String>(objetsInventory);
-        this.consumableShopList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.consumableShopList.setLayoutOrientation(JList.VERTICAL);
-        this.consumableShopList.setVisibleRowCount(-1);
-        this.consumableShopList.setFixedCellHeight(25);
-        this.consumableShopList.setSize(new Dimension(300, 220));
-        this.consumableShopList.setLocation(10, 12);
-
-
     }
 
     public void paintComponent(Graphics graphics){
@@ -125,7 +112,7 @@ public class InventoryMenu extends ContextualMenu{
     public void actualiser() {
         this.invalidate();
         this.repaint();
-        watata();
-
+        actualInventory();
+        inventoryyyy();
     }
 }

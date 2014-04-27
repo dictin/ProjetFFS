@@ -6,9 +6,6 @@ import java.util.ArrayList;
 
 public class ItemController {
 
-
-
-
     ArrayList<Integer> objetBougthList = new ArrayList<Integer>();
 
 
