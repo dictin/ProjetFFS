@@ -7,7 +7,6 @@ import java.util.Random;
 public class MapData {
 
     private static Case[][] map = new Case[30][30];
-    private static Smell2[][] SmellArray=new Smell2[30][30];
     private static int hivePosition;
     private static ArrayList<Animal> animalList=new ArrayList<Animal>();
 

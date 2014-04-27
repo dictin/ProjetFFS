@@ -100,6 +100,7 @@ public class MasterController extends Thread{
     }
 
     public void enterMenuTriggerZone(){
+        System.out.println("EMTZ");
         mUI.popMenu("main_menu");
     }
 
