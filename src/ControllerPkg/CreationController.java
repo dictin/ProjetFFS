@@ -21,7 +21,10 @@ public class CreationController implements ActionListener {
         Point spawn = MapData.getSpawnPoint();
         if (spawn != null){
             animalType = CreationHashTable.getAssociatedValue(source);
-            MapData.getCase(new Point(MapData.getSpawnPoint())).setOccupant(new Fourmillier(0, new int[]{13,13,13}, animalType));
+            Point spawnPoint=MapData.getSpawnPoint();
+            Fourmillier spawnedFourmilier=new Fourmillier(0, new int[]{13,13,13}, animalType, spawnPoint);
+            MapData.getAnimalList().add(spawnedFourmilier);
+            MapData.getCase(spawnPoint).setOccupant(spawnedFourmilier);
 
         }
 

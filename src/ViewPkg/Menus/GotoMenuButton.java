@@ -37,7 +37,7 @@ public class GotoMenuButton extends JComponent {
                 super.mouseEntered(e);
                 GotoMenuButton gotoMenuButton = (GotoMenuButton) e.getSource();
                 gotoMenuButton.setAnimated(true);
-                gotoMenuButton.setAnmtnStartTime(controller.getAnimationTime());
+                gotoMenuButton.setAnmtnStartTime(controller.getTime());
             }
 
             @Override
@@ -71,7 +71,7 @@ public class GotoMenuButton extends JComponent {
     }
 
     public void actualiser(){
-        if (isAnimatedNow&&(((controller.getAnimationTime()-this.anmtnStartTime)%this.anmtnWaitTime)==0)){
+        if (isAnimatedNow&&(((controller.getTime()-this.anmtnStartTime)%this.anmtnWaitTime)==0)){
             switchActiveSprite();
         }
     }

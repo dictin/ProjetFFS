@@ -8,6 +8,11 @@ public class MapData {
 
     private static Case[][] map = new Case[30][30];
     private static int hivePosition;
+    private static ArrayList<Animal> animalList=new ArrayList<Animal>();
+
+    public static ArrayList<Animal> getAnimalList() {
+        return animalList;
+    }
 
     private void initialize2(int nbOfTrees, int nbOfRocks, int nbOfWater, int nbOfHoles){
         Random casePicker=new Random(30*30);
@@ -67,6 +72,22 @@ public class MapData {
         map[hivePosition+1][hivePosition+1] = new Case(new Point(hivePosition+1,hivePosition+1), null, new WildObject(5, true));
 
 
+    }
+
+    public static Case[][] getSubsection2(Point origin){
+        Case[][] subsection = new Case[3][3];
+        for (int i =0; i<3; i++){
+            for (int j=0; j<3; j++){
+                try{
+                subsection[i][j]=map[origin.x+i-1][origin.y+j-1];
+                    //System.out.println("x: "+(origin.x+i-1)+"y: "+(origin.y+j-1));
+                }
+                catch(NullPointerException npe){
+                    subsection[i][j]=null;
+                }
+            }
+        }
+        return subsection;
     }
 
     public static Case[][] getSubsection(Point origin){

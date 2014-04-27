@@ -27,6 +27,27 @@ public class Case implements Observable {
 
     }
 
+    public boolean caseContains(String thing){
+        boolean answer=false;
+        try{
+        if (thing.equals("fourmilier")&&this.getOccupant() instanceof Fourmillier){
+            answer=true;
+        }
+        else if (thing.equals("predator")&&this.getOccupant() instanceof Critter){
+                answer=true;
+        }
+        else if (thing.equals("item")&&this.getWildObject().getType()==8){
+            answer=true;
+        }
+        else if (thing.equals("food")&&this.getWildObject().getType()==7) {
+            answer=true;
+        }
+    }
+        catch(NullPointerException npe){
+        }
+        return answer;
+    }
+
     public void addSmell(Smell smell){
         this.smellArrayList.add(smell);
         this.optimizeSmellArray();
