@@ -5,9 +5,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by Chloé on 14-04-14.
- */
 public class QuestionChaman {
     private String question;
     private String answer0;

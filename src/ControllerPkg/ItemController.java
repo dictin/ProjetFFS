@@ -2,7 +2,15 @@ package ControllerPkg;
 
 import ModelPkg.PkgItems.Items;
 
+import java.util.ArrayList;
+
 public class ItemController {
+
+
+
+
+    ArrayList<Integer> objetBougthList = new ArrayList<Integer>();
+
 
     public ItemController(){
 
@@ -16,4 +24,22 @@ public class ItemController {
 
         return itemNames;
     }
+    public Items getBougthItem(int i){
+        Items item = Items.values()[i];
+        return(item);
+    }
+    public void setObjetBougthList(int i) {
+        this.objetBougthList.add(i);
+        System.out.println("adddinnggg");
+        System.out.println("New size: "+objetBougthList.size());
+
+
+    }
+    public int getObjetBougth(int i){
+        return objetBougthList.get(i);
+    }
+    public ArrayList<Integer> getObjetBougthList() {
+        return objetBougthList;
+    }
+
 }

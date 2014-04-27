@@ -4,13 +4,12 @@ import ControllerPkg.BuyButtonHandler;
 import ControllerPkg.ItemController;
 import ControllerPkg.MasterController;
 import ControllerPkg.ShopListHandler;
+import ModelPkg.PkgItems.Items;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
-/**
- * Created by Xav on 05/03/14.
- */
 public class ShopMenu extends ContextualMenu{
 
     ItemController itemController;
@@ -22,11 +21,8 @@ public class ShopMenu extends ContextualMenu{
 
     public ShopMenu(final MasterController controller){
         super(controller, "shop_menu");
-
         this.itemController = controller.getItemController();
-
         this.shopInfoMenu = new ShopMenuInfo(controller.getShopInfoController());
-
         this.shopList = new JList<String>(itemController.getItemList());
         this.shopList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.shopList.setLayoutOrientation(JList.VERTICAL);
@@ -44,13 +40,10 @@ public class ShopMenu extends ContextualMenu{
         this.buyButton.setSize(100,30);
         this.buyButton.setLocation(200,238);
         this.add(this.buyButton);
-        this.buyButton.addActionListener(new BuyButtonHandler(this.shopList));
-
+        this.buyButton.addActionListener(new BuyButtonHandler(this.shopList, controller));
         this.setBackground(Color.green);
         this.shopInfoMenu.setLocation(0, 275);
         this.add(this.shopInfoMenu);
-
-
     }
 
     @Override

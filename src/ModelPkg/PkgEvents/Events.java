@@ -2,9 +2,6 @@ package ModelPkg.PkgEvents;
 
 import ModelPkg.Time;
 
-/**
- * Created by Chloé on 14-03-17.
- */
 public abstract class Events {
 
 
