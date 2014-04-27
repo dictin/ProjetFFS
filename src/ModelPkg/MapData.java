@@ -9,9 +9,94 @@ public class MapData {
     private static Case[][] map = new Case[30][30];
     private static int hivePosition;
     private static ArrayList<Animal> animalList=new ArrayList<Animal>();
-
+    ArrayList<Case> casesWithSmellSources=new ArrayList<Case>();
     public static ArrayList<Animal> getAnimalList() {
         return animalList;
+    }
+
+
+    private void updateSmells(){
+        Case selectedCase;
+        for (int i=0;i<30;i++){
+            for (int j=0; i<30;i++){
+                selectedCase=map[i][j];
+                selectedCase.getSmellArrayList().clear();
+            }
+        }
+        //TODO add SmellSources to appropriate Cases
+        ArrayList<Case> casesWithSmellSources=getCasesWithSmellSources();
+        if (!casesWithSmellSources.isEmpty()){
+            for (int i=0;i<casesWithSmellSources.size();i++){
+                disperseSmellSources(casesWithSmellSources.get(i));
+                casesWithSmellSources.get(i).fadeSourceSmells();
+            }
+        }
+    }
+
+    public void disperseSmellSources(Case selectedCase){
+        for (int i=0;i<selectedCase.getSmellSourceArrayList().size();i++){
+            Smell smell=(Smell)selectedCase.getSmellSourceArrayList().get(i);
+            selectedCase.getSmellArrayList().add(smell);
+            disperseSmell(selectedCase, smell);
+        }
+    }
+
+    public int getSmellThreshold(Smell smell, Case selectedCase){
+        int threshold=0;
+        if (!selectedCase.getSmellArrayList().isEmpty()){
+            for (Smell selectedSmell:selectedCase.getSmellArrayList()){
+                if (selectedSmell.getID()==smell.getID()){
+                    threshold=selectedSmell.getIntensity();
+                }
+            }
+        }
+        return threshold;
+    }
+
+    public void disperseSmell(Case sourceCase, Smell smell){
+        if (smell.getIntensity()>=10){
+        Case[][] subsection=getSubsection(sourceCase.getPosition());
+        for (int i=-1; i<2;i++){
+            for (int j=-1; j<2;j++){
+                Case selectedCase=subsection[i+1][j+1];
+                int smellThreshold=getSmellThreshold(smell, selectedCase);
+                    //Les coins. .38 est le multiplicateur .5 par la distance d'une diagonale
+                if (smellThreshold<smell.getIntensity()*.38){
+                    Smell dissipatedSmell=smell.clone();
+                    if(i==j||i==-j){
+                        dissipatedSmell.dissipateIntensity(38);
+                    }
+                    else if(smellThreshold<smell.getIntensity()*.5){
+                        dissipatedSmell.dissipateIntensity(50);
+                }
+                    else{
+                        System.out.println("That was not supposed to happen.");
+                    }
+                    subsection[i+1][j+1].eraseInferiorSmellOfSameID(dissipatedSmell);
+                    subsection[i+1][j+1].getSmellArrayList().add(dissipatedSmell);
+                    disperseSmell(subsection[i+1][j+1], dissipatedSmell);
+            }
+        }
+        }
+    }
+    }
+
+    private ArrayList<Case> getCasesWithSmellSources(){
+        ArrayList<Case> caseThatHaveASourceSmell=new ArrayList<Case>();
+        for (int i=0; i<30;i++){
+            for (int j=0;j<30;j++){
+                Case selectedCase=map[i][j];
+                if (!selectedCase.getSmellSourceArrayList().isEmpty()){
+                    caseThatHaveASourceSmell.add(map[i][j]);
+                }
+            }
+        }
+        if (!caseThatHaveASourceSmell.isEmpty()){
+        return caseThatHaveASourceSmell;
+        }
+        else{
+            return null;
+        }
     }
 
     private void initialize2(int nbOfTrees, int nbOfRocks, int nbOfWater, int nbOfHoles){
