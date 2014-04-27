@@ -55,6 +55,38 @@ public class Behavior {
         return objectif;
     }
 
+    public static void evaluateBestObjective(Point position, int internalBehavior){
+        Case[][] subsection = MapData.getSubsection2(position);
+        boolean nearFoodSource = false;
+        if (internalBehavior == 1){
+            Point strongestSmellPoint = null;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    if (subsection[i][j].getWildObject().getType() == WildObject.HIVE_ID || subsection[i][j].getWildObject().getType() == WildObject.FOOD_ID){
+                        nearFoodSource = true;
+                    }
+
+                }
+            }
+
+           if (!nearFoodSource){
+               for (int i = 0; i < 3; i++){
+                   for (int j = 0; j < 3; j++){
+                       if (strongestSmellPoint == null && subsection[i][j].getSortedSmellArrayList().get(0).getType() == Smell.FOOD_ODOR){
+                           strongestSmellPoint = new Point(i,j);
+                       }else if(subsection[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(0).getIntensity() < subsection[i][j].getSortedSmellArrayList().get(0).getIntensity() &&subsection[i][j].getSortedSmellArrayList().get(0).getType() == Smell.FOOD_ODOR){
+                           strongestSmellPoint = new Point(i,j);
+                       }
+                   }
+               }
+           }
+
+
+
+        }
+
+    }
+
 
 
 }

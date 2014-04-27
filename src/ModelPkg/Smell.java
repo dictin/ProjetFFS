@@ -9,6 +9,10 @@ public class Smell {
     private int intensity;
     private ArrayList<SmellID> contributors = new ArrayList<SmellID>();
     private int type;
+    public static final int FOOD_ODOR = 1;
+    public static final int ENEMY_ODOR = 2;
+    public static final int ALLY_ODOR = 3;
+    public static final int HIVE_ODOR = 4;
     /*
       le type de senteur:
       1-Nourriture

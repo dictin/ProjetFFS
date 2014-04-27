@@ -9,6 +9,16 @@ public class WildObject {
 
     private boolean traversable;
     private int type = 0;
+
+    public static final int ROCK_ID = 1;
+    public static final int TREE_ID = 2;
+    public static final int WATER_ID = 3;
+    public static final int HOLE_ID = 4;
+    public static final int HIVE_ID = 5;
+    public static final int CORPSE_ID = 6;
+    public static final int FOOD_ID = 7;
+    public static final int ITEM_ID = 8;
+    public static final int EMPTY_ID = 0;
     /*
      * 1: Rock  - Climb
      * 2: Tree  - Impassable
