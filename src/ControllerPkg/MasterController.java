@@ -1,11 +1,13 @@
 package ControllerPkg;
 
+import ModelPkg.Animal;
 import ModelPkg.Name;
 import ModelPkg.QuestionData;
 import ViewPkg.MasterFrame;
 import ViewPkg.MasterUI;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Created by Xav on 24/02/14.
@@ -17,11 +19,12 @@ public class MasterController extends Thread{
     MapController mapController = new MapController();
     QuestionChamanController chamanController = new QuestionChamanController();
 
+    private static int animalListIndex=0;
     private int testCounter=0;
     private MasterFrame mF;
     private MasterUI mUI=null;
     private int sleepTime;
-    private int animationTime=0;
+    private static int time =0;
 
 
     public MasterController(int FPS){
@@ -32,13 +35,28 @@ public class MasterController extends Thread{
         this.start();
     }
 
+    public static void disposeAnimal(Animal deadAnimal){
+        deadAnimal.getOccupiedCase().setOccupant(null);
+        MapController.getAnimalList().remove(MapController.getAnimalList().indexOf(deadAnimal));
+        animalListIndex--;
+    }
+
     @Override
     public void run(){
         while (true){
             try {
 
                 this.sleep(sleepTime);
-                this.animationTime++;
+                this.time++;
+
+                ArrayList<Animal> animalList=getMapController().getAnimalList();
+                if (!animalList.isEmpty()){
+                    for (animalListIndex=0; animalListIndex<animalList.size();animalListIndex++){
+                        Animal animal=animalList.get(animalListIndex);
+                        animal.activate(getTime());
+                    }
+                }
+
                 mUI.actualiser();
                 mUI.invalidate();
                 mUI.repaint();
@@ -52,8 +70,8 @@ public class MasterController extends Thread{
 
 //NOTE DE CHLOÉ: Cette méthode n'est plus nécessaire parce qu'elle existe déjà dans la classe Time. Est-ce que c'est ok de la supprimée?
 
-    public int getAnimationTime(){
-        return animationTime;
+    public static int getTime(){
+        return time;
     }
 
     public void openMainMenu(){

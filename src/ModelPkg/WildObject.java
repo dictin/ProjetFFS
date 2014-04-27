@@ -17,7 +17,7 @@ public class WildObject {
      * 5: Hive  - Impassable
      * 6: Corpse
      * 7: Food
-     *
+     * 8: item
      * 0: Nothing
      *
      *
