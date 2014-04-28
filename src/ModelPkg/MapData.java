@@ -82,7 +82,7 @@ public class MapData {
                 subsection[i][j]=map[origin.x+i-1][origin.y+j-1];
                     //System.out.println("x: "+(origin.x+i-1)+"y: "+(origin.y+j-1));
                 }
-                catch(NullPointerException npe){
+                catch(NullPointerException | ArrayIndexOutOfBoundsException exception){
                     subsection[i][j]=null;
                 }
             }

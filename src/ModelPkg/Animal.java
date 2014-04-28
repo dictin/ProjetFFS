@@ -7,7 +7,8 @@ import java.util.Random;
 
 public abstract class Animal {
 
-    private boolean wantsToGoHome=false;
+    private final int MAX_HEALTH = 100;
+    private Point objective = null;
     private int activationFrequency;
     private int birthday;
     private Point position;
@@ -18,7 +19,7 @@ public abstract class Animal {
     //NameGen = génération du nom ex: Eustache IIème du nom
     private int nameGen;
     private int health;
-    private Smell smell;
+    private int smellID;
     private String species;
 
 
@@ -42,10 +43,10 @@ public abstract class Animal {
     private String spriteName;
     private Image sprite;
 
-    private int behaviorID;
+    private MentalStates mentalState = MentalStates.NEUTRAL;
 
 
-    public Animal(int team, int[] meanStats, String species, Point startingPosition){
+    public Animal(int team, int[] meanStats, String species, Point startingPosition, int smellID){
     //Création du nom de l'animal
         this.birthday= MasterController.getTime();
         Random random = new Random();
@@ -72,6 +73,7 @@ public abstract class Animal {
         this.smellStrength=25-mainStats[2];
         this.grabQuantity=mainStats[3];
         this.equipQuantity=25-mainStats[3];
+        this.smellID = smellID;
 
 
         System.out.println("stats:");
@@ -231,8 +233,8 @@ public abstract class Animal {
         return grabQuantity;
     }
 
-    public Smell getSmell() {
-        return smell;
+    public int getSmellID() {
+        return smellID;
     }
 
     public Image getSprite() {
@@ -255,84 +257,28 @@ public abstract class Animal {
     public void activate(int time){
         //TODO reset smellSource of case
         if (time!=birthday&&(time-birthday)%activationFrequency==0){
-            System.out.println(position);
-            Case[][] subsection=MapData.getSubsection2(position);
-            //TODO balance health decrease/activation
-            //TODO remove once done testing
-            //System.out.println("C'est mon tour!Il est: "+time);
-            //System.out.println(birthday);
-            //System.out.println(speed);
-            //System.out.println(activationFrequency);
-            if (team!=1){
-                activateAsFoe();
-            }
-            else{
-            if (carriedFood!=0){
-                wantsToGoHome=true;
-            }
-            else{
-                wantsToGoHome=false;
-            }
-            if (health<=25){
-                //L'animal est particulièrement en mauvais état et doit se guérrir.
-                if (carriedFood!=0){
-                    while(health<100&&carriedFood!=0){
-                        carriedFood-=1;
-                        health+=5;
-                    }
-                }
-                //if case contient nourriture
-                if (occupiedCase.caseContains("food")&&health!=100){
-                    //TODO eat food from case
-                }
-                for (int i=0; i<3; i++){
-                    for (int j=0; j<3; j++){
-                        if (subsection[i][j].caseContains("food")){
-                            //TODO add this case to an array, once all checked, move to one with MOST food.
-                        }
-                    }
-                }
-            }
 
-            //If not unhealthy
-            else{
-                if (wantsToGoHome){
-                    //TODO
-                    /*
-                    If smells home, go where it smells most.
-                    If it smells friends, go where it smells most many, but least intense
-                    If it smells only himself, follow own tracks (least intense, not last case it was in)
-                    50% added chance of failing morale
-                     */
-            }
-                else{
-                    //TODO
-                    /*
-                    depends of adjacent cases contents:
+            this.decideInternalBehavior();
+            B
 
-                    If two or more enemies and at least one adjacent friend:
-                        roll morale if succeeds, attack enemy with weakest health
 
-                    Else if two or more ennemies and no ally:
-                        Flee from enemy with most HP/flee both if possible?
 
-                    Else if at least one item:
-                        Go to item, get item
-                    Else if a single enemy:
-                        roll morale, if succeeds, attack enemy, else, flee enemy
-                    Else if other cases smell something other than his own odor:
-                        only smells enemies:
-                            roll for morale, if succeed, follow strongest smell, set behavior to attack
-                     */
-                }
-            if (MapData.getCase(position).getWildObject().getType()==7&&carriedFood<grabQuantity){
-                //TODO pick up as much food as possible, remove wildObject as needed
-            }
-            }
-        }
-            decreaseHealth((25-endurance)/2);
+            decreaseHealth((25 - endurance) / 2);
     }
 }
+
+    private void decideInternalBehavior() {
+        if (this.health <= this.MAX_HEALTH/4){
+            this.mentalState = MentalStates.WEAK;
+        }else if (this.carriedFood > 0){
+            this.mentalState = MentalStates.RETURN_TO_BASE;
+        }else{
+            this.mentalState = MentalStates.NEUTRAL;
+        }
+
+
+    }
+
     public boolean isDead(){
         if (health<=0){
             return true;
