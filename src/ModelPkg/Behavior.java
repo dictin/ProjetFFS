@@ -1,7 +1,5 @@
 package ModelPkg;
 
-import com.sun.xml.internal.bind.v2.TODO;
-
 import java.awt.*;
 import java.util.Random;
 
@@ -25,7 +23,7 @@ public class Behavior {
     }
 
     //TODO Vérifier s'il n'y a pas de null pointer exception (vérification d'une case inexistante)
-    public static Point search(Case [][] table, int odorat, int typeOdeur){
+   /* public static Point search(Case [][] table, int odorat, int typeOdeur){
         int goodLigne = 0;
         int goodColonne = 0;
 
@@ -53,7 +51,7 @@ public class Behavior {
         //Maintenant ligne et colonne ont les coordonnées de la case où la senteur de nourriture est la plus forte.
         objectif.setLocation(goodLigne-1,goodColonne-1);
         return objectif;
-    }
+    }    */
 
 
 
