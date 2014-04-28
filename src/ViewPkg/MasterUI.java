@@ -1,6 +1,7 @@
 package ViewPkg;
 
 import ControllerPkg.MasterController;
+import ModelPkg.QuestionChaman;
 import ViewPkg.Menus.*;
 
 import javax.swing.*;
@@ -19,6 +20,10 @@ public class MasterUI extends JPanel{
     private ContextualMenu shopMenu;
     private ContextualMenu inventoryMenu;
     private ContextualMenu creationMenu;
+
+    private int numberQuestion =1;
+    private JLabel questionLabel = new JLabel();
+    private QuestionChaman actualQuestion;
 
     //TODO déplacer dans le modèle
     private int food=300;
@@ -40,12 +45,8 @@ public class MasterUI extends JPanel{
         this.setLocation(0,0);
         this.setLayout(null);
 
-      // Pour enlever les questions du chaman, mettre en commentaire ci-dessous
-
-      /*  JLabel questionLabel = new Chaman(controller);
-        questionLabel.setLocation(75,163);
-        this.add(questionLabel);
-*/
+        // Pour enlever les questions du chaman, mettre en commentaire ci-dessous
+        creationQuestion();
 
         int xGridSize=30;
         int tailleYGrille=30;
@@ -82,6 +83,7 @@ public class MasterUI extends JPanel{
 //        gridTriggerZone.setLocation(25, 25);
 
         //TODO Ajouter éléments visuels d'un niveau de jeu.
+
     }
 
 
@@ -117,6 +119,7 @@ public class MasterUI extends JPanel{
         else if (menuName.equals("inventory_menu")){
             selectedMenu.setVisible(false);
             selectedMenu=inventoryMenu;
+            ((InventoryMenu)selectedMenu).setI(0);
             this.remove(selectedMenu);
             this.add(selectedMenu);
             selectedMenu.setLocation(gridEndPointX+25, 25);
@@ -143,12 +146,29 @@ public class MasterUI extends JPanel{
         //TODO link visualCases to contained items and display informations on them.
     }
 
+    public void creationQuestion(){
+        System.out.println("New question");
+        actualQuestion = controller.getChamanController().getQuestion();
+        System.out.println(actualQuestion.getFinish());
+        System.out.println(actualQuestion.getQuestion());
+        questionLabel = new Chaman(controller, actualQuestion);
+        this.add(questionLabel);
+        questionLabel.setVisible(true);
+        questionLabel.setLocation(75, 163);
+    }
+
     public void actualiser(){
         quitIcon.actualiser();
         if (selectedMenu!=null){
             selectedMenu.actualiser();
         }
-        this.invalidate();
-        this.repaint();
+        if(actualQuestion.getGoodAnswer()){
+            System.out.println("Trouvé!");
+            questionLabel.setVisible(false);
+            this.remove(questionLabel);
+            creationQuestion();
+            questionLabel.invalidate();
+            questionLabel.repaint();
+        }
     }
 }

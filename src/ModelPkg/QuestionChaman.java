@@ -12,6 +12,8 @@ public class QuestionChaman {
     private String answer2;
     private String answer3;
     private int questionSize;
+    private boolean goodAnswer = false;
+    private boolean finish = false;
 
 
 
@@ -44,5 +46,21 @@ public class QuestionChaman {
 
     public String getQuestion() {
         return question;
+    }
+
+    public boolean getGoodAnswer() {
+        return goodAnswer;
+    }
+
+    public boolean getFinish() {
+        return finish;
+    }
+
+    public void setGoodAnswer(boolean goodAnswer) {
+        this.goodAnswer = goodAnswer;
+    }
+
+    public void setFinish(boolean finish) {
+        this.finish = finish;
     }
 }

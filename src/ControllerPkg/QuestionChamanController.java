@@ -12,8 +12,11 @@ public class QuestionChamanController {
 
     }
     public QuestionChaman getQuestion(){
+        int noQuestion;
+        do{
         Random random = new Random();
-        int noQuestion = random.nextInt(QuestionData.getQuestionList().size());
+        noQuestion = random.nextInt(QuestionData.getQuestionList().size());
+        }while(QuestionData.getQuestionList().get(noQuestion).getFinish());
         return QuestionData.getQuestionList().get(noQuestion);
 
     }
