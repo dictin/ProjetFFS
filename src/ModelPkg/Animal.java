@@ -43,8 +43,7 @@ public abstract class Animal {
     private String spriteName;
     private Image sprite;
 
-    private int behaviorID;
-    private int internalBehaviorID = 0;
+    private MentalStates mentalState = MentalStates.NEUTRAL;
 
 
     public Animal(int team, int[] meanStats, String species, Point startingPosition, int smellID){
@@ -260,6 +259,7 @@ public abstract class Animal {
         if (time!=birthday&&(time-birthday)%activationFrequency==0){
 
             this.decideInternalBehavior();
+            B
 
 
 
@@ -269,11 +269,11 @@ public abstract class Animal {
 
     private void decideInternalBehavior() {
         if (this.health <= this.MAX_HEALTH/4){
-            this.internalBehaviorID = 1;
+            this.mentalState = MentalStates.WEAK;
         }else if (this.carriedFood > 0){
-            this.internalBehaviorID = 2;
-        }else {
-            this.internalBehaviorID = 0;
+            this.mentalState = MentalStates.RETURN_TO_BASE;
+        }else{
+            this.mentalState = MentalStates.NEUTRAL;
         }
 
 
