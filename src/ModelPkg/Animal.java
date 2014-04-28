@@ -18,7 +18,7 @@ public abstract class Animal {
     //NameGen = génération du nom ex: Eustache IIème du nom
     private int nameGen;
     private int health;
-    private Smell smell;
+    private SmellSource smell;
     private String species;
 
 
@@ -30,7 +30,9 @@ public abstract class Animal {
     private int defence;
 
     private int smellSensitivity;
-    private int smellStrength;
+    private int smellThreshold;
+    private int smellStrengthStat;
+    private int smellIntensity;
 
     private int grabQuantity;
     private int carriedFood = 0;
@@ -58,6 +60,8 @@ public abstract class Animal {
 
         this.team = team;
         this.meanStats=meanStats;
+        this.species=species;
+
         this.mainStats=rollStats();
 
         this.position=startingPosition;
@@ -69,9 +73,14 @@ public abstract class Animal {
         this.attack=mainStats[1];
         this.defence=25-mainStats[1];
         this.smellSensitivity=mainStats[2];
-        this.smellStrength=25-mainStats[2];
+        this.smellStrengthStat =25-mainStats[2];
         this.grabQuantity=mainStats[3];
         this.equipQuantity=25-mainStats[3];
+
+        //TODO balance this and add a smell
+        this.smellIntensity=this.getSmellStrengthStat()*8;
+        this.smellThreshold=this.getSmellStrengthStat();
+        //this.smell=new SmellSource(MasterController.getUniqueID(),);
 
 
         System.out.println("stats:");
@@ -175,8 +184,8 @@ public abstract class Animal {
         return smellSensitivity;
     }
 
-    public int getSmellStrength() {
-        return smellStrength;
+    public int getSmellStrengthStat() {
+        return smellStrengthStat;
     }
 
     public int getDefence() {

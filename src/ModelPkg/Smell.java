@@ -7,7 +7,6 @@ import java.awt.*;
  */
 public class Smell implements Cloneable {
     private int iD;
-    private Point coords;
     private int intensity;
     private int team;
     private SmellType2 type;
@@ -19,11 +18,17 @@ public class Smell implements Cloneable {
     public enum SmellType2{
         food, animal, foe, item;
     }
+
+    public void setIntensity(int intensity) {
+        this.intensity = intensity;
+    }
+
     //TODO remplacer le String ID par un int
-    public Smell(int animalID, Point coords, int intensity, int team, SmellType2 type){
+    public Smell(int animalID, int intensity, int team, SmellType2 type){
         this.iD =animalID;
-        this.coords=coords;
         this.intensity=intensity;
+        this.team=team;
+        this.type=type;
         this.team=team;
         this.type=type;
     }

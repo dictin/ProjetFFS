@@ -1,5 +1,7 @@
 package ModelPkg;
 
+import com.sun.xml.internal.bind.v2.TODO;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -23,7 +25,7 @@ public class Behavior {
     }
 
     //TODO Vérifier s'il n'y a pas de null pointer exception (vérification d'une case inexistante)
-   /* public static Point search(Case [][] table, int odorat, int typeOdeur){
+    public static Point search(Case [][] table, int odorat, int typeOdeur){
         int goodLigne = 0;
         int goodColonne = 0;
 
@@ -35,14 +37,14 @@ public class Behavior {
                     //On ne veut pas vérifier la case du milieu (l'endroit où est le fourmilier) et que la cas n'est pas null
                     if(ligne !=0 && colonne != 0 && table[ligne][colonne] != null){
                     //Le type de smell ( ex: 1 est de la nourriture, 2 est un ennemi... (voir Smell pour tous les détails))
-                        if(table[ligne][colonne].getSortedSmellArrayList().get(i).getType() == typeOdeur){
+                       /* if(table[ligne][colonne].getSortedSmellArrayList().get(i).getType() == typeOdeur){
                         //Si l'intensité de cette odeur est plus forte que l'odeur déjà enregistrée
                             if(table[ligne][colonne].getSortedSmellArrayList().get(i).getIntensity() > goodSmell){
                                 goodSmell = table[ligne][colonne].getSortedSmellArrayList().get(i).getIntensity();
                                 goodLigne = ligne;
                                 goodColonne = colonne;
                             }
-                        }
+                        }*/
                     }
                 }
             }
@@ -51,7 +53,7 @@ public class Behavior {
         //Maintenant ligne et colonne ont les coordonnées de la case où la senteur de nourriture est la plus forte.
         objectif.setLocation(goodLigne-1,goodColonne-1);
         return objectif;
-    }    */
+    }
 
 
 

@@ -15,25 +15,40 @@ public class MapData {
     }
 
 
-    private void updateSmells(){
+    public static void updateSmells(){
         Case selectedCase;
-        for (int i=0;i<30;i++){
-            for (int j=0; i<30;i++){
+        for (int i=0;i<map.length;i++){
+            for (int j=0; j<map[i].length;j++){
                 selectedCase=map[i][j];
                 selectedCase.getSmellArrayList().clear();
+                selectedCase.getOccupant().getSmell();
             }
         }
         //TODO add SmellSources to appropriate Cases
         ArrayList<Case> casesWithSmellSources=getCasesWithSmellSources();
-        if (!casesWithSmellSources.isEmpty()){
+        if (casesWithSmellSources!=null){
             for (int i=0;i<casesWithSmellSources.size();i++){
                 disperseSmellSources(casesWithSmellSources.get(i));
                 casesWithSmellSources.get(i).fadeSourceSmells();
             }
         }
+
+
+        //TODO remove this test when done
+        /*
+        for (int i=0; i<map.length;i++){
+            for (int j=0;j<map[i].length;j++){
+                ArrayList<Smell> testList=map[i][j].getSmellArrayList();
+                if (testList.size()!=0){
+                System.out.print(testList.get(0).getIntensity() + " ");
+                }
+            }
+            System.out.println();
+        }
+        */
     }
 
-    public void disperseSmellSources(Case selectedCase){
+    public static void disperseSmellSources(Case selectedCase){
         for (int i=0;i<selectedCase.getSmellSourceArrayList().size();i++){
             Smell smell=(Smell)selectedCase.getSmellSourceArrayList().get(i);
             selectedCase.getSmellArrayList().add(smell);
@@ -41,7 +56,7 @@ public class MapData {
         }
     }
 
-    public int getSmellThreshold(Smell smell, Case selectedCase){
+    public static int getSmellThreshold(Smell smell, Case selectedCase){
         int threshold=0;
         if (!selectedCase.getSmellArrayList().isEmpty()){
             for (Smell selectedSmell:selectedCase.getSmellArrayList()){
@@ -53,12 +68,13 @@ public class MapData {
         return threshold;
     }
 
-    public void disperseSmell(Case sourceCase, Smell smell){
+    public static void disperseSmell(Case sourceCase, Smell smell){
         if (smell.getIntensity()>=10){
-        Case[][] subsection=getSubsection(sourceCase.getPosition());
+        Case[][] subsection=getSubsection2(sourceCase.getPosition());
         for (int i=-1; i<2;i++){
             for (int j=-1; j<2;j++){
                 Case selectedCase=subsection[i+1][j+1];
+                if (selectedCase!=null){
                 int smellThreshold=getSmellThreshold(smell, selectedCase);
                     //Les coins. .38 est le multiplicateur .5 par la distance d'une diagonale
                 if (smellThreshold<smell.getIntensity()*.38){
@@ -72,16 +88,19 @@ public class MapData {
                     else{
                         System.out.println("That was not supposed to happen.");
                     }
+                    if (smellThreshold!=0){
                     subsection[i+1][j+1].eraseInferiorSmellOfSameID(dissipatedSmell);
+                    }
                     subsection[i+1][j+1].getSmellArrayList().add(dissipatedSmell);
                     disperseSmell(subsection[i+1][j+1], dissipatedSmell);
             }
         }
+            }
         }
     }
     }
 
-    private ArrayList<Case> getCasesWithSmellSources(){
+    private static ArrayList<Case> getCasesWithSmellSources(){
         ArrayList<Case> caseThatHaveASourceSmell=new ArrayList<Case>();
         for (int i=0; i<30;i++){
             for (int j=0;j<30;j++){
@@ -165,9 +184,8 @@ public class MapData {
             for (int j=0; j<3; j++){
                 try{
                 subsection[i][j]=map[origin.x+i-1][origin.y+j-1];
-                    //System.out.println("x: "+(origin.x+i-1)+"y: "+(origin.y+j-1));
                 }
-                catch(NullPointerException npe){
+                catch(NullPointerException|ArrayIndexOutOfBoundsException npe){
                     subsection[i][j]=null;
                 }
             }
