@@ -4,11 +4,9 @@ import ControllerPkg.BuyButtonHandler;
 import ControllerPkg.ItemController;
 import ControllerPkg.MasterController;
 import ControllerPkg.ShopListHandler;
-import ModelPkg.PkgItems.Items;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 public class ShopMenu extends ContextualMenu{
 
@@ -48,6 +46,7 @@ public class ShopMenu extends ContextualMenu{
 
     @Override
     public void actualiser() {
+        this.repaint();
     }
 
     @Override

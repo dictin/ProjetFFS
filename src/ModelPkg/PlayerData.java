@@ -1,23 +1,31 @@
 package ModelPkg;
 
+import ModelPkg.PkgItems.BoostEffect;
+import ModelPkg.PkgItems.Items;
 import ModelPkg.PkgItems.TempItemInstance;
+import ObserverPkg.Observable;
+import ObserverPkg.Observer;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class PlayerData {
-    //TODO modifier le nombre de nourritures de départ selon la difficultée du jeu :)
-    private static int food = 300;
-    // Que représente Score???
-    //Dictin: une valeur numerique qui depend de la nourriture recupere over all, du nombre fourmilliers perdus et du niveau atteint. TODO determiner l'algorithme qui calcule le score
+public class PlayerData implements Observable {
+    private int food = 300;
     private int score = 0;
     private int niveau = 1;
     private int population = 0;
     private int dead = 0;
-    private ArrayList<TempItemInstance> passiveInstances = new ArrayList<TempItemInstance>(); //Contient les items innactifs de l'inventaire du joueur
+    private ArrayList<TempItemInstance> passiveInstances = new ArrayList<TempItemInstance>(); //Contient les effects des items innactifs de l'inventaire du joueur
+    private ArrayList<String> consumablesInventory = new ArrayList<>();
+    private ArrayList<String> permanentInventory = new ArrayList<>();
     private ArrayList<TempItemInstance> permanentInstances = new ArrayList<TempItemInstance>();
     private ArrayList<TempItemInstance> tempItemInstances = new ArrayList<TempItemInstance>();
     private static int[] statModifiers = new int[]{0,0,0,0,0,0,0,0};
+
+    private ArrayList<Observer> observers = new ArrayList<>();
+
+    public PlayerData(){
+    }
 
     public void addPassiveItem(TempItemInstance instance){
         this.passiveInstances.add(instance);
@@ -29,7 +37,7 @@ public class PlayerData {
         this.passiveInstances.remove(index);
     }
 
-    public void addItemInstance(TempItemInstance itemInstance){
+    private void addItemInstance(TempItemInstance itemInstance){
         if (itemInstance.getDuration() < 0){
             this.permanentInstances.add(itemInstance);
         }else{
@@ -79,19 +87,19 @@ public class PlayerData {
         return population;
     }
 
-    public static void addFood(int food) {
-        PlayerData.food += food;
+    public void addFood(int food) {
+        this.food += food;
     }
 
     public void removeFood(int food){
-        PlayerData.food -= food;
-        if (PlayerData.food < 0){
-            PlayerData.food =0;
+        this.food -= food;
+        if (this.food < 0){
+            this.food =0;
         }
     }
 
     public void setScore(int score) {
-        this.score = (PlayerData.food * this.niveau) - (2*this.dead);
+        this.score = (this.food * this.niveau) - (2*this.dead);
     }
 
     public void newBorn(){
@@ -116,5 +124,45 @@ public class PlayerData {
 
     public int getStatMod(int stat){
         return this.statModifiers[stat];
+    }
+
+    public void addItemToInventory(Items item){
+        TempItemInstance itemInstance;
+
+        if (item.getEffect() instanceof BoostEffect){
+            itemInstance = (((BoostEffect) item.getEffect()).getTempInstance());
+            this.addPassiveItem(itemInstance);
+
+            if (itemInstance.getDuration() < 0){
+                this.permanentInventory.add(item.getName());
+            }else{
+                this.consumablesInventory.add(item.getName());
+            }
+        }
+
+        this.updateObservers();
+
+    }
+
+    public ArrayList<String> getConsumablesInventory() {
+        return consumablesInventory;
+    }
+
+    public ArrayList<String> getPermanentInventory() {
+        return permanentInventory;
+    }
+
+    @Override
+    public void addObserver(Observer observer) {
+        this.observers.add(observer);
+
+    }
+
+    @Override
+    public void updateObservers() {
+        for(int i = 0; i < observers.size(); i++){
+            observers.get(i).update();
+        }
+
     }
 }

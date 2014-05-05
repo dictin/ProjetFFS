@@ -14,10 +14,11 @@ import java.util.ArrayList;
  */
 public class MasterController extends Thread{
 
-    ItemController itemController = new ItemController();
+    ItemController itemController = new ItemController(this);
     ShopInfoController shopInfoController = new ShopInfoController();
     MapController mapController = new MapController();
     QuestionChamanController chamanController = new QuestionChamanController();
+    PlayerDataController playerDataController = new PlayerDataController();
 
     private static int animalListIndex=0;
     private int testCounter=0;
@@ -130,4 +131,8 @@ public class MasterController extends Thread{
     }
 
     public QuestionChamanController getChamanController() { return chamanController;}
+
+    public PlayerDataController getPlayerDataController() {
+        return playerDataController;
+    }
 }
