@@ -3,6 +3,7 @@ package ControllerPkg;
 import ModelPkg.CreationHashTable;
 import ModelPkg.Fourmillier;
 import ModelPkg.MapData;
+import ModelPkg.Smell;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +23,7 @@ public class CreationController implements ActionListener {
         if (spawn != null){
             animalType = CreationHashTable.getAssociatedValue(source);
             Point spawnPoint=MapData.getSpawnPoint();
-            Fourmillier spawnedFourmilier=new Fourmillier(0, new int[]{13,13,13}, animalType, spawnPoint);
+            Fourmillier spawnedFourmilier=new Fourmillier(0, new int[]{13,13,13}, animalType, spawnPoint, Smell.ALLY_ODOR);
             MapData.getAnimalList().add(spawnedFourmilier);
             MapData.getCase(spawnPoint).setOccupant(spawnedFourmilier);
 

@@ -3,9 +3,7 @@ package ModelPkg;
 import java.awt.*;
 import java.util.Random;
 
-/**
- * Created by Chloé on 14-03-17.
- */
+
 public class Behavior {
 
     //objectif est composé de -1,0 et 1. il indique le déplacement à faire. Donc coordonné + objectif = noulles coordonneé du fourmilier après le déplacement
@@ -69,7 +67,20 @@ public class Behavior {
             }
 
             if (nearFoodSource){
-                //TODO this
+                Point foodLocation = null;
+                for (int i = 0; i < Behavior.SUBSECTION_SIZE; i++){
+                    for (int j = 0; j < Behavior.SUBSECTION_SIZE; j++){
+                        if (foodLocation == null && subsection[i][j].getWildObject().getType() == WildObject.FOOD_ID){
+                            foodLocation = new Point(i,j);
+                        }
+                    }
+                }
+
+                if (foodLocation != null){
+                    return new VirtualFutureAction(foodLocation, ActionTypes.EAT_FROM_LOCATION);
+                }else {
+                    return new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
+                }
             }else{
                for (int i = 0; i < Behavior.SUBSECTION_SIZE; i++){
                    for (int j = 0; j < Behavior.SUBSECTION_SIZE; j++){
@@ -192,7 +203,7 @@ public class Behavior {
                 if (strongestSmellPoint == null){
                     return new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
                 }else {
-                    return new VirtualFutureAction(strongestSmellPoint, ActionTypes.GO_TO_LOCATION);
+                    return new VirtualFutureAction(strongestSmellPoint, ActionTypes.RUN_AT_ENEMY);
                 }
             }
 
@@ -200,30 +211,95 @@ public class Behavior {
 
         }else{ // mentalState == MentalStates.NEUTRAL
             Point strongestSmellPoint = null;
+            boolean enemyNear = false;
             for (int i = 0; i < Behavior.SUBSECTION_SIZE; i++){
                 for (int j = 0; j < Behavior.SUBSECTION_SIZE; j++){
-                    if (strongestSmellPoint == null){
-                        strongestSmellPoint = new Point(i,j);
-                    }else if(subsection[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(0).getIntensity() < subsection[i][j].getSortedSmellArrayList().get(0).getIntensity() &&subsection[i][j].getSortedSmellArrayList().get(0).getType() == Smell.ENEMY_ODOR){
-                        strongestSmellPoint = new Point(i,j);
+                    if (subsection[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(0).getType() == Smell.ENEMY_ODOR){
+                        enemyNear = true;
                     }
                 }
 
             }
 
-            if (strongestSmellPoint == null){
-                return new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
-            }else {
-                return new VirtualFutureAction(strongestSmellPoint, ActionTypes.GO_TO_LOCATION);
-            }
+            if (enemyNear){
+                if (Behavior.moralCheck(moralValue)){
+                    for (int i = 0; i < Behavior.SUBSECTION_SIZE; i++){
+                        for (int j = 0; j < Behavior.SUBSECTION_SIZE; j++){
+                            if (strongestSmellPoint == null && subsection[i][j].getSortedSmellArrayList().get(0).getType() == Smell.FOOD_ODOR){
+                                strongestSmellPoint = new Point(i,j);
+                            }else if(subsection[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(0).getIntensity() < subsection[i][j].getSortedSmellArrayList().get(0).getIntensity() &&subsection[i][j].getSortedSmellArrayList().get(0).getType() == Smell.FOOD_ODOR){
+                                strongestSmellPoint = new Point(i,j);
+                            }
+                        }
 
+                    }
+
+                    if (subsection[strongestSmellPoint.x][strongestSmellPoint.y].getWildObject().getType() == WildObject.FOOD_ID ||subsection[strongestSmellPoint.x][strongestSmellPoint.y].getWildObject().getType() == WildObject.HIVE_ID){
+                        return new VirtualFutureAction(strongestSmellPoint, ActionTypes.PICKUP_FROM_LOCATION);
+                    }else if (strongestSmellPoint != null){
+                        return new VirtualFutureAction(strongestSmellPoint, ActionTypes.GO_TO_LOCATION);
+                    }else {
+                        return new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
+                    }
+
+
+                }else{
+                    for (int i = 0; i < Behavior.SUBSECTION_SIZE; i++){
+                        for (int j = 0; j < Behavior.SUBSECTION_SIZE; j++){
+                            if (strongestSmellPoint == null && subsection[i][j].getSortedSmellArrayList().get(0).getType() == Smell.ENEMY_ODOR){
+                                strongestSmellPoint = new Point(i,j);
+                            }else if(subsection[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(0).getIntensity() < subsection[i][j].getSortedSmellArrayList().get(0).getIntensity() &&subsection[i][j].getSortedSmellArrayList().get(0).getType() == Smell.ENEMY_ODOR){
+                                strongestSmellPoint = new Point(i,j);
+                            }
+                        }
+
+                    }
+
+                    if (subsection[strongestSmellPoint.x][strongestSmellPoint.y].getOccupant() != null && subsection[strongestSmellPoint.x][strongestSmellPoint.y].getOccupant().getSmellID() == Smell.ENEMY_ODOR){
+                        return new VirtualFutureAction(strongestSmellPoint, ActionTypes.ATTACK_AT_LOCATION);
+                    }else if (strongestSmellPoint != null){
+                        return new VirtualFutureAction(strongestSmellPoint, ActionTypes.RUN_AT_ENEMY);
+                    }else {
+                        return new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
+                    }
+
+                }
+            }else{
+                for (int i = 0; i < Behavior.SUBSECTION_SIZE; i++){
+                    for (int j = 0; j < Behavior.SUBSECTION_SIZE; j++){
+                        if (strongestSmellPoint == null && subsection[i][j].getSortedSmellArrayList().get(0).getType() == Smell.FOOD_ODOR){
+                            strongestSmellPoint = new Point(i,j);
+                        }else if(subsection[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(0).getIntensity() < subsection[i][j].getSortedSmellArrayList().get(0).getIntensity() &&subsection[i][j].getSortedSmellArrayList().get(0).getType() == Smell.FOOD_ODOR){
+                            strongestSmellPoint = new Point(i,j);
+                        }
+                    }
+
+                }
+
+                if (subsection[strongestSmellPoint.x][strongestSmellPoint.y].getWildObject().getType() == WildObject.FOOD_ID ||subsection[strongestSmellPoint.x][strongestSmellPoint.y].getWildObject().getType() == WildObject.HIVE_ID){
+                    return new VirtualFutureAction(strongestSmellPoint, ActionTypes.PICKUP_FROM_LOCATION);
+                }else if (strongestSmellPoint != null){
+                    return new VirtualFutureAction(strongestSmellPoint, ActionTypes.GO_TO_LOCATION);
+                }else {
+                    return new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
+                }
+
+            }
 
         }
 
     }
 
+    public static boolean moralCheck(int moralValue){
+        boolean returnValue;
+        Random random = new Random();
+        int rollResult = random.nextInt(100)+1;
+
+        returnValue = rollResult < moralValue;
+        return returnValue;
 
 
+    }
 
 
 }
