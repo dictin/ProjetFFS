@@ -17,7 +17,7 @@ public class Behavior {
         Random random = new Random();
         int rndobjectifX = random.nextInt(Behavior.SUBSECTION_SIZE-1);
         int rndobjectifY = random.nextInt(Behavior.SUBSECTION_SIZE-1);
-        objectif.setLocation(rndobjectifX-1,rndobjectifY-1);
+        objectif = new Point(rndobjectifX-1,rndobjectifY-1);
         return objectif;
     }
 
@@ -53,12 +53,15 @@ public class Behavior {
     }
 
     public static VirtualFutureAction evaluateBestObjective(Point position, MentalStates mentalState, int moralValue){
+
+
         Case[][] subsection = MapData.getSubsection2(position);
+
         boolean nearFoodSource = false;
         if (mentalState == MentalStates.WEAK){
             Point strongestSmellPoint = null;
             for (int i = 0; i < Behavior.SUBSECTION_SIZE; i++) {
-                for (int j = 0; j < Behavior.SUBSECTION_SIZE; j++) {
+                for (int j = 0; j < Behavior.SUBSECTION_SIZE && !nearFoodSource; j++) {
                     if (subsection[i][j].getWildObject().getType() == WildObject.HIVE_ID || subsection[i][j].getWildObject().getType() == WildObject.FOOD_ID){
                         nearFoodSource = true;
                     }
@@ -214,7 +217,7 @@ public class Behavior {
             boolean enemyNear = false;
             for (int i = 0; i < Behavior.SUBSECTION_SIZE; i++){
                 for (int j = 0; j < Behavior.SUBSECTION_SIZE; j++){
-                    if (subsection[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(0).getType() == Smell.ENEMY_ODOR){
+                    if (!subsection[i][j].getSortedSmellArrayList().isEmpty() && subsection[i][j].getSortedSmellArrayList().get(0).getType() == Smell.ENEMY_ODOR){
                         enemyNear = true;
                     }
                 }
@@ -267,22 +270,27 @@ public class Behavior {
             }else{
                 for (int i = 0; i < Behavior.SUBSECTION_SIZE; i++){
                     for (int j = 0; j < Behavior.SUBSECTION_SIZE; j++){
-                        if (strongestSmellPoint == null && subsection[i][j].getSortedSmellArrayList().get(0).getType() == Smell.FOOD_ODOR){
+                        if (!subsection[i][j].getSortedSmellArrayList().isEmpty() && strongestSmellPoint == null && subsection[i][j].getSortedSmellArrayList().get(0).getType() == Smell.FOOD_ODOR){
                             strongestSmellPoint = new Point(i,j);
-                        }else if(subsection[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(0).getIntensity() < subsection[i][j].getSortedSmellArrayList().get(0).getIntensity() &&subsection[i][j].getSortedSmellArrayList().get(0).getType() == Smell.FOOD_ODOR){
+                        }else if(strongestSmellPoint != null && !subsection[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().isEmpty() && subsection[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(0).getIntensity() < subsection[i][j].getSortedSmellArrayList().get(0).getIntensity() &&subsection[i][j].getSortedSmellArrayList().get(0).getType() == Smell.FOOD_ODOR){
                             strongestSmellPoint = new Point(i,j);
                         }
                     }
 
                 }
 
-                if (subsection[strongestSmellPoint.x][strongestSmellPoint.y].getWildObject().getType() == WildObject.FOOD_ID ||subsection[strongestSmellPoint.x][strongestSmellPoint.y].getWildObject().getType() == WildObject.HIVE_ID){
-                    return new VirtualFutureAction(strongestSmellPoint, ActionTypes.PICKUP_FROM_LOCATION);
-                }else if (strongestSmellPoint != null){
-                    return new VirtualFutureAction(strongestSmellPoint, ActionTypes.GO_TO_LOCATION);
-                }else {
+                if (strongestSmellPoint != null){
+                    if (subsection[strongestSmellPoint.x][strongestSmellPoint.y].getWildObject().getType() == WildObject.FOOD_ID ||subsection[strongestSmellPoint.x][strongestSmellPoint.y].getWildObject().getType() == WildObject.HIVE_ID){
+                        return new VirtualFutureAction(strongestSmellPoint, ActionTypes.PICKUP_FROM_LOCATION);
+                    }else if (strongestSmellPoint != null){
+                        return new VirtualFutureAction(strongestSmellPoint, ActionTypes.GO_TO_LOCATION);
+                    }else {
+                        return new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
+                    }
+                }else{
                     return new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
                 }
+
 
             }
 

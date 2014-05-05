@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class PlayerData implements Observable {
-    private int food = 300;
+    private static int food = 300;
     private int score = 0;
     private int niveau = 1;
     private int population = 0;
@@ -87,8 +87,8 @@ public class PlayerData implements Observable {
         return population;
     }
 
-    public void addFood(int food) {
-        this.food += food;
+    public static void addFood(int food) {
+        PlayerData.food += food;
     }
 
     public void removeFood(int food){

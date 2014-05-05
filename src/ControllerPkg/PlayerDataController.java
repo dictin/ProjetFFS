@@ -56,6 +56,10 @@ public class PlayerDataController {
         return listModel;
     }
 
+    public void addFood(int value){
+        this.playerData.addFood(value);
+    }
+
 
 
 
