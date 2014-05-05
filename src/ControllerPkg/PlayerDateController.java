@@ -7,5 +7,6 @@ public class PlayerDateController {
 
     public void spendFood(int price){
 
+
     }
 }

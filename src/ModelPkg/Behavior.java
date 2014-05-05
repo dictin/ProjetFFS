@@ -283,11 +283,8 @@ public class Behavior {
                 }else {
                     return new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
                 }
-
             }
-
         }
-
     }
 
     public static boolean moralCheck(int moralValue){

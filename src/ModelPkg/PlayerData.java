@@ -10,13 +10,16 @@ public class PlayerData {
     private static int food = 300;
     // Que représente Score???
     //Dictin: une valeur numerique qui depend de la nourriture recupere over all, du nombre fourmilliers perdus et du niveau atteint. TODO determiner l'algorithme qui calcule le score
-    private int score = 0;
-    private int niveau = 1;
-    private int population = 0;
-    private int dead = 0;
+    private  int score = 0;
+    private  int niveau = 1;
+    private  int population = 0;
+    private  int dead = 0;
     private ArrayList<TempItemInstance> passiveInstances = new ArrayList<TempItemInstance>(); //Contient les items innactifs de l'inventaire du joueur
     private ArrayList<TempItemInstance> permanentInstances = new ArrayList<TempItemInstance>();
     private ArrayList<TempItemInstance> tempItemInstances = new ArrayList<TempItemInstance>();
+
+
+
     private static int[] statModifiers = new int[]{0,0,0,0,0,0,0,0};
 
     public void addPassiveItem(TempItemInstance instance){
@@ -67,7 +70,7 @@ public class PlayerData {
         }
     }
 
-    public int getFood() {
+    public  int getFood() {
         return food;
     }
 
@@ -117,4 +120,6 @@ public class PlayerData {
     public int getStatMod(int stat){
         return this.statModifiers[stat];
     }
+
+
 }

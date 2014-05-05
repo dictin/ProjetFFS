@@ -26,6 +26,19 @@ public class MasterUI extends JPanel{
     private JLabel questionLabel = new JLabel();
     private QuestionChaman actualQuestion;
     private JLabel tvaNews = new JLabel();
+    private int positionMinTvaNews = 660;
+    private int positionMaxTvaNews = 701;
+    private int positionActualTvaNews = 701;
+    private int numberOfNews = 0;
+    private int mouvement = 0;
+    private int duration = 0;
+
+    JLabel labelPopulation = new JLabel("Population: 999");
+    JLabel labelFood = new JLabel("Nourriture: 9999");
+    JLabel labelDeaths = new JLabel("Victimes: 999");
+    JLabel labelLevel = new JLabel("Niveau: 99");
+    JLabel labelScore = new JLabel("Score: 99999");
+    JLabel background = new JLabel();
 
     //TODO déplacer dans le modèle
     private int food=300;
@@ -87,17 +100,47 @@ public class MasterUI extends JPanel{
         //TODO Ajouter éléments visuels d'un niveau de jeu.
         System.out.println("Checking if empty");
 
-        if(!MapData.getNewsList().isEmpty()){
-        tvaNews.setText(MapData.getNewsList().get(0));
-        }
-        else{
-        tvaNews.setText("Not twerking");
-        }
+        //TODO lier les labels à leur valeur.
+        //labelFood.setText(labelFood.split(":")[0]+" "+nourriture);
+
+        labelFood.setSize(92,9);
+        labelFood.setForeground(Color.white);
+        labelFood.setLocation(660,590); // 10,525
+        this.add(labelFood);
+        //population
+        labelPopulation.setSize(87,16);
+        labelPopulation.setForeground(Color.white);
+        labelPopulation.setLocation(660,600);
+        this.add(labelPopulation);
+        //Victimes
+        labelDeaths.setSize(77,9);
+        labelDeaths.setForeground(Color.white);
+        labelDeaths.setLocation(660,617);
+        this.add(labelDeaths);
+        //Level
+        labelLevel.setSize(58,9);
+        labelLevel.setForeground(Color.white);
+        labelLevel.setLocation(660,630);
+        this.add(labelLevel);
+        //Score
+        labelScore.setSize(87,9);
+        labelScore.setForeground(Color.white);
+        labelScore.setLocation(660,645);
+        this.add(labelScore);
+        //Fond derrière les label
+        background.setOpaque(true);
+        background.setBackground(new Color(Integer.parseInt("324159", 15)));
+        background.setSize(110,85);
+        background.setLocation(655,580);
+        this.add(background);
+
+
+        tvaNews.setText(MapData.getNewsList().remove(0));
         tvaNews.setSize(495, 20);
-        tvaNews.setLocation(25, 660);
+        tvaNews.setLocation(25, positionActualTvaNews);
         tvaNews.setOpaque(true);
         tvaNews.setBackground(Color.BLACK);
-        tvaNews.setFont(new Font("Courier New", Font.PLAIN, 15));
+        tvaNews.setFont(new Font("Courier New", Font.PLAIN, 20));
         tvaNews.setForeground(Color.white);
         this.add(tvaNews);
 
@@ -178,10 +221,41 @@ public class MasterUI extends JPanel{
         if (selectedMenu!=null){
             selectedMenu.actualiser();
         }
-        if(MasterController.getTime() % 120 == 0 && !MapData.getNewsList().isEmpty()){
+
+        if(MapData.getNewsList().size()>numberOfNews){
+            mouvement = 1;
+        }
+        if(mouvement ==1){
+            tvaNews.setLocation(25,positionActualTvaNews--);
+            if(positionActualTvaNews == positionMinTvaNews){
+                mouvement = 0;
+                duration = MasterController.getTime();
+            }
+        }
+        if(MasterController.getTime() -duration == 150){
+        mouvement = -1;
+        }
+        if(mouvement ==-1){
+            tvaNews.setLocation(25,positionActualTvaNews++);
+
+            if(positionActualTvaNews == positionMaxTvaNews){
+                System.out.println("Time to stop min atteint");
+                mouvement = 0;
+
+                System.out.println("longeur : "+MapData.getNewsList().size());
+                if(MapData.getNewsList().size()>=1){
+                    tvaNews.setText(MapData.getNewsList().get(0));
+                    System.out.println("moving up");
+                    mouvement =1;
+                    MapData.getNewsList().remove(0);
+
+                }
+            }
+        }
+        /*if(MasterController.getTime() % 120 == 0 && !MapData.getNewsList().isEmpty()){
             System.out.println("Temps de changer les news");
             tvaNews.setText(MapData.getNewsList().remove(0));
-        }
+        }*/
         if(actualQuestion.getQuestionTaTuBienRepondu()==1){
             System.out.println("Trouvé!");
             actualQuestion = controller.getChamanController().getQuestion();
@@ -191,6 +265,6 @@ public class MasterUI extends JPanel{
             questionLabel.invalidate();
             questionLabel.repaint();
             }
-
+        numberOfNews = MapData.getNewsList().size();
     }
 }

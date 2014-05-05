@@ -64,7 +64,6 @@ public class MapData {
                 }else{
                     map[i][j] = new Case(new Point(i,j), null, new WildObject(0, true));
                 }
-
             }
         }
 
@@ -72,6 +71,9 @@ public class MapData {
         map[hivePosition+1][hivePosition] = new Case(new Point(hivePosition+1,hivePosition), null, new WildObject(5, true));
         map[hivePosition][hivePosition+1] = new Case(new Point(hivePosition,hivePosition+1), null, new WildObject(5, true));
         map[hivePosition+1][hivePosition+1] = new Case(new Point(hivePosition+1,hivePosition+1), null, new WildObject(5, true));
+        newsList.add(0, "Bienvenu à FFS!");
+        newsList.add(1, "Niveau 1");
+        newsList.add(2, "#YOLO");
 
 
     }
