@@ -11,6 +11,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CreationController implements ActionListener {
+
+    private MasterController masterController;
+
+    public CreationController(final MasterController masterController){
+        this.masterController = masterController;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         //TODO add food limitation
@@ -26,6 +33,7 @@ public class CreationController implements ActionListener {
             Fourmillier spawnedFourmilier=new Fourmillier(0, new int[]{13,13,13}, animalType, spawnPoint, Smell.ALLY_ODOR);
             MapData.getAnimalList().add(spawnedFourmilier);
             MapData.getCase(spawnPoint).setOccupant(spawnedFourmilier);
+
 
         }
 
