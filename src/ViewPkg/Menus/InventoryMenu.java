@@ -2,9 +2,8 @@ package ViewPkg.Menus;
 
 import ControllerPkg.ItemController;
 import ControllerPkg.MasterController;
-import ControllerPkg.PlayerDataController;
 import ControllerPkg.ShopListHandler;
-import ObserverPkg.Observer;
+import ModelPkg.PkgItems.Items;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,8 +11,7 @@ import java.awt.*;
 /**
  * Created by Xav on 17/03/14.
  */
-public class InventoryMenu extends ContextualMenu implements Observer{
-
+public class InventoryMenu extends ContextualMenu{
 
     private GotoMenuButton consumables;
     private GotoMenuButton reusables;
@@ -21,8 +19,8 @@ public class InventoryMenu extends ContextualMenu implements Observer{
     private JLabel reusablesLabel = new JLabel ("Objets réutilisables!");
     private JButton consumablesBuyButton = new JButton("Utiliser");
     private JButton reusablesBuyButton = new JButton("Activer");
-    private ItemController itemController;
-    private PlayerDataController playerDataController;
+    ItemController itemController;
+
     JList<String> consumableShopList;
     JScrollPane consumableScrollPane;
 
@@ -31,22 +29,14 @@ public class InventoryMenu extends ContextualMenu implements Observer{
 
     public InventoryMenu(MasterController controller) {
         super(controller, "inventory_menu");
-        this.playerDataController = controller.getPlayerDataController();
         this.itemController = controller.getItemController();
-        this.playerDataController.addObserver(this);
-
-
         consumablesLabel.setSize(400,35);
         consumablesLabel.setLocation(25,0);
         consumablesLabel.setFont(new Font("Arial", Font.PLAIN, 30));
-
-
         consumables = new GotoMenuButton(controller, "consumables_button", new Dimension(this.getWidth()-10, this.getHeight()/2-10), Color.cyan);
         consumables.setLocation(5, 5);
         this.add(consumables);
-
-
-        this.consumableShopList = new JList<String>();
+        watata();
         this.consumableShopList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.consumableShopList.setLayoutOrientation(JList.VERTICAL);
         this.consumableShopList.setVisibleRowCount(-1);
@@ -100,21 +90,41 @@ public class InventoryMenu extends ContextualMenu implements Observer{
 
     }
 
+    public void watata(){
+
+        System.out.println("Et cest le temps d'afficher l'inventaire!");
+        String[] objetsInventory = new String[2];
+        //String[] objetsInventory = new String[itemController.getObjetBougthList().size()];
+        System.out.println("longueur: "+itemController.getObjetBougthList().size());
+        for(int i = 0; i < itemController.getObjetBougthList().size(); i++){
+            Items item = itemController.getBougthItem(itemController.getObjetBougth(i));
+            objetsInventory[0]= "Allo";
+
+        }
+
+        //objetsInventory[i]= item.getName();
+        objetsInventory[0]= "Coucou";
+        System.out.println(objetsInventory[0]);
+        this.consumableShopList = new JList<String>(objetsInventory);
+        this.consumableShopList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.consumableShopList.setLayoutOrientation(JList.VERTICAL);
+        this.consumableShopList.setVisibleRowCount(-1);
+        this.consumableShopList.setFixedCellHeight(25);
+        this.consumableShopList.setSize(new Dimension(300, 220));
+        this.consumableShopList.setLocation(10, 12);
+
+
+    }
+
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
     }
 
     @Override
     public void actualiser() {
-
-
-    }
-
-    @Override
-    public void update() {
-        this.consumableShopList.setModel(this.playerDataController.getConsumableInventoryDataModel());
-        this.reusableShopList.setModel(this.playerDataController.getPermanentInventoryDataModel());
-
+        this.invalidate();
+        this.repaint();
+        watata();
 
     }
 }

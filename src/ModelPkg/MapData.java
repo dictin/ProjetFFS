@@ -13,6 +13,8 @@ public class MapData {
     public static ArrayList<Animal> getAnimalList() {
         return animalList;
     }
+    private static ArrayList<String> newsList = new ArrayList<String>();
+
 
     private void initialize2(int nbOfTrees, int nbOfRocks, int nbOfWater, int nbOfHoles){
         Random casePicker=new Random(30*30);
@@ -128,6 +130,12 @@ public class MapData {
     public static Case getCase(Point point){
         return MapData.map[point.x][point.y];
 
+    }
+    public  static void addNewsList(String news) {
+        newsList.add(news);
+    }
+    public static ArrayList<String> getNewsList() {
+        return newsList;
     }
 
 }

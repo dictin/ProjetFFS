@@ -1,6 +1,8 @@
 package ViewPkg;
 
 import ControllerPkg.MasterController;
+import ModelPkg.MapData;
+import ModelPkg.QuestionChaman;
 import ViewPkg.Menus.*;
 
 import javax.swing.*;
@@ -19,6 +21,11 @@ public class MasterUI extends JPanel{
     private ContextualMenu shopMenu;
     private ContextualMenu inventoryMenu;
     private ContextualMenu creationMenu;
+
+    private int numberQuestion =1;
+    private JLabel questionLabel = new JLabel();
+    private QuestionChaman actualQuestion;
+    private JLabel tvaNews = new JLabel();
 
     //TODO déplacer dans le modèle
     private int food=300;
@@ -40,12 +47,8 @@ public class MasterUI extends JPanel{
         this.setLocation(0,0);
         this.setLayout(null);
 
-      // Pour enlever les questions du chaman, mettre en commentaire ci-dessous
-        //TODO remettre fonctionnel si nécessaire
-//        JLabel questionLabel = new Chaman(controller);
-//        questionLabel.setLocation(75,163);
-//        this.add(questionLabel);
-
+        // Pour enlever les questions du chaman, mettre en commentaire ci-dessous
+        creationQuestion();
 
         int xGridSize=30;
         int tailleYGrille=30;
@@ -82,6 +85,23 @@ public class MasterUI extends JPanel{
 //        gridTriggerZone.setLocation(25, 25);
 
         //TODO Ajouter éléments visuels d'un niveau de jeu.
+        System.out.println("Checking if empty");
+
+        if(!MapData.getNewsList().isEmpty()){
+        tvaNews.setText(MapData.getNewsList().get(0));
+        }
+        else{
+        tvaNews.setText("Not twerking");
+        }
+        tvaNews.setSize(495, 20);
+        tvaNews.setLocation(25, 660);
+        tvaNews.setOpaque(true);
+        tvaNews.setBackground(Color.BLACK);
+        tvaNews.setFont(new Font("Courier New", Font.PLAIN, 15));
+        tvaNews.setForeground(Color.white);
+        this.add(tvaNews);
+
+
     }
 
 
@@ -117,6 +137,7 @@ public class MasterUI extends JPanel{
         else if (menuName.equals("inventory_menu")){
             selectedMenu.setVisible(false);
             selectedMenu=inventoryMenu;
+            ((InventoryMenu)selectedMenu).setI(0);
             this.remove(selectedMenu);
             this.add(selectedMenu);
             selectedMenu.setLocation(gridEndPointX+25, 25);
@@ -143,12 +164,33 @@ public class MasterUI extends JPanel{
         //TODO link visualCases to contained items and display informations on them.
     }
 
+    public void creationQuestion(){
+        System.out.println("New question");
+        actualQuestion = controller.getChamanController().getQuestion();
+        questionLabel = new Chaman(controller, actualQuestion);
+        questionLabel.setVisible(true);
+        questionLabel.setLocation(75, 163);
+        this.add(questionLabel);
+    }
+
     public void actualiser(){
         quitIcon.actualiser();
         if (selectedMenu!=null){
             selectedMenu.actualiser();
         }
-        this.invalidate();
-        this.repaint();
+        if(MasterController.getTime() % 120 == 0 && !MapData.getNewsList().isEmpty()){
+            System.out.println("Temps de changer les news");
+            tvaNews.setText(MapData.getNewsList().remove(0));
+        }
+        if(actualQuestion.getQuestionTaTuBienRepondu()==1){
+            System.out.println("Trouvé!");
+            actualQuestion = controller.getChamanController().getQuestion();
+            questionLabel.setVisible(false);
+            questionLabel.setText("Stéphane est un dieu");
+            creationQuestion();
+            questionLabel.invalidate();
+            questionLabel.repaint();
+            }
+
     }
 }
