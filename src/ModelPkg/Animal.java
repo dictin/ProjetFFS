@@ -20,6 +20,7 @@ public abstract class Animal {
     private int nameGen;
     private int health;
     private int smellID;
+    private int moral;
     private String species;
 
 
@@ -44,6 +45,7 @@ public abstract class Animal {
     private Image sprite;
 
     private MentalStates mentalState = MentalStates.NEUTRAL;
+    private ActionTypes actionToCommit = null;
 
 
     public Animal(int team, int[] meanStats, String species, Point startingPosition, int smellID){
@@ -73,6 +75,7 @@ public abstract class Animal {
         this.smellStrength=25-mainStats[2];
         this.grabQuantity=mainStats[3];
         this.equipQuantity=25-mainStats[3];
+        this.moral = 25; //TODO determiner comment evaluer le moral;
         this.smellID = smellID;
 
 
@@ -241,6 +244,10 @@ public abstract class Animal {
         return sprite;
     }
 
+    public ActionTypes getActionToCommit() {
+        return actionToCommit;
+    }
+
     public void eatFood(){
         if (MapData.getCase(position).getWildObject().getType()==7){
             //eatFoodInCase(MapData.getCase(position));
@@ -257,15 +264,28 @@ public abstract class Animal {
     public void activate(int time){
         //TODO reset smellSource of case
         if (time!=birthday&&(time-birthday)%activationFrequency==0){
+            VirtualFutureAction virtualFutureAction = null;
 
             this.decideInternalBehavior();
-            B
+            virtualFutureAction = Behavior.evaluateBestObjective(this.position, this.mentalState, this.moral);
+            this.realizeFutureAction(virtualFutureAction);
+
 
 
 
             decreaseHealth((25 - endurance) / 2);
     }
 }
+
+    private void realizeFutureAction(VirtualFutureAction virtualFutureAction) {
+        this.objective = virtualFutureAction.getTargetLocation();
+        this.actionToCommit = virtualFutureAction.getActionType();
+        this.decideFutureMentalState(this.mentalState, this.actionToCommit);
+    }
+
+    private void decideFutureMentalState(MentalStates mentalState, ActionTypes actionToCommit) {
+
+    }
 
     private void decideInternalBehavior() {
         if (this.health <= this.MAX_HEALTH/4){

@@ -159,7 +159,7 @@ public class MasterUI extends JPanel{
 
     public void actualiser(){
         quitIcon.actualiser();
-        if (selectedMenu!=null){
+        if (selectedMenu!=null){      //Boucle infinie  !?
             selectedMenu.actualiser();
         }
         if(actualQuestion.getGoodAnswer()){
