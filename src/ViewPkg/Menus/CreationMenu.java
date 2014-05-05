@@ -14,10 +14,11 @@ public class CreationMenu extends ContextualMenu {
 
     private String[] strings = {"Myrmidon", "TamanduaMexique","TamanduaNord", "Tamanoir"};
     private JButton[] jButtons = new JButton[this.strings.length];
-    private CreationController creationController = new CreationController();
+    private CreationController creationController;
 
     public CreationMenu(MasterController controller){
         super(controller, "creation_menu");
+        this.creationController = new CreationController(controller);
         JLabel background = new JLabel();
 
         JButton fourmilier1 = new JButton();
