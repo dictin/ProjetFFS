@@ -180,7 +180,6 @@ public class MasterUI extends JPanel{
         else if (menuName.equals("inventory_menu")){
             selectedMenu.setVisible(false);
             selectedMenu=inventoryMenu;
-            ((InventoryMenu)selectedMenu).setI(0);
             this.remove(selectedMenu);
             this.add(selectedMenu);
             selectedMenu.setLocation(gridEndPointX+25, 25);

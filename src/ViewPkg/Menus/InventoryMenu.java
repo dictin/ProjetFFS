@@ -2,14 +2,17 @@ package ViewPkg.Menus;
 
 import ControllerPkg.ItemController;
 import ControllerPkg.MasterController;
+import ControllerPkg.PlayerDataController;
 import ControllerPkg.ShopListHandler;
-import ModelPkg.PkgItems.Items;
+import ObserverPkg.Observer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
-public class InventoryMenu extends ContextualMenu{
+/**
+ * Created by Xav on 17/03/14.
+ */
+public class InventoryMenu extends ContextualMenu implements Observer{
 
     private GotoMenuButton consumables;
     private GotoMenuButton reusables;
@@ -18,41 +21,26 @@ public class InventoryMenu extends ContextualMenu{
     private JButton consumablesBuyButton = new JButton("Utiliser");
     private JButton reusablesBuyButton = new JButton("Activer");
     ItemController itemController;
-    private int i = 0;
-    private int longTable = 0;
+    PlayerDataController playerDataController;
 
     JList<String> consumableShopList;
     JScrollPane consumableScrollPane;
 
     JList<String> reusableShopList;
     JScrollPane reusableScrollPane;
-    private MasterController controller;
 
     public InventoryMenu(MasterController controller) {
         super(controller, "inventory_menu");
-        this.controller = controller; 
+        this.playerDataController = controller.getPlayerDataController();
         this.itemController = controller.getItemController();
-        consumablesLabel.setSize(400, 35);
+        this.playerDataController.addObserver(this);
+        consumablesLabel.setSize(400,35);
         consumablesLabel.setLocation(25, 0);
         consumablesLabel.setFont(new Font("Arial", Font.PLAIN, 30));
         consumables = new GotoMenuButton(controller, "consumables_button", new Dimension(this.getWidth()-10, this.getHeight()/2-10), Color.cyan);
         consumables.setLocation(5, 5);
         this.add(consumables);
-
-        reusablesLabel.setSize(400,35);
-        reusablesLabel.setLocation(25,0);
-        reusablesLabel.setFont(new Font("Arial", Font.PLAIN, 30));
-        this.add(reusablesLabel);
-        reusables = new GotoMenuButton(controller, "reusables_button", consumables.getSize(), Color.RED);
-        reusables.setLocation(5, 5 + 10 + reusables.getHeight());
-        this.add(reusables);
-    }
-
-
-        public void inventoryyyy(){
-        this.consumableShopList = new JList<String>(actualInventory());
-       // actualInventory();
-            System.out.println("ouhhhhhhh");
+        this.consumableShopList = new JList<String>();
         this.consumableShopList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.consumableShopList.setLayoutOrientation(JList.VERTICAL);
         this.consumableShopList.setVisibleRowCount(-1);
@@ -75,7 +63,17 @@ public class InventoryMenu extends ContextualMenu{
         //************************************************************************************
 
 
+        reusablesLabel.setSize(400,35);
+        reusablesLabel.setLocation(25,0);
+        reusablesLabel.setFont(new Font("Arial", Font.PLAIN, 30));
+
+
+        reusables = new GotoMenuButton(controller, "reusables_button", consumables.getSize(), Color.RED);
+        reusables.setLocation(5, 5 + 10 + reusables.getHeight());
+        this.add(reusables);
+
         this.reusableShopList = new JList<String>();
+
         this.reusableShopList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.reusableShopList.setLayoutOrientation(JList.VERTICAL);
         this.reusableShopList.setVisibleRowCount(-1);
@@ -96,36 +94,22 @@ public class InventoryMenu extends ContextualMenu{
 
     }
 
-    public String[] actualInventory(){
-        String[] objetsInventory = new String[itemController.getObjetBougthList().size()];
-        System.out.println("ancienne longeur :"+ longTable);
-        System.out.println("nouvelle longeur :"+ itemController.getObjetBougthList().size());
-        for(int i = 0; i < itemController.getObjetBougthList().size(); i++){
-            Items item = itemController.getBougthItem(itemController.getObjetBougth(i));
-            objetsInventory[i]= item.getName();
-        }
-
-        longTable = itemController.getObjetBougthList().size();
-        System.out.println("long :"+ objetsInventory.length);
-        return objetsInventory;
-    }
-
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
     }
 
-    public void setI(int i){
-        this.i = i;
+    @Override
+    public void actualiser() {
+        this.invalidate();
+        this.repaint();
+
+
     }
 
     @Override
-    public void actualiser() {
-        if(i < 1){
-        System.out.println("actu");
-        inventoryyyy();
-        this.invalidate();
-        this.repaint();
-       }
-        i++;
+    public void update() {
+        this.consumableShopList.setModel(this.playerDataController.getConsumableInventoryDataModel());
+        this.reusableShopList.setModel(this.playerDataController.getPermanentInventoryDataModel());
+
     }
 }

@@ -1,5 +1,7 @@
 package ControllerPkg;
 
+import ModelPkg.PkgItems.Items;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,8 +20,8 @@ public class BuyButtonHandler implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.list.getSelectedIndex();
+        int selectedIndex = this.list.getSelectedIndex();
         System.out.println(this.list.getSelectedIndex());
-        itemController.setObjetBougthList(list.getSelectedIndex());
+        itemController.addItemToInventory(Items.values()[selectedIndex]);
     }
 }

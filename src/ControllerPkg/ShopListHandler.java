@@ -21,7 +21,10 @@ public class ShopListHandler implements ListSelectionListener {
         JList<String> list = (JList<String>) e.getSource();
 
         int selectedIndex = list.getSelectedIndex();
-        Items selectedItem = Items.values()[selectedIndex];
+        if (selectedIndex >= 0){
+            Items selectedItem = Items.values()[selectedIndex];
+
+
         int statID;
         int statBoost;
         boolean isItemPermanent;
@@ -33,12 +36,14 @@ public class ShopListHandler implements ListSelectionListener {
             } else {
                 isItemPermanent = false;
             }
+
+
         }else{
             statID = 0;
             statBoost = 0;
             isItemPermanent = false;
         }
         shopItemInfoData.changeValues(selectedItem.getName(), 0, statID, statBoost, isItemPermanent);
-
+        }
     }
 }
