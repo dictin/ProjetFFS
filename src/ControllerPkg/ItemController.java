@@ -9,11 +9,12 @@ public class ItemController {
 
 
 
-
+    MasterController masterController;
     ArrayList<Integer> objetBougthList = new ArrayList<Integer>();
 
 
-    public ItemController(){
+    public ItemController(MasterController masterController){
+        this.masterController = masterController;
 
     }
 
@@ -39,8 +40,9 @@ public class ItemController {
     public int getObjetBougth(int i){
         return objetBougthList.get(i);
     }
-    public ArrayList<Integer> getObjetBougthList() {
-        return objetBougthList;
-    }
 
+
+    public void addItemToInventory(Items items) {
+        this.masterController.getPlayerDataController().addItemToInventory(items);
+    }
 }
