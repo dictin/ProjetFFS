@@ -21,11 +21,13 @@ public class QuestionsHandler implements MouseListener{
         answerClick = (JLabel)e.getSource();
         if(answerClick.getText().equals(actualQuestion.getAnswer2())){
             System.out.println("Bonne réponse!");
-            actualQuestion.setGoodAnswer(true);
+             actualQuestion.setQuestionTaTuBienRepondu(1);
+
         }else{
             System.out.println("Mauvaise réponse");
+            actualQuestion.setQuestionTaTuBienRepondu(-1);
         }
-        actualQuestion.setFinish(true);
+
     }
 
     @Override

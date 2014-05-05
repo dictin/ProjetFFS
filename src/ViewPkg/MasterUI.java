@@ -1,6 +1,7 @@
 package ViewPkg;
 
 import ControllerPkg.MasterController;
+import ModelPkg.MapData;
 import ModelPkg.QuestionChaman;
 import ViewPkg.Menus.*;
 
@@ -24,6 +25,7 @@ public class MasterUI extends JPanel{
     private int numberQuestion =1;
     private JLabel questionLabel = new JLabel();
     private QuestionChaman actualQuestion;
+    private JLabel tvaNews = new JLabel();
 
     //TODO déplacer dans le modèle
     private int food=300;
@@ -83,6 +85,22 @@ public class MasterUI extends JPanel{
 //        gridTriggerZone.setLocation(25, 25);
 
         //TODO Ajouter éléments visuels d'un niveau de jeu.
+        System.out.println("Checking if empty");
+
+        if(!MapData.getNewsList().isEmpty()){
+        tvaNews.setText(MapData.getNewsList().get(0));
+        }
+        else{
+        tvaNews.setText("Not twerking");
+        }
+        tvaNews.setSize(495, 20);
+        tvaNews.setLocation(25, 660);
+        tvaNews.setOpaque(true);
+        tvaNews.setBackground(Color.BLACK);
+        tvaNews.setFont(new Font("Courier New", Font.PLAIN, 15));
+        tvaNews.setForeground(Color.white);
+        this.add(tvaNews);
+
 
     }
 
@@ -149,12 +167,10 @@ public class MasterUI extends JPanel{
     public void creationQuestion(){
         System.out.println("New question");
         actualQuestion = controller.getChamanController().getQuestion();
-        System.out.println(actualQuestion.getFinish());
-        System.out.println(actualQuestion.getQuestion());
         questionLabel = new Chaman(controller, actualQuestion);
-        this.add(questionLabel);
         questionLabel.setVisible(true);
         questionLabel.setLocation(75, 163);
+        this.add(questionLabel);
     }
 
     public void actualiser(){
@@ -162,13 +178,19 @@ public class MasterUI extends JPanel{
         if (selectedMenu!=null){
             selectedMenu.actualiser();
         }
-        if(actualQuestion.getGoodAnswer()){
+        if(MasterController.getTime() % 120 == 0 && !MapData.getNewsList().isEmpty()){
+            System.out.println("Temps de changer les news");
+            tvaNews.setText(MapData.getNewsList().remove(0));
+        }
+        if(actualQuestion.getQuestionTaTuBienRepondu()==1){
             System.out.println("Trouvé!");
+            actualQuestion = controller.getChamanController().getQuestion();
             questionLabel.setVisible(false);
-            this.remove(questionLabel);
+            questionLabel.setText("Stéphane est un dieu");
             creationQuestion();
             questionLabel.invalidate();
             questionLabel.repaint();
-        }
+            }
+
     }
 }

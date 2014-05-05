@@ -1,9 +1,6 @@
 package ControllerPkg;
 
-import ModelPkg.CreationHashTable;
-import ModelPkg.Fourmillier;
-import ModelPkg.MapData;
-import ModelPkg.Smell;
+import ModelPkg.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,6 +31,7 @@ public class CreationController implements ActionListener {
             MapData.getAnimalList().add(spawnedFourmilier);
             MapData.getCase(spawnPoint).setOccupant(spawnedFourmilier);
 
+             MapData.addNewsList(spawnedFourmilier.getName()+ " est né!!");
 
         }
 

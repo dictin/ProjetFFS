@@ -12,9 +12,7 @@ public class QuestionChaman {
     private String answer2;
     private String answer3;
     private int questionSize;
-    private boolean goodAnswer = false;
-    private boolean finish = false;
-
+    private int questionTaTuBienRepondu = 0; // 0:= aucune réponse -1:= mauvaise réponse 1:= bonne réponse
 
 
     public  QuestionChaman(String q, String a0, String a1, String a2, String a3){
@@ -43,24 +41,35 @@ public class QuestionChaman {
     public String getAnswer0() {
         return answer0;
     }
-
     public String getQuestion() {
         return question;
     }
+    public int getQuestionTaTuBienRepondu() {
 
-    public boolean getGoodAnswer() {
-        return goodAnswer;
+        return questionTaTuBienRepondu;
     }
 
-    public boolean getFinish() {
-        return finish;
-    }
+    public  void setQuestionTaTuBienRepondu(int questionTaTuBienRepondu) {
 
-    public void setGoodAnswer(boolean goodAnswer) {
-        this.goodAnswer = goodAnswer;
-    }
 
-    public void setFinish(boolean finish) {
-        this.finish = finish;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        this.questionTaTuBienRepondu = questionTaTuBienRepondu;
     }
 }
+
