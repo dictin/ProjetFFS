@@ -18,7 +18,6 @@ public class QuestionChamanController {
         noQuestion = random.nextInt(QuestionData.getQuestionList().size());
         }while(QuestionData.getQuestionList().get(noQuestion).getQuestionTaTuBienRepondu()!=0);
         return QuestionData.getQuestionList().get(noQuestion);
-
     }
 
 }

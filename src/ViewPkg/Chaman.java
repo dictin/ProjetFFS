@@ -23,9 +23,9 @@ public class Chaman extends JLabel{
     private JLabel answer3 = new JLabel();
     private QuestionsHandler questionsHandler;
     private MasterController controller;
-    private QuestionChaman actualQuestion;
+    private ModelPkg.QuestionChaman actualQuestion;
 
-public Chaman(final MasterController controller, QuestionChaman actualQuestion){
+public Chaman(final MasterController controller, ModelPkg.QuestionChaman actualQuestion){
     this.actualQuestion = actualQuestion;
     this.controller=controller;
     this.questionsHandler = new QuestionsHandler(this.actualQuestion);
