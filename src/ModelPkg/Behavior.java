@@ -1,5 +1,7 @@
 package ModelPkg;
 
+import ModelPkg.WildObjects.WildObject;
+
 import java.awt.*;
 import java.util.Random;
 

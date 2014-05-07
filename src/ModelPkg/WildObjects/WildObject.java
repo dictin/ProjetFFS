@@ -44,6 +44,7 @@ public class WildObject {
         this.initializeImages();
         this.type = type;
         this.traversable = traversable;
+        this.smellSource=new SmellSource(System.currentTimeMillis(),0,-1,SmellType.NOTHING);
         if (this.type==HIVE_ID) {
             this.smellSource = new SmellSource(System.currentTimeMillis(), 100,-1, SmellType.HIVE);
         }
@@ -54,7 +55,12 @@ public class WildObject {
             this.smellSource = new SmellSource(System.currentTimeMillis(), 50,-1,SmellType.ITEM);
         }
         else if (this.type==FOOD_ID||this.type==CORPSE_ID){
-            this.smellSource=new SmellSource(System.currentTimeMillis(), ((FoodSource)this).
+            if (this.type==FOOD_ID) {
+                this.smellSource = new SmellSource(System.currentTimeMillis(), ((FoodSource) this).getFoodQuantity(), -1, SmellType.FOOD);
+            }
+            else{
+                this.smellSource = new SmellSource(System.currentTimeMillis(), ((FoodSource) this).getFoodQuantity(), -1, SmellType.CORPSE);
+            }
         }
     }
 
@@ -86,5 +92,7 @@ public class WildObject {
     }
 
 
-
+    public SmellSource getSmellSource() {
+        return smellSource;
+    }
 }

@@ -1,5 +1,7 @@
 package ModelPkg;
 
+import ModelPkg.WildObjects.WildObject;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
@@ -19,13 +21,25 @@ public class MapData {
 
     public static void updateSmells(){
         Case selectedCase;
+        //Wipes temporary smells
         for (int i=0;i<map.length;i++){
             for (int j=0; j<map[i].length;j++){
                 selectedCase=map[i][j];
                 selectedCase.getSortedSmellArrayList().clear();
             }
         }
-        //TODO add SmellSources to appropriate Cases
+        //Adds smell sources
+        for (int i=0;i<map.length;i++){
+            for (int j=0; j<map[i].length;j++){
+                selectedCase=map[i][j];
+                if (selectedCase.getOccupant()!=null){
+                    selectedCase.getSmellSourceArrayList().add(selectedCase.getOccupant().getSmell());
+                }
+                if(selectedCase.getWildObject()!=null){
+                    selectedCase.getSmellSourceArrayList().add(selectedCase.getWildObject().getSmellSource());
+                }
+            }
+        }
         ArrayList<Case> casesWithSmellSources=getCasesWithSmellSources();
         if (casesWithSmellSources!=null){
             for (int i=0;i<casesWithSmellSources.size();i++){

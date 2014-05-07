@@ -10,8 +10,9 @@ public class SmellSource extends Smell{
     }
 
     public void fade() {
-        System.out.println("fade");
         super.setIntensity(super.getIntensity()-10);
+
+        System.out.println("fade");
         System.out.println(super.getIntensity());
     }
 

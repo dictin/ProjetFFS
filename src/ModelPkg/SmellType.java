@@ -10,5 +10,6 @@ public enum SmellType{
     ANIMAL,
     ALLY,
     ITEM,
+    CORPSE,
     NOTHING;
 }
