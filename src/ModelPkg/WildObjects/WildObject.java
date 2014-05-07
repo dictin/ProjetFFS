@@ -1,4 +1,7 @@
-package ModelPkg;
+package ModelPkg.WildObjects;
+
+import ModelPkg.SmellSource;
+import ModelPkg.SmellType;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -9,6 +12,7 @@ public class WildObject {
 
     private boolean traversable;
     private int type = 0;
+    private SmellSource smellSource;
 
     public static final int ROCK_ID = 1;
     public static final int TREE_ID = 2;
@@ -25,7 +29,7 @@ public class WildObject {
      * 3: Water - Swim
      * 4: Hole  - Fly
      * 5: Hive  - Impassable
-     * 6: Corpse
+     * 6:
      * 7: Food
      * 8: item
      * 0: Nothing
@@ -40,7 +44,18 @@ public class WildObject {
         this.initializeImages();
         this.type = type;
         this.traversable = traversable;
-
+        if (this.type==HIVE_ID) {
+            this.smellSource = new SmellSource(System.currentTimeMillis(), 100,-1, SmellType.HIVE);
+        }
+        else if(this.type==ITEM_ID){
+            this.smellSource = new SmellSource(System.currentTimeMillis(), 50,-1,SmellType.ITEM);
+        }
+        else if(this.type==ITEM_ID){
+            this.smellSource = new SmellSource(System.currentTimeMillis(), 50,-1,SmellType.ITEM);
+        }
+        else if (this.type==FOOD_ID||this.type==CORPSE_ID){
+            this.smellSource=new SmellSource(System.currentTimeMillis(), ((FoodSource)this).
+        }
     }
 
     private void initializeImages(){
