@@ -1,18 +1,21 @@
 package ViewPkg;
 
 import ControllerPkg.MasterController;
+import ControllerPkg.PlayerDataController;
 import ModelPkg.MapData;
 import ModelPkg.QuestionChaman;
+import ObserverPkg.Observer;
 import ViewPkg.Menus.*;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class MasterUI extends JPanel{
+public class MasterUI extends JPanel implements Observer{
 
 
     private int gridEndPointX;
-    private MasterController controller;
+    private MasterController masterController;
+    private PlayerDataController playerDataController;
     private GotoMenuButton quitIcon;
 
     private MenuTriggerZone menuTriggerZone;
@@ -33,27 +36,24 @@ public class MasterUI extends JPanel{
     private int mouvement = 0;
     private int duration = 0;
 
-    JLabel labelPopulation = new JLabel("Population: 999");
-    JLabel labelFood = new JLabel("Nourriture: 9999");
-    JLabel labelDeaths = new JLabel("Victimes: 999");
-    JLabel labelLevel = new JLabel("Niveau: 99");
-    JLabel labelScore = new JLabel("Score: 99999");
+    JLabel labelPopulation = new JLabel("Population: 0");
+    JLabel labelFood = new JLabel("Nourriture: 300");
+    JLabel labelDeaths = new JLabel("Victimes: 0");
+    JLabel labelLevel = new JLabel("Niveau: 1");
+    JLabel labelScore = new JLabel("Score: 0");
     JLabel background = new JLabel();
 
-    //TODO déplacer dans le modèle
-    private int food=300;
 
-    private int getGridEndPointX;
-
-    public MasterUI(final MasterController controller){
-        this.controller=controller;
-
-        mainMenu= new MainMenu(controller);
-        shopMenu=new ShopMenu(controller);
-        creationMenu = new CreationMenu(controller);
+    public MasterUI(final MasterController masterController){
+        this.masterController = masterController;
 
 
-        inventoryMenu= new InventoryMenu(controller);
+        mainMenu= new MainMenu(masterController);
+        shopMenu=new ShopMenu(masterController);
+        creationMenu = new CreationMenu(masterController);
+
+
+        inventoryMenu= new InventoryMenu(masterController);
         this.setSize(MasterFrame.GAME_FRAME_SIZE);
         this.setBackground(new Color(Integer.parseInt("314159", 16)));
 
@@ -61,7 +61,7 @@ public class MasterUI extends JPanel{
         this.setLayout(null);
 
         // Pour enlever les questions du chaman, mettre en commentaire ci-dessous
-        creationQuestion();
+        //this.creationQuestion();
 
         int xGridSize=30;
         int tailleYGrille=30;
@@ -70,11 +70,11 @@ public class MasterUI extends JPanel{
 
         for (int i=0; i<xGridSize; i++){
             for (int j=0; j<tailleYGrille; j++){
-                visualCasesGrid[i][j]=new VisualCase(i, j, visualCasesGridOrigin, controller);
+                visualCasesGrid[i][j]=new VisualCase(i, j, visualCasesGridOrigin, masterController);
                 this.add(visualCasesGrid[i][j]);
             }
         }
-        quitIcon = new GotoMenuButton(controller, "quit_button", new Dimension(25,25), new Color(Integer.parseInt("314159",16)));
+        quitIcon = new GotoMenuButton(masterController, "quit_button", new Dimension(25,25), new Color(Integer.parseInt("314159",16)));
         this.add(quitIcon);
         quitIcon.setLocation(this.getWidth()-quitIcon.getWidth(), 0);
 
@@ -87,8 +87,8 @@ public class MasterUI extends JPanel{
 
 
 
-        menuTriggerZone =new MenuTriggerZone(controller);
-//        gridTriggerZone= new GridTriggerZone(controller, xGridSize);
+        menuTriggerZone =new MenuTriggerZone(masterController);
+//        gridTriggerZone= new GridTriggerZone(masterController, xGridSize);
 
 
         this.add(menuTriggerZone);
@@ -147,12 +147,6 @@ public class MasterUI extends JPanel{
 
     }
 
-
-
-    public void setFood(int newFoodValue){
-        this.food=newFoodValue;
-    }
-
     public void popMenu(String menuName){
         if (menuName.equals("main_menu")){
             selectedMenu=mainMenu;
@@ -208,8 +202,8 @@ public class MasterUI extends JPanel{
 
     public void creationQuestion(){
         System.out.println("New question");
-        actualQuestion = controller.getChamanController().getQuestion();
-        questionLabel = new Chaman(controller, actualQuestion);
+        actualQuestion = masterController.getChamanController().getQuestion();
+        questionLabel = new Chaman(masterController, actualQuestion);
         questionLabel.setVisible(true);
         questionLabel.setLocation(75, 163);
         this.add(questionLabel);
@@ -255,9 +249,9 @@ public class MasterUI extends JPanel{
             System.out.println("Temps de changer les news");
             tvaNews.setText(MapData.getNewsList().remove(0));
         }*/
-        if(actualQuestion.getQuestionTaTuBienRepondu()==1){
+        if(actualQuestion != null && actualQuestion.getQuestionTaTuBienRepondu()==1){
             System.out.println("Trouvé!");
-            actualQuestion = controller.getChamanController().getQuestion();
+            actualQuestion = masterController.getChamanController().getQuestion();
             questionLabel.setVisible(false);
             questionLabel.setText("Stéphane est un dieu");
             creationQuestion();
@@ -265,5 +259,18 @@ public class MasterUI extends JPanel{
             questionLabel.repaint();
             }
         numberOfNews = MapData.getNewsList().size();
+    }
+
+    private void updateNumericInfos(){
+        this.labelScore.setText("Score: "+this.playerDataController.getScore());
+        this.labelFood.setText("Nourriture: "+this.playerDataController.getFood());
+        this.labelLevel.setText("Niveau: "+this.playerDataController.getLevel());
+        this.labelPopulation.setText("Population: "+this.playerDataController.getPopulation());
+        this.labelDeaths.setText("Victimes: "+this.playerDataController.getDead());
+    }
+
+    @Override
+    public void update() {
+        this.updateNumericInfos();
     }
 }

@@ -80,6 +80,7 @@ public enum Items {
     private int itemID;
     private String name;
     private ItemEffect effect;
+    private int winnings = 0;
 
     private Items(int itemID, String name, ItemEffect effect){
         this.itemID =itemID;
@@ -100,11 +101,15 @@ public enum Items {
             TempItemInstance instance = ((BoostEffect) effect).getTempInstance();
             //Ajouter l'instance temporaire au arraylist du joueur
         }else if (effect instanceof LotteryEffects){
-            effect.activate();
+            this.winnings = ((LotteryEffects) effect).activateLottery();
         }
     }
 
     public String getName() {
         return this.name;
+    }
+
+    public int getWinnings() {
+        return winnings;
     }
 }

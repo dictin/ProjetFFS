@@ -2,6 +2,7 @@ package ModelPkg;
 
 import ModelPkg.PkgItems.BoostEffect;
 import ModelPkg.PkgItems.Items;
+import ModelPkg.PkgItems.LotteryEffects;
 import ModelPkg.PkgItems.TempItemInstance;
 import ObserverPkg.Observable;
 import ObserverPkg.Observer;
@@ -10,9 +11,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class PlayerData implements Observable {
-    private static int food = 300;
+    private int food = 300;
     private int score = 0;
-    private int niveau = 1;
+    private int level = 1;
     private int population = 0;
     private int dead = 0;
     private ArrayList<TempItemInstance> passiveInstances = new ArrayList<TempItemInstance>(); //Contient les effects des items innactifs de l'inventaire du joueur
@@ -75,20 +76,9 @@ public class PlayerData implements Observable {
         }
     }
 
-    public int getFood() {
-        return food;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public int getPopulation() {
-        return population;
-    }
-
-    public static void addFood(int food) {
-        PlayerData.food += food;
+    public void addFood(int food) {
+        this.food += food;
+        this.updateObservers();
     }
 
     public void removeFood(int food){
@@ -96,19 +86,23 @@ public class PlayerData implements Observable {
         if (this.food < 0){
             this.food =0;
         }
+        this.updateObservers();
     }
 
     public void setScore(int score) {
-        this.score = (this.food * this.niveau) - (2*this.dead);
+        this.score = (this.food * this.level) - (2*this.dead);
+        this.updateObservers();
     }
 
     public void newBorn(){
         this.population++;
+        this.updateObservers();
     }
 
     public void death(){
         this.population--;
         this.dead++;
+        this.updateObservers();
     }
 
 
@@ -130,6 +124,7 @@ public class PlayerData implements Observable {
         TempItemInstance itemInstance;
 
         if (item.getEffect() instanceof BoostEffect){
+            item.firstActivation();
             itemInstance = (((BoostEffect) item.getEffect()).getTempInstance());
             this.addPassiveItem(itemInstance);
 
@@ -138,6 +133,8 @@ public class PlayerData implements Observable {
             }else{
                 this.consumablesInventory.add(item.getName());
             }
+        }else if (item.getEffect() instanceof LotteryEffects){
+            this.addFood(item.getWinnings());
         }
 
         this.updateObservers();
@@ -150,6 +147,26 @@ public class PlayerData implements Observable {
 
     public ArrayList<String> getPermanentInventory() {
         return permanentInventory;
+    }
+
+    public int getFood() {
+        return food;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getPopulation() {
+        return population;
+    }
+
+    public int getDead() {
+        return dead;
     }
 
     @Override

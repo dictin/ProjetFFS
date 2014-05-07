@@ -87,10 +87,12 @@ public enum BoostEffect implements ItemEffect {
         this.duration = duration;
     }
 
+    @Override
     public void activate(){
         PlayerData.addMod(this.statID, this.boostValue);
 
     }
+
 
     public TempItemInstance getTempInstance(){
         return new TempItemInstance(this);

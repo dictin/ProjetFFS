@@ -1,11 +1,8 @@
 package ModelPkg.PkgItems;
 
-import ModelPkg.PlayerData;
-
 import java.util.Random;
 
-
-public enum LotteryEffects implements ItemEffect {
+public enum LotteryEffects implements LotteryItemEffect {
 
     LOW_VALUE_TICKET(90, 50),
     MED_VALUE_TICKET(60, 100),
@@ -14,6 +11,7 @@ public enum LotteryEffects implements ItemEffect {
 
     private int probability;
     private int value;
+    private int winnings;
 
     private LotteryEffects(int probability, int value){
         this .probability = probability;
@@ -21,6 +19,11 @@ public enum LotteryEffects implements ItemEffect {
     }
 
     public void activate(){
+
+    }
+
+    @Override
+    public int activateLottery() {
         Random random = new Random();
         int rndNbr = random.nextInt(100) +  1;
         int winnings;
@@ -31,6 +34,7 @@ public enum LotteryEffects implements ItemEffect {
             winnings = 0;
         }
 
-        PlayerData.addFood(winnings);
+        return winnings;
     }
+
 }

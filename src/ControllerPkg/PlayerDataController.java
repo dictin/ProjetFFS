@@ -60,6 +60,26 @@ public class PlayerDataController {
         this.playerData.addFood(value);
     }
 
+    public int getFood(){
+        return this.playerData.getFood();
+    }
+
+    public int getLevel(){
+        return this.playerData.getLevel();
+    }
+
+    public int getScore(){
+        return this.playerData.getScore();
+    }
+
+    public int getPopulation(){
+        return this.playerData.getPopulation();
+    }
+
+    public int getDead(){
+        return this.playerData.getDead();
+    }
+
 
 
 
