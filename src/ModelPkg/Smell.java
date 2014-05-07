@@ -1,12 +1,14 @@
 package ModelPkg;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.awt.*;
 
-public class Smell {
-
-    public static final int MAX_VALUE = 100;
+/**
+ * Created by Xav on 27/04/14.
+ */
+public class Smell implements Cloneable {
+    private int iD;
     private int intensity;
+<<<<<<< HEAD
     private ArrayList<SmellID> contributors = new ArrayList<SmellID>();
     private int type;
     public static final int FOOD_ODOR = 1;
@@ -22,83 +24,49 @@ public class Smell {
 
      */
 
+=======
+    private int team;
+    private SmellType2 type;
+>>>>>>> origin/SmellSystem2
 
-    public Smell(int intensity, long sourceID, int type){
-        this.contributors.add(new SmellID(sourceID,intensity));
-        this.type = type;
+    public int getID() {
+        return iD;
     }
 
-    public void diminish(){
-        Iterator<SmellID> iterator = this.contributors.iterator();
-        while (iterator.hasNext()){
-            iterator.next().diminish();
+    public enum SmellType2{
+        food, animal, foe, item;
+    }
+
+    public void setIntensity(int intensity) {
+        this.intensity = intensity;
+    }
+
+    //TODO remplacer le String ID par un int
+    public Smell(int animalID, int intensity, int team, SmellType2 type){
+        this.iD =animalID;
+        this.intensity=intensity;
+        this.team=team;
+        this.type=type;
+        this.team=team;
+        this.type=type;
+    }
+
+    public void dissipateIntensity(int percentageMultiplier){
+        this.intensity=intensity*percentageMultiplier/100;
+    }
+
+    public int getIntensity(){
+        return this.intensity;
+    }
+
+    @Override
+    public Smell clone() {
+        try {
+            return (Smell)super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+            System.out.println("Clone not supported. Error.");
+            return null;
         }
-    }
-
-    public void increase(SmellID smellID){
-        Iterator<SmellID> iterator = this.contributors.iterator();
-        if (this.oldOrigin(smellID.getiD())){
-            while(iterator.hasNext()){
-                SmellID instSmell = iterator.next();
-                if (instSmell.getiD()== smellID.getiD()){
-                    instSmell.setIntensity(smellID.getIntensity());
-
-                }
-            }
-
-        }else{
-            this.contributors.add(smellID);
-        }
-    }
-
-    public void clearOldSmell(){
-        Iterator<SmellID> iterator = this.contributors.iterator();
-        while(iterator.hasNext()){
-            SmellID instSmell = iterator.next();
-            if (instSmell.getIntensity() == 0){
-                this.contributors.remove(instSmell);   //TODO  UNSTABLE: Check for concurrent exception
-            }
-        }
-    }
-
-    public boolean oldOrigin(long iD){
-        boolean returnValue = false;
-        Iterator<SmellID> iterator = this.contributors.iterator();
-
-        while(iterator.hasNext()){
-            if (iterator.next().getiD() == iD){
-                returnValue = true;
-            }
-        }
-
-        return returnValue;
-
-    }
-
-    public int totalSmell(){
-        int total = 0;
-        Iterator<SmellID> iterator = this.contributors.iterator();
-
-        while(iterator.hasNext()){
-            total+=iterator.next().getIntensity();
-        }
-
-        if (total > 100){
-            total = 100;
-        }
-
-        return total;
-
-    }
-
-
-
-    public int getIntensity() {
-        return intensity;
-    }
-
-
-    public int getType() {
-        return type;
     }
 }

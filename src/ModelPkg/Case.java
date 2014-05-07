@@ -11,11 +11,20 @@ import java.util.Iterator;
 
 public class Case implements Observable {
 
+    public Point getPosition() {
+        return position;
+    }
+
     private Point position;
     private Animal occupant;
     private WildObject terrain;
     private ArrayList<Smell> smellArrayList = new ArrayList<Smell>();
-    private ArrayList<Smell> sortedSmellArrayList = new ArrayList<Smell>();
+
+    public ArrayList<SmellSource> getSmellSourceArrayList() {
+        return smellSourceArrayList;
+    }
+
+    private ArrayList<SmellSource> smellSourceArrayList = new ArrayList<SmellSource>();
 
     private ArrayList<Observer> observers = new ArrayList<Observer>();
 
@@ -48,62 +57,9 @@ public class Case implements Observable {
         return answer;
     }
 
-    public void addSmell(Smell smell){
-        this.smellArrayList.add(smell);
-        this.optimizeSmellArray();
+    public void addSmellSource(SmellSource smell){
+        this.smellSourceArrayList.add(smell);
     }
-
-    private void optimizeSmellArray() {
-        int maxSmellType = 0;
-        int maxSmellStrength = 0;
-        Iterator<Smell> iterator = this.smellArrayList.iterator();
-        ArrayList<Smell> toRemove = new ArrayList<Smell>();
-
-        this.sortedSmellArrayList.clear();
-
-        while(iterator.hasNext()){
-            Smell activeSmell = iterator.next();
-            if (activeSmell.getIntensity() > maxSmellStrength){
-                maxSmellType = activeSmell.getType();
-                maxSmellStrength = activeSmell.getIntensity();
-            }
-
-        }
-
-        iterator = this.smellArrayList.iterator(); //On reset l'iterator
-
-        while(iterator.hasNext()){
-            Smell activeSmell = iterator.next();
-            if (activeSmell.getIntensity() != 0){
-                if (activeSmell.getType() == maxSmellType){
-                    this.sortedSmellArrayList.add(activeSmell);
-                }
-            }
-            else{
-                toRemove.add(activeSmell);
-            }
-
-        }
-
-        this.smellArrayList.removeAll(toRemove);
-
-    }
-
-    public void dilluteSmell(){
-        ArrayList<Smell> dilutedSmells = new ArrayList<Smell>();
-        Smell tempSmell = null;
-        for(int i = 0; i < this.smellArrayList.size(); i++){
-            tempSmell = this.smellArrayList.get(i);
-            tempSmell.diminish();
-            dilutedSmells.add(tempSmell);
-
-        }
-
-        this.smellArrayList.clear();
-        this.smellArrayList.addAll(dilutedSmells);
-        this.optimizeSmellArray();
-    }
-
 
     public Animal getOccupant() {
         return occupant;
@@ -111,10 +67,6 @@ public class Case implements Observable {
 
     public WildObject getWildObject(){
         return this.terrain;
-    }
-
-    public ArrayList<Smell> getSortedSmellArrayList() {
-        return sortedSmellArrayList;
     }
 
     public void setOccupant(Animal occupant) {
@@ -131,6 +83,30 @@ public class Case implements Observable {
     public void updateObservers() {
         for(int i = 0; i< observers.size(); i++){
             this.observers.get(i).update();
+        }
+    }
+
+    public ArrayList<Smell> getSmellArrayList() {
+        return smellArrayList;
+    }
+
+    public void eraseInferiorSmellOfSameID(Smell smell) {
+        Boolean inferiorSmellNotFound=true;
+        for (int i=0; i<smellArrayList.size()&&inferiorSmellNotFound;i++){
+            Smell comparedSmell=smellArrayList.get(i);
+            if (comparedSmell.getID()==smell.getID()){
+                smellArrayList.remove(comparedSmell);
+                inferiorSmellNotFound=false;
+            }
+        }
+        if (inferiorSmellNotFound){
+            System.out.println("Something went horribly wrong here...");
+        }
+    }
+
+    public void fadeSourceSmells() {
+        for(SmellSource smellSource: smellSourceArrayList){
+            smellSource.fade();
         }
     }
 }
