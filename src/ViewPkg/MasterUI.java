@@ -46,7 +46,9 @@ public class MasterUI extends JPanel implements Observer{
 
     public MasterUI(final MasterController masterController){
         this.masterController = masterController;
+        this.playerDataController = this.masterController.getPlayerDataController();
 
+        this.playerDataController.addObserver(this);
 
         mainMenu= new MainMenu(masterController);
         shopMenu=new ShopMenu(masterController);

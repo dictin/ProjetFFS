@@ -30,6 +30,7 @@ public class CreationController implements ActionListener {
             Fourmillier spawnedFourmilier=new Fourmillier(0, new int[]{13,13,13}, animalType, spawnPoint, Smell.ALLY_ODOR);
             MapData.getAnimalList().add(spawnedFourmilier);
             MapData.getCase(spawnPoint).setOccupant(spawnedFourmilier);
+            this.masterController.getPlayerDataController().newBorn();
 
              MapData.addNewsList(spawnedFourmilier.getName()+ " est né!!");
 

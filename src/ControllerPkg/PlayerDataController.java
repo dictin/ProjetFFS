@@ -80,6 +80,10 @@ public class PlayerDataController {
         return this.playerData.getDead();
     }
 
+    public void newBorn(){
+        this.playerData.newBorn();
+    }
+
 
 
 
