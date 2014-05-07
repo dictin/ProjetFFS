@@ -7,6 +7,7 @@ import java.util.Random;
 
 public abstract class Animal {
 
+    private MasterController masterController;
     private final int MAX_HEALTH = 100;
     private long animalID;
     private Point objective = null;
@@ -51,8 +52,9 @@ public abstract class Animal {
     private ActionTypes actionToCommit = null;
 
 
-    public Animal(int team, int[] meanStats, String species, Point startingPosition, long animalID, SmellType smellType){
+    public Animal(int team, int[] meanStats, String species, Point startingPosition, long animalID, SmellType smellType,final MasterController masterController){
     //Création du nom de l'animal
+        this.masterController = masterController;
         this.birthday= MasterController.getTime();
         Random random = new Random();
         int noName = random.nextInt(20);
@@ -160,7 +162,8 @@ public abstract class Animal {
             this.isDead();
             MasterController.disposeAnimal(this);
             System.out.println("I am dead.");
-            MapData.addNewsList(this.getName()+ " est malheureusement décédé!!");
+            MapData.addNewsList(this.getName() + " est malheureusement décédé!!");
+            masterController.victimes();
         }
     }
 

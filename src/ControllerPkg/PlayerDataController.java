@@ -85,6 +85,10 @@ public class PlayerDataController {
         this.playerData.newBorn();
     }
 
+    public void newVictime()
+    {
+        this.playerData.death();
+    }
 
 
 

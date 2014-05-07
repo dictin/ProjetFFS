@@ -139,7 +139,7 @@ public class MasterUI extends JPanel implements Observer{
 
         System.out.println("TVA nouvelle, premier sur la nouvelle");
         tvaNews.setText(MapData.getNewsList().remove(0));
-        tvaNews.setSize(495, 20);
+        tvaNews.setSize(600, 20);
         tvaNews.setLocation(25, positionActualTvaNews);
         tvaNews.setOpaque(true);
         tvaNews.setBackground(Color.BLACK);

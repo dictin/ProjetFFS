@@ -34,13 +34,20 @@ public class MasterController extends Thread{
         this.sleepTime=1000/FPS;
         mF=new MasterFrame(this);
         this.start();
+
     }
 
     public static void disposeAnimal(Animal deadAnimal){
         deadAnimal.getOccupiedCase().setOccupant(null);
         MapController.getAnimalList().remove(MapController.getAnimalList().indexOf(deadAnimal));
         animalListIndex--;
+
+
     }
+    public void victimes(){
+        this.playerDataController.newVictime();
+    }
+
 
     public static int getUniqueID() {
         uniqueID++;
