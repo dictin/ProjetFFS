@@ -15,8 +15,15 @@ public class Behavior {
 
     public static Point drunk(){
         Random random = new Random();
-        int rndobjectifX = random.nextInt(Behavior.SUBSECTION_SIZE);
-        int rndobjectifY = random.nextInt(Behavior.SUBSECTION_SIZE);
+
+        int rndobjectifX = 0;
+        int rndobjectifY = 0;
+
+        while(rndobjectifX == 0 && rndobjectifY == 0){
+            rndobjectifX = random.nextInt(Behavior.SUBSECTION_SIZE);
+            rndobjectifY = random.nextInt(Behavior.SUBSECTION_SIZE);
+        }
+
         objectif = new Point(rndobjectifX,rndobjectifY);
         return objectif;
     }
