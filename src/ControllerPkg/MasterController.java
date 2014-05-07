@@ -1,8 +1,6 @@
 package ControllerPkg;
 
-import ModelPkg.Animal;
-import ModelPkg.Name;
-import ModelPkg.QuestionData;
+import ModelPkg.*;
 import ViewPkg.MasterFrame;
 import ViewPkg.MasterUI;
 
@@ -26,6 +24,8 @@ public class MasterController extends Thread{
     private MasterUI mUI=null;
     private int sleepTime;
     private static int time =0;
+    private int smellDecayTime=60;
+    private static int uniqueID=0;
 
 
     public MasterController(int FPS){
@@ -42,6 +42,11 @@ public class MasterController extends Thread{
         animalListIndex--;
     }
 
+    public static int getUniqueID() {
+        uniqueID++;
+        return uniqueID;
+    }
+
     @Override
     public void run(){
         while (true){
@@ -49,6 +54,21 @@ public class MasterController extends Thread{
 
                 this.sleep(sleepTime);
                 this.time++;
+
+                //TODO remove this test
+                /*
+                if (time==200){
+                    MapData.getCase(new Point(0,0)).getSmellSourceArrayList().add(new SmellSource(0,100,1, Smell.SmellType2.animal));
+                }
+                if (time==250){
+                MapData.getCase(new Point(5,0)).getSmellSourceArrayList().add(new SmellSource(0,75,1, Smell.SmellType2.animal));
+                }
+                */
+
+
+                if (time!=0&&time%smellDecayTime==0){
+                MapData.updateSmells();
+                }
 
                 ArrayList<Animal> animalList=getMapController().getAnimalList();
                 if (!animalList.isEmpty()){

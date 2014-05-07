@@ -8,6 +8,7 @@ import java.util.Random;
 public abstract class Animal {
 
     private final int MAX_HEALTH = 100;
+    private long animalID;
     private Point objective = null;
     private int activationFrequency;
     private int birthday;
@@ -19,8 +20,8 @@ public abstract class Animal {
     //NameGen = génération du nom ex: Eustache IIème du nom
     private int nameGen;
     private int health;
-    private int smellID;
     private int moral;
+    private SmellSource smell;
     private String species;
 
 
@@ -32,7 +33,9 @@ public abstract class Animal {
     private int defence;
 
     private int smellSensitivity;
-    private int smellStrength;
+    private int smellThreshold;
+    private int smellStrengthStat;
+    private int smellIntensity;
 
     private int grabQuantity;
     private int carriedFood = 0;
@@ -48,19 +51,23 @@ public abstract class Animal {
     private ActionTypes actionToCommit = null;
 
 
-    public Animal(int team, int[] meanStats, String species, Point startingPosition, int smellID){
+    public Animal(int team, int[] meanStats, String species, Point startingPosition, long animalID, SmellType smellType){
     //Création du nom de l'animal
         this.birthday= MasterController.getTime();
         Random random = new Random();
         int noName = random.nextInt(20);
         this.name = Name.getName(noName);
         this.nameGen = Name.getGen(noName);
+        this.animalID = animalID;
 
         this.name +=" le "+this.nameGen;
         System.out.println(this.name);
 
+
         this.team = team;
         this.meanStats=meanStats;
+        this.species=species;
+
         this.mainStats=rollStats();
 
         this.position=startingPosition;
@@ -72,12 +79,16 @@ public abstract class Animal {
         this.attack=mainStats[1];
         this.defence=25-mainStats[1];
         this.smellSensitivity=mainStats[2];
-        this.smellStrength=25-mainStats[2];
+        this.smellStrengthStat =25-mainStats[2];
         this.grabQuantity=mainStats[3];
         this.equipQuantity=25-mainStats[3];
         this.moral = 25; //TODO determiner comment evaluer le moral;
-        this.smellID = smellID;
+        //TODO balance this and add a smell
+        this.smellIntensity=this.getSmellStrengthStat()*8;
+        this.smellThreshold=this.getSmellStrengthStat();
+        //this.smell=new SmellSource(MasterController.getUniqueID(),);
 
+        this.smell = new SmellSource(animalID, this.smellIntensity, this.team, smellType);
 
         System.out.println("stats:");
         System.out.println("speed: "+speed);
@@ -134,46 +145,6 @@ public abstract class Animal {
     public  void smellSurroundings(){
 
     }
-    public void setAction(Case [][] table){
-        //TODO Déterminer le comportement de l'animal
-        //Doit déterminé si l'animal veut soit trouver de la nourriture, soit un ennemi, soit la base ect.
-        //Pour le moment, l'action par défault est 1:Chercher de la nourriture
-
-    }
-    public int getAction(){
-        return(action);
-    }
-
-    public void setMouvement(){
-        Point direction;
-        boolean doItAgain = false;
-        //Si Behavior est appelé et qu'il retourne 0,0, alors on rappel Behavior avec la méthode Drunk pour qu'il retourne un mouvement aléatoire
-        do{
-            if(!doItAgain){
-            direction = Behavior.search(MapData.getSubsection(this.position),this.smellSensitivity,action);
-            doItAgain = !doItAgain;
-            }
-            else{
-             direction = Behavior.drunk();
-            }
-            }while(direction.getX() != 0 && direction.getY() != 0);
-    }
-
-    public void attack(Point location,Case [][] table){
-        //Vérification qu'il y a toujours un ennemi à côté de lui
-        for(int ligne = 0; ligne < 3; ligne++){
-            for(int colonne = 0; colonne < 3 ; colonne++){
-                //Si la senteur de la case est un ennemi et que l'odeur est à 100, cela signifie qu'il y a un ennemi à côté de lui
-                if(table[ligne][colonne].getSortedSmellArrayList().get(0).getType() ==2 && table[ligne][colonne].getSortedSmellArrayList().get(0).getIntensity() ==100);
-            }
-        }
-
-        Animal animal = MapData.getCase(location).getOccupant();
-        int damageAmount = (int)Math.ceil(this.attack/animal.getDefence());               //TODO Balancing of this algorithm
-        animal.decreaseHealth(damageAmount);
-
-
-    }
 
     public void grab(Point location){
 
@@ -220,8 +191,8 @@ public abstract class Animal {
         return smellSensitivity;
     }
 
-    public int getSmellStrength() {
-        return smellStrength;
+    public int getSmellStrengthStat() {
+        return smellStrengthStat;
     }
 
     public int getDefence() {
@@ -236,9 +207,7 @@ public abstract class Animal {
         return grabQuantity;
     }
 
-    public int getSmellID() {
-        return smellID;
-    }
+
 
     public Image getSprite() {
         return sprite;
@@ -310,5 +279,9 @@ public abstract class Animal {
 
     public Case getOccupiedCase() {
         return occupiedCase;
+    }
+
+    public SmellSource getSmell() {
+        return smell;
     }
 }
