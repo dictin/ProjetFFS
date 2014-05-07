@@ -19,7 +19,7 @@ public class PlayerDataController {
     }
 
     public void spendFood(int price){
-
+        this.playerData.removeFood(price);
     }
 
     public ArrayList<String> getConsumablesInventory() {
@@ -81,6 +81,7 @@ public class PlayerDataController {
     }
 
     public void newBorn(){
+        System.out.println("NewBorn");
         this.playerData.newBorn();
     }
 

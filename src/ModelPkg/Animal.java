@@ -160,6 +160,7 @@ public abstract class Animal {
             this.isDead();
             MasterController.disposeAnimal(this);
             System.out.println("I am dead.");
+            MapData.addNewsList(this.getName()+ " est malheureusement décédé!!");
         }
     }
 

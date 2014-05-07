@@ -35,6 +35,7 @@ public class MasterUI extends JPanel implements Observer{
     private int numberOfNews = 0;
     private int mouvement = 0;
     private int duration = 0;
+    private boolean alreadyInMovement = false;
 
     JLabel labelPopulation = new JLabel("Population: 0");
     JLabel labelFood = new JLabel("Nourriture: 300");
@@ -136,7 +137,7 @@ public class MasterUI extends JPanel implements Observer{
         background.setLocation(655,580);
         this.add(background);
 
-
+        System.out.println("TVA nouvelle, premier sur la nouvelle");
         tvaNews.setText(MapData.getNewsList().remove(0));
         tvaNews.setSize(495, 20);
         tvaNews.setLocation(25, positionActualTvaNews);
@@ -217,8 +218,10 @@ public class MasterUI extends JPanel implements Observer{
             selectedMenu.actualiser();
         }
 
-        if(MapData.getNewsList().size()>numberOfNews){
+        if(MapData.getNewsList().size()>numberOfNews && !alreadyInMovement){
+            System.out.println("new newssss");
             mouvement = 1;
+            alreadyInMovement = true;
         }
         if(mouvement ==1){
             tvaNews.setLocation(25,positionActualTvaNews--);
@@ -234,17 +237,22 @@ public class MasterUI extends JPanel implements Observer{
             tvaNews.setLocation(25,positionActualTvaNews++);
 
             if(positionActualTvaNews == positionMaxTvaNews){
-                System.out.println("Time to stop min atteint");
                 mouvement = 0;
 
                 System.out.println("longeur : "+MapData.getNewsList().size());
                 if(MapData.getNewsList().size()>=1){
-                    tvaNews.setText(MapData.getNewsList().get(0));
-                    System.out.println("moving up");
+                    System.out.println("Still goat news");
+                    System.out.println(MapData.getNewsList().get(0));
                     mouvement =1;
-                    MapData.getNewsList().remove(0);
+                    tvaNews.setText(MapData.getNewsList().remove(0));
 
                 }
+                else if(MapData.getNewsList().size() ==0){
+                    alreadyInMovement = false;
+                    System.out.println("Is it empty?: "+ MapData.getNewsList().isEmpty());
+                    tvaNews.setText("Nouvelle de dernière heure!");
+                }
+
             }
         }
         /*if(MasterController.getTime() % 120 == 0 && !MapData.getNewsList().isEmpty()){

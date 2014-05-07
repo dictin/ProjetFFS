@@ -22,9 +22,10 @@ public class CreationController implements ActionListener {
 
         String animalType;
         JButton source = (JButton) e.getSource();
-
         Point spawn = MapData.getSpawnPoint();
+
         if (spawn != null){
+            if(this.masterController.getPlayerDataController().getFood()>=100){
             animalType = CreationHashTable.getAssociatedValue(source);
             Point spawnPoint=MapData.getSpawnPoint();
             long uniqueID = System.currentTimeMillis();
@@ -32,9 +33,13 @@ public class CreationController implements ActionListener {
             MapData.getAnimalList().add(spawnedFourmilier);
             MapData.getCase(spawnPoint).setOccupant(spawnedFourmilier);
             this.masterController.getPlayerDataController().newBorn();
-
+            this.masterController.getPlayerDataController().spendFood(100);
              MapData.addNewsList(spawnedFourmilier.getName()+ " est né!!");
 
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Nourriture insuffisante");
+            }
         }
 
 
