@@ -22,8 +22,7 @@ public class MapData {
         for (int i=0;i<map.length;i++){
             for (int j=0; j<map[i].length;j++){
                 selectedCase=map[i][j];
-                selectedCase.getSmellArrayList().clear();
-                selectedCase.getOccupant().getSmell();
+                selectedCase.getSortedSmellArrayList().clear();
             }
         }
         //TODO add SmellSources to appropriate Cases
@@ -52,16 +51,16 @@ public class MapData {
 
     public static void disperseSmellSources(Case selectedCase){
         for (int i=0;i<selectedCase.getSmellSourceArrayList().size();i++){
-            Smell smell=(Smell)selectedCase.getSmellSourceArrayList().get(i);
-            selectedCase.getSmellArrayList().add(smell);
+            Smell smell=selectedCase.getSmellSourceArrayList().get(i);
+            selectedCase.getSortedSmellArrayList().add(smell);
             disperseSmell(selectedCase, smell);
         }
     }
 
     public static int getSmellThreshold(Smell smell, Case selectedCase){
         int threshold=0;
-        if (!selectedCase.getSmellArrayList().isEmpty()){
-            for (Smell selectedSmell:selectedCase.getSmellArrayList()){
+        if (!selectedCase.getSortedSmellArrayList().isEmpty()){
+            for (Smell selectedSmell:selectedCase.getSortedSmellArrayList()){
                 if (selectedSmell.getID()==smell.getID()){
                     threshold=selectedSmell.getIntensity();
                 }
@@ -93,7 +92,7 @@ public class MapData {
                     if (smellThreshold!=0){
                     subsection[i+1][j+1].eraseInferiorSmellOfSameID(dissipatedSmell);
                     }
-                    subsection[i+1][j+1].getSmellArrayList().add(dissipatedSmell);
+                    subsection[i+1][j+1].getSortedSmellArrayList().add(dissipatedSmell);
                     disperseSmell(subsection[i+1][j+1], dissipatedSmell);
             }
         }
@@ -188,12 +187,8 @@ public class MapData {
             for (int j=0; j<3; j++){
                 try{
                 subsection[i][j]=map[origin.x+i-1][origin.y+j-1];
-                }
-<<<<<<< HEAD
-                catch(NullPointerException | ArrayIndexOutOfBoundsException exception){
-=======
-                catch(NullPointerException|ArrayIndexOutOfBoundsException npe){
->>>>>>> origin/SmellSystem2
+                }catch(NullPointerException | ArrayIndexOutOfBoundsException exception){
+
                     subsection[i][j]=null;
                 }
             }

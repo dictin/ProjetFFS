@@ -1,13 +1,11 @@
 package ModelPkg;
 
-import java.awt.*;
-
 /**
  * Created by Xav on 27/04/14.
  */
 public class SmellSource extends Smell{
 
-    public SmellSource(int animalID, int intensity, int team, Smell.SmellType2 type) {
+    public SmellSource(long animalID, int intensity, int team, SmellType type) {
         super(animalID, intensity, team, type);
     }
 

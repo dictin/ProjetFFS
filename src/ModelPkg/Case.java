@@ -7,7 +7,6 @@ import ObserverPkg.Observer;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Case implements Observable {
 
@@ -31,7 +30,7 @@ public class Case implements Observable {
 
     public Case(Point location, Animal occupant , WildObject terrain){
         this.position = location;
-        this.occupant = null;
+        this.occupant = occupant;
         this.terrain = terrain;
 
     }
@@ -86,8 +85,33 @@ public class Case implements Observable {
         }
     }
 
-    public ArrayList<Smell> getSmellArrayList() {
-        return smellArrayList;
+    public ArrayList<Smell> getSortedSmellArrayList() {
+        if (smellArrayList.isEmpty()){
+            ArrayList<Smell> emptySmellArrayList = new ArrayList<>();
+            emptySmellArrayList.add(new Smell(-1,0,-1, SmellType.NOTHING));
+            return emptySmellArrayList;
+
+
+        }else {
+            ArrayList<Smell> unsortedSmellArrayList = this.smellArrayList;
+            ArrayList<Smell> sortedSmellArrayList = new ArrayList<>();
+
+            while(!unsortedSmellArrayList.isEmpty()){
+                int strongestSmell = 0;
+                int strongestIndex = 0;
+                for(int i = 0; i < unsortedSmellArrayList.size(); i++){
+                    if (unsortedSmellArrayList.get(i).getIntensity()>= strongestSmell){
+                        strongestSmell = unsortedSmellArrayList.get(i).getIntensity();
+                        strongestIndex = i;
+                    }
+                }
+                sortedSmellArrayList.add(unsortedSmellArrayList.remove(strongestIndex));
+            }
+
+            return sortedSmellArrayList;
+
+        }
+
     }
 
     public void eraseInferiorSmellOfSameID(Smell smell) {
@@ -109,4 +133,7 @@ public class Case implements Observable {
             smellSource.fade();
         }
     }
+
+
+
 }

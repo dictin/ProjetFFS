@@ -8,6 +8,7 @@ import java.util.Random;
 public abstract class Animal {
 
     private final int MAX_HEALTH = 100;
+    private long animalID;
     private Point objective = null;
     private int activationFrequency;
     private int birthday;
@@ -19,12 +20,8 @@ public abstract class Animal {
     //NameGen = génération du nom ex: Eustache IIème du nom
     private int nameGen;
     private int health;
-<<<<<<< HEAD
-    private int smellID;
     private int moral;
-=======
     private SmellSource smell;
->>>>>>> origin/SmellSystem2
     private String species;
 
 
@@ -54,16 +51,18 @@ public abstract class Animal {
     private ActionTypes actionToCommit = null;
 
 
-    public Animal(int team, int[] meanStats, String species, Point startingPosition, int smellID){
+    public Animal(int team, int[] meanStats, String species, Point startingPosition, long animalID, SmellType smellType){
     //Création du nom de l'animal
         this.birthday= MasterController.getTime();
         Random random = new Random();
         int noName = random.nextInt(20);
         this.name = Name.getName(noName);
         this.nameGen = Name.getGen(noName);
+        this.animalID = animalID;
 
         this.name +=" le "+this.nameGen;
         System.out.println(this.name);
+
 
         this.team = team;
         this.meanStats=meanStats;
@@ -84,13 +83,12 @@ public abstract class Animal {
         this.grabQuantity=mainStats[3];
         this.equipQuantity=25-mainStats[3];
         this.moral = 25; //TODO determiner comment evaluer le moral;
-        this.smellID = smellID;
-
         //TODO balance this and add a smell
         this.smellIntensity=this.getSmellStrengthStat()*8;
         this.smellThreshold=this.getSmellStrengthStat();
         //this.smell=new SmellSource(MasterController.getUniqueID(),);
 
+        this.smell = new SmellSource(animalID, this.smellIntensity, this.team, smellType);
 
         System.out.println("stats:");
         System.out.println("speed: "+speed);
@@ -209,9 +207,7 @@ public abstract class Animal {
         return grabQuantity;
     }
 
-    public int getSmellID() {
-        return smellID;
-    }
+
 
     public Image getSprite() {
         return sprite;
@@ -283,5 +279,9 @@ public abstract class Animal {
 
     public Case getOccupiedCase() {
         return occupiedCase;
+    }
+
+    public SmellSource getSmell() {
+        return smell;
     }
 }
