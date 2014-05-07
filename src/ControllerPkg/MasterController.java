@@ -56,14 +56,14 @@ public class MasterController extends Thread{
                 this.time++;
 
                 //TODO remove this test
-                /*
+
                 if (time==200){
-                    MapData.getCase(new Point(0,0)).getSmellSourceArrayList().add(new SmellSource(0,100,1, Smell.SmellType2.animal));
+                    MapData.getCase(new Point(0,0)).getSmellSourceArrayList().add(new SmellSource(0,100,1, SmellType.FOE));
                 }
                 if (time==250){
-                MapData.getCase(new Point(5,0)).getSmellSourceArrayList().add(new SmellSource(0,75,1, Smell.SmellType2.animal));
+                MapData.getCase(new Point(5,0)).getSmellSourceArrayList().add(new SmellSource(0,75,1, SmellType.ALLY));
                 }
-                */
+
 
 
                 if (time!=0&&time%smellDecayTime==0){
