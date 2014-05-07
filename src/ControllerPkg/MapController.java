@@ -3,14 +3,12 @@ package ControllerPkg;
 import ModelPkg.Animal;
 import ModelPkg.Case;
 import ModelPkg.MapData;
-import ObserverPkg.Observable;
-import ObserverPkg.Observer;
 import ViewPkg.VisualCase;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class MapController implements Observable {
+public class MapController {
 
 
 
@@ -40,15 +38,5 @@ public class MapController implements Observable {
 
     public static ArrayList<Animal> getAnimalList(){
         return MapData.getAnimalList();
-    }
-
-    @Override
-    public void addObserver(Observer observer) {
-
-    }
-
-    @Override
-    public void updateObservers() {
-
     }
 }

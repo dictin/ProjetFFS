@@ -1,7 +1,6 @@
 package ModelPkg;
 
 
-
 import ModelPkg.WildObjects.WildObject;
 import ObserverPkg.Observable;
 import ObserverPkg.Observer;
@@ -132,9 +131,6 @@ public class Case implements Observable {
     public void fadeSourceSmells() {
         for(SmellSource smellSource: smellSourceArrayList){
             smellSource.fade();
-            if (smellSource.getIntensity()<=0){
-
-            }
         }
     }
 
