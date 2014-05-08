@@ -1,6 +1,8 @@
 package ControllerPkg;
 
 import ModelPkg.*;
+import ModelPkg.PkgEvents.GameEventSunnyWeather;
+import ModelPkg.PkgEvents.LingeringGameEvents;
 import ViewPkg.MasterFrame;
 import ViewPkg.MasterUI;
 
@@ -25,13 +27,19 @@ public class MasterController extends Thread{
     private int sleepTime;
     private static int time =0;
     private int smellDecayTime=60;
+    private int eventFrequency=300;
     private static int uniqueID=0;
+    private EventController eventRoller;
 
 
     public MasterController(int FPS){
         Name.initialize();
+        eventRoller=new EventController(this);
         QuestionData.initialize();
         this.sleepTime=1000/FPS;
+
+        //TODO initialize eventController
+
         mF=new MasterFrame(this);
         this.start();
 
@@ -65,7 +73,7 @@ public class MasterController extends Thread{
                 //TODO remove this test
 
                 if (time==200){
-                    MapData.getCase(new Point(0,0)).getSmellSourceArrayList().add(new SmellSource(0,100,1, SmellType.FOE));
+                    MapData.getCase(new Point(0,0)).getSmellSourceArrayList().add(new SmellSource(1,100,1, SmellType.FOE));
                 }
                 if (time==250){
                 MapData.getCase(new Point(5,0)).getSmellSourceArrayList().add(new SmellSource(0,75,1, SmellType.ALLY));
@@ -75,6 +83,24 @@ public class MasterController extends Thread{
 
                 if (time!=0&&time%smellDecayTime==0){
                 MapData.updateSmells();
+                }
+
+                if (time!=0&&time%eventFrequency==0){
+                    if (getPlayerDataController().playerData.getCurrentEvent()==null){
+                        getPlayerDataController().playerData.setCurrentEvent(new GameEventSunnyWeather());
+                    }
+                    else{
+                    int duration=getPlayerDataController().playerData.getCurrentEvent().getDuration();
+                    if (duration==0){
+                        System.out.println("whats the weather");
+                        getPlayerDataController().playerData.setCurrentEvent(eventRoller.whatIsTheWeather());
+                        getPlayerDataController().playerData.getCurrentEvent().firstTimeActivation();
+                    }
+                    else{
+                        getPlayerDataController().playerData.getCurrentEvent().decreaseDuration();
+                        ((LingeringGameEvents)getPlayerDataController().playerData.getCurrentEvent()).lingeringActivation();
+                    }
+                    }
                 }
 
                 ArrayList<Animal> animalList=getMapController().getAnimalList();

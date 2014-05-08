@@ -246,7 +246,7 @@ public abstract class Animal {
 
 
 
-            decreaseHealth((25 - endurance) / 2);
+            decreaseHealth(((25 - endurance) / 2));
     }
 }
 

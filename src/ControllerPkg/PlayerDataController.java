@@ -91,5 +91,15 @@ public class PlayerDataController {
     }
 
 
+    public int getKarma() {
+        return this.playerData.getKarma();
+    }
 
+    public int getNextEventGravtity() {
+        return this.playerData.getNextEventGravity();
+    }
+
+    public void modifyKarma(int number) {
+        this.playerData.modifyKarma(number);
+    }
 }

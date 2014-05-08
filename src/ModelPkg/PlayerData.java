@@ -1,5 +1,6 @@
 package ModelPkg;
 
+import ModelPkg.PkgEvents.GameEvent;
 import ModelPkg.PkgItems.BoostEffect;
 import ModelPkg.PkgItems.Items;
 import ModelPkg.PkgItems.LotteryEffects;
@@ -11,6 +12,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class PlayerData implements Observable {
+
+    private int karma=0;
+    private GameEvent currentEvent;
+
     private int food = 300;
     private int score = 0;
     private int level = 1;
@@ -24,6 +29,7 @@ public class PlayerData implements Observable {
     private static int[] statModifiers = new int[]{0,0,0,0,0,0,0,0};
 
     private ArrayList<Observer> observers = new ArrayList<>();
+    private int nextEventGravity=1;
 
     public PlayerData(){
     }
@@ -181,5 +187,32 @@ public class PlayerData implements Observable {
             observers.get(i).update();
         }
 
+    }
+
+    public int getKarma() {
+        return karma;
+    }
+
+    public int getNextEventGravity() {
+        return nextEventGravity;
+    }
+    public void setNextEventGravity(int nextEventGravity) {
+        this.nextEventGravity=nextEventGravity;
+    }
+
+    public void increaseNextEventGravity() {
+        this.nextEventGravity+=1;
+    }
+
+    public void modifyKarma(int number) {
+        this.karma+=number;
+    }
+
+    public GameEvent getCurrentEvent() {
+        return currentEvent;
+    }
+
+    public void setCurrentEvent(GameEvent currentEvent) {
+        this.currentEvent = currentEvent;
     }
 }

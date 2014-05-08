@@ -11,7 +11,7 @@ public class MapData {
     private static Case[][] map = new Case[30][30];
     private static int hivePosition;
     private static ArrayList<Animal> animalList=new ArrayList<Animal>();
-    ArrayList<Case> casesWithSmellSources=new ArrayList<Case>();
+    static ArrayList<Case> casesWithSmellSources=new ArrayList<Case>();
     public static ArrayList<Animal> getAnimalList() {
         return animalList;
     }
@@ -32,15 +32,19 @@ public class MapData {
         for (int i=0;i<map.length;i++){
             for (int j=0; j<map[i].length;j++){
                 selectedCase=map[i][j];
+                //TODO overwrite same smell in case
                 if (selectedCase.getOccupant()!=null){
                     selectedCase.getSmellSourceArrayList().add(selectedCase.getOccupant().getSmell());
+
+                    System.out.println("Occupant non null");
+                    System.out.println(selectedCase.getOccupant().getSmell().getType());
                 }
                 if(selectedCase.getWildObject()!=null){
                     selectedCase.getSmellSourceArrayList().add(selectedCase.getWildObject().getSmellSource());
                 }
             }
         }
-        ArrayList<Case> casesWithSmellSources=getCasesWithSmellSources();
+        casesWithSmellSources=getCasesWithSmellSources();
         if (casesWithSmellSources!=null){
             for (int i=0;i<casesWithSmellSources.size();i++){
                 disperseSmellSources(casesWithSmellSources.get(i));
@@ -50,17 +54,21 @@ public class MapData {
 
 
         //TODO remove this test when done
-        /*
+
         for (int i=0; i<map.length;i++){
             for (int j=0;j<map[i].length;j++){
-                ArrayList<Smell> testList=map[i][j].getSmellArrayList();
+                ArrayList<Smell> testList=map[i][j].getSortedSmellArrayList();
                 if (testList.size()!=0){
-                System.out.print(testList.get(0).getIntensity() + " ");
+                    if (testList.size()!=1){
+                        System.out.println("success");
+                    }
+                System.out.print(testList.size() + " ");
+//                System.out.print(testList.get(0).getIntensity() + " ");
                 }
             }
             System.out.println();
         }
-        */
+
     }
 
     public static void disperseSmellSources(Case selectedCase){
@@ -246,6 +254,7 @@ public class MapData {
     }
 
     public static Case getCase(Point point){
+        System.out.println(point.x+";"+point.y);
         return MapData.map[point.x][point.y];
 
     }
