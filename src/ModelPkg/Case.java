@@ -20,7 +20,9 @@ public class Case implements Observable {
     private WildObject terrain;
     private ArrayList<Smell> smellArrayList = new ArrayList<Smell>();
 
-    public ArrayList<SmellSource> getSmellSourceArrayList() {return smellSourceArrayList;}
+    public ArrayList<SmellSource> getSmellSourceArrayList() {
+        return smellSourceArrayList;
+    }
 
     private ArrayList<SmellSource> smellSourceArrayList = new ArrayList<SmellSource>();
 
@@ -114,7 +116,6 @@ public class Case implements Observable {
     }
 
     public void eraseInferiorSmellOfSameID(Smell smell) {
-        System.out.println("aye aye captain");
         Boolean inferiorSmellNotFound=true;
         for (int i=0; i<smellArrayList.size()&&inferiorSmellNotFound;i++){
             Smell comparedSmell=smellArrayList.get(i);

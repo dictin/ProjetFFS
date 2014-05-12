@@ -265,4 +265,7 @@ public class MapData {
         return newsList;
     }
 
+    public static void setAnimalList(ArrayList<Animal> animalList) {
+        MapData.animalList = animalList;
+    }
 }

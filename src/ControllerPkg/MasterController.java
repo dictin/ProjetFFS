@@ -73,7 +73,7 @@ public class MasterController extends Thread{
                 //TODO remove this test
 
                 if (time==200){
-                    MapData.getCase(new Point(0,0)).getSmellSourceArrayList().add(new SmellSource(1,100,1, SmellType.FOE));
+                    MapData.getCase(new Point(0,0)).getSmellSourceArrayList().add(new SmellSource(0,100,1, SmellType.FOE));
                 }
                 if (time==250){
                 MapData.getCase(new Point(5,0)).getSmellSourceArrayList().add(new SmellSource(0,75,1, SmellType.ALLY));
@@ -103,13 +103,8 @@ public class MasterController extends Thread{
                     }
                 }
 
-                ArrayList<Animal> animalList=getMapController().getAnimalList();
-                if (!animalList.isEmpty()){
-                    for (animalListIndex=0; animalListIndex<animalList.size();animalListIndex++){
-                        Animal animal=animalList.get(animalListIndex);
-                        animal.activate(getTime());
-                    }
-                }
+
+                this.moveAnimals();//TODO fix me
 
                 mUI.actualiser();
                 mUI.invalidate();
@@ -187,5 +182,36 @@ public class MasterController extends Thread{
 
     public PlayerDataController getPlayerDataController() {
         return playerDataController;
+    }
+
+    public void moveAnimals(){
+        ArrayList<Animal> animalArrayList = MapData.getAnimalList();
+        ArrayList<Animal> toMoveAnimals = new ArrayList<>();
+        for(int i = 0; i < animalArrayList.size(); i++){
+            if (animalArrayList.get(i).isToMove()){
+                toMoveAnimals.add(animalArrayList.indexOf(animalArrayList.get(i)),animalArrayList.get(i));
+            }
+        }
+
+        for (int i = 0; i < toMoveAnimals.size(); i++){
+            if (toMoveAnimals.size() != 0){
+
+                Point oldPosition = animalArrayList.get(i).getPosition();
+
+                Point newPosition;
+
+                toMoveAnimals.get(i).activate(MasterController.getTime());
+
+                newPosition = animalArrayList.get(i).getPosition();
+
+                animalArrayList.remove(animalArrayList.get(i));
+
+                MapData.getCase(oldPosition).setOccupant(null);
+                MapData.getCase(newPosition).setOccupant(animalArrayList.get(i));
+
+                animalArrayList.add(toMoveAnimals.indexOf(animalArrayList.get(i)), animalArrayList.get(i));
+                MapData.setAnimalList(animalArrayList);
+            }
+        }
     }
 }
