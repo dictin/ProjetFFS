@@ -30,7 +30,6 @@ public class Smell implements Cloneable {
     }
 
     public void dissipateIntensity(int percentageMultiplier){
-       // System.out.println("Dissipate");
         this.intensity=intensity*percentageMultiplier/100;
     }
 
@@ -42,18 +41,15 @@ public class Smell implements Cloneable {
         return iD;
     }
 
+    public int getTeam() {return team;}
+
     public SmellType getType() {
         return type;
     }
 
     @Override
     public Smell clone() {
-        try {
-            return (Smell)super.clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-            System.out.println("Clone not supported. Error.");
-            return null;
-        }
+            Smell clonedSmell=new Smell(getID(), getIntensity(), getTeam(), getType());
+        return clonedSmell;
     }
 }
