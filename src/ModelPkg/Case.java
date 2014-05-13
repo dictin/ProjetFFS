@@ -142,5 +142,12 @@ public class Case implements Observable {
     }
 
 
+    public void overwriteSmellsource(SmellSource smellSource) {
+        boolean matchNotFound=true;
+        for (int i=0; i<smellSourceArrayList.size()&&matchNotFound; i++){
+            if (smellArrayList.get(i).getID()==smellSource.getID()){
 
+            }
+        }
+    }
 }

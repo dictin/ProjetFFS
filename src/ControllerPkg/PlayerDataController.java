@@ -81,7 +81,7 @@ public class PlayerDataController {
     }
 
     public void newBorn(){
-        System.out.println("NewBorn");
+        //System.out.println("NewBorn");
         this.playerData.newBorn();
     }
 

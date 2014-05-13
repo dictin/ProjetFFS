@@ -32,8 +32,8 @@ public class ItemController {
     }
     public void setObjetBougthList(int i) {
         this.objetBougthList.add(i);
-        System.out.println("adddinnggg");
-        System.out.println("New size: "+objetBougthList.size());
+        //System.out.println("adddinnggg");
+        //System.out.println("New size: "+objetBougthList.size());
 
 
     }

@@ -3,6 +3,7 @@ package ModelPkg;
 import ControllerPkg.MasterController;
 import ModelPkg.WildObjects.*;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
@@ -36,12 +37,12 @@ public abstract class Animal {
     private int defence;
 
     private int smellSensitivity;
-    private int smellThreshold;
+        private int smellThreshold;
     private int smellStrengthStat;
-    private int smellIntensity;
+        private int smellIntensity;
 
     private int grabQuantity;
-    private int carriedFood = 0;
+        private int carriedFood = 0;
     private int equipQuantity;
 
     private int team; // -1: player, 1: enemy 1, 2: enemy 2
