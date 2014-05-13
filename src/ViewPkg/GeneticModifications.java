@@ -3,7 +3,9 @@ package ViewPkg;
 
 import ControllerPkg.MasterController;
 import ControllerPkg.SliderListener;
+import ModelPkg.Laboratory;
 import ModelPkg.MapData;
+import ModelPkg.PlayerData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,11 +25,9 @@ public class GeneticModifications extends JLabel {
     private Font font2 = new Font("Couriel", Font.BOLD, 18);
     private Color color = new Color(Integer.parseInt("510968", 19));
     private JButton finish = new JButton("Finish");
-
-    private int speedEnduranceBefore = MapData.getFourmilierStats(0);
-    private int attackDefenceBefore = MapData.getFourmilierStats(1);
-    private int sensitivitySmellStrengthBefore = MapData.getFourmilierStats(2);
-    private int cost = 0;
+    private JButton reset = new JButton("Réinisialiser");
+    private JLabel cost = new JLabel("Coût: "+ Laboratory.getCost());
+    private int modificationCost = 0;
 
     private JLabel speed = new JLabel("Vitesse");
     private JLabel endurance = new JLabel("Endurance");
@@ -70,8 +70,8 @@ public class GeneticModifications extends JLabel {
         speedEndurance.setFont(font);
         speedEndurance.setBackground(color);
         this.add(speedEndurance);
-       // speedEndurance.addChangeListener(new SliderListener());
-        speedEndurance.addPropertyChangeListener(new SliderListener());
+        speedEndurance.addChangeListener(new SliderListener());
+
 
 
 
@@ -87,9 +87,10 @@ public class GeneticModifications extends JLabel {
         attackDefence.setPaintTicks(true);
         attackDefence.setPaintLabels(true);
         attackDefence.setSize(280, 50);
-        attackDefence.setLocation(107, 200);
+        attackDefence.setLocation(107, 190);
         attackDefence.setFont(font);
         attackDefence.setBackground(color);
+        attackDefence.addChangeListener(new SliderListener());
         this.add(attackDefence);
 
         sensitivity.setSize(50, 20);
@@ -107,9 +108,10 @@ public class GeneticModifications extends JLabel {
         sensitivitySmellStrength.setPaintTicks(true);
         sensitivitySmellStrength.setPaintLabels(true);
         sensitivitySmellStrength.setSize(280, 50);
-        sensitivitySmellStrength.setLocation(107, 300);
+        sensitivitySmellStrength.setLocation(107, 280);
         sensitivitySmellStrength.setFont(font);
         sensitivitySmellStrength.setBackground(color);
+        sensitivitySmellStrength.addChangeListener(new SliderListener());
         this.add(sensitivitySmellStrength);
 
         finish.setSize(100,23);
@@ -123,16 +125,56 @@ public class GeneticModifications extends JLabel {
             }
         });
         this.add(finish);
+
+    reset.setSize(120,23);
+    reset.setLocation(5, 345);
+    reset.setForeground(Color.white);
+    reset.setBackground(new Color(Integer.parseInt("1994", 20)));
+        reset.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("time to reset!");
+            }
+        });
+    this.add(reset);
+        cost.setSize(100,23);
+        cost.setLocation(230,345);
+        this.add(cost);
+        if(Laboratory.isMoving()){
+            System.out.println("Actual: " + speedEndurance.getValue());
+            Laboratory.setMoving(false);
+        }
     }
 
     public void finish(){
+        System.out.println(Laboratory.isFinish());
         System.out.println(speedEndurance.getValue());
         System.out.println(attackDefence.getValue());
         System.out.println(sensitivitySmellStrength.getValue());
-        cost = cost+Math.abs(speedEnduranceBefore-speedEndurance.getValue())*10;
-        cost = cost+Math.abs(attackDefenceBefore-attackDefence.getValue())*10;
-        cost = cost+Math.abs(sensitivitySmellStrengthBefore-sensitivitySmellStrength.getValue())*10;
-        System.out.println("cout: "+ cost);
+        modificationCost = modificationCost+Math.abs(Laboratory.getSpeedEnduranceBefore()-speedEndurance.getValue())*10;
+        modificationCost = modificationCost+Math.abs(Laboratory.getAttackDefenceBefore()-attackDefence.getValue())*10;
+        modificationCost = modificationCost+Math.abs(Laboratory.getSensitivitySmellStrengthBefore()-sensitivitySmellStrength.getValue())*10;
+        System.out.println("Cout: "+modificationCost);
+        if(controller.getPlayerDataController().getFood() -modificationCost >= 0 ){
+            Laboratory.setFinish(true);
+            Laboratory.setCost(modificationCost);
+            controller.getPlayerDataController().spendFood(modificationCost);
+            Laboratory.setSpeedEnduranceBefore(speedEndurance.getValue());
+            Laboratory.setAttackDefenceBefore(attackDefence.getValue());
+            Laboratory.setSensitivitySmellStrengthBefore(sensitivitySmellStrength.getValue());
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Nourriture insuffisante");
+            reset();
+        }
+    }
+    public void reset(){
+        Laboratory.setReset(true);
+        Laboratory.setCost(0);
+        cost.setText("Coût: " + Laboratory.getCost());
+        speedEndurance.setValue(Laboratory.getSpeedEnduranceBefore());
+        attackDefence.setValue(Laboratory.getAttackDefenceBefore());
+        sensitivitySmellStrength.setValue(Laboratory.getSensitivitySmellStrengthBefore());
     }
 }
 

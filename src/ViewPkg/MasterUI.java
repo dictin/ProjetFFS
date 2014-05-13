@@ -2,6 +2,7 @@ package ViewPkg;
 
 import ControllerPkg.MasterController;
 import ControllerPkg.PlayerDataController;
+import ModelPkg.Laboratory;
 import ModelPkg.MapData;
 import ModelPkg.QuestionChaman;
 import ObserverPkg.Observer;
@@ -66,7 +67,8 @@ public class MasterUI extends JPanel implements Observer{
 
         // Pour enlever les questions du chaman et/ou GeneticModification, mettre en commentaire ci-dessous
         //this.creationQuestion();
-       this.creationGeneticModifications();
+          this.creationGeneticModifications();
+
 
 
         int xGridSize=30;
@@ -220,6 +222,7 @@ public class MasterUI extends JPanel implements Observer{
         laboratoryLabel.setLocation(75,163);
         this.add(laboratoryLabel);
 
+
     }
 
     public void actualiser(){
@@ -274,6 +277,12 @@ public class MasterUI extends JPanel implements Observer{
             questionLabel.repaint();
             }
         numberOfNews = MapData.getNewsList().size();
+
+        if(Laboratory.isFinish()){
+        laboratoryLabel.setVisible(false);
+        }
+
+
     }
 
     private void updateNumericInfos(){
