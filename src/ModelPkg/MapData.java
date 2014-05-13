@@ -98,7 +98,7 @@ public class MapData {
 
     public static void disperseSmell(Case sourceCase, Smell smell){
         if (smell.getIntensity()>=10){
-        Case[][] subsection=getSubsection2(sourceCase.getPosition());
+        Case[][] subsection= getSubsection(sourceCase.getPosition());
         for (int i=-1; i<2;i++){
             for (int j=-1; j<2;j++){
                 Case selectedCase=subsection[i+1][j+1];
@@ -208,7 +208,7 @@ public class MapData {
 
     }
 
-    public static Case[][] getSubsection2(Point origin){
+    public static Case[][] getSubsection(Point origin){
         Case[][] subsection = new Case[3][3];
         for (int i =0; i<3; i++){
             for (int j=0; j<3; j++){
@@ -223,26 +223,7 @@ public class MapData {
         return subsection;
     }
 
-    public static Case[][] getSubsection(Point origin){
-        int radius = 3;
-        Case[][] returnArray = new Case[(2*radius)+1][(2*radius)+1];
-        int subI = 0;
-        int subJ = 0;
 
-        for (int i = origin.x-radius; i <= origin.x+radius; i++){
-            for (int j = origin.y-radius; j <= origin.y+radius; j++){
-                try{
-                returnArray[subI][subJ] = MapData.map[i][j];
-                } catch (ArrayIndexOutOfBoundsException e){
-                    returnArray[subI][subJ] = null;
-                }
-                subJ++;
-            }
-            subI++;
-        }
-
-        return returnArray;
-    }
 
     public static Point getSpawnPoint(){
         Point spawn = null;

@@ -1,9 +1,8 @@
 package ModelPkg;
 
 import ControllerPkg.MasterController;
-import ModelPkg.WildObjects.*;
+import ModelPkg.WildObjects.FoodSource;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
@@ -16,6 +15,7 @@ public abstract class Animal {
     private int activationFrequency;
     private int birthday;
     private Point position;
+    private Point oldPosition = null;
     private Case occupiedCase;
     private int[] meanStats;
     private int[] mainStats;
@@ -251,6 +251,7 @@ public abstract class Animal {
 
             if (this.actionToCommit == ActionTypes.GO_TO_LOCATION || this.actionToCommit == ActionTypes.FLEE_TO_LOCATION || this.actionToCommit == ActionTypes.RUN_AT_ENEMY){
                 this.toMove = true;
+                this.oldPosition = this.position;
                 this.position = new Point(this.position.x+objective.x, this.position.y+objective.y);
             }else {
                 if (this.actionToCommit == ActionTypes.ATTACK_AT_LOCATION){
@@ -334,5 +335,13 @@ public abstract class Animal {
 
     public boolean isToMove() {
         return toMove;
+    }
+
+    public Point getOldPosition() {
+        return oldPosition;
+    }
+
+    public void setToMove(boolean toMove){
+        this.toMove = toMove;
     }
 }

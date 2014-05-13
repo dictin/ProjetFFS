@@ -70,6 +70,10 @@ public class MasterController extends Thread{
                 this.sleep(sleepTime);
                 this.time++;
 
+                for(Animal v : MapData.getAnimalList()){
+                    v.activate(this.time);
+                }
+
                 //TODO remove this test
 
                 if (time==200){
@@ -194,20 +198,23 @@ public class MasterController extends Thread{
         for (int i = 0; i < toMoveAnimals.size(); i++){
             if (toMoveAnimals.size() != 0){
 
-                Point oldPosition = animalArrayList.get(i).getPosition();
+
+
+                Point oldPosition = animalArrayList.get(i).getOldPosition();
 
                 Point newPosition;
 
-                toMoveAnimals.get(i).activate(MasterController.getTime());
+                //toMoveAnimals.get(i).activate(MasterController.getTime());
 
                 newPosition = animalArrayList.get(i).getPosition();
 
-                animalArrayList.remove(animalArrayList.get(i));
 
-                MapData.getCase(oldPosition).setOccupant(null);
-                MapData.getCase(newPosition).setOccupant(animalArrayList.get(i));
 
-                animalArrayList.add(toMoveAnimals.indexOf(animalArrayList.get(i)), animalArrayList.get(i));
+                this.disposeAnimal(MapData.getCase(oldPosition).getOccupant());
+                MapData.getCase(newPosition).setOccupant(toMoveAnimals.get(i));
+                toMoveAnimals.get(i).setToMove(false);
+
+                animalArrayList.add(toMoveAnimals.indexOf(toMoveAnimals.get(i)), toMoveAnimals.get(i));
                 MapData.setAnimalList(animalArrayList);
             }
         }

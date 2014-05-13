@@ -15,24 +15,54 @@ public class Behavior {
     public Behavior(){
     }
 
-    public static Point drunk(){
+    public static Point drunk(Point position){
         System.out.println("Hic! I'm drunk");
+        Point theoreticalPosition;
         Random random = new Random();
 
         int rndobjectifX = 0;
         int rndobjectifY = 0;
 
-        while(rndobjectifX == 0 && rndobjectifY == 0){
-            rndobjectifX = random.nextInt(Behavior.SUBSECTION_SIZE);
-            rndobjectifY = random.nextInt(Behavior.SUBSECTION_SIZE);
-        }
+        rndobjectifX = random.nextInt(3) - 1;
+        rndobjectifY = random.nextInt(3) - 1;
+
+
 
         objectif = new Point(rndobjectifX,rndobjectifY);
-        return objectif;
+        theoreticalPosition = new Point(objectif.x+position.x, objectif.y+position.y);
+
+        if (!Behavior.isThereNowhereToGo(position)){
+            if (MapData.getCase(theoreticalPosition).getOccupant() == null && MapData.getCase(theoreticalPosition).getWildObject().getType() == WildObject.EMPTY_ID){
+                return objectif;
+            }else{
+                return Behavior.drunk(position);
+            }
+        }else{
+            return new Point(0,0);
+        }
+
+
+
+
+    }
+
+    private static boolean isThereNowhereToGo(Point origin) {
+        boolean nowhereToGo = true;
+        Case[][] subsection = MapData.getSubsection(origin);
+        for(int i = 0; i < subsection.length; i++){
+            for(int j = 0; j < subsection[i].length; j++){
+                if(subsection[i][j].getOccupant() == null && subsection[i][j].getWildObject().getType() == WildObject.EMPTY_ID){
+                    nowhereToGo = false;
+                }
+
+            }
+        }
+
+        return nowhereToGo;
     }
 
     private static boolean isThereASmell(Point location){
-        Case[][] subsection = MapData.getSubsection2(location);
+        Case[][] subsection = MapData.getSubsection(location);
         boolean isEmpty = true;
 
         for(int i = 0; i < subsection.length && isEmpty; i++){
@@ -48,7 +78,7 @@ public class Behavior {
 
     public static VirtualFutureAction evaluateBestObjective(Point position, MentalStates mentalState, int moralValue){
         if (Behavior.isThereASmell(position)){
-            Case[][] subsection = MapData.getSubsection2(position);
+            Case[][] subsection = MapData.getSubsection(position);
             boolean nearFoodSource = false;
             if (mentalState == MentalStates.WEAK){
                 Point strongestSmellPoint = null;
@@ -74,7 +104,7 @@ public class Behavior {
                     if (foodLocation != null){
                         return new VirtualFutureAction(foodLocation, ActionTypes.EAT_FROM_LOCATION);
                     }else {
-                        return new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
+                        return new VirtualFutureAction(Behavior.drunk(position), ActionTypes.GO_TO_LOCATION);
                     }
                 }else{
                     for (int i = 0; i < Behavior.SUBSECTION_SIZE; i++){
@@ -91,7 +121,7 @@ public class Behavior {
                     }
 
                     if (strongestSmellPoint == null){
-                        return new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
+                        return new VirtualFutureAction(Behavior.drunk(position), ActionTypes.GO_TO_LOCATION);
                     }else {
                         return new VirtualFutureAction(strongestSmellPoint, ActionTypes.GO_TO_LOCATION);
                     }
@@ -114,7 +144,7 @@ public class Behavior {
                 }
 
                 if (weakAllySmell == null){
-                    return new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
+                    return new VirtualFutureAction(Behavior.drunk(position), ActionTypes.GO_TO_LOCATION);
                 }else {
                     return new VirtualFutureAction(weakAllySmell, ActionTypes.GO_TO_LOCATION);
                 }
@@ -136,7 +166,7 @@ public class Behavior {
                 }
 
                 if (strongestSmellPoint == null){
-                    return new VirtualFutureAction(Behavior.drunk(), ActionTypes.FLEE_TO_LOCATION);
+                    return new VirtualFutureAction(Behavior.drunk(position), ActionTypes.FLEE_TO_LOCATION);
                 }else {
                     int x = strongestSmellPoint.x;
                     int y = strongestSmellPoint.y;
@@ -163,7 +193,7 @@ public class Behavior {
                 }
 
                 if (strongestSmellPoint == null){
-                    return new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
+                    return new VirtualFutureAction(Behavior.drunk(position), ActionTypes.GO_TO_LOCATION);
                 }else {
                     int x = strongestSmellPoint.x;
                     int y = strongestSmellPoint.y;
@@ -201,7 +231,7 @@ public class Behavior {
                     }
 
                     if (strongestSmellPoint == null){
-                        return new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
+                        return new VirtualFutureAction(Behavior.drunk(position), ActionTypes.GO_TO_LOCATION);
                     }else {
                         return new VirtualFutureAction(strongestSmellPoint, ActionTypes.RUN_AT_ENEMY);
                     }
@@ -239,7 +269,7 @@ public class Behavior {
                         }else if (strongestSmellPoint != null){
                             return new VirtualFutureAction(strongestSmellPoint, ActionTypes.GO_TO_LOCATION);
                         }else {
-                            return new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
+                            return new VirtualFutureAction(Behavior.drunk(position), ActionTypes.GO_TO_LOCATION);
                         }
 
 
@@ -260,7 +290,7 @@ public class Behavior {
                         }else if (strongestSmellPoint != null){
                             return new VirtualFutureAction(strongestSmellPoint, ActionTypes.RUN_AT_ENEMY);
                         }else {
-                            return new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
+                            return new VirtualFutureAction(Behavior.drunk(position), ActionTypes.GO_TO_LOCATION);
                         }
 
                     }
@@ -281,13 +311,13 @@ public class Behavior {
                     }else if (strongestSmellPoint != null){
                         return new VirtualFutureAction(strongestSmellPoint, ActionTypes.GO_TO_LOCATION);
                     }else {
-                        return new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
+                        return new VirtualFutureAction(Behavior.drunk(position), ActionTypes.GO_TO_LOCATION);
                     }
                 }
             }
 
         }else {
-            VirtualFutureAction virtualFutureAction = new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
+            VirtualFutureAction virtualFutureAction = new VirtualFutureAction(Behavior.drunk(position), ActionTypes.GO_TO_LOCATION);
             return virtualFutureAction;
         }
     }
