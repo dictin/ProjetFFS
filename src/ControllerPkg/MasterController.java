@@ -143,13 +143,11 @@ public class MasterController extends Thread{
         }
         else {
             String menuName=menuButtonName.split("_")[0]+"_menu";
-            System.out.println(menuName);
             mUI.popMenu(menuName);
         }
     }
 
     public void enterMenuTriggerZone(){
-        System.out.println("EMTZ");
         mUI.popMenu("main_menu");
     }
 

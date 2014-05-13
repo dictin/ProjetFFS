@@ -23,7 +23,10 @@ public class EventController {
         goodGameEvents.add(new LingeringAlmightyBlessing());
         goodGameEvents.add(new InstantaneousHumanitarianHelp());
         neutralGameEvents.add(new GameEventSunnyWeather());
-        badGameEvents.add(new MassInstantaneousCombustion());
+
+        //TODO remove sunny from bad events
+        badGameEvents.add(new GameEventSunnyWeather());
+        //badGameEvents.add(new MassInstantaneousCombustion());
     }
 
     public GameEvent whatIsTheWeather(){
@@ -50,7 +53,7 @@ public class EventController {
             masterController.getPlayerDataController().playerData.increaseNextEventGravity();
         }
         nextGameEvent.setGravity(eventFinalGravity);
-        System.out.println(rollResult);
+        //System.out.println(rollResult);
         return nextGameEvent;
     }
 

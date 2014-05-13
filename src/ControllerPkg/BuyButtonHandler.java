@@ -21,7 +21,8 @@ public class BuyButtonHandler implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         int selectedIndex = this.list.getSelectedIndex();
-        System.out.println(this.list.getSelectedIndex());
+        //TODO remove all souts
+        //System.out.println(this.list.getSelectedIndex());
         itemController.addItemToInventory(Items.values()[selectedIndex]);
     }
 }
