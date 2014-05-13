@@ -243,6 +243,7 @@ public abstract class Animal {
 
     public void activate(int time){
         //TODO reset smellSource of case
+
         if (time!=birthday&&(time-birthday)%activationFrequency==0){
             VirtualFutureAction virtualFutureAction = null;
             virtualFutureAction = Behavior.evaluateBestObjective(this.position, this.mentalState, this.moral);

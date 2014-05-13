@@ -5,6 +5,7 @@ import ModelPkg.PkgEvents.GameEventSunnyWeather;
 import ModelPkg.PkgEvents.LingeringGameEvents;
 import ViewPkg.MasterFrame;
 import ViewPkg.MasterUI;
+import com.sun.java.swing.plaf.windows.resources.windows_de;
 
 import java.awt.*;
 import java.util.ArrayList;

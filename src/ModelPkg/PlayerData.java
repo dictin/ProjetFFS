@@ -12,15 +12,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class PlayerData implements Observable {
-
-    private int karma=0;
-    private GameEvent currentEvent;
-
     private int food = 300;
     private int score = 0;
     private int level = 1;
     private int population = 0;
     private int dead = 0;
+    private boolean selectInventory = false;
+    private GameEvent currentEvent;
     private ArrayList<TempItemInstance> passiveInstances = new ArrayList<TempItemInstance>(); //Contient les effects des items innactifs de l'inventaire du joueur
     private ArrayList<String> consumablesInventory = new ArrayList<>();
     private ArrayList<String> permanentInventory = new ArrayList<>();
@@ -28,8 +26,8 @@ public class PlayerData implements Observable {
     private ArrayList<TempItemInstance> tempItemInstances = new ArrayList<TempItemInstance>();
     private static int[] statModifiers = new int[]{0,0,0,0,0,0,0,0};
 
+
     private ArrayList<Observer> observers = new ArrayList<>();
-    private int nextEventGravity=1;
 
     public PlayerData(){
     }
@@ -189,23 +187,12 @@ public class PlayerData implements Observable {
 
     }
 
-    public int getKarma() {
-        return karma;
+    public boolean isSelectInventory() {
+        return selectInventory;
     }
 
-    public int getNextEventGravity() {
-        return nextEventGravity;
-    }
-    public void setNextEventGravity(int nextEventGravity) {
-        this.nextEventGravity=nextEventGravity;
-    }
-
-    public void increaseNextEventGravity() {
-        this.nextEventGravity+=1;
-    }
-
-    public void modifyKarma(int number) {
-        this.karma+=number;
+    public void setSelectInventory(boolean selectInventory) {
+        this.selectInventory = selectInventory;
     }
 
     public GameEvent getCurrentEvent() {

@@ -77,6 +77,7 @@ public class ShopMenuInfo extends JComponent implements Observer {
 
     @Override
     public void update() {
+
         this.itemName.setText("Nom: "+this.shopInfoController.getName());
         this.itemCost.setText("Co\u00FBt: "+this.shopInfoController.getCost());
         this.boost.setText("Bonus: "+this.getStatTitle(this.shopInfoController.getStatID())+" +"+this.shopInfoController.getModValue());

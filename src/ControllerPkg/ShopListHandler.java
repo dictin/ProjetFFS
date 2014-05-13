@@ -43,7 +43,7 @@ public class ShopListHandler implements ListSelectionListener {
             statBoost = 0;
             isItemPermanent = false;
         }
-        shopItemInfoData.changeValues(selectedItem.getName(), 0, statID, statBoost, isItemPermanent);
+        shopItemInfoData.changeValues(selectedItem.getName(), selectedItem.getPrice(), statID, statBoost, isItemPermanent);
         }
     }
 }

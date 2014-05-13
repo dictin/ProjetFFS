@@ -137,7 +137,6 @@ public class MasterUI extends JPanel implements Observer{
         background.setLocation(655,580);
         this.add(background);
 
-        System.out.println("TVA nouvelle, premier sur la nouvelle");
         tvaNews.setText(MapData.getNewsList().remove(0));
         tvaNews.setSize(600, 20);
         tvaNews.setLocation(25, positionActualTvaNews);
@@ -219,7 +218,6 @@ public class MasterUI extends JPanel implements Observer{
         }
 
         if(MapData.getNewsList().size()>numberOfNews && !alreadyInMovement){
-            System.out.println("new newssss");
             mouvement = 1;
             alreadyInMovement = true;
         }
@@ -241,15 +239,12 @@ public class MasterUI extends JPanel implements Observer{
 
                 System.out.println("longeur : "+MapData.getNewsList().size());
                 if(MapData.getNewsList().size()>=1){
-                    System.out.println("Still goat news");
-                    System.out.println(MapData.getNewsList().get(0));
                     mouvement =1;
                     tvaNews.setText(MapData.getNewsList().remove(0));
 
                 }
                 else if(MapData.getNewsList().size() ==0){
                     alreadyInMovement = false;
-                    System.out.println("Is it empty?: "+ MapData.getNewsList().isEmpty());
                     tvaNews.setText("Nouvelle de dernière heure!");
                 }
 

@@ -1,27 +1,22 @@
 package ViewPkg.Menus;
 
-import ControllerPkg.ItemController;
-import ControllerPkg.MasterController;
-import ControllerPkg.PlayerDataController;
-import ControllerPkg.ShopListHandler;
+import ControllerPkg.*;
 import ObserverPkg.Observer;
 
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by Xav on 17/03/14.
- */
 public class InventoryMenu extends ContextualMenu implements Observer{
 
     private GotoMenuButton consumables;
     private GotoMenuButton reusables;
-    private JLabel consumablesLabel = new JLabel("Objets cosumables!");
+    private JLabel consumablesLabel = new JLabel("Objets consumables!");
     private JLabel reusablesLabel = new JLabel ("Objets réutilisables!");
     private JButton consumablesBuyButton = new JButton("Utiliser");
     private JButton reusablesBuyButton = new JButton("Activer");
     ItemController itemController;
     PlayerDataController playerDataController;
+    MasterController masterController;
 
     JList<String> consumableShopList;
     JScrollPane consumableScrollPane;
@@ -29,11 +24,15 @@ public class InventoryMenu extends ContextualMenu implements Observer{
     JList<String> reusableShopList;
     JScrollPane reusableScrollPane;
 
+    private InventoryActivateButtonHandler InventoryActivateButtonHandler;
+
     public InventoryMenu(MasterController controller) {
         super(controller, "inventory_menu");
+        this.masterController = controller;
         this.playerDataController = controller.getPlayerDataController();
         this.itemController = controller.getItemController();
         this.playerDataController.addObserver(this);
+        InventoryActivateButtonHandler = new InventoryActivateButtonHandler(playerDataController);
         consumablesLabel.setSize(400,35);
         consumablesLabel.setLocation(25, 0);
         consumablesLabel.setFont(new Font("Arial", Font.PLAIN, 30));
@@ -47,7 +46,9 @@ public class InventoryMenu extends ContextualMenu implements Observer{
         this.consumableShopList.setFixedCellHeight(25);
         this.consumableShopList.setSize(new Dimension(300, 220));
         this.consumableShopList.setLocation(10, 12);
-        this.consumableShopList.addListSelectionListener(new ShopListHandler(controller.getShopInfoController().getShopItemInfoData()));
+       // this.consumableShopList.addListSelectionListener(new ShopListHandler(controller.getShopInfoController().getShopItemInfoData()));
+        this.consumableShopList.addListSelectionListener(new InventoryListHandler(masterController));
+
 
         consumableScrollPane = new JScrollPane(this.consumableShopList, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         this.consumableScrollPane.setLocation(10,40);
@@ -58,6 +59,7 @@ public class InventoryMenu extends ContextualMenu implements Observer{
         this.consumablesBuyButton.setSize(100,30);
         this.consumablesBuyButton.setLocation(200,270);
         this.consumables.add(this.consumablesBuyButton);
+        this.consumablesBuyButton.addActionListener(InventoryActivateButtonHandler);
 
 
         //************************************************************************************
@@ -80,7 +82,8 @@ public class InventoryMenu extends ContextualMenu implements Observer{
         this.reusableShopList.setFixedCellHeight(25);
         this.reusableShopList.setSize(new Dimension(300, 220));
         this.reusableShopList.setLocation(10, 12);
-        this.reusableShopList.addListSelectionListener(new ShopListHandler(controller.getShopInfoController().getShopItemInfoData()));
+        //this.reusableShopList.addListSelectionListener(new ShopListHandler(controller.getShopInfoController().getShopItemInfoData()));
+        this.reusableShopList.addListSelectionListener(new InventoryListHandler(masterController));
 
         this.reusableScrollPane = new JScrollPane(this.reusableShopList, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         this.reusableScrollPane.setLocation(10,40);
@@ -88,9 +91,10 @@ public class InventoryMenu extends ContextualMenu implements Observer{
         this.reusables.add(this.reusableScrollPane);
         this.reusables.add(reusablesLabel);
 
-        this.reusablesBuyButton.setSize(100,30);
-        this.reusablesBuyButton.setLocation(200,270);
+        this.reusablesBuyButton.setSize(100, 30);
+        this.reusablesBuyButton.setLocation(200, 270);
         this.reusables.add(this.reusablesBuyButton);
+        this.reusablesBuyButton.addActionListener(InventoryActivateButtonHandler);
 
     }
 

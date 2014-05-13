@@ -89,17 +89,13 @@ public class PlayerDataController {
     {
         this.playerData.death();
     }
-
-
-    public int getKarma() {
-        return this.playerData.getKarma();
+    public boolean isSelectedItem(){
+        return(this.playerData.isSelectInventory());
+    }
+    public void setSelectedItem(boolean select){
+        this.playerData.setSelectInventory(select);
     }
 
-    public int getNextEventGravtity() {
-        return this.playerData.getNextEventGravity();
-    }
 
-    public void modifyKarma(int number) {
-        this.playerData.modifyKarma(number);
-    }
+
 }

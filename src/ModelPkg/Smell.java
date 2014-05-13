@@ -26,10 +26,11 @@ public class Smell implements Cloneable {
         this.team=team;
         this.type=type;
         this.team=team;
-        this.type=type;
+
     }
 
     public void dissipateIntensity(int percentageMultiplier){
+        System.out.println("Dissipate");
         this.intensity=intensity*percentageMultiplier/100;
     }
 
