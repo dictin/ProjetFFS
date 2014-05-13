@@ -3,8 +3,8 @@ package ModelPkg.PkgEvents;
 /**
  * Created by Xav on 13/05/14.
  */
-public class InstantaneousCombustion extends InstantaneousGameEvent{
-    public InstantaneousCombustion() {
+public class MassInstantaneousCombustion extends InstantaneousGameEvent{
+    public MassInstantaneousCombustion() {
         super(GameEventType.BAD);
     }
 

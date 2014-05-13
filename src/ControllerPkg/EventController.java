@@ -24,7 +24,7 @@ public class EventController {
         goodGameEvents.add(new InstantaneousHumanitarianHelp());
         neutralGameEvents.add(new GameEventSunnyWeather());
 
-        badGameEvents.add(new InstantaneousCombustion());
+        badGameEvents.add(new MassInstantaneousCombustion());
     }
 
     public GameEvent whatIsTheWeather(){
