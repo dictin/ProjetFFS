@@ -33,14 +33,19 @@ public class MapData {
             for (int j=0; j<map[i].length;j++){
                 selectedCase=map[i][j];
                 //TODO overwrite same smell in case
-                if (selectedCase.getOccupant()!=null){
-                    selectedCase.overwriteSmellsource();
+                if (selectedCase.getOccupant()!=null&&!selectedCase.getSmellSourceArrayList().isEmpty()){
+                    selectedCase.removeSmellsource(selectedCase.getOccupant().getSmell());
                     selectedCase.getSmellSourceArrayList().add(selectedCase.getOccupant().getSmell());
-                    System.out.println("Occupant non null");
+
+                    System.out.print("Occupant non null, smell:");
                     System.out.println(selectedCase.getOccupant().getSmell().getType());
                 }
-                if(selectedCase.getWildObject()!=null){
+                if(selectedCase.getWildObject()!=null&&!selectedCase.getSmellSourceArrayList().isEmpty()){
+                    selectedCase.removeSmellsource(selectedCase.getWildObject().getSmellSource());
                     selectedCase.getSmellSourceArrayList().add(selectedCase.getWildObject().getSmellSource());
+
+                    System.out.print("Wild object non null, smell:");
+                    System.out.println(selectedCase.getWildObject().getSmellSource().getType());
                 }
             }
         }
@@ -60,7 +65,7 @@ public class MapData {
                 ArrayList<Smell> testList=map[i][j].getSortedSmellArrayList();
                 if (testList.size()!=0){
                     if (testList.size()!=1){
-                        System.out.println("success");
+                        System.out.println("Ca sent bon et c'est bien.");
                     }
                 //System.out.print(testList.size() + " ");
 //                System.out.print(testList.get(0).getIntensity() + " ");
