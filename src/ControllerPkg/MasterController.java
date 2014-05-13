@@ -5,7 +5,6 @@ import ModelPkg.PkgEvents.GameEventSunnyWeather;
 import ModelPkg.PkgEvents.LingeringGameEvents;
 import ViewPkg.MasterFrame;
 import ViewPkg.MasterUI;
-import com.sun.java.swing.plaf.windows.resources.windows_de;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -87,19 +86,19 @@ public class MasterController extends Thread{
                 }
 
                 if (time!=0&&time%eventFrequency==0){
-                    if (getPlayerDataController().playerData.getCurrentEvent()==null){
-                        getPlayerDataController().playerData.setCurrentEvent(new GameEventSunnyWeather());
+                    if (getPlayerDataController().getCurrentEvent() == null){
+                        getPlayerDataController().setCurrentEvent(new GameEventSunnyWeather());
                     }
                     else{
-                    int duration=getPlayerDataController().playerData.getCurrentEvent().getDuration();
+                    int duration=getPlayerDataController().getCurrentEvent().getDuration();
                     if (duration==0){
                         System.out.println("whats the weather");
-                        getPlayerDataController().playerData.setCurrentEvent(eventRoller.whatIsTheWeather());
-                        getPlayerDataController().playerData.getCurrentEvent().firstTimeActivation();
+                        getPlayerDataController().setCurrentEvent(eventRoller.whatIsTheWeather());
+                        getPlayerDataController().getCurrentEvent().firstTimeActivation();
                     }
                     else{
-                        getPlayerDataController().playerData.getCurrentEvent().decreaseDuration();
-                        ((LingeringGameEvents)getPlayerDataController().playerData.getCurrentEvent()).lingeringActivation();
+                        getPlayerDataController().getCurrentEvent().decreaseDuration();
+                        ((LingeringGameEvents)getPlayerDataController().getCurrentEvent()).lingeringActivation();
                     }
                     }
                 }

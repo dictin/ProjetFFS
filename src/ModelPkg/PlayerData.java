@@ -27,6 +27,12 @@ public class PlayerData implements Observable {
     private static int[] statModifiers = new int[]{0,0,0,0,0,0,0,0};
 
 
+    private int karma=0;
+    private int nextEventGravity=1;
+
+
+
+
     private ArrayList<Observer> observers = new ArrayList<>();
 
     public PlayerData(){
@@ -55,6 +61,26 @@ public class PlayerData implements Observable {
             this.tempItemInstances.get(i).turn();
         }
     }
+
+    public int getKarma() {
+        return karma;
+    }
+
+    public int getNextEventGravity() {
+        return nextEventGravity;
+    }
+    public void setNextEventGravity(int nextEventGravity) {
+        this.nextEventGravity=nextEventGravity;
+    }
+
+    public void increaseNextEventGravity() {
+        this.nextEventGravity+=1;
+    }
+
+    public void modifyKarma(int number) {
+        this.karma+=number;
+    }
+
 
     public void cleanTempItemInstances(){
         ArrayList<TempItemInstance> toClean = new ArrayList<TempItemInstance>();

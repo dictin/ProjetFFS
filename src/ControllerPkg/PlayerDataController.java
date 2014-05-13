@@ -1,5 +1,6 @@
 package ControllerPkg;
 
+import ModelPkg.PkgEvents.GameEvent;
 import ModelPkg.PkgItems.Items;
 import ModelPkg.PlayerData;
 import ObserverPkg.Observer;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  */
 public class PlayerDataController {
 
-    PlayerData playerData;
+    private PlayerData playerData;
 
     public PlayerDataController(){
         this.playerData = new PlayerData();
@@ -94,7 +95,38 @@ public class PlayerDataController {
     }
     public void setSelectedItem(boolean select){
         this.playerData.setSelectInventory(select);
+
     }
+
+    public GameEvent getCurrentEvent(){
+        return this.playerData.getCurrentEvent();
+    }
+
+    public void setCurrentEvent(GameEvent gameEvent){
+        this.playerData.setCurrentEvent(gameEvent);
+    }
+
+    public int getKarma() {
+        return this.playerData.getKarma();
+    }
+
+    public int getNextEventGravtity() {
+        return this.playerData.getNextEventGravity();
+    }
+
+    public void modifyKarma(int number) {
+        this.playerData.modifyKarma(number);
+    }
+
+    public void setNextEventGravity(int value){
+        this.playerData.setNextEventGravity(value);
+    }
+
+    public void increaseNextEventGravity(){
+        this.playerData.increaseNextEventGravity();
+    }
+
+
 
 
 

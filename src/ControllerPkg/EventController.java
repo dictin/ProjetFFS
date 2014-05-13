@@ -40,17 +40,17 @@ public class EventController {
         if (rollResult+currentPlayerKarma<=badThreshold){
             nextGameEvent =chooseRandomEvent(badGameEvents);
             masterController.getPlayerDataController().modifyKarma(eventFinalGravity);
-            masterController.getPlayerDataController().playerData.setNextEventGravity(1);
+            masterController.getPlayerDataController().setNextEventGravity(1);
         }
         //Le joueur est chanceux
         else if (rollResult+currentPlayerKarma>=goodThreshold){
             nextGameEvent =chooseRandomEvent(goodGameEvents);
             masterController.getPlayerDataController().modifyKarma(-eventFinalGravity);
-            masterController.getPlayerDataController().playerData.setNextEventGravity(1);
+            masterController.getPlayerDataController().setNextEventGravity(1);
         }
         else{
             nextGameEvent =chooseRandomEvent(neutralGameEvents);
-            masterController.getPlayerDataController().playerData.increaseNextEventGravity();
+            masterController.getPlayerDataController().increaseNextEventGravity();
         }
         nextGameEvent.setGravity(eventFinalGravity);
         //System.out.println(rollResult);
