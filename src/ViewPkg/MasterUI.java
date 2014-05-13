@@ -36,6 +36,7 @@ public class MasterUI extends JPanel implements Observer{
     private int mouvement = 0;
     private int duration = 0;
     private boolean alreadyInMovement = false;
+    private JLabel laboratoryLabel = new JLabel();
 
     JLabel labelPopulation = new JLabel("Population: 0");
     JLabel labelFood = new JLabel("Nourriture: 300");
@@ -63,8 +64,10 @@ public class MasterUI extends JPanel implements Observer{
         this.setLocation(0,0);
         this.setLayout(null);
 
-        // Pour enlever les questions du chaman, mettre en commentaire ci-dessous
+        // Pour enlever les questions du chaman et/ou GeneticModification, mettre en commentaire ci-dessous
         //this.creationQuestion();
+       this.creationGeneticModifications();
+
 
         int xGridSize=30;
         int tailleYGrille=30;
@@ -210,6 +213,14 @@ public class MasterUI extends JPanel implements Observer{
         questionLabel.setLocation(75, 163);
         this.add(questionLabel);
     }
+    public void creationGeneticModifications(){
+        System.out.println("Time to me creepy");
+        laboratoryLabel = new GeneticModifications(masterController);
+        laboratoryLabel.setVisible(true);
+        laboratoryLabel.setLocation(75,163);
+        this.add(laboratoryLabel);
+
+    }
 
     public void actualiser(){
         quitIcon.actualiser();
@@ -258,7 +269,6 @@ public class MasterUI extends JPanel implements Observer{
             System.out.println("Trouvé!");
             actualQuestion = masterController.getChamanController().getQuestion();
             questionLabel.setVisible(false);
-            questionLabel.setText("Stéphane est un dieu");
             creationQuestion();
             questionLabel.invalidate();
             questionLabel.repaint();

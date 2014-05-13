@@ -29,7 +29,7 @@ public class CreationController implements ActionListener {
             animalType = CreationHashTable.getAssociatedValue(source);
             Point spawnPoint=MapData.getSpawnPoint();
             long uniqueID = System.currentTimeMillis();
-            Fourmillier spawnedFourmilier=new Fourmillier(0, new int[]{13,13,13}, animalType, spawnPoint, uniqueID, SmellType.ALLY,masterController);
+            Fourmillier spawnedFourmilier=new Fourmillier(0, MapData.getFourmilierStatsTab(), animalType, spawnPoint, uniqueID, SmellType.ALLY,masterController);
             MapData.getAnimalList().add(spawnedFourmilier);
             MapData.getCase(spawnPoint).setOccupant(spawnedFourmilier);
             this.masterController.getPlayerDataController().newBorn();

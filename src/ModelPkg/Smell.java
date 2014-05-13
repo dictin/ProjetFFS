@@ -30,7 +30,7 @@ public class Smell implements Cloneable {
     }
 
     public void dissipateIntensity(int percentageMultiplier){
-        System.out.println("Dissipate");
+       // System.out.println("Dissipate");
         this.intensity=intensity*percentageMultiplier/100;
     }
 

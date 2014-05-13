@@ -19,6 +19,9 @@ public class MapData {
 
 
 
+    private static int[] fourmilierStats =new int[]{13,13,13};
+
+
     public static void updateSmells(){
         Case selectedCase;
         //Wipes temporary smells
@@ -34,7 +37,7 @@ public class MapData {
                 selectedCase=map[i][j];
                 //TODO overwrite same smell in case
                 if (selectedCase.getOccupant()!=null){
-                    selectedCase.overwriteSmellsource();
+                    //selectedCase.overwriteSmellsource();
                     selectedCase.getSmellSourceArrayList().add(selectedCase.getOccupant().getSmell());
                     System.out.println("Occupant non null");
                     System.out.println(selectedCase.getOccupant().getSmell().getType());
@@ -141,6 +144,16 @@ public class MapData {
         }
     }
 
+    public static int getFourmilierStats(int positionStat) {
+        return fourmilierStats[positionStat];
+    }
+
+    public static void setFourmilierStats(int positionStat) {
+        MapData.fourmilierStats[positionStat] = fourmilierStats[positionStat];
+    }
+    public static int[] getFourmilierStatsTab() {
+        return fourmilierStats;
+    }
     private void initialize2(int nbOfTrees, int nbOfRocks, int nbOfWater, int nbOfHoles){
         Random casePicker=new Random(30*30);
         int nbOfSpecialCases=nbOfHoles+nbOfRocks+nbOfTrees+nbOfWater;

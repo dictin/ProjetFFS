@@ -25,7 +25,6 @@ public class Name {
             String name;
             while (line != null){
                 name = line;
-                System.out.println(line);
                 nameList.add(name);
                 genList[nameList.indexOf(name)] = 1;
                 line = fileEnter.readLine();

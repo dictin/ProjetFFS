@@ -134,7 +134,7 @@ public class Case implements Observable {
             SmellSource smellSource=smellSourceArrayList.get(i);
             smellSource.fade();
             if (smellSource.getIntensity()<=0){
-                System.out.println("removed a smell");
+               // System.out.println("removed a smell");
                 smellSourceArrayList.remove(i);
                 i--;
             }

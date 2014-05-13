@@ -12,8 +12,8 @@ public class SmellSource extends Smell{
     public void fade() {
         super.setIntensity(super.getIntensity()-10);
 
-        System.out.println("fade");
-        System.out.println(super.getIntensity());
+       // System.out.println("fade");
+       // System.out.println(super.getIntensity());
     }
 
     public enum SmellType2{
