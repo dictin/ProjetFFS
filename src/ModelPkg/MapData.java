@@ -21,6 +21,15 @@ public class MapData {
 
     public static void updateSmells(){
         Case selectedCase;
+
+        for (int i=0;i<map.length;i++){
+            for (int j=0; j<map[i].length;j++){
+                selectedCase=map[i][j];
+                System.out.print(selectedCase.getSortedSmellArrayList().get(0).getIntensity() + " ");
+            }
+            System.out.println();
+        }
+
         //Wipes temporary smells
         for (int i=0;i<map.length;i++){
             for (int j=0; j<map[i].length;j++){
@@ -33,19 +42,17 @@ public class MapData {
             for (int j=0; j<map[i].length;j++){
                 selectedCase=map[i][j];
                 //TODO overwrite same smell in case
-                if (selectedCase.getOccupant()!=null&&!selectedCase.getSmellSourceArrayList().isEmpty()){
+                if (selectedCase.getOccupant()!=null){
                     selectedCase.removeSmellsource(selectedCase.getOccupant().getSmell());
-                    selectedCase.getSmellSourceArrayList().add(selectedCase.getOccupant().getSmell());
-
-                    System.out.print("Occupant non null, smell:");
-                    System.out.println(selectedCase.getOccupant().getSmell().getType());
+                    selectedCase.getSmellSourceArrayList().add(selectedCase.getOccupant().getSmell().clone());
                 }
-                if(selectedCase.getWildObject()!=null&&!selectedCase.getSmellSourceArrayList().isEmpty()){
+                if(selectedCase.getWildObject().getType()!=0){
                     selectedCase.removeSmellsource(selectedCase.getWildObject().getSmellSource());
-                    selectedCase.getSmellSourceArrayList().add(selectedCase.getWildObject().getSmellSource());
+                    selectedCase.getSmellSourceArrayList().add(selectedCase.getWildObject().getSmellSource().clone());
 
-                    System.out.print("Wild object non null, smell:");
-                    System.out.println(selectedCase.getWildObject().getSmellSource().getType());
+                    if (selectedCase.getWildObject().getSmellSource()==selectedCase.getSmellSourceArrayList().get(selectedCase.getSmellSourceArrayList().size()-1));{
+                        System.out.println("FUCK");
+                    }
                 }
             }
         }

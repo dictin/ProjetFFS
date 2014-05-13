@@ -74,6 +74,7 @@ public class MasterController extends Thread{
                     v.activate(this.time);
                 }
 
+
                 //TODO remove this test
 
                 if (time==200){
