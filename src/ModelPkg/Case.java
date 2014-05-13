@@ -91,12 +91,10 @@ public class Case implements Observable {
             ArrayList<Smell> emptySmellArrayList = new ArrayList<>();
             emptySmellArrayList.add(new Smell(-1,0,-1, SmellType.NOTHING));
             return emptySmellArrayList;
-
-
-        }else {
+        }
+        else {
             ArrayList<Smell> unsortedSmellArrayList = this.smellArrayList;
             ArrayList<Smell> sortedSmellArrayList = new ArrayList<>();
-
             while(!unsortedSmellArrayList.isEmpty()){
                 int strongestSmell = 0;
                 int strongestIndex = 0;
@@ -134,7 +132,12 @@ public class Case implements Observable {
             SmellSource smellSource=smellSourceArrayList.get(i);
             smellSource.fade();
             if (smellSource.getIntensity()<=0){
-                System.out.println("removed a smell");
+
+                //TODO remove this if
+                if (!(smellSource.getType()==SmellType.NOTHING)){
+                //System.out.println("removed a smell");
+                }
+
                 smellSourceArrayList.remove(i);
                 i--;
             }
@@ -143,13 +146,15 @@ public class Case implements Observable {
 
 
     public void removeSmellsource(SmellSource smellSource) {
+        if (!smellSourceArrayList.isEmpty()){
         boolean matchNotFound=true;
         for (int i=0; i<smellSourceArrayList.size()&&matchNotFound; i++){
-            if (smellArrayList.get(i).getID()==smellSource.getID()){
+            if (smellSourceArrayList.get(i).getID()==smellSource.getID()){
                 matchNotFound=false;
                 smellSourceArrayList.remove(i);
                 smellSourceArrayList.add(smellSource);
             }
+        }
         }
     }
 }

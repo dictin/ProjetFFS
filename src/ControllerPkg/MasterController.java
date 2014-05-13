@@ -70,6 +70,7 @@ public class MasterController extends Thread{
                 this.sleep(sleepTime);
                 this.time++;
 
+
                 //TODO remove this test
 
                 if (time==200){
