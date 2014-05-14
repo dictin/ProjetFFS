@@ -73,14 +73,6 @@ public class MapData {
         }
     }
 
-    public static void disperseSmellSources(Case selectedCase){
-        for (int i=0;i<selectedCase.getSmellSourceArrayList().size();i++){
-            Smell smell=selectedCase.getSmellSourceArrayList().get(i);
-            selectedCase.getSortedSmellArrayList().add(smell);
-            disperseSmell(selectedCase, smell);
-        }
-    }
-
 
     public static int getSmellThreshold(Smell smell, Case selectedCase) {
         int threshold = 0;
@@ -95,7 +87,6 @@ public class MapData {
     }
 
     public static void disperseSmellSources(Case selectedCase) {
-
         for (int i = 0; i < selectedCase.getSortedSmellSourceArrayList().size(); i++) {
             Smell smell = selectedCase.getSortedSmellSourceArrayList().get(i).clone();
             selectedCase.addToSortedSmellArrayList(smell);
