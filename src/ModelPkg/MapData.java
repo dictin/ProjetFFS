@@ -18,6 +18,7 @@ public class MapData {
     }
 
     private static ArrayList<String> newsList = new ArrayList<String>();
+    private static int[] fourmilierStats = new int[]{13,13,13};
 
 
     public static void updateSmells() {
@@ -72,46 +73,11 @@ public class MapData {
         }
     }
 
-    public static void updateSmellsBkup() {
-        Case selectedCase;
-
-        /*
-        Pseudo code edition:
-        Wipe all smells
-        add all new smell sources
-            Overwrite lesser SS with same ID
-        fade all SS
-         */
-
-
-        //Wipes temporary smells
-        for (int i = 0; i < map.length; i++) {
-            for (int j = 0; j < map[i].length; j++) {
-                selectedCase = map[i][j];
-                selectedCase.getSortedSmellArrayList().clear();
-            }
-        }
-        //Adds smell sources
-        for (int i = 0; i < map.length; i++) {
-            for (int j = 0; j < map[i].length; j++) {
-                selectedCase = map[i][j];
-                if (selectedCase.getOccupant() != null) {
-                    selectedCase.removeSmellSource(selectedCase.getOccupant().getSmell());
-                    selectedCase.addToSortedSmellSourceArrayList(selectedCase.getOccupant().getSmell().clone());
-                }
-                if (selectedCase.getWildObject().getType() != 0) {
-                    selectedCase.removeSmellSource(selectedCase.getWildObject().getSmellSource());
-                    selectedCase.addToSortedSmellSourceArrayList(selectedCase.getWildObject().getSmellSource().clone());
-                }
-            }
-        }
-        casesWithSmellSources = getCasesWithSmellSources();
-        if (casesWithSmellSources != null) {
-            System.out.println("not null");
-            for (int i = 0; i < casesWithSmellSources.size(); i++) {
-                disperseSmellSources(casesWithSmellSources.get(i));
-                casesWithSmellSources.get(i).fadeSourceSmells();
-            }
+    public static void disperseSmellSources(Case selectedCase){
+        for (int i=0;i<selectedCase.getSmellSourceArrayList().size();i++){
+            Smell smell=selectedCase.getSmellSourceArrayList().get(i);
+            selectedCase.getSortedSmellArrayList().add(smell);
+            disperseSmell(selectedCase, smell);
         }
     }
 
@@ -311,5 +277,15 @@ public class MapData {
 
     public static void setAnimalList(ArrayList<Animal> animalList) {
         MapData.animalList = animalList;
+    }
+    public static int[] getFourmilierStatsTab() {
+        return fourmilierStats;
+    }
+
+    public static void setFourmilierStats(int position) {
+        fourmilierStats[position] = fourmilierStats[position];
+    }
+    public static int getFourmilierStats(int position) {
+        return fourmilierStats[position];
     }
 }
