@@ -16,10 +16,8 @@ public class InventoryActivateButtonHandler implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if(playerDataController.isSelectedItem()){
-            System.out.println("LOL!");
         }
         else{
-            System.out.println("Noup!");
         }
     }
 }

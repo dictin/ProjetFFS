@@ -38,8 +38,6 @@ public class MasterController extends Thread{
         QuestionData.initialize();
         this.sleepTime=1000/FPS;
 
-        //TODO initialize eventController
-
         mF=new MasterFrame(this);
         this.start();
 
@@ -67,18 +65,11 @@ public class MasterController extends Thread{
         while (true){
             try {
 
+                //TODO tester infinite loop (Si runnin arrete, break glass; it's an emergency)
+                //System.out.println("Runnin'");
+
                 this.sleep(sleepTime);
                 this.time++;
-
-
-                //TODO remove this test
-
-                if (time==200){
-                    MapData.getCase(new Point(0,0)).getSmellSourceArrayList().add(new SmellSource(0,100,1, SmellType.FOE));
-                }
-                if (time==250){
-                MapData.getCase(new Point(5,0)).getSmellSourceArrayList().add(new SmellSource(0,75,1, SmellType.ALLY));
-                }
 
 
 
@@ -93,7 +84,6 @@ public class MasterController extends Thread{
                     else{
                     int duration=getPlayerDataController().getCurrentEvent().getDuration();
                     if (duration==0){
-                        System.out.println("whats the weather");
                         getPlayerDataController().setCurrentEvent(eventRoller.whatIsTheWeather());
                         getPlayerDataController().getCurrentEvent().firstTimeActivation();
                     }
@@ -138,7 +128,6 @@ public class MasterController extends Thread{
 
     public void menuButtonClick(String menuButtonName){
 
-        //TODO remplacer chaîne de ifs par un switch
         if (menuButtonName=="quit_button"){
             System.exit(0);
         }

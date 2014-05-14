@@ -20,11 +20,11 @@ public class QuestionsHandler implements MouseListener{
     public void mouseClicked(MouseEvent e) {
         answerClick = (JLabel)e.getSource();
         if(answerClick.getText().equals(actualQuestion.getAnswer2())){
-            System.out.println("Bonne réponse!");
+            //TODO avertir joueur d'une bonne réponse avec son
              actualQuestion.setQuestionTaTuBienRepondu(1);
 
         }else{
-            System.out.println("Mauvaise réponse");
+            //TODO avertir joueur d'une mauvaise réponse avec son
             actualQuestion.setQuestionTaTuBienRepondu(-1);
         }
 

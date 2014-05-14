@@ -16,7 +16,6 @@ public class Behavior {
     }
 
     public static Point drunk(){
-        System.out.println("Hic! I'm drunk");
         Random random = new Random();
 
         int rndobjectifX = 0;

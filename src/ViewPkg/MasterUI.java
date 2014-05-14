@@ -236,8 +236,6 @@ public class MasterUI extends JPanel implements Observer{
 
             if(positionActualTvaNews == positionMaxTvaNews){
                 mouvement = 0;
-
-                System.out.println("longeur : "+MapData.getNewsList().size());
                 if(MapData.getNewsList().size()>=1){
                     mouvement =1;
                     tvaNews.setText(MapData.getNewsList().remove(0));
@@ -251,11 +249,9 @@ public class MasterUI extends JPanel implements Observer{
             }
         }
         /*if(MasterController.getTime() % 120 == 0 && !MapData.getNewsList().isEmpty()){
-            System.out.println("Temps de changer les news");
             tvaNews.setText(MapData.getNewsList().remove(0));
         }*/
         if(actualQuestion != null && actualQuestion.getQuestionTaTuBienRepondu()==1){
-            System.out.println("Trouvé!");
             actualQuestion = masterController.getChamanController().getQuestion();
             questionLabel.setVisible(false);
             questionLabel.setText("Stéphane est un dieu");

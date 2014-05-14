@@ -68,7 +68,6 @@ public abstract class Animal {
         this.animalID = animalID;
 
         this.name +=" le "+this.nameGen;
-        System.out.println(this.name);
 
 
         this.team = team;
@@ -99,9 +98,6 @@ public abstract class Animal {
 
         this.smell = new SmellSource(animalID, this.smellIntensity, this.team, smellType);
 
-        System.out.println("stats:");
-        System.out.println("speed: "+speed);
-        System.out.println("endurance: "+endurance);
         sprite=Toolkit.getDefaultToolkit().getImage("IMG/"+species+".png");
     }
 
@@ -168,7 +164,8 @@ public abstract class Animal {
         if (health<=0){
             this.isDead();
             MasterController.disposeAnimal(this);
-            System.out.println("I am dead.");
+
+            //TODO kill fourmilier
             MapData.addNewsList(this.getName() + " est malheureusement décédé!!");
             masterController.victimes();
         }
