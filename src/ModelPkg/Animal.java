@@ -245,11 +245,11 @@ public abstract class Animal {
     }
 
     public void activate(int time){
-        //TODO reset smellSource of case
-            System.out.println("Mon tour");
-            VirtualFutureAction virtualFutureAction = null;
-            virtualFutureAction = Behavior.evaluateBestObjective(this.position, this.mentalState, this.moral);
-            this.realizeFutureAction(virtualFutureAction);
+        decreaseHealth(((25 - endurance) / 2));
+
+        VirtualFutureAction virtualFutureAction;
+        virtualFutureAction = Behavior.evaluateBestObjective(this.position, this.mentalState, this.moral, this.smellThreshold);
+        this.realizeFutureAction(virtualFutureAction);
 
             if (this.actionToCommit == ActionTypes.GO_TO_LOCATION || this.actionToCommit == ActionTypes.FLEE_TO_LOCATION || this.actionToCommit == ActionTypes.RUN_AT_ENEMY){
                 this.toMove = true;
@@ -259,18 +259,17 @@ public abstract class Animal {
                 if (this.actionToCommit == ActionTypes.ATTACK_AT_LOCATION){
                     this.attackOpponent(MapData.getCase(new Point(position.x+objective.x, position.y+objective.y)).getOccupant(), this.attack);
                 }else if (this.actionToCommit == ActionTypes.PICKUP_FROM_LOCATION){
-                    if (MapData.getCase(new Point(position.x+objective.x, position.y+objective.y)).getWildObject() instanceof FoodSource){
-                        FoodSource foodSource = ((FoodSource)MapData.getCase(new Point(position.x+objective.x, position.y+objective.y)).getWildObject());
-                        int foodAvailable;
-                        foodAvailable = foodSource.getFoodQuantity();
+                    FoodSource foodSource = ((FoodSource)MapData.getCase(new Point(position.x+objective.x, position.y+objective.y)).getWildObject());
+                    int foodAvailable;
+                    foodAvailable = foodSource.getFoodQuantity();
 
-                        if (foodAvailable >= this.grabQuantity){
-                            this.foodCarried = this.grabQuantity;
-                            foodSource.setFoodQuantity(foodAvailable-this.grabQuantity);
-                        }else if (foodAvailable < this.grabQuantity){
-                            this.foodCarried = foodAvailable;
-                            foodSource.setFoodQuantity(0);
-                        }
+                    if (foodAvailable >= this.grabQuantity){
+                        this.foodCarried = this.grabQuantity;
+                        foodSource.setFoodQuantity(foodAvailable-this.grabQuantity);
+                    }else if (foodAvailable < this.grabQuantity){
+                        this.foodCarried = foodAvailable;
+                        foodSource.setFoodQuantity(0);
+
                     }
 
                 }else if (this.actionToCommit == ActionTypes.DROP_TO_LOCATION){

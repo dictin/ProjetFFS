@@ -261,7 +261,10 @@ public class Behavior {
 
                 }
 
-                if (enemyNear){
+                if (nearFoodSource){
+                    return null;
+
+                }else if (enemyNear){
                     if (Behavior.moralCheck(moralValue)){
                         for (int i = 0; i < Behavior.SUBSECTION_SIZE; i++){
                             for (int j = 0; j < Behavior.SUBSECTION_SIZE; j++){
