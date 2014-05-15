@@ -279,9 +279,9 @@ public class MasterUI extends JPanel implements Observer{
             }
         numberOfNews = MapData.getNewsList().size();
 
-        if(Laboratory.isFinish()){
-        laboratoryLabel.setVisible(false);
-        }
+       // if(Laboratory.isFinish()){
+        //laboratoryLabel.setVisible(false);
+        //}
 
 
     }

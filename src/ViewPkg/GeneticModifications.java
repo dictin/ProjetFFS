@@ -11,6 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class GeneticModifications extends JLabel {
     private JLabel laboratory = new JLabel();
@@ -26,22 +28,51 @@ public class GeneticModifications extends JLabel {
     private Color color = new Color(Integer.parseInt("510968", 19));
     private JButton finish = new JButton("Finish");
     private JButton reset = new JButton("Réinisialiser");
-    private JLabel cost = new JLabel("Coût: "+ Laboratory.getCost());
+    private JLabel cost = new JLabel("Coût futur de cette nouvelle race: "+ Laboratory.getCost());
     private int modificationCost = 0;
+    private JLabel blocSlider = new JLabel();
 
-    private JLabel speed = new JLabel("Vitesse");
-    private JLabel endurance = new JLabel("Endurance");
-    private JLabel attack = new JLabel("Attaque");
-    private JLabel defence = new JLabel("Défence");
-    private JLabel sensitivity = new JLabel("Odorat");
-    private JLabel sensitivity2 = new JLabel("Sensible");
-    private JLabel smellStrength = new JLabel("Odeur");
+    private JButton speed = new JButton("Vitesse");
+    private JButton endurance = new JButton("Endurance");
+    private JButton attack = new JButton("Attaque");
+    private JButton defence = new JButton("Défence");
+    private JButton sensitivity = new JButton("Odorat");
+    private JButton smellStrength = new JButton("Odeur");
 
     public GeneticModifications(final MasterController controller){
         this.setOpaque(true);
         this.setBackground(color);
         this.setSize(500,375);
         this.controller=controller;
+
+        blocSlider.setSize(270, 230);
+        blocSlider.setLocation(112, 100);
+        this.add(blocSlider);
+        blocSlider.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
 
         laboratoryTitle.setSize(450,23);
         laboratoryExplination1.setSize(400,20);
@@ -54,13 +85,25 @@ public class GeneticModifications extends JLabel {
         this.add(laboratoryExplination1);
         this.add(laboratoryExplination2);
 
-        speed.setSize(50, 20);
-        speed.setLocation(55, 95);
+        speed.setSize(90, 30);
+        speed.setLocation(20, 95);
         this.add(speed);
-        endurance.setSize(70, 20);
+        speed.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateSlider("statsSpeed");
+            }
+        });
+        endurance.setSize(100, 30);
         endurance.setLocation(387, 95);
         this.add(endurance);
-        speedEndurance = new JSlider(JSlider.HORIZONTAL,1, 24, MapData.getFourmilierStats(0));
+        endurance.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateSlider("statsEndurance");
+            }
+        });
+        speedEndurance = new JSlider(JSlider.HORIZONTAL,1, 24, MapData.getFourmilierActualRaceStats(0));
         speedEndurance.setMajorTickSpacing(2);
         speedEndurance.setMinorTickSpacing(1);
         speedEndurance.setPaintTicks(true);
@@ -70,18 +113,26 @@ public class GeneticModifications extends JLabel {
         speedEndurance.setFont(font);
         speedEndurance.setBackground(color);
         this.add(speedEndurance);
-        speedEndurance.addChangeListener(new SliderListener());
 
-
-
-
-        attack.setSize(50, 20);
-        attack.setLocation(55, 195);
+        attack.setSize(90, 30);
+        attack.setLocation(20, 185);
         this.add(attack);
-        defence.setSize(70, 20);
-        defence.setLocation(387, 195);
+        attack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateSlider("statsAttack");
+            }
+        });
+        defence.setSize(90, 30);
+        defence.setLocation(387, 185);
         this.add(defence);
-        attackDefence = new JSlider(JSlider.HORIZONTAL,1, 24, MapData.getFourmilierStats(1));
+        defence.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateSlider("statsDefence");
+            }
+        });
+        attackDefence = new JSlider(JSlider.HORIZONTAL,1, 24, MapData.getFourmilierActualRaceStats(1));
         attackDefence.setMajorTickSpacing(2);
         attackDefence.setMinorTickSpacing(1);
         attackDefence.setPaintTicks(true);
@@ -90,19 +141,27 @@ public class GeneticModifications extends JLabel {
         attackDefence.setLocation(107, 190);
         attackDefence.setFont(font);
         attackDefence.setBackground(color);
-        attackDefence.addChangeListener(new SliderListener());
         this.add(attackDefence);
 
-        sensitivity.setSize(50, 20);
-        sensitivity.setLocation(55, 290);
+        sensitivity.setSize(90, 30);
+        sensitivity.setLocation(20, 275);
         this.add(sensitivity);
-        sensitivity2.setSize(50, 20);
-        sensitivity2.setLocation(55, 305);
-        this.add(sensitivity2);
-        smellStrength.setSize(70, 20);
-        smellStrength.setLocation(387, 295);
+        sensitivity.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateSlider("statsSensitivity");
+            }
+        });
+        smellStrength.setSize(90, 30);
+        smellStrength.setLocation(387, 275);
         this.add(smellStrength);
-        sensitivitySmellStrength = new JSlider(JSlider.HORIZONTAL,1, 24, MapData.getFourmilierStats(2));
+        smellStrength.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateSlider("statsSmell");
+            }
+        });
+        sensitivitySmellStrength = new JSlider(JSlider.HORIZONTAL,1, 24, MapData.getFourmilierActualRaceStats(2));
         sensitivitySmellStrength.setMajorTickSpacing(2);
         sensitivitySmellStrength.setMinorTickSpacing(1);
         sensitivitySmellStrength.setPaintTicks(true);
@@ -111,8 +170,8 @@ public class GeneticModifications extends JLabel {
         sensitivitySmellStrength.setLocation(107, 280);
         sensitivitySmellStrength.setFont(font);
         sensitivitySmellStrength.setBackground(color);
-        sensitivitySmellStrength.addChangeListener(new SliderListener());
         this.add(sensitivitySmellStrength);
+
 
         finish.setSize(100,23);
         finish.setLocation(390, 345);
@@ -134,11 +193,13 @@ public class GeneticModifications extends JLabel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("time to reset!");
+                reset();
             }
         });
     this.add(reset);
-        cost.setSize(100,23);
-        cost.setLocation(230,345);
+
+        cost.setSize(230,23);
+        cost.setLocation(150,345);
         this.add(cost);
         if(Laboratory.isMoving()){
             System.out.println("Actual: " + speedEndurance.getValue());
@@ -147,34 +208,52 @@ public class GeneticModifications extends JLabel {
     }
 
     public void finish(){
-        System.out.println(Laboratory.isFinish());
-        System.out.println(speedEndurance.getValue());
-        System.out.println(attackDefence.getValue());
-        System.out.println(sensitivitySmellStrength.getValue());
-        modificationCost = modificationCost+Math.abs(Laboratory.getSpeedEnduranceBefore()-speedEndurance.getValue())*10;
-        modificationCost = modificationCost+Math.abs(Laboratory.getAttackDefenceBefore()-attackDefence.getValue())*10;
-        modificationCost = modificationCost+Math.abs(Laboratory.getSensitivitySmellStrengthBefore()-sensitivitySmellStrength.getValue())*10;
         System.out.println("Cout: "+modificationCost);
-        if(controller.getPlayerDataController().getFood() -modificationCost >= 0 ){
-            Laboratory.setFinish(true);
-            Laboratory.setCost(modificationCost);
-            controller.getPlayerDataController().spendFood(modificationCost);
+        Laboratory.setFinish(true);
+        Laboratory.setCost(modificationCost);
+        if(controller.getPlayerDataController().getLevel() ==2){
             Laboratory.setSpeedEnduranceBefore(speedEndurance.getValue());
             Laboratory.setAttackDefenceBefore(attackDefence.getValue());
             Laboratory.setSensitivitySmellStrengthBefore(sensitivitySmellStrength.getValue());
+            int[] newStats= new int[]{speedEndurance.getValue(),attackDefence.getValue(),sensitivitySmellStrength.getValue()};
+            MapData.setFourmilierFixRaceStats1(newStats);
         }
-        else{
-            JOptionPane.showMessageDialog(null, "Nourriture insuffisante");
-            reset();
-        }
+
     }
     public void reset(){
         Laboratory.setReset(true);
         Laboratory.setCost(0);
-        cost.setText("Coût: " + Laboratory.getCost());
+        cost.setText("Coût futur de cette nouvelle race: " + Laboratory.getCost());
         speedEndurance.setValue(Laboratory.getSpeedEnduranceBefore());
         attackDefence.setValue(Laboratory.getAttackDefenceBefore());
         sensitivitySmellStrength.setValue(Laboratory.getSensitivitySmellStrengthBefore());
+    }
+    public void updateSlider(String statsName){
+        switch (statsName){
+            case "statsSpeed":
+                speedEndurance.setValue(speedEndurance.getValue()-1);
+                break;
+            case "statsEndurance":
+                speedEndurance.setValue(speedEndurance.getValue()+1);
+                break;
+            case "statsAttack":
+                attackDefence.setValue(attackDefence.getValue()-1);
+                break;
+            case "statsDefence":
+                attackDefence.setValue(attackDefence.getValue()+1);
+                break;
+            case "statsSensitivity":
+                sensitivitySmellStrength.setValue(sensitivitySmellStrength.getValue()-1);
+                break;
+            case "statsSmell":
+                sensitivitySmellStrength.setValue(sensitivitySmellStrength.getValue()+1);
+                break;
+        }
+        modificationCost = modificationCost+Math.abs(Laboratory.getSpeedEnduranceBefore()-speedEndurance.getValue())*10;
+        modificationCost = modificationCost+Math.abs(Laboratory.getAttackDefenceBefore()-attackDefence.getValue())*10;
+        modificationCost = modificationCost+Math.abs(Laboratory.getSensitivitySmellStrengthBefore()-sensitivitySmellStrength.getValue())*10;
+        cost.setText("Coût futur de cette nouvelle race: " + modificationCost);
+
     }
 }
 

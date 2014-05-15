@@ -306,18 +306,12 @@ public abstract class Animal {
         }else if (mentalState == MentalStates.RETURN_TO_BASE && actionToCommit == ActionTypes.DROP_TO_LOCATION){
             this.mentalState = MentalStates.NEUTRAL;
         }
-
         if (this.health <= this.MAX_HEALTH/4){
             this.mentalState = MentalStates.WEAK;
         }else if (this.carriedFood > 0){
             this.mentalState = MentalStates.RETURN_TO_BASE;
         }
-
-
-
-
     }
-
     public boolean isDead(){
         if (health<=0){
             System.out.println("in isDead");
