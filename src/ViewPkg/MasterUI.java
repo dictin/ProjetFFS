@@ -11,7 +11,7 @@ import ViewPkg.Menus.*;
 import javax.swing.*;
 import java.awt.*;
 
-public class MasterUI extends JPanel implements Observer{
+public class MasterUI extends JLayeredPane implements Observer{
 
 
     private int gridEndPointX;
@@ -80,17 +80,17 @@ public class MasterUI extends JPanel implements Observer{
         for (int i=0; i<xGridSize; i++){
             for (int j=0; j<tailleYGrille; j++){
                 visualCasesGrid[i][j]=new VisualCase(i, j, visualCasesGridOrigin, masterController);
-                this.add(visualCasesGrid[i][j]);
+                this.add(visualCasesGrid[i][j], UILayers.MAP);
             }
         }
         quitIcon = new GotoMenuButton(masterController, "quit_button", new Dimension(25,25), new Color(Integer.parseInt("314159",16)));
-        this.add(quitIcon);
+        this.add(quitIcon, UILayers.MENUS);
         quitIcon.setLocation(this.getWidth()-quitIcon.getWidth(), 0);
 
         gridEndPointX=25+xGridSize*VisualCase.CASE_SIDE_PIXEL_SIZE;
 
         selectedMenu=mainMenu;
-        this.add(selectedMenu);
+        this.add(selectedMenu, UILayers.MENUS);
         selectedMenu.setLocation(gridEndPointX+25, 25);
         selectedMenu.setVisible(true);
 
@@ -100,7 +100,7 @@ public class MasterUI extends JPanel implements Observer{
 //        gridTriggerZone= new GridTriggerZone(masterController, xGridSize);
 
 
-        this.add(menuTriggerZone);
+        this.add(menuTriggerZone, UILayers.MENUS);
         menuTriggerZone.setLocation(gridEndPointX, 25);
 //TODO kill gridTriggerZone from all of existence.
 //        this.add(gridTriggerZone);
@@ -115,28 +115,28 @@ public class MasterUI extends JPanel implements Observer{
         labelFood.setSize(92,9);
         labelFood.setForeground(Color.white);
         labelFood.setLocation(660,590); // 10,525
-        this.add(labelFood);
+        this.add(labelFood, UILayers.MAP);
         //population
         labelPopulation.setSize(87,16);
         labelPopulation.setForeground(Color.white);
         labelPopulation.setLocation(660,600);
-        this.add(labelPopulation);
+        this.add(labelPopulation, UILayers.MAP);
         //Victimes
         labelDeaths.setSize(77,9);
         labelDeaths.setForeground(Color.white);
         labelDeaths.setLocation(660,617);
-        this.add(labelDeaths);
+        this.add(labelDeaths, UILayers.MAP);
         //Level
         labelLevel.setSize(58,9);
         labelLevel.setForeground(Color.white);
         labelLevel.setLocation(660,630);
-        this.add(labelLevel);
+        this.add(labelLevel, UILayers.MAP);
         //Nourriture qu'il reste à ramasser avant le prochain niveau
         labelPickUpFood.setText("Food to pick up: "+masterController.getPlayerDataController().getNumberFoodToGo());
         labelPickUpFood.setSize(120,14);
         labelPickUpFood.setForeground(Color.white);
         labelPickUpFood.setLocation(660,640);
-        this.add(labelPickUpFood);
+        this.add(labelPickUpFood, UILayers.MAP);
         //Score
         labelScore.setSize(87,9);
         labelScore.setForeground(Color.white);
