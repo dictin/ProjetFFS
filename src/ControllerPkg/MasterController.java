@@ -71,9 +71,7 @@ public class MasterController extends Thread{
                 this.sleep(sleepTime);
                 this.time++;
 
-                for(Animal v : MapData.getAnimalList()){
-                    v.activate(this.time);
-                }
+
 
 
                 if (time!=0&&time%smellDecayTime==0){
@@ -199,13 +197,6 @@ public class MasterController extends Thread{
             toMoveAnimals.remove(0);
 
 
-                this.disposeAnimal(MapData.getCase(oldPosition).getOccupant());
-                MapData.getCase(newPosition).setOccupant(toMoveAnimals.get(i));
-                toMoveAnimals.get(i).setToMove(false);
-
-                animalArrayList.add(toMoveAnimals.indexOf(toMoveAnimals.get(i)), toMoveAnimals.get(i));
-                MapData.setAnimalList(animalArrayList);
-            }
         }
     }
 }

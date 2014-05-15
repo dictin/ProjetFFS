@@ -48,7 +48,7 @@ public class Behavior {
 
     private static boolean isThereNowhereToGo(Point origin) {
         boolean nowhereToGo = true;
-        Case[][] subsection = MapData.getSubsection(origin);
+        Case[][] subsection = MapData.getSubsection2(origin);
         for(int i = 0; i < subsection.length; i++){
             for(int j = 0; j < subsection[i].length; j++){
                 if(subsection[i][j].getOccupant() == null && subsection[i][j].getWildObject().getType() == WildObject.EMPTY_ID){
@@ -62,7 +62,7 @@ public class Behavior {
     }
 
     private static boolean isThereASmell(Point location){
-        Case[][] subsection = MapData.getSubsection(location);
+        Case[][] subsection = MapData.getSubsection2(location);
         boolean isEmpty = true;
 
         for(int i = 0; i < subsection.length && isEmpty; i++){
@@ -78,7 +78,7 @@ public class Behavior {
 
     public static VirtualFutureAction evaluateBestObjective(Point position, MentalStates mentalState, int moralValue){
         if (Behavior.isThereASmell(position)){
-            Case[][] subsection = MapData.getSubsection(position);
+            Case[][] subsection = MapData.getSubsection2(position);
             boolean nearFoodSource = false;
             if (mentalState == MentalStates.WEAK){
                 Point strongestSmellPoint = null;
