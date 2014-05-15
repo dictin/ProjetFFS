@@ -15,10 +15,14 @@ public class ShopMenu extends ContextualMenu{
 
     JList<String> shopList;
     JScrollPane scrollPane;
-    JButton buyButton = new JButton("Acheter");
+    ImageIcon buyButtonImage=new ImageIcon("IMG/BUY_BUTTON.ico");
+    JButton buyButton=new JButton();
 
     public ShopMenu(final MasterController controller){
         super(controller, "shop_menu");
+
+        buyButton.setIcon(new ImageIcon("IMG/BUY_BUTTON.jpg"));
+
         this.itemController = controller.getItemController();
         this.shopInfoMenu = new ShopMenuInfo(controller.getShopInfoController());
         this.shopList = new JList<String>(itemController.getItemList());
@@ -30,16 +34,17 @@ public class ShopMenu extends ContextualMenu{
         this.shopList.setLocation(10, 12);
         this.shopList.addListSelectionListener(new ShopListHandler(controller.getShopInfoController().getShopItemInfoData()));
 
+        shopList.setBackground(new Color(186,139,106));
+
         scrollPane = new JScrollPane(this.shopList, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         this.scrollPane.setLocation(10,12);
         this.scrollPane.setSize(300,220);
         this.add(this.scrollPane);
 
         this.buyButton.setSize(100,30);
-        this.buyButton.setLocation(200,238);
+        this.buyButton.setLocation(200, 238);
         this.add(this.buyButton);
         this.buyButton.addActionListener(new BuyButtonHandler(this.shopList, controller));
-        this.setBackground(Color.green);
         this.shopInfoMenu.setLocation(0, 275);
         this.add(this.shopInfoMenu);
     }

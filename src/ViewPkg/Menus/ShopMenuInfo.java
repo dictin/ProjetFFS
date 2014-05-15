@@ -46,8 +46,7 @@ public class ShopMenuInfo extends JComponent implements Observer {
 
     public void paintComponent(Graphics graphics){
         graphics.setColor(Color.ORANGE);
-        graphics.fillRect(0,0,this.getWidth(), this.getHeight());
-
+        graphics.drawImage(Toolkit.getDefaultToolkit().getImage("IMG/DESCRIPTION_BACKGROUND.jpg"),0,0,this);
     }
 
     private String getStatTitle(int statID){
