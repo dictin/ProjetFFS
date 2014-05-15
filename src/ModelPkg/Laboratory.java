@@ -9,7 +9,7 @@ public class Laboratory {
     private static int cost = 0;
 
     //TODO mettre à false pour travailler sur labo
-    private static boolean isFinish = true;
+    private static boolean isFinish = false;
     private static boolean reset = false;
     private static boolean moving = false;
     private static boolean stopMoving = false;

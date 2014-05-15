@@ -201,10 +201,7 @@ public class GeneticModifications extends JLabel {
         cost.setSize(230,23);
         cost.setLocation(150,345);
         this.add(cost);
-        if(Laboratory.isMoving()){
-            System.out.println("Actual: " + speedEndurance.getValue());
-            Laboratory.setMoving(false);
-        }
+
     }
 
     public void finish(){
@@ -227,6 +224,7 @@ public class GeneticModifications extends JLabel {
         speedEndurance.setValue(Laboratory.getSpeedEnduranceBefore());
         attackDefence.setValue(Laboratory.getAttackDefenceBefore());
         sensitivitySmellStrength.setValue(Laboratory.getSensitivitySmellStrengthBefore());
+        modificationCost = 0;
     }
     public void updateSlider(String statsName){
         switch (statsName){

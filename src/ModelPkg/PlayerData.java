@@ -19,6 +19,7 @@ public class PlayerData implements Observable {
     private int dead = 0;
     private boolean selectInventory = false;
     private GameEvent currentEvent;
+    private int questionNumber = 1;
     private ArrayList<TempItemInstance> passiveInstances = new ArrayList<TempItemInstance>(); //Contient les effects des items innactifs de l'inventaire du joueur
     private ArrayList<String> consumablesInventory = new ArrayList<>();
     private ArrayList<String> permanentInventory = new ArrayList<>();
@@ -238,4 +239,11 @@ public class PlayerData implements Observable {
         this.pickUpFood = pickUpFood;
     }
 
+    public int getQuestionNumber() {
+        return questionNumber;
+    }
+
+    public void setQuestionNumber(int questionNumber) {
+        this.questionNumber = questionNumber;
+    }
 }

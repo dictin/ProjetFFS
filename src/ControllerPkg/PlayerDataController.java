@@ -126,7 +126,13 @@ public class PlayerDataController {
        return(this.playerData.getNumberFoodToGo());
     }
 
+    public int getQuestionNumber() {
+        return this.playerData.getQuestionNumber();
+    }
 
+    public void setQuestionNumber(int questionNumber) {
+        this.playerData.setQuestionNumber(questionNumber);
+    }
 
 
 }

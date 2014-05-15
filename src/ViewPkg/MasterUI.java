@@ -67,8 +67,8 @@ public class MasterUI extends JLayeredPane implements Observer{
         this.setLayout(null);
 
         // Pour enlever les questions du chaman et/ou GeneticModification, mettre en commentaire ci-dessous
-        //this.creationQuestion();
-          this.creationGeneticModifications();
+        this.creationQuestion();
+          //this.creationGeneticModifications();
 
 
 
@@ -141,22 +141,22 @@ public class MasterUI extends JLayeredPane implements Observer{
         labelScore.setSize(87,9);
         labelScore.setForeground(Color.white);
         labelScore.setLocation(660,655);
-        this.add(labelScore);
+        this.add(labelScore, UILayers.MAP);
         //Fond derrière les label
         background.setOpaque(true);
         background.setBackground(new Color(Integer.parseInt("324159", 15)));
         background.setSize(127,95);
         background.setLocation(655,580);
-        this.add(background);
+        this.add(background, UILayers.MENUS);
 
-        tvaNews.setText(MapData.getNewsList().remove(0));
+                tvaNews.setText(MapData.getNewsList().remove(0));
         tvaNews.setSize(600, 20);
         tvaNews.setLocation(25, positionActualTvaNews);
         tvaNews.setOpaque(true);
         tvaNews.setBackground(Color.BLACK);
         tvaNews.setFont(new Font("Courier New", Font.PLAIN, 20));
         tvaNews.setForeground(Color.white);
-        this.add(tvaNews);
+        this.add(tvaNews, UILayers.MENUS);
 
 
     }
@@ -170,7 +170,7 @@ public class MasterUI extends JLayeredPane implements Observer{
             selectedMenu.setVisible(false);
             selectedMenu=creationMenu;
             this.remove(selectedMenu);
-            this.add(selectedMenu);
+            this.add(selectedMenu, UILayers.MENUS);
             selectedMenu.setLocation(gridEndPointX + 25, 25);
             selectedMenu.setVisible(true);
             System.out.println("Creation!");
@@ -179,7 +179,7 @@ public class MasterUI extends JLayeredPane implements Observer{
             selectedMenu.setVisible(false);
             selectedMenu=shopMenu;
             this.remove(selectedMenu);
-            this.add(selectedMenu);
+            this.add(selectedMenu, UILayers.MENUS);
             selectedMenu.setLocation(gridEndPointX + 25, 25);
             selectedMenu.setVisible(true);
             System.out.println("potatost");
@@ -189,7 +189,7 @@ public class MasterUI extends JLayeredPane implements Observer{
             selectedMenu.setVisible(false);
             selectedMenu=inventoryMenu;
             this.remove(selectedMenu);
-            this.add(selectedMenu);
+            this.add(selectedMenu, UILayers.MENUS);
             selectedMenu.setLocation(gridEndPointX+25, 25);
             selectedMenu.setVisible(true);
         }
@@ -215,19 +215,19 @@ public class MasterUI extends JLayeredPane implements Observer{
     }
 
     public void creationQuestion(){
-        System.out.println("New question");
         actualQuestion = masterController.getChamanController().getQuestion();
         questionLabel = new Chaman(masterController, actualQuestion);
         questionLabel.setVisible(true);
         questionLabel.setLocation(75, 163);
-        this.add(questionLabel);
+        this.add(questionLabel, UILayers.QUESTIONS);
+        System.out.println("Layer" + UILayers.QUESTIONS.getLayerIndex());
+        System.out.println("LayerMap"+UILayers.MAP.getLayerIndex());
     }
     public void creationGeneticModifications(){
-        System.out.println("Time to me creepy");
         laboratoryLabel = new GeneticModifications(masterController);
         laboratoryLabel.setVisible(true);
         laboratoryLabel.setLocation(75,163);
-        this.add(laboratoryLabel);
+        this.add(laboratoryLabel, UILayers.QUESTIONS);
 
 
     }
@@ -274,21 +274,26 @@ public class MasterUI extends JLayeredPane implements Observer{
 
             }
         }
-        /*if(MasterController.getTime() % 120 == 0 && !MapData.getNewsList().isEmpty()){
-            tvaNews.setText(MapData.getNewsList().remove(0));
-        }*/
+        numberOfNews = MapData.getNewsList().size();
+
         if(actualQuestion != null && actualQuestion.getQuestionTaTuBienRepondu()==1){
+            masterController.getPlayerDataController().setQuestionNumber(masterController.getPlayerDataController().getQuestionNumber()+1);
+            if(masterController.getPlayerDataController().getQuestionNumber()%3 ==0){
+                Laboratory.setFinish(false);
+                creationGeneticModifications();
+            }
+            else{
             actualQuestion = masterController.getChamanController().getQuestion();
             questionLabel.setVisible(false);
             creationQuestion();
             questionLabel.invalidate();
             questionLabel.repaint();
             }
-        numberOfNews = MapData.getNewsList().size();
+            }
 
-       // if(Laboratory.isFinish()){
-        //laboratoryLabel.setVisible(false);
-        //}
+        if(Laboratory.isFinish()){
+        laboratoryLabel.setVisible(false);
+        }
 
 
     }
