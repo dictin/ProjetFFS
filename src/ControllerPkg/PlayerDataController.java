@@ -8,9 +8,7 @@ import ObserverPkg.Observer;
 import javax.swing.*;
 import java.util.ArrayList;
 
-/**
- * Created by Chloé on 14-03-24.
- */
+
 public class PlayerDataController {
 
     private PlayerData playerData;
@@ -82,7 +80,6 @@ public class PlayerDataController {
     }
 
     public void newBorn(){
-        //System.out.println("NewBorn");
         this.playerData.newBorn();
     }
 

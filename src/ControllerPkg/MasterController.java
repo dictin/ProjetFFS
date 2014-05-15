@@ -20,15 +20,12 @@ public class MasterController extends Thread{
     QuestionChamanController chamanController = new QuestionChamanController();
     PlayerDataController playerDataController = new PlayerDataController();
 
-    private static int animalListIndex=0;
-    private int testCounter=0;
     private MasterFrame mF;
     private MasterUI mUI=null;
     private int sleepTime;
     private static int time =0;
     private int smellDecayTime=60;
     private int eventFrequency=300;
-    private static int uniqueID=0;
     private EventController eventRoller;
 
 
@@ -38,28 +35,29 @@ public class MasterController extends Thread{
         QuestionData.initialize();
         this.sleepTime=1000/FPS;
 
-        //TODO initialize eventController
-
         mF=new MasterFrame(this);
         this.start();
 
     }
 
     public static void disposeAnimal(Animal deadAnimal){
-        deadAnimal.getOccupiedCase().setOccupant(null);
-        MapController.getAnimalList().remove(MapController.getAnimalList().indexOf(deadAnimal));
-        animalListIndex--;
+        Point targetPosition=deadAnimal.getPosition();
+        System.out.println("YOU ARE SUPPOSED TO DIE!");
+        MapData.getCase(targetPosition).setOccupant(null);
+        MapController.getAnimalList().remove(deadAnimal);
+        deadAnimal=null;
+        for (int i=0; i<30; i++){
+            for (int j=0; j<30; j++){
+                Case selectedCase=MapData.getCase(new Point(i,j));
+                if (selectedCase==MapData.getCase(targetPosition)){
 
-
+                }
+            }
+        }
+        System.out.println(MapController.getAnimalList().size());
     }
     public void victimes(){
         this.playerDataController.newVictime();
-    }
-
-
-    public static int getUniqueID() {
-        uniqueID++;
-        return uniqueID;
     }
 
     @Override
@@ -67,23 +65,15 @@ public class MasterController extends Thread{
         while (true){
             try {
 
+                //TODO tester infinite loop (Si runnin arrete, break glass; it's an emergency)
+                //System.out.println("Runnin'");
+
                 this.sleep(sleepTime);
                 this.time++;
 
                 for(Animal v : MapData.getAnimalList()){
                     v.activate(this.time);
                 }
-
-
-                //TODO remove this test
-
-                if (time==200){
-                    MapData.getCase(new Point(0,0)).getSmellSourceArrayList().add(new SmellSource(0,100,1, SmellType.FOE));
-                }
-                if (time==250){
-                MapData.getCase(new Point(5,0)).getSmellSourceArrayList().add(new SmellSource(0,75,1, SmellType.ALLY));
-                }
-
 
 
                 if (time!=0&&time%smellDecayTime==0){
@@ -97,7 +87,6 @@ public class MasterController extends Thread{
                     else{
                     int duration=getPlayerDataController().getCurrentEvent().getDuration();
                     if (duration==0){
-                        System.out.println("whats the weather");
                         getPlayerDataController().setCurrentEvent(eventRoller.whatIsTheWeather());
                         getPlayerDataController().getCurrentEvent().firstTimeActivation();
                     }
@@ -142,7 +131,6 @@ public class MasterController extends Thread{
 
     public void menuButtonClick(String menuButtonName){
 
-        //TODO remplacer chaîne de ifs par un switch
         if (menuButtonName=="quit_button"){
             System.exit(0);
         }
@@ -191,24 +179,24 @@ public class MasterController extends Thread{
         ArrayList<Animal> animalArrayList = MapData.getAnimalList();
         ArrayList<Animal> toMoveAnimals = new ArrayList<>();
         for(int i = 0; i < animalArrayList.size(); i++){
-            if (animalArrayList.get(i).isToMove()){
-                toMoveAnimals.add(animalArrayList.indexOf(animalArrayList.get(i)),animalArrayList.get(i));
+            if (animalArrayList.get(i).isToMove(MasterController.getTime())){
+                toMoveAnimals.add(animalArrayList.get(i));
             }
         }
 
-        for (int i = 0; i < toMoveAnimals.size(); i++){
-            if (toMoveAnimals.size() != 0){
+        while (!toMoveAnimals.isEmpty()){
 
+            Point oldPosition = toMoveAnimals.get(0).getPosition();
+            Point newPosition;
 
+            toMoveAnimals.get(0).activate(MasterController.getTime());
 
-                Point oldPosition = animalArrayList.get(i).getOldPosition();
+            newPosition = toMoveAnimals.get(0).getPosition();
 
-                Point newPosition;
+            MapData.getCase(oldPosition).setOccupant(null);
+            MapData.getCase(newPosition).setOccupant(toMoveAnimals.get(0));
 
-                //toMoveAnimals.get(i).activate(MasterController.getTime());
-
-                newPosition = animalArrayList.get(i).getPosition();
-
+            toMoveAnimals.remove(0);
 
 
                 this.disposeAnimal(MapData.getCase(oldPosition).getOccupant());

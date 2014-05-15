@@ -98,7 +98,6 @@ public enum Items {
 
 
     public void firstActivation(){
-        System.out.println("Item activation");
         ItemEffect effect = this.getEffect();
         if (effect instanceof BoostEffect){
             TempItemInstance instance = ((BoostEffect) effect).getTempInstance();

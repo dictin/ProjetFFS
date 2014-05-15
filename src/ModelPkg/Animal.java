@@ -1,8 +1,9 @@
 package ModelPkg;
 
 import ControllerPkg.MasterController;
-import ModelPkg.WildObjects.FoodSource;
+import ModelPkg.WildObjects.*;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
@@ -37,12 +38,12 @@ public abstract class Animal {
     private int defence;
 
     private int smellSensitivity;
-        private int smellThreshold;
+    private int smellThreshold;
     private int smellStrengthStat;
-        private int smellIntensity;
+    private int smellIntensity;
 
     private int grabQuantity;
-        private int carriedFood = 0;
+    private int carriedFood = 0;
     private int equipQuantity;
 
     private int team; // -1: player, 1: enemy 1, 2: enemy 2
@@ -92,7 +93,7 @@ public abstract class Animal {
         this.moral = 25; //TODO determiner comment evaluer le moral;
         //TODO balance this and add a smell
         this.smellIntensity=this.getSmellStrengthStat()*8;
-        this.smellThreshold=this.getSmellStrengthStat();
+        this.smellThreshold=100/this.getSmellSensitivity();
         //this.smell=new SmellSource(MasterController.getUniqueID(),);
 
 
@@ -139,7 +140,7 @@ public abstract class Animal {
     }
 
     public void setPosition(Point position) {
-
+        System.out.println("Moved");
         this.position = position;
     }
 
@@ -168,7 +169,8 @@ public abstract class Animal {
         if (health<=0){
             this.isDead();
             MasterController.disposeAnimal(this);
-            System.out.println("I am dead.");
+
+            //TODO kill fourmilier
             MapData.addNewsList(this.getName() + " est malheureusement décédé!!");
             masterController.victimes();
         }
@@ -201,6 +203,8 @@ public abstract class Animal {
     public int getSmellSensitivity() {
         return smellSensitivity;
     }
+
+    public int getSmellThreshold() {return smellThreshold;}
 
     public int getSmellStrengthStat() {
         return smellStrengthStat;
@@ -243,8 +247,7 @@ public abstract class Animal {
 
     public void activate(int time){
         //TODO reset smellSource of case
-
-        if (time!=birthday&&(time-birthday)%activationFrequency==0){
+            System.out.println("Mon tour");
             VirtualFutureAction virtualFutureAction = null;
             virtualFutureAction = Behavior.evaluateBestObjective(this.position, this.mentalState, this.moral);
             this.realizeFutureAction(virtualFutureAction);
@@ -278,7 +281,6 @@ public abstract class Animal {
 
 
             decreaseHealth(((25 - endurance) / 2));
-    }
 }
 
     private void attackOpponent(Animal animal, int damageAmount) {
@@ -341,7 +343,15 @@ public abstract class Animal {
         return oldPosition;
     }
 
-    public void setToMove(boolean toMove){
+    public void setToMove(boolean toMove) {
         this.toMove = toMove;
+    }
+
+    public boolean isToMove(int time) {
+        boolean answer=false;
+        if (time!=birthday&&(time-birthday)%activationFrequency==0){
+            answer=true;
+        }
+        return answer;
     }
 }

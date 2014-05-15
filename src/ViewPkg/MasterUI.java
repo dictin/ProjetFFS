@@ -2,6 +2,7 @@ package ViewPkg;
 
 import ControllerPkg.MasterController;
 import ControllerPkg.PlayerDataController;
+import ModelPkg.Laboratory;
 import ModelPkg.MapData;
 import ModelPkg.QuestionChaman;
 import ObserverPkg.Observer;
@@ -36,6 +37,7 @@ public class MasterUI extends JPanel implements Observer{
     private int mouvement = 0;
     private int duration = 0;
     private boolean alreadyInMovement = false;
+    private JLabel laboratoryLabel = new JLabel();
 
     JLabel labelPopulation = new JLabel("Population: 0");
     JLabel labelFood = new JLabel("Nourriture: 300");
@@ -63,8 +65,11 @@ public class MasterUI extends JPanel implements Observer{
         this.setLocation(0,0);
         this.setLayout(null);
 
-        // Pour enlever les questions du chaman, mettre en commentaire ci-dessous
+        // Pour enlever les questions du chaman et/ou GeneticModification, mettre en commentaire ci-dessous
         //this.creationQuestion();
+          this.creationGeneticModifications();
+
+
 
         int xGridSize=30;
         int tailleYGrille=30;
@@ -210,6 +215,15 @@ public class MasterUI extends JPanel implements Observer{
         questionLabel.setLocation(75, 163);
         this.add(questionLabel);
     }
+    public void creationGeneticModifications(){
+        System.out.println("Time to me creepy");
+        laboratoryLabel = new GeneticModifications(masterController);
+        laboratoryLabel.setVisible(true);
+        laboratoryLabel.setLocation(75,163);
+        this.add(laboratoryLabel);
+
+
+    }
 
     public void actualiser(){
         quitIcon.actualiser();
@@ -236,8 +250,6 @@ public class MasterUI extends JPanel implements Observer{
 
             if(positionActualTvaNews == positionMaxTvaNews){
                 mouvement = 0;
-
-                System.out.println("longeur : "+MapData.getNewsList().size());
                 if(MapData.getNewsList().size()>=1){
                     mouvement =1;
                     tvaNews.setText(MapData.getNewsList().remove(0));
@@ -251,19 +263,22 @@ public class MasterUI extends JPanel implements Observer{
             }
         }
         /*if(MasterController.getTime() % 120 == 0 && !MapData.getNewsList().isEmpty()){
-            System.out.println("Temps de changer les news");
             tvaNews.setText(MapData.getNewsList().remove(0));
         }*/
         if(actualQuestion != null && actualQuestion.getQuestionTaTuBienRepondu()==1){
-            System.out.println("Trouvé!");
             actualQuestion = masterController.getChamanController().getQuestion();
             questionLabel.setVisible(false);
-            questionLabel.setText("Stéphane est un dieu");
             creationQuestion();
             questionLabel.invalidate();
             questionLabel.repaint();
             }
         numberOfNews = MapData.getNewsList().size();
+
+        if(Laboratory.isFinish()){
+        laboratoryLabel.setVisible(false);
+        }
+
+
     }
 
     private void updateNumericInfos(){

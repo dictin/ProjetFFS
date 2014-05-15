@@ -16,16 +16,10 @@ public class Case implements Observable {
     }
 
     private Point position;
-    private Animal occupant;
+    private Animal occupant=null;
     private WildObject terrain;
     private ArrayList<Smell> smellArrayList = new ArrayList<Smell>();
-
-    public ArrayList<SmellSource> getSmellSourceArrayList() {
-        return smellSourceArrayList;
-    }
-
     private ArrayList<SmellSource> smellSourceArrayList = new ArrayList<SmellSource>();
-
     private ArrayList<Observer> observers = new ArrayList<Observer>();
 
 
@@ -57,10 +51,6 @@ public class Case implements Observable {
         return answer;
     }
 
-    public void addSmellSource(SmellSource smell){
-        this.smellSourceArrayList.add(smell);
-    }
-
     public Animal getOccupant() {
         return occupant;
     }
@@ -70,6 +60,9 @@ public class Case implements Observable {
     }
 
     public void setOccupant(Animal occupant) {
+        if (occupant==null){
+            System.out.println("Set to null");
+        }
         this.occupant = occupant;
         this.updateObservers();
     }
@@ -93,8 +86,13 @@ public class Case implements Observable {
             return emptySmellArrayList;
         }
         else {
-            ArrayList<Smell> unsortedSmellArrayList = this.smellArrayList;
+            ArrayList<Smell> unsortedSmellArrayList = new ArrayList<>();
             ArrayList<Smell> sortedSmellArrayList = new ArrayList<>();
+
+            for (int i=0; i<smellArrayList.size(); i++){
+                unsortedSmellArrayList.add(smellArrayList.get(i).clone());
+            }
+
             while(!unsortedSmellArrayList.isEmpty()){
                 int strongestSmell = 0;
                 int strongestIndex = 0;
@@ -123,8 +121,30 @@ public class Case implements Observable {
             }
         }
         if (inferiorSmellNotFound){
-            System.out.println("Something went horribly wrong here...");
+            System.out.println("ERROR");
         }
+    }
+
+    public ArrayList<SmellSource> getSortedSmellSourceArrayList() {
+        ArrayList<SmellSource> unsortedSmellSourceArrayList=new ArrayList<>();
+        ArrayList<SmellSource> sortedSmellSourceArrayList = new ArrayList<>();
+
+        for (int i=0; i<smellSourceArrayList.size(); i++){
+            unsortedSmellSourceArrayList.add(smellSourceArrayList.get(i).clone());
+        }
+
+            while(!unsortedSmellSourceArrayList.isEmpty()){
+                int strongestSmellIntensity = 0;
+                int strongestIndex = 0;
+                for(int i = 0; i < unsortedSmellSourceArrayList.size(); i++){
+                    if (unsortedSmellSourceArrayList.get(i).getIntensity()>= strongestSmellIntensity){
+                        strongestSmellIntensity = unsortedSmellSourceArrayList.get(i).getIntensity();
+                        strongestIndex = i;
+                    }
+                }
+                sortedSmellSourceArrayList.add(unsortedSmellSourceArrayList.remove(strongestIndex));
+            }
+        return sortedSmellSourceArrayList;
     }
 
     public void fadeSourceSmells() {
@@ -132,12 +152,6 @@ public class Case implements Observable {
             SmellSource smellSource=smellSourceArrayList.get(i);
             smellSource.fade();
             if (smellSource.getIntensity()<=0){
-
-                //TODO remove this if
-                if (!(smellSource.getType()==SmellType.NOTHING)){
-                //System.out.println("removed a smell");
-                }
-
                 smellSourceArrayList.remove(i);
                 i--;
             }
@@ -145,16 +159,32 @@ public class Case implements Observable {
     }
 
 
-    public void removeSmellsource(SmellSource smellSource) {
+    public void removeSmellSource(SmellSource smellSource) {
         if (!smellSourceArrayList.isEmpty()){
         boolean matchNotFound=true;
         for (int i=0; i<smellSourceArrayList.size()&&matchNotFound; i++){
             if (smellSourceArrayList.get(i).getID()==smellSource.getID()){
                 matchNotFound=false;
                 smellSourceArrayList.remove(i);
-                smellSourceArrayList.add(smellSource);
             }
         }
         }
+    }
+
+    public void addToSortedSmellArrayList(Smell smell) {
+        this.smellArrayList.add(smell);
+    }
+
+    public void addToSortedSmellSourceArrayList(SmellSource smellSource) {
+        this.smellSourceArrayList.add(smellSource);
+    }
+
+    public void clearSortedSmellArrayList() {
+        smellArrayList=new ArrayList<>();
+    }
+
+    public Case semiClone(){
+        Case clone=new Case(getPosition(), getOccupant(), getWildObject());
+        return clone;
     }
 }

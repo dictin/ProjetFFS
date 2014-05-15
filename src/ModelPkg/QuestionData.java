@@ -52,19 +52,13 @@ public class QuestionData implements Observable {
                 else if(line.equals("*")){
                     count =0;
                     QuestionChaman questionC = new QuestionChaman(question,answer0,answer1,answer2,answer3);
-                    System.out.println(question);
-                    System.out.println(answer0);
-                    System.out.println(answer1);
-                    System.out.println(answer2);
-                    System.out.println(answer3);
-                    System.out.println("fin question ");
                     questionList.add(questionC);
                 }
                 line = fileEnter.readLine();
             }
             fileEnter.close();
         } catch (IOException e) {
-            System.out.println("introuvable");
+            System.out.println("fichier introuvable");
             e.printStackTrace();
         }
     }

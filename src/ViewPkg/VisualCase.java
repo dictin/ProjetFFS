@@ -52,6 +52,8 @@ public class VisualCase extends JComponent implements Observer {
     public void update() {
         this.backgroundImage = controller.getMapController().getVisualWildObject(caseCoord);
         this.occupantImage = controller.getMapController().getOccupancy(caseCoord);
+        this.invalidate();
         this.repaint();
+        System.out.println("repainted");
     }
 }

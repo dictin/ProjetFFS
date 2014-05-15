@@ -51,7 +51,6 @@ public class EventController {
             masterController.getPlayerDataController().increaseNextEventGravity();
         }
         nextGameEvent.setGravity(eventFinalGravity);
-        //System.out.println(rollResult);
         return nextGameEvent;
     }
 

@@ -142,7 +142,6 @@ public Chaman(final MasterController controller, ModelPkg.QuestionChaman actualQ
 
 public void updateQuestion(){
     repaint();
-    System.out.println("repaiiiint");
     }
 }
 
