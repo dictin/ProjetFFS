@@ -3,6 +3,7 @@ package ViewPkg.Menus;
 import ControllerPkg.CreationController;
 import ControllerPkg.HashtableController;
 import ControllerPkg.MasterController;
+import ControllerPkg.PlayerDataController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,31 +16,37 @@ public class CreationMenu extends ContextualMenu {
     private String[] strings = {"Myrmidon", "TamanduaMexique","TamanduaNord", "Tamanoir"};
     private JButton[] jButtons = new JButton[this.strings.length];
     private CreationController creationController;
+    private MasterController controller;
+    private JButton fourmilier1 = new JButton();
+    private JButton fourmilier2 = new JButton();
+    private JButton fourmilier3 = new JButton();
+    private JButton fourmilier4 = new JButton();
+    private JLabel textfou1 = new JLabel(this.strings[0]);
+    private JLabel textfou2 = new JLabel(this.strings[1]);
+    private JLabel textfou3 = new JLabel(this.strings[2]);
+    private JLabel textfou4 = new JLabel (this.strings[3]);
+
+
+
 
     public CreationMenu(MasterController controller){
         super(controller, "creation_menu");
         this.creationController = new CreationController(controller);
+        this.controller = controller;
         JLabel background = new JLabel();
 
-        JButton fourmilier1 = new JButton();
         fourmilier1.setIcon(new ImageIcon("IMG/MyrmidonIcon.png") );
-        JLabel textfou1 = new JLabel(this.strings[0]);
 
-
-
-
-        JButton fourmilier2 = new JButton();
+        fourmilier2.setVisible(false);
         fourmilier2.setIcon(new ImageIcon("IMG/TamanduaMexiqueIcon.png") );
-        JLabel textfou2 = new JLabel(this.strings[1]);
 
 
-        JButton fourmilier3 = new JButton();
+        fourmilier3.setVisible(false);
         fourmilier3.setIcon(new ImageIcon("IMG/TamanduaNordIcon.png"));
-        JLabel textfou3 = new JLabel(this.strings[2]);
 
-        JButton fourmilier4 = new JButton();
+        fourmilier4.setVisible(false);
         fourmilier4.setIcon(new ImageIcon("IMG/TamanoirIcon.png"));
-        JLabel textfou4 = new JLabel (this.strings[3]);
+
 
         fourmilier1.setSize(100,100);
         textfou1.setSize(200,50);
@@ -52,6 +59,7 @@ public class CreationMenu extends ContextualMenu {
 
         fourmilier2.setSize(100,100);
         textfou2.setSize(200,50);
+        textfou2.setVisible(false);
         fourmilier2.setLocation(15, 220);
         textfou2.setLocation(120,250);
         this.add(textfou2);
@@ -60,6 +68,7 @@ public class CreationMenu extends ContextualMenu {
 
         fourmilier3.setSize(100,100);
         textfou3.setSize(200,50);
+        textfou3.setVisible(false);
         fourmilier3.setLocation(15, 325);
         textfou3.setLocation(120,355);
         this.add(textfou3);
@@ -68,6 +77,7 @@ public class CreationMenu extends ContextualMenu {
 
         fourmilier4.setSize(100,100);
         textfou4.setSize(200,50);
+        textfou4.setVisible(false);
         fourmilier4.setLocation(15, 430);
         textfou4.setLocation(120,460);
         this.add(textfou4);
@@ -96,5 +106,25 @@ public class CreationMenu extends ContextualMenu {
     @Override
     public void actualiser() {
 
+    }
+    //TODO Faire le lien avec le changement de level et la visibilité des fourmiliers.
+    public void changeFourmilierVisibility(){
+        switch (controller.getPlayerDataController().getLevel()){
+            case 1: break;
+            case 2: fourmilier2.setVisible(true);
+                textfou2.setVisible(true);
+                break;
+            case 3: fourmilier2.setVisible(true);
+                textfou2.setVisible(true);
+                fourmilier3.setVisible(true);
+                textfou3.setVisible(true);
+            case 4:
+                fourmilier2.setVisible(true);
+                textfou2.setVisible(true);
+                fourmilier3.setVisible(true);
+                textfou3.setVisible(true);
+                fourmilier4.setVisible(true);
+                textfou4.setVisible(true);
+        }
     }
 }

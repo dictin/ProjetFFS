@@ -19,7 +19,10 @@ public class MapData {
     }
 
     private static ArrayList<String> newsList = new ArrayList<String>();
-    private static int[] fourmilierStats = new int[]{13,13,13};
+    private static int[] fourmilierActualRaceStats= new int[]{13,13,13};
+    private static int[] fourmilierFixRaceStats1 = new int[]{13,13,13};
+    private static int[] fourmilierFixRaceStats2= new int[]{13,13,13};
+    private static int[] fourmilierFixRaxceStats3 = new int[]{13,13,13};
 
 
     public static void updateSmells() {
@@ -285,14 +288,45 @@ public class MapData {
     public static void setAnimalList(ArrayList<Animal> animalList) {
         MapData.animalList = animalList;
     }
-    public static int[] getFourmilierStatsTab() {
-        return fourmilierStats;
+
+
+
+
+
+    public static int[] getFourmilierActualRaceStats1Tab() {
+    return fourmilierActualRaceStats;
+    }
+    public static void setFourmilierActualRaceStats(int position, int stats) {
+        fourmilierActualRaceStats[position] = stats;
+    }
+    public static int getFourmilierActualRaceStats(int position) {
+        return fourmilierActualRaceStats[position];
     }
 
-    public static void setFourmilierStats(int position) {
-        fourmilierStats[position] = fourmilierStats[position];
+    public static int[] getFourmilierFixRaceStats1() {
+        return fourmilierFixRaceStats1;
     }
-    public static int getFourmilierStats(int position) {
-        return fourmilierStats[position];
+
+    public static void setFourmilierFixRaceStats1(int[] fourmilierFixRaceStats1) {
+        MapData.fourmilierFixRaceStats1 = fourmilierFixRaceStats1;
     }
+
+    public static int[] getFourmilierFixRaceStats2() {
+        return fourmilierFixRaceStats2;
+    }
+
+    public static void setFourmilierFixRaceStats2(int[] fourmilierFixRaceStats2) {
+        MapData.fourmilierFixRaceStats2 = fourmilierFixRaceStats2;
+    }
+
+    public static int[] getFourmilierFixRaxceStats3() {
+        return fourmilierFixRaxceStats3;
+    }
+
+    public static void setFourmilierFixRaxceStats3(int[] fourmilierFixRaxceStats3) {
+        MapData.fourmilierFixRaxceStats3 = fourmilierFixRaxceStats3;
+    }
+
+
+
 }

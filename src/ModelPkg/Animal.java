@@ -165,7 +165,8 @@ public abstract class Animal {
 
     public void decreaseHealth(int amount){
         this.health-= amount;
-        if (health<=0){
+        if(this.isDead()){
+            System.out.println("In decreaseHealth");
             MasterController.disposeAnimal(this);
 
             //TODO kill fourmilier
@@ -220,7 +221,7 @@ public abstract class Animal {
         return grabQuantity;
     }
 
-
+//dgsfrjhfs
 
     public Image getSprite() {
         return sprite;
@@ -245,11 +246,10 @@ public abstract class Animal {
 
     public void activate(int time){
         decreaseHealth(((25 - endurance) / 2));
-            //TODO reset smellSource of case
-            System.out.println("Mon tour");
-            VirtualFutureAction virtualFutureAction;
-            virtualFutureAction = Behavior.evaluateBestObjective(this.position, this.mentalState, this.moral, this.smellThreshold);
-            this.realizeFutureAction(virtualFutureAction);
+
+        VirtualFutureAction virtualFutureAction;
+        virtualFutureAction = Behavior.evaluateBestObjective(this.position, this.mentalState, this.moral, this.smellThreshold);
+        this.realizeFutureAction(virtualFutureAction);
 
             if (this.actionToCommit == ActionTypes.GO_TO_LOCATION || this.actionToCommit == ActionTypes.FLEE_TO_LOCATION || this.actionToCommit == ActionTypes.RUN_AT_ENEMY){
                 this.toMove = true;
@@ -269,6 +269,7 @@ public abstract class Animal {
                     }else if (foodAvailable < this.grabQuantity){
                         this.foodCarried = foodAvailable;
                         foodSource.setFoodQuantity(0);
+
                     }
 
                 }else if (this.actionToCommit == ActionTypes.DROP_TO_LOCATION){
@@ -278,7 +279,9 @@ public abstract class Animal {
             }
 
 
-    }
+
+            decreaseHealth(((25 - endurance) / 2));
+}
 
     private void attackOpponent(Animal animal, int damageAmount) {
         animal.decreaseHealth(damageAmount);
@@ -303,20 +306,15 @@ public abstract class Animal {
         }else if (mentalState == MentalStates.RETURN_TO_BASE && actionToCommit == ActionTypes.DROP_TO_LOCATION){
             this.mentalState = MentalStates.NEUTRAL;
         }
-
         if (this.health <= this.MAX_HEALTH/4){
             this.mentalState = MentalStates.WEAK;
         }else if (this.carriedFood > 0){
             this.mentalState = MentalStates.RETURN_TO_BASE;
         }
-
-
-
-
     }
-
     public boolean isDead(){
         if (health<=0){
+            System.out.println("in isDead");
             return true;
         }
         else {

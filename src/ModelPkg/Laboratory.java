@@ -3,9 +3,9 @@ package ModelPkg;
 
 public class Laboratory {
 
-    private static int speedEnduranceBefore = MapData.getFourmilierStats(0);
-    private static int attackDefenceBefore = MapData.getFourmilierStats(1);
-    private static int sensitivitySmellStrengthBefore = MapData.getFourmilierStats(2);
+    private static int speedEnduranceBefore = MapData.getFourmilierActualRaceStats(0);
+    private static int attackDefenceBefore = MapData.getFourmilierActualRaceStats(1);
+    private static int sensitivitySmellStrengthBefore = MapData.getFourmilierActualRaceStats(2);
     private static int cost = 0;
 
     //TODO mettre à false pour travailler sur labo
