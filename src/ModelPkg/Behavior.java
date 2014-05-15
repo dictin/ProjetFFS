@@ -76,9 +76,9 @@ public class Behavior {
         return !isEmpty;
     }
 
-    public static VirtualFutureAction evaluateBestObjective(Point position, MentalStates mentalState, int moralValue){
+    public static VirtualFutureAction evaluateBestObjective(Point position, MentalStates mentalState, int moralValue, int smellThreshold){
         if (Behavior.isThereASmell(position)){
-            Case[][] subsection = MapData.getSubsection2(position);
+            Case[][] subsection = MapData.getSmellableSubsection(MapData.getSubsection2(position), smellThreshold);
             boolean nearFoodSource = false;
             if (mentalState == MentalStates.WEAK){
                 Point strongestSmellPoint = null;

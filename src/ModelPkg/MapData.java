@@ -33,17 +33,6 @@ public class MapData {
             }
         }
 
-        for (int i = 0; i < map.length; i++) {
-            for (int j = 0; j < map[i].length; j++) {
-                selectedCase = map[i][j];
-                if (selectedCase.getOccupant()!=null){
-                    System.out.println("quelqu'un vit");
-                    System.out.println("X;Y:"+selectedCase.getPosition().x+";"+selectedCase.getPosition().y);
-                    System.out.println(selectedCase.getOccupant());
-                }
-            }
-        }
-
 
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
