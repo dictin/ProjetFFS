@@ -37,7 +37,10 @@ public abstract class Animal {
     private int defence;
 
     private int smellSensitivity;
-        private int smellThreshold;
+
+
+
+    private int smellThreshold;
     private int smellStrengthStat;
         private int smellIntensity;
 
@@ -53,8 +56,6 @@ public abstract class Animal {
 
     private MentalStates mentalState = MentalStates.NEUTRAL;
     private ActionTypes actionToCommit = null;
-
-    private boolean toMove = false;
 
 
     public Animal(int team, int[] meanStats, String species, Point startingPosition, long animalID, SmellType smellType,final MasterController masterController){
@@ -91,9 +92,7 @@ public abstract class Animal {
         this.moral = 25; //TODO determiner comment evaluer le moral;
         //TODO balance this and add a smell
         this.smellIntensity=this.getSmellStrengthStat()*8;
-        this.smellThreshold=this.getSmellStrengthStat();
-        //this.smell=new SmellSource(MasterController.getUniqueID(),);
-
+        this.smellThreshold=100/this.getSmellSensitivity();
 
 
         this.smell = new SmellSource(animalID, this.smellIntensity, this.team, smellType);
@@ -135,7 +134,7 @@ public abstract class Animal {
     }
 
     public void setPosition(Point position) {
-
+        System.out.println("Moved");
         this.position = position;
     }
 
@@ -199,6 +198,8 @@ public abstract class Animal {
         return smellSensitivity;
     }
 
+    public int getSmellThreshold() {return smellThreshold;}
+
     public int getSmellStrengthStat() {
         return smellStrengthStat;
     }
@@ -240,15 +241,13 @@ public abstract class Animal {
 
     public void activate(int time){
         //TODO reset smellSource of case
-
-        if (time!=birthday&&(time-birthday)%activationFrequency==0){
+            System.out.println("Mon tour");
             VirtualFutureAction virtualFutureAction = null;
             virtualFutureAction = Behavior.evaluateBestObjective(this.position, this.mentalState, this.moral);
             this.realizeFutureAction(virtualFutureAction);
 
             if (this.actionToCommit == ActionTypes.GO_TO_LOCATION || this.actionToCommit == ActionTypes.FLEE_TO_LOCATION || this.actionToCommit == ActionTypes.RUN_AT_ENEMY){
-                this.toMove = true;
-                this.position = new Point(this.position.x+objective.x, this.position.y+objective.y);
+                setPosition(new Point(this.position.x+objective.x, this.position.y+objective.y));
             }else {
                 if (this.actionToCommit == ActionTypes.ATTACK_AT_LOCATION){
                     this.attackOpponent(MapData.getCase(new Point(position.x+objective.x, position.y+objective.y)).getOccupant(), this.attack);
@@ -274,7 +273,6 @@ public abstract class Animal {
 
 
             decreaseHealth(((25 - endurance) / 2));
-    }
 }
 
     private void attackOpponent(Animal animal, int damageAmount) {
@@ -329,7 +327,11 @@ public abstract class Animal {
         return smell;
     }
 
-    public boolean isToMove() {
-        return toMove;
+    public boolean isToMove(int time) {
+        boolean answer=false;
+        if (time!=birthday&&(time-birthday)%activationFrequency==0){
+            answer=true;
+        }
+        return answer;
     }
 }

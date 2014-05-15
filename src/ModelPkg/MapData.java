@@ -34,6 +34,18 @@ public class MapData {
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
                 selectedCase = map[i][j];
+                if (selectedCase.getOccupant()!=null){
+                    System.out.println("quelqu'un vit");
+                    System.out.println("X;Y:"+selectedCase.getPosition().x+";"+selectedCase.getPosition().y);
+                    System.out.println(selectedCase.getOccupant());
+                }
+            }
+        }
+
+
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[i].length; j++) {
+                selectedCase = map[i][j];
                 if (selectedCase.getOccupant() != null) {
                     if (!selectedCase.getSortedSmellSourceArrayList().isEmpty()) {
                         selectedCase.removeSmellSource(selectedCase.getOccupant().getSmell());
@@ -57,18 +69,6 @@ public class MapData {
             for (int i = 0; i < casesWithSmellSources.size(); i++) {
                 disperseSmellSources(casesWithSmellSources.get(i));
                 casesWithSmellSources.get(i).fadeSourceSmells();
-            }
-        }
-
-        for (int i = 0; i < map.length; i++) {
-            for (int j = 0; j < map[i].length; j++) {
-                selectedCase = MapData.getCase(new Point(i, j));
-                if (selectedCase.getOccupant() != null) {
-                    for (int k = 0; k < selectedCase.getSortedSmellArrayList().size(); k++) {
-                        System.out.print("Odeur no" + k + " intensité:" + selectedCase.getSortedSmellArrayList().get(k).getIntensity());
-                        System.out.println(" Type: " + selectedCase.getSortedSmellArrayList().get(k).getType());
-                    }
-                }
             }
         }
     }
@@ -201,6 +201,27 @@ public class MapData {
         newsList.add(2, "#YOLO");
 
 
+    }
+
+    public static Case[][] getSmellableSubsection(Case[][] subsection, int smellThreshold){
+        Case[][] smellableSubsection=new Case[3][3];
+        for (int i=0; i<subsection.length;i++){
+            for (int j=0; j<subsection.length;j++){
+                smellableSubsection[i][j]=subsection[i][j].semiClone();
+            }
+        }
+        for (int i=0; i<subsection.length; i++){
+            for  (int j=0; j<subsection.length;j++){
+                ArrayList<Smell> smellInCase=(ArrayList<Smell>)subsection[i][j].getSortedSmellArrayList().clone();
+                for (int k=0; k<smellInCase.size();k++){
+                    if (smellInCase.get(k).getIntensity()<smellThreshold){
+                        smellInCase.remove(k);
+                        k--;
+                    }
+                }
+            }
+        }
+        return subsection;
     }
 
     public static Case[][] getSubsection2(Point origin) {

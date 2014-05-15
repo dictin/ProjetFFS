@@ -22,8 +22,8 @@ public class Behavior {
         int rndobjectifY = 0;
 
         while(rndobjectifX == 0 && rndobjectifY == 0){
-            rndobjectifX = random.nextInt(Behavior.SUBSECTION_SIZE);
-            rndobjectifY = random.nextInt(Behavior.SUBSECTION_SIZE);
+            rndobjectifX = random.nextInt(Behavior.SUBSECTION_SIZE)-1;
+            rndobjectifY = random.nextInt(Behavior.SUBSECTION_SIZE)-1;
         }
 
         objectif = new Point(rndobjectifX,rndobjectifY);
@@ -42,12 +42,20 @@ public class Behavior {
             }
         }
 
-        return isEmpty;
+        //Xav: Changé return isEmpty par !isEmpty
+        return !isEmpty;
     }
 
+
+    //TODO add ability to eat held food make animal
     public static VirtualFutureAction evaluateBestObjective(Point position, MentalStates mentalState, int moralValue){
         if (Behavior.isThereASmell(position)){
+
             Case[][] subsection = MapData.getSubsection2(position);
+            int smellThreshold=MapData.getCase(position).getOccupant().getSmellThreshold();
+
+            subsection= MapData.getSmellableSubsection(subsection, smellThreshold);
+
             boolean nearFoodSource = false;
             if (mentalState == MentalStates.WEAK){
                 Point strongestSmellPoint = null;
@@ -72,7 +80,11 @@ public class Behavior {
 
                     if (foodLocation != null){
                         return new VirtualFutureAction(foodLocation, ActionTypes.EAT_FROM_LOCATION);
-                    }else {
+                    }
+
+                    else {
+
+                        //Xav: TODO remove this else, it should never happen, am I right? Keep for test purposes
                         return new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
                     }
                 }else{
@@ -81,7 +93,7 @@ public class Behavior {
                             if (i != 1 || j != 1){
                                 if (strongestSmellPoint == null && subsection[i][j].getSortedSmellArrayList().get(0).getType() == SmellType.FOOD){
                                     strongestSmellPoint = new Point(i,j);
-                                }else if(subsection[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(0).getIntensity() < subsection[i][j].getSortedSmellArrayList().get(0).getIntensity() && subsection[i][j].getSortedSmellArrayList().get(0).getType() == SmellType.FOOD){
+                                }else if(strongestSmellPoint!=null&&(subsection[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(0).getIntensity() < subsection[i][j].getSortedSmellArrayList().get(0).getIntensity() && subsection[i][j].getSortedSmellArrayList().get(0).getType() == SmellType.FOOD)){
                                     strongestSmellPoint = new Point(i,j);
                                 }
                             }
@@ -92,6 +104,7 @@ public class Behavior {
                     if (strongestSmellPoint == null){
                         return new VirtualFutureAction(Behavior.drunk(), ActionTypes.GO_TO_LOCATION);
                     }else {
+                        //Xav: TODO remove this else, it should never happen, am I right? Keep for test purposes
                         return new VirtualFutureAction(strongestSmellPoint, ActionTypes.GO_TO_LOCATION);
                     }
                 }
@@ -268,14 +281,13 @@ public class Behavior {
                         for (int j = 0; j < Behavior.SUBSECTION_SIZE; j++){
                             if (strongestSmellPoint == null && subsection[i][j].getSortedSmellArrayList().get(0).getType() == SmellType.FOOD){
                                 strongestSmellPoint = new Point(i,j);
-                            }else if(subsection[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(0).getIntensity() < subsection[i][j].getSortedSmellArrayList().get(0).getIntensity() &&subsection[i][j].getSortedSmellArrayList().get(0).getType() == SmellType.FOOD){
+                            }else if(strongestSmellPoint!=null&&subsection[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(0).getIntensity() < subsection[i][j].getSortedSmellArrayList().get(0).getIntensity() &&subsection[i][j].getSortedSmellArrayList().get(0).getType() == SmellType.FOOD){
                                 strongestSmellPoint = new Point(i,j);
                             }
                         }
-
                     }
 
-                    if (subsection[strongestSmellPoint.x][strongestSmellPoint.y].getWildObject().getType() == WildObject.FOOD_ID ||subsection[strongestSmellPoint.x][strongestSmellPoint.y].getWildObject().getType() == WildObject.HIVE_ID){
+                    if (strongestSmellPoint!=null&&(subsection[strongestSmellPoint.x][strongestSmellPoint.y].getWildObject().getType() == WildObject.FOOD_ID ||subsection[strongestSmellPoint.x][strongestSmellPoint.y].getWildObject().getType() == WildObject.HIVE_ID)){
                         return new VirtualFutureAction(strongestSmellPoint, ActionTypes.PICKUP_FROM_LOCATION);
                     }else if (strongestSmellPoint != null){
                         return new VirtualFutureAction(strongestSmellPoint, ActionTypes.GO_TO_LOCATION);

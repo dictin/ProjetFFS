@@ -60,6 +60,9 @@ public class Case implements Observable {
     }
 
     public void setOccupant(Animal occupant) {
+        if (occupant==null){
+            System.out.println("Set to null");
+        }
         this.occupant = occupant;
         this.updateObservers();
     }
@@ -178,5 +181,10 @@ public class Case implements Observable {
 
     public void clearSortedSmellArrayList() {
         smellArrayList=new ArrayList<>();
+    }
+
+    public Case semiClone(){
+        Case clone=new Case(getPosition(), getOccupant(), getWildObject());
+        return clone;
     }
 }

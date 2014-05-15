@@ -7,7 +7,9 @@ public class Laboratory {
     private static int attackDefenceBefore = MapData.getFourmilierStats(1);
     private static int sensitivitySmellStrengthBefore = MapData.getFourmilierStats(2);
     private static int cost = 0;
-    private static boolean isFinish = false;
+
+    //TODO mettre à false pour travailler sur labo
+    private static boolean isFinish = true;
     private static boolean reset = false;
     private static boolean moving = false;
     private static boolean stopMoving = false;
