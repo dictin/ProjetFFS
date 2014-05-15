@@ -259,16 +259,18 @@ public abstract class Animal {
                 if (this.actionToCommit == ActionTypes.ATTACK_AT_LOCATION){
                     this.attackOpponent(MapData.getCase(new Point(position.x+objective.x, position.y+objective.y)).getOccupant(), this.attack);
                 }else if (this.actionToCommit == ActionTypes.PICKUP_FROM_LOCATION){
-                    FoodSource foodSource = ((FoodSource)MapData.getCase(new Point(position.x+objective.x, position.y+objective.y)).getWildObject());
-                    int foodAvailable;
-                    foodAvailable = foodSource.getFoodQuantity();
+                    if (MapData.getCase(new Point(position.x+objective.x, position.y+objective.y)).getWildObject() instanceof FoodSource){
+                        FoodSource foodSource = ((FoodSource)MapData.getCase(new Point(position.x+objective.x, position.y+objective.y)).getWildObject());
+                        int foodAvailable;
+                        foodAvailable = foodSource.getFoodQuantity();
 
-                    if (foodAvailable >= this.grabQuantity){
-                        this.foodCarried = this.grabQuantity;
-                        foodSource.setFoodQuantity(foodAvailable-this.grabQuantity);
-                    }else if (foodAvailable < this.grabQuantity){
-                        this.foodCarried = foodAvailable;
-                        foodSource.setFoodQuantity(0);
+                        if (foodAvailable >= this.grabQuantity){
+                            this.foodCarried = this.grabQuantity;
+                            foodSource.setFoodQuantity(foodAvailable-this.grabQuantity);
+                        }else if (foodAvailable < this.grabQuantity){
+                            this.foodCarried = foodAvailable;
+                            foodSource.setFoodQuantity(0);
+                        }
                     }
 
                 }else if (this.actionToCommit == ActionTypes.DROP_TO_LOCATION){
