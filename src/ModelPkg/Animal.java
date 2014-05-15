@@ -3,7 +3,6 @@ package ModelPkg;
 import ControllerPkg.MasterController;
 import ModelPkg.WildObjects.*;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
@@ -172,7 +171,7 @@ public abstract class Animal {
 
             //TODO kill fourmilier
             MapData.addNewsList(this.getName() + " est malheureusement décédé!!");
-            masterController.victimes();
+            masterController.victims();
         }
     }
 

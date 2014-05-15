@@ -56,8 +56,7 @@ public class MasterController extends Thread{
         }
         System.out.println(MapController.getAnimalList().size());
     }
-
-    public void victimes(){
+    public void victims(){
         this.playerDataController.newVictime();
     }
 
