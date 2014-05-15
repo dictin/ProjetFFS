@@ -34,7 +34,7 @@ public class CreationController implements ActionListener {
             MapData.getCase(spawnPoint).setOccupant(spawnedFourmilier);
             this.masterController.getPlayerDataController().newBorn();
             this.masterController.getPlayerDataController().spendFood(100);
-             MapData.addNewsList(spawnedFourmilier.getName()+ " est né!!");
+            MapData.addNewsList(spawnedFourmilier.getName()+ " est né!!");
 
             }
             else{

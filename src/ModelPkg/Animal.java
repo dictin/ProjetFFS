@@ -248,7 +248,7 @@ public abstract class Animal {
         //TODO reset smellSource of case
             System.out.println("Mon tour");
             VirtualFutureAction virtualFutureAction = null;
-            virtualFutureAction = Behavior.evaluateBestObjective(this.position, this.mentalState, this.moral, this.getSmellThreshold());
+            virtualFutureAction = Behavior.evaluateBestObjective(this.position, this.mentalState, this.moral, this.smellThreshold);
             this.realizeFutureAction(virtualFutureAction);
 
             if (this.actionToCommit == ActionTypes.GO_TO_LOCATION || this.actionToCommit == ActionTypes.FLEE_TO_LOCATION || this.actionToCommit == ActionTypes.RUN_AT_ENEMY){

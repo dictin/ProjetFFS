@@ -8,12 +8,14 @@ import java.awt.event.ActionListener;
 
 public class BuyButtonHandler implements ActionListener {
 
+    MasterController masterController;
     JList<String> list;
     ItemController itemController;
 
     public BuyButtonHandler(JList<String> list, final MasterController controller){
         super();
-        this.itemController = controller.getItemController();
+        this.masterController = controller;
+        this.itemController = masterController.getItemController();
         this.list = list;
 
 
@@ -21,6 +23,14 @@ public class BuyButtonHandler implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         int selectedIndex = this.list.getSelectedIndex();
-        itemController.addItemToInventory(Items.values()[selectedIndex]);
+        int playerFood = this.masterController.getPlayerDataController().getFood();
+        int price = Items.values()[selectedIndex].getPrice();
+        if (playerFood >= price){
+            itemController.addItemToInventory(Items.values()[selectedIndex]);
+            masterController.getPlayerDataController().spendFood(Items.values()[selectedIndex].getPrice());
+        }else {
+            JOptionPane.showMessageDialog(null, "Nourriture insuffisante");
+        }
+
     }
 }
