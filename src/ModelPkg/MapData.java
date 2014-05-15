@@ -1,5 +1,6 @@
 package ModelPkg;
 
+import ModelPkg.WildObjects.FoodSource;
 import ModelPkg.WildObjects.WildObject;
 
 import java.awt.*;
@@ -176,17 +177,21 @@ public class MapData {
         for (int i = 0; i < maxLength; i++) {
             for (int j = 0; j < maxLength; j++) {
                 int caseType = random.nextInt(100);
-                if (caseType < 93) {
-                    map[i][j] = new Case(new Point(i, j), null, new WildObject(0, true));
+                if (caseType < 90) {
+                    map[i][j] = new Case(new Point(i, j), null, new WildObject(WildObject.EMPTY_ID, true));
+                }
+                else if (caseType < 93) {
+                    map[i][j] = new Case(new Point(i, j), null, new FoodSource(WildObject.FOOD_ID, random.nextInt(200)));
                 } else if (caseType < 96) {
-                    map[i][j] = new Case(new Point(i, j), null, new WildObject(2, true));
+                    map[i][j] = new Case(new Point(i, j), null, new WildObject(WildObject.TREE_ID, true));
                 } else if (caseType < 97) {
-                    map[i][j] = new Case(new Point(i, j), null, new WildObject(3, true));
+                    map[i][j] = new Case(new Point(i, j), null, new WildObject(WildObject.WATER_ID, true));
                 } else if (caseType < 98) {
-                    map[i][j] = new Case(new Point(i, j), null, new WildObject(1, true));
+                    map[i][j] = new Case(new Point(i, j), null, new WildObject(WildObject.ROCK_ID, true));
                 } else if (caseType < 100) {
-                    map[i][j] = new Case(new Point(i, j), null, new WildObject(4, true));
+                    map[i][j] = new Case(new Point(i, j), null, new WildObject(WildObject.HOLE_ID, true));
                 } else {
+                    System.out.println("wtf");
                     map[i][j] = new Case(new Point(i, j), null, new WildObject(0, true));
                 }
             }
