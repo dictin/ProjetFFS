@@ -166,7 +166,6 @@ public abstract class Animal {
     public void decreaseHealth(int amount){
         this.health-= amount;
         if (health<=0){
-            this.isDead();
             MasterController.disposeAnimal(this);
 
             //TODO kill fourmilier
@@ -245,7 +244,9 @@ public abstract class Animal {
     }
 
     public void activate(int time){
-        //TODO reset smellSource of case
+        decreaseHealth(((25 - endurance) / 2));
+
+            //TODO reset smellSource of case
             System.out.println("Mon tour");
             VirtualFutureAction virtualFutureAction = null;
             virtualFutureAction = Behavior.evaluateBestObjective(this.position, this.mentalState, this.moral, this.smellThreshold);
@@ -276,11 +277,7 @@ public abstract class Animal {
                     this.foodCarried = 0;
                 }
             }
-
-
-
-            decreaseHealth(((25 - endurance) / 2));
-}
+    }
 
     private void attackOpponent(Animal animal, int damageAmount) {
         animal.decreaseHealth(damageAmount);

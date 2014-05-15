@@ -54,7 +54,7 @@ public class MasterController extends Thread{
                 }
             }
         }
-        System.out.println(MapController.getAnimalList().size());
+
     }
     public void victims(){
         this.playerDataController.newVictime();
@@ -189,10 +189,16 @@ public class MasterController extends Thread{
 
             toMoveAnimals.get(0).activate(MasterController.getTime());
 
-            newPosition = toMoveAnimals.get(0).getPosition();
+            if (!toMoveAnimals.get(0).isDead()){
+                newPosition = toMoveAnimals.get(0).getPosition();
 
-            MapData.getCase(oldPosition).setOccupant(null);
-            MapData.getCase(newPosition).setOccupant(toMoveAnimals.get(0));
+                MapData.getCase(oldPosition).setOccupant(null);
+                MapData.getCase(newPosition).setOccupant(toMoveAnimals.get(0));
+            }else {
+                MapData.getCase(toMoveAnimals.get(0).getPosition()).setOccupant(null);
+            }
+
+
 
             toMoveAnimals.remove(0);
 

@@ -32,7 +32,7 @@ public class InventoryMenu extends ContextualMenu implements Observer{
         this.playerDataController = controller.getPlayerDataController();
         this.itemController = controller.getItemController();
         this.playerDataController.addObserver(this);
-        InventoryActivateButtonHandler = new InventoryActivateButtonHandler(playerDataController);
+        InventoryActivateButtonHandler = new InventoryActivateButtonHandler(this.masterController);
         consumablesLabel.setSize(400,35);
         consumablesLabel.setLocation(25, 0);
         consumablesLabel.setFont(new Font("Arial", Font.PLAIN, 30));
