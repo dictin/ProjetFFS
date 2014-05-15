@@ -25,13 +25,10 @@ public class PlayerData implements Observable {
     private ArrayList<TempItemInstance> permanentInstances = new ArrayList<TempItemInstance>();
     private ArrayList<TempItemInstance> tempItemInstances = new ArrayList<TempItemInstance>();
     private static int[] statModifiers = new int[]{0,0,0,0,0,0,0,0};
-
-
+    private static int[] numberFoodGoToNextLevel = new int[]{1000,2000,3000,4000};
+    private int pickUpFood = 0;
     private int karma=0;
     private int nextEventGravity=1;
-
-
-
 
     private ArrayList<Observer> observers = new ArrayList<>();
 
@@ -108,6 +105,7 @@ public class PlayerData implements Observable {
 
     public void addFood(int food) {
         this.food += food;
+        this.pickUpFood += food;
         this.updateObservers();
     }
 
@@ -186,6 +184,9 @@ public class PlayerData implements Observable {
     public int getScore() {
         return score;
     }
+    public int getNumberFoodToGo(){
+        return (this.numberFoodGoToNextLevel[(this.level)-1]-this.pickUpFood);
+    }
 
     public int getLevel() {
         return level;
@@ -228,4 +229,13 @@ public class PlayerData implements Observable {
     public void setCurrentEvent(GameEvent currentEvent) {
         this.currentEvent = currentEvent;
     }
+
+    public int getPickUpFood() {
+        return pickUpFood;
+    }
+
+    public void setPickUpFood(int pickUpFood) {
+        this.pickUpFood = pickUpFood;
+    }
+
 }

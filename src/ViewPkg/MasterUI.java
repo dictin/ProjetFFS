@@ -44,6 +44,7 @@ public class MasterUI extends JPanel implements Observer{
     JLabel labelDeaths = new JLabel("Victimes: 0");
     JLabel labelLevel = new JLabel("Niveau: 1");
     JLabel labelScore = new JLabel("Score: 0");
+    JLabel labelPickUpFood = new JLabel("Food to pick up: 0");
     JLabel background = new JLabel();
 
 
@@ -130,15 +131,21 @@ public class MasterUI extends JPanel implements Observer{
         labelLevel.setForeground(Color.white);
         labelLevel.setLocation(660,630);
         this.add(labelLevel);
+        //Nourriture qu'il reste à ramasser avant le prochain niveau
+        labelPickUpFood.setText("Food to pick up: "+masterController.getPlayerDataController().getNumberFoodToGo());
+        labelPickUpFood.setSize(120,14);
+        labelPickUpFood.setForeground(Color.white);
+        labelPickUpFood.setLocation(660,640);
+        this.add(labelPickUpFood);
         //Score
         labelScore.setSize(87,9);
         labelScore.setForeground(Color.white);
-        labelScore.setLocation(660,645);
+        labelScore.setLocation(660,655);
         this.add(labelScore);
         //Fond derrière les label
         background.setOpaque(true);
         background.setBackground(new Color(Integer.parseInt("324159", 15)));
-        background.setSize(110,85);
+        background.setSize(127,95);
         background.setLocation(655,580);
         this.add(background);
 
@@ -292,6 +299,7 @@ public class MasterUI extends JPanel implements Observer{
         this.labelLevel.setText("Niveau: "+this.playerDataController.getLevel());
         this.labelPopulation.setText("Population: "+this.playerDataController.getPopulation());
         this.labelDeaths.setText("Victimes: "+this.playerDataController.getDead());
+        this.labelPickUpFood.setText("Food to pick up: "+masterController.getPlayerDataController().getNumberFoodToGo());
     }
 
     @Override

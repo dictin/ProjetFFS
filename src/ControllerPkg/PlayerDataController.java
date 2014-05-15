@@ -122,7 +122,9 @@ public class PlayerDataController {
     public void increaseNextEventGravity(){
         this.playerData.increaseNextEventGravity();
     }
-
+    public int getNumberFoodToGo(){
+       return(this.playerData.getNumberFoodToGo());
+    }
 
 
 
