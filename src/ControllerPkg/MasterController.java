@@ -95,9 +95,14 @@ public class MasterController extends Thread{
                     }
                 }
 
+                mUI.actualiser();
+                mUI.invalidate();
+                mUI.repaint();
+
 
                 this.moveAnimals();//TODO fix me
 
+                mUI.actualizeIcons();
                 mUI.actualiser();
                 mUI.invalidate();
                 mUI.repaint();
@@ -194,8 +199,10 @@ public class MasterController extends Thread{
 
                 MapData.getCase(oldPosition).setOccupant(null);
                 MapData.getCase(newPosition).setOccupant(toMoveAnimals.get(0));
+
             }else {
                 MapData.getCase(toMoveAnimals.get(0).getPosition()).setOccupant(null);
+                System.out.println("DIEEE");
             }
 
 

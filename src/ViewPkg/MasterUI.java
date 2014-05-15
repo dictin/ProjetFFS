@@ -225,11 +225,16 @@ public class MasterUI extends JPanel implements Observer{
 
     }
 
-    public void actualiser(){
+    public void actualizeIcons(){
         quitIcon.actualiser();
         if (selectedMenu!=null){
             selectedMenu.actualiser();
         }
+    }
+
+    public void actualiser(){
+
+
 
         if(MapData.getNewsList().size()>numberOfNews && !alreadyInMovement){
             mouvement = 1;

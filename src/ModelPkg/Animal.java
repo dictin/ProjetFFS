@@ -245,10 +245,9 @@ public abstract class Animal {
 
     public void activate(int time){
         decreaseHealth(((25 - endurance) / 2));
-
             //TODO reset smellSource of case
             System.out.println("Mon tour");
-            VirtualFutureAction virtualFutureAction = null;
+            VirtualFutureAction virtualFutureAction;
             virtualFutureAction = Behavior.evaluateBestObjective(this.position, this.mentalState, this.moral, this.smellThreshold);
             this.realizeFutureAction(virtualFutureAction);
 
@@ -277,6 +276,8 @@ public abstract class Animal {
                     this.foodCarried = 0;
                 }
             }
+
+
     }
 
     private void attackOpponent(Animal animal, int damageAmount) {
