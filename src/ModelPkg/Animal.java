@@ -247,6 +247,42 @@ public abstract class Animal {
     public void activate(int time){
         decreaseHealth(((25 - endurance) / 2));
 
+        VirtualFutureAction virtualFutureAction;
+
+
+
+        if (this.health <= this.MAX_HEALTH/4){
+            if (this.carriedFood > 0){
+                this.restore();
+                virtualFutureAction = Behavior.skipTurn();
+                this.objective = virtualFutureAction.getTargetLocation();
+                this.actionToCommit = virtualFutureAction.getActionType();
+            }else {
+                if (Behavior.isCloseTo(WildObject.FOOD_ID, this.position)){
+                    virtualFutureAction = Behavior.eatAdjacentFood(this.position);
+                    this.objective = virtualFutureAction.getTargetLocation();
+                    this.actionToCommit = virtualFutureAction.getActionType();
+                }else if (Behavior.doesItSmell(this.filterSmells(), SmellType.FOOD)){
+                    virtualFutureAction = Behavior.scanForFood(this.filterSmells());
+
+                }
+            }
+
+        }
+
+
+    }
+
+    private void restore(){
+        while (this.carriedFood > 0 && this.health < this.MAX_HEALTH){
+                carriedFood--;
+                if(this.health < 90){
+                    this.health+=10;
+                }else{
+                    this.health = this.MAX_HEALTH;
+                }
+        }
+
 
     }
 
@@ -300,5 +336,23 @@ public abstract class Animal {
             answer=true;
         }
         return answer;
+    }
+
+    private Case[][] filterSmells(){
+        Case[][] unfilteredSubsection = MapData.getSubsection2(this.position);
+        Case[][] filteredSubsection = new Case[unfilteredSubsection.length][unfilteredSubsection[0].length];
+        for (int i = 0; i < unfilteredSubsection.length; i++) {
+            for (int j = 0; j < unfilteredSubsection[i].length; j++) {
+                filteredSubsection[i][j] = unfilteredSubsection[i][j].semiClone();
+                for (int k = 0; k < unfilteredSubsection[i][j].getSortedSmellArrayList().size(); k++){
+                    if (unfilteredSubsection[i][j].getSortedSmellArrayList().get(k).getIntensity() >= this.smellThreshold){
+                        filteredSubsection[i][j].getSortedSmellArrayList().add(unfilteredSubsection[i][j].getSortedSmellArrayList().remove(k));
+                    }
+                }
+            }
+        }
+
+        return filteredSubsection;
+
     }
 }

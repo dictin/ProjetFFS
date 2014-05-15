@@ -93,6 +93,87 @@ public class Behavior {
     }
 
 
+    public static VirtualFutureAction skipTurn() {
+        return new VirtualFutureAction(new Point(0,0), ActionTypes.DO_NOTHING);
+    }
+
+    public static boolean isCloseTo(int id, Point position) {
+        Case[][] subsection = MapData.getSubsection2(position);
+        boolean isClose = false;
+
+        for (int i = 0; i < subsection.length && !isClose; i++){
+            for (int j = 0; j < subsection[i].length && !isClose; j++){
+                if (subsection[i][j].getWildObject().getType() == id){
+                    isClose = true;
+                }
+            }
+        }
+
+        return isClose;
+
+    }
+
+    public static VirtualFutureAction eatAdjacentFood(Point position) {
+        Case[][] subsection = MapData.getSubsection2(position);
+        Point foodLocation = null;
+        Point correctedFoodLocation; //referential of the fourmillier
+        int highestFoodValue = 0;
+
+
+        for (int i = 0; i < subsection.length; i++){
+            for (int j = 0; j < subsection[i].length; j++){
+                if (subsection[i][j].getWildObject() instanceof FoodSource){
+                    if (foodLocation == null){
+                        foodLocation = new Point(i,j);
+                        highestFoodValue = ((FoodSource) subsection[i][j].getWildObject()).getFoodQuantity();
+                    }else if (foodLocation != null && (((FoodSource) subsection[i][j].getWildObject()).getFoodQuantity()) > highestFoodValue){
+                        foodLocation = new Point(i,j);
+                        highestFoodValue = ((FoodSource) subsection[i][j].getWildObject()).getFoodQuantity();
+                    }
+                }
+            }
+
+        }
+
+        correctedFoodLocation = new Point(foodLocation.x-1, foodLocation.y-1);
+
+        return new VirtualFutureAction(correctedFoodLocation, ActionTypes.EAT_FROM_LOCATION);
+
+
+
+    }
+
+    public static boolean doesItSmell(Case[][] subsection, SmellType smellType) {
+        Case selectedCase = null;
+        boolean isItSmelling = false;
+
+        for (int i = 0; i < subsection.length; i++) {
+            for (int j = 0; j < subsection[i].length; j++) {
+                selectedCase = subsection[i][j];
+                for (int k = 0; k < selectedCase.getSortedSmellArrayList().size(); k++){
+                    if (selectedCase.getSortedSmellArrayList().get(k).getType() == smellType){
+                        isItSmelling = true;
+                    }
+
+                }
+
+            }
+        }
+
+        return isItSmelling;
+    }
+
+    public static VirtualFutureAction scanForFood(Case[][] cases) {
+        Case strongestSmellCase = null;
+        for (int i = 0; i < cases.length; i++) {
+            for (int j = 0; j < cases[i].length; j++) {
+                for (int k = 0; k < cases[i][j].getSortedSmellArrayList().size(); k++)
+
+
+            }
+        }
+
+    }
 }
 
 

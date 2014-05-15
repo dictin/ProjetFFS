@@ -183,7 +183,7 @@ public class Case implements Observable {
         smellArrayList=new ArrayList<>();
     }
 
-    public Case semiClone(){
+    public Case semiClone(){ //TODO Xav, don't fuck this up!
         Case clone=new Case(getPosition(), getOccupant(), getWildObject());
         return clone;
     }
