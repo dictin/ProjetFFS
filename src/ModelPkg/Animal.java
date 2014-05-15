@@ -247,41 +247,8 @@ public abstract class Animal {
     public void activate(int time){
         decreaseHealth(((25 - endurance) / 2));
 
-        VirtualFutureAction virtualFutureAction;
-        virtualFutureAction = Behavior.evaluateBestObjective(this.position, this.mentalState, this.moral, this.smellThreshold);
-        this.realizeFutureAction(virtualFutureAction);
 
-            if (this.actionToCommit == ActionTypes.GO_TO_LOCATION || this.actionToCommit == ActionTypes.FLEE_TO_LOCATION || this.actionToCommit == ActionTypes.RUN_AT_ENEMY){
-                this.toMove = true;
-                this.oldPosition = this.position;
-                this.position = new Point(this.position.x+objective.x, this.position.y+objective.y);
-            }else {
-                if (this.actionToCommit == ActionTypes.ATTACK_AT_LOCATION){
-                    this.attackOpponent(MapData.getCase(new Point(position.x+objective.x, position.y+objective.y)).getOccupant(), this.attack);
-                }else if (this.actionToCommit == ActionTypes.PICKUP_FROM_LOCATION){
-                    FoodSource foodSource = ((FoodSource)MapData.getCase(new Point(position.x+objective.x, position.y+objective.y)).getWildObject());
-                    int foodAvailable;
-                    foodAvailable = foodSource.getFoodQuantity();
-
-                    if (foodAvailable >= this.grabQuantity){
-                        this.foodCarried = this.grabQuantity;
-                        foodSource.setFoodQuantity(foodAvailable-this.grabQuantity);
-                    }else if (foodAvailable < this.grabQuantity){
-                        this.foodCarried = foodAvailable;
-                        foodSource.setFoodQuantity(0);
-
-                    }
-
-                }else if (this.actionToCommit == ActionTypes.DROP_TO_LOCATION){
-                    this.masterController.getPlayerDataController().addFood(this.foodCarried);
-                    this.foodCarried = 0;
-                }
-            }
-
-
-
-            decreaseHealth(((25 - endurance) / 2));
-}
+    }
 
     private void attackOpponent(Animal animal, int damageAmount) {
         animal.decreaseHealth(damageAmount);
@@ -295,22 +262,7 @@ public abstract class Animal {
     }
 
     private void decideFutureMentalState(MentalStates mentalState, ActionTypes actionToCommit) {
-        if ((mentalState == MentalStates.SCARED || mentalState == MentalStates.FLEEING) && actionToCommit == ActionTypes.FLEE_TO_LOCATION){
-            this.mentalState = MentalStates.FLEEING;
-        }else if((mentalState == MentalStates.SCARED || mentalState == MentalStates.FLEEING) && actionToCommit == ActionTypes.GO_TO_LOCATION){
-            this.mentalState = MentalStates.NEUTRAL;
-        }else if (mentalState == MentalStates.AGRESSIVE && (actionToCommit == ActionTypes.RUN_AT_ENEMY || actionToCommit == ActionTypes.ATTACK_AT_LOCATION)){
-            this.mentalState = MentalStates.AGRESSIVE;
-        }else if (mentalState == MentalStates.AGRESSIVE && actionToCommit == ActionTypes.FLEE_TO_LOCATION){
-            this.mentalState = MentalStates.FLEEING;
-        }else if (mentalState == MentalStates.RETURN_TO_BASE && actionToCommit == ActionTypes.DROP_TO_LOCATION){
-            this.mentalState = MentalStates.NEUTRAL;
-        }
-        if (this.health <= this.MAX_HEALTH/4){
-            this.mentalState = MentalStates.WEAK;
-        }else if (this.carriedFood > 0){
-            this.mentalState = MentalStates.RETURN_TO_BASE;
-        }
+
     }
     public boolean isDead(){
         if (health<=0){
