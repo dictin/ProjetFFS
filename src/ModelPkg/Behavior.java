@@ -163,16 +163,34 @@ public class Behavior {
         return isItSmelling;
     }
 
-    public static VirtualFutureAction scanForFood(Case[][] cases) {
-        Case strongestSmellCase = null;
+    public static VirtualFutureAction scanForWildObject(Case[][] cases, SmellType type, String desiredQuality) {
+        Point strongestSmellPoint = null;
+        int preferredIntensity=0;
+        Point correctedReferential=null;
         for (int i = 0; i < cases.length; i++) {
             for (int j = 0; j < cases[i].length; j++) {
-                for (int k = 0; k < cases[i][j].getSortedSmellArrayList().size(); k++)
-
-
+                for (int k = 0; k < cases[i][j].getSortedSmellArrayList().size(); k++){
+                    if (strongestSmellPoint==null&&cases[i][j].getSortedSmellArrayList().get(k).getType()==type){
+                        strongestSmellPoint=new Point(i,j);
+                        preferredIntensity=cases[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(k).getIntensity();
+                    }
+                    else if(desiredQuality.equals("lesser")&&(strongestSmellPoint!=null&&cases[i][j].getSortedSmellArrayList().get(k).getIntensity()<preferredIntensity)){
+                        strongestSmellPoint=new Point(i,j);
+                        preferredIntensity=cases[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(k).getIntensity();
+                    }
+                    else if(desiredQuality.equals("greater")&&(strongestSmellPoint!=null&&cases[i][j].getSortedSmellArrayList().get(k).getIntensity()>preferredIntensity)){
+                        strongestSmellPoint=new Point(i,j);
+                        preferredIntensity=cases[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(k).getIntensity();
+                    }
+                }
             }
         }
+        correctedReferential=new Point(strongestSmellPoint.x-1,strongestSmellPoint.y-1);
+        return new VirtualFutureAction(correctedReferential, ActionTypes.GO_TO_LOCATION);
+    }
 
+    public static VirtualFutureAction dropToHive(Point position) {
+        return new VirtualFutureAction(new Point(0,0), ActionTypes.DROP_TO_HIVE);
     }
 }
 

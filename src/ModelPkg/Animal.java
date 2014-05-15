@@ -8,6 +8,8 @@ import java.util.Random;
 
 public abstract class Animal {
 
+
+    private final String lesser="lesser";
     private MasterController masterController;
     private final int MAX_HEALTH = 100;
     private long animalID;
@@ -247,7 +249,7 @@ public abstract class Animal {
     public void activate(int time){
         decreaseHealth(((25 - endurance) / 2));
 
-        VirtualFutureAction virtualFutureAction;
+        VirtualFutureAction virtualFutureAction=null;
 
 
 
@@ -255,21 +257,31 @@ public abstract class Animal {
             if (this.carriedFood > 0){
                 this.restore();
                 virtualFutureAction = Behavior.skipTurn();
-                this.objective = virtualFutureAction.getTargetLocation();
-                this.actionToCommit = virtualFutureAction.getActionType();
+
             }else {
                 if (Behavior.isCloseTo(WildObject.FOOD_ID, this.position)){
                     virtualFutureAction = Behavior.eatAdjacentFood(this.position);
-                    this.objective = virtualFutureAction.getTargetLocation();
-                    this.actionToCommit = virtualFutureAction.getActionType();
                 }else if (Behavior.doesItSmell(this.filterSmells(), SmellType.FOOD)){
-                    virtualFutureAction = Behavior.scanForFood(this.filterSmells());
+                    virtualFutureAction = Behavior.scanForWildObject(this.filterSmells(), SmellType.FOOD, "greater");
 
                 }
             }
 
         }
-
+        //Cherche à rentrer.
+        if(this.carriedFood>0){
+            if (Behavior.isCloseTo(WildObject.HIVE_ID, this.position)){
+                virtualFutureAction = Behavior.dropToHive(this.position);
+            }
+            else if(Behavior.doesItSmell(this.filterSmells(), SmellType.HIVE)){
+                virtualFutureAction = Behavior.scanForWildObject(this.filterSmells(), SmellType.HIVE, "greater");
+            }
+            else{
+                virtualFutureAction = Behavior.scanForWildObject(this.filterSmells(), SmellType.ALLY, "lesser");
+            }
+        }
+        this.objective = virtualFutureAction.getTargetLocation();
+        this.actionToCommit = virtualFutureAction.getActionType();
 
     }
 

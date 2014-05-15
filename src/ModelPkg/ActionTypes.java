@@ -11,7 +11,7 @@ public enum ActionTypes {
     PICKUP_FROM_LOCATION,
     RUN_AT_ENEMY,
     ATTACK_AT_LOCATION,
-    DROP_TO_LOCATION,
+    DROP_TO_HIVE,
     DO_NOTHING;
 
 }
