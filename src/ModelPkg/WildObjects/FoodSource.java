@@ -10,6 +10,7 @@ public class FoodSource extends WildObject {
     public FoodSource(int type, int quantity) {
         super(type, true);
         this.foodQuantity=quantity;
+        this.getSmellSource().setIntensity(getFoodQuantity());
     }
 
     public int getFoodQuantity() {
@@ -18,6 +19,7 @@ public class FoodSource extends WildObject {
 
     public void setFoodQuantity(int foodQuantity) {
         this.foodQuantity = foodQuantity;
+        this.getSmellSource().setIntensity(foodQuantity);
     }
 
 }

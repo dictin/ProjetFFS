@@ -16,7 +16,7 @@ public abstract class ContextualMenu extends JComponent {
 
     public ContextualMenu(final MasterController controller, String menuName){
         this.menuName=menuName;
-        backgroundImage=Toolkit.getDefaultToolkit().getImage(menuName+ ".gif");
+        backgroundImage=Toolkit.getDefaultToolkit().getImage(menuName+ ".jpg");
 
         this.setSize(menuZone);
 

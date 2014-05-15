@@ -51,9 +51,6 @@ public class WildObject {
         else if(this.type==ITEM_ID){
             this.smellSource = new SmellSource(System.currentTimeMillis(), 50,-1,SmellType.ITEM);
         }
-        else if(this.type==ITEM_ID){
-            this.smellSource = new SmellSource(System.currentTimeMillis(), 50,-1,SmellType.ITEM);
-        }
         else if (this.type==FOOD_ID||this.type==CORPSE_ID){
             if (this.type==FOOD_ID) {
                 this.smellSource = new SmellSource(System.currentTimeMillis(), ((FoodSource) this).getFoodQuantity(), -1, SmellType.FOOD);

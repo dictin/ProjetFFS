@@ -52,7 +52,6 @@ public class ShopMenu extends ContextualMenu{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.setColor(Color.BLUE);
-        g.fillRect(0,0,320,325);
+        g.drawImage(Toolkit.getDefaultToolkit().getImage("IMG/"+"SHOP_BACKGROUND.jpg"), 0, 0, this);
     }
 }

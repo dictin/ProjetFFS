@@ -1,5 +1,6 @@
 package ModelPkg;
 
+import ModelPkg.WildObjects.FoodSource;
 import ModelPkg.WildObjects.WildObject;
 
 import java.awt.*;
@@ -130,7 +131,8 @@ public class Behavior {
 
 
 
-            }else if (mentalState == MentalStates.RETURN_TO_BASE){
+            }
+            else if (mentalState == MentalStates.RETURN_TO_BASE){
                 Point weakAllySmell = null;
                 for (int i = 0; i < Behavior.SUBSECTION_SIZE; i++){
                     for(int j = 0; j < Behavior.SUBSECTION_SIZE; j++){
@@ -241,6 +243,13 @@ public class Behavior {
 
 
             }else{ // mentalState == MentalStates.NEUTRAL
+                for (int i=0; i<subsection.length&&!nearFoodSource; i++){
+                    for (int j=0; j<subsection[i].length&&!nearFoodSource;j++){
+                        if (subsection[i][j].getWildObject() instanceof FoodSource){
+                            nearFoodSource=true;
+                        }
+                    }
+                }
                 Point strongestSmellPoint = null;
                 boolean enemyNear = false;
                 for (int i = 0; i < Behavior.SUBSECTION_SIZE; i++){
