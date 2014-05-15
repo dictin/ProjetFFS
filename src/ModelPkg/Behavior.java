@@ -113,7 +113,7 @@ public class Behavior {
                             if (i != 1 || j != 1){
                                 if (strongestSmellPoint == null && subsection[i][j].getSortedSmellArrayList().get(0).getType() == SmellType.FOOD){
                                     strongestSmellPoint = new Point(i,j);
-                                }else if(subsection[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(0).getIntensity() < subsection[i][j].getSortedSmellArrayList().get(0).getIntensity() && subsection[i][j].getSortedSmellArrayList().get(0).getType() == SmellType.FOOD){
+                                }else if(strongestSmellPoint!=null&&(subsection[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(0).getIntensity() < subsection[i][j].getSortedSmellArrayList().get(0).getIntensity() && subsection[i][j].getSortedSmellArrayList().get(0).getType() == SmellType.FOOD)){
                                     strongestSmellPoint = new Point(i,j);
                                 }
                             }
@@ -300,14 +300,14 @@ public class Behavior {
                         for (int j = 0; j < Behavior.SUBSECTION_SIZE; j++){
                             if (strongestSmellPoint == null && subsection[i][j].getSortedSmellArrayList().get(0).getType() == SmellType.FOOD){
                                 strongestSmellPoint = new Point(i,j);
-                            }else if(subsection[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(0).getIntensity() < subsection[i][j].getSortedSmellArrayList().get(0).getIntensity() &&subsection[i][j].getSortedSmellArrayList().get(0).getType() == SmellType.FOOD){
+                            }else if(strongestSmellPoint!=null&&(subsection[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(0).getIntensity() < subsection[i][j].getSortedSmellArrayList().get(0).getIntensity() &&subsection[i][j].getSortedSmellArrayList().get(0).getType() == SmellType.FOOD)){
                                 strongestSmellPoint = new Point(i,j);
                             }
                         }
 
                     }
 
-                    if (subsection[strongestSmellPoint.x][strongestSmellPoint.y].getWildObject().getType() == WildObject.FOOD_ID ||subsection[strongestSmellPoint.x][strongestSmellPoint.y].getWildObject().getType() == WildObject.HIVE_ID){
+                    if (strongestSmellPoint!=null&&(subsection[strongestSmellPoint.x][strongestSmellPoint.y].getWildObject().getType() == WildObject.FOOD_ID ||subsection[strongestSmellPoint.x][strongestSmellPoint.y].getWildObject().getType() == WildObject.HIVE_ID)){
                         return new VirtualFutureAction(strongestSmellPoint, ActionTypes.PICKUP_FROM_LOCATION);
                     }else if (strongestSmellPoint != null){
                         return new VirtualFutureAction(strongestSmellPoint, ActionTypes.GO_TO_LOCATION);

@@ -25,6 +25,7 @@ public class MapData {
     public static void updateSmells() {
 
         Case selectedCase = null;
+
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
                 selectedCase = map[i][j];
