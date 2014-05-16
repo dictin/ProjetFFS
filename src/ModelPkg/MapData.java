@@ -25,6 +25,24 @@ public class MapData {
     private static int[] fourmilierFixRaceStats2= new int[]{13,13,13};
     private static int[] fourmilierFixRaxceStats3 = new int[]{13,13,13};
 
+    public static void afficheNmbrSmellsSources(){
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[i].length; j++) {
+                System.out.print(map[i][j].getSortedSmellSourceArrayList().size());
+            }
+            System.out.println();
+        }
+    }
+
+    public static void afficheNmbrSmells(){
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[i].length; j++) {
+                System.out.print(map[i][j].getSortedSmellArrayList().get(0).getIntensity());
+            }
+            System.out.println();
+        }
+    }
+
 
     public static void updateSmells() {
 
@@ -59,6 +77,7 @@ public class MapData {
             }
         }
 
+
         casesWithSmellSources = getCasesWithSmellSources();
         if (!casesWithSmellSources.isEmpty()) {
             for (int i = 0; i < casesWithSmellSources.size(); i++) {
@@ -67,16 +86,6 @@ public class MapData {
             }
         }
 
-        for (int i = 0; i < map.length; i++) {
-            for (int j = 0; j < map[i].length; j++) {
-                int ans=0;
-                if (map[i][j].getSortedSmellArrayList().isEmpty()){
-                    ans=1;
-                }
-                System.out.print(ans);
-            }
-            System.out.println();
-        }
     }
 
 

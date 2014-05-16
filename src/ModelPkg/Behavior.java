@@ -33,11 +33,11 @@ public class Behavior {
         correctedObjective = new Point(objective.x+position.x, objective.y+position.y);
 
         if ((Behavior.isThereNowhereToGo(position))){
-            System.out.println("Drunk and blocked");
+            //System.out.println("Drunk and blocked");
             objective=position;
         }
         else{
-            System.out.println("Drunk not blocked");
+            //System.out.println("Drunk not blocked");
             if (MapData.getCase(correctedObjective).getOccupant() != null || MapData.getCase(correctedObjective).getWildObject().getType() != WildObject.EMPTY_ID){
                 objective=Behavior.drunk(position);
             }
@@ -50,8 +50,8 @@ public class Behavior {
         Case[][] subsection = MapData.getSubsection2(origin);
         for(int i = 0; i < subsection.length&&nowhereToGo; i++){
             for(int j = 0; j < subsection[i].length&&nowhereToGo; j++){
-                System.out.println("x;y"+origin.x+";"+origin.y);
-                if(subsection[i][j].getOccupant() == null && subsection[i][j].getWildObject().getType() == WildObject.EMPTY_ID){
+                //System.out.println("x;y"+origin.x+";"+origin.y);
+                if((!((i==j)&&i==0))&&subsection[i][j].getOccupant() == null && subsection[i][j].getWildObject().getType() == WildObject.EMPTY_ID){
                     nowhereToGo = false;
                 }
 
@@ -130,6 +130,7 @@ public class Behavior {
     }
 
     public static VirtualFutureAction scanForWildObject(Case[][] cases, SmellType type, String desiredQuality) {
+        System.out.println("I smell with my little nose "+type);
         Point targetPoint = null;
         int preferredIntensity=0;
         Point correctedReferential=null;
@@ -171,7 +172,6 @@ public class Behavior {
          */
 
         if (targetPoint!=null){
-        System.out.println("targetPoint: "+targetPoint.x+" y: "+targetPoint.y);
         correctedReferential=new Point(targetPoint.x-1,targetPoint.y-1);
         }
         return new VirtualFutureAction(correctedReferential, ActionTypes.GO_TO_LOCATION);

@@ -110,6 +110,7 @@ public class Case implements Observable {
                 sortedSmellArrayList.add(unsortedSmellArrayList.remove(strongestIndex));
             }
 
+
             return sortedSmellArrayList;
 
         }
@@ -141,10 +142,12 @@ public class Case implements Observable {
             while(!unsortedSmellSourceArrayList.isEmpty()){
                 int strongestSmellIntensity = 0;
                 int strongestIndex = 0;
-                for(int i = 0; i < unsortedSmellSourceArrayList.size(); i++){
+                boolean strongestFound=false;
+                for(int i = 0; i < unsortedSmellSourceArrayList.size()&&!strongestFound; i++){
                     if (unsortedSmellSourceArrayList.get(i).getIntensity()>= strongestSmellIntensity){
                         strongestSmellIntensity = unsortedSmellSourceArrayList.get(i).getIntensity();
                         strongestIndex = i;
+                        strongestFound=true;
                     }
                 }
                 sortedSmellSourceArrayList.add(unsortedSmellSourceArrayList.remove(strongestIndex));

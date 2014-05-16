@@ -105,9 +105,9 @@ public abstract class Animal {
 
         this.smell = new SmellSource(animalID, this.smellIntensity, this.team, smellType);
 
-        System.out.println("stats:");
-        System.out.println("Smell thresh"+smellThreshold);
-        System.out.println("espérance de vie: "+(100/25-endurance));
+        //System.out.println("stats:");
+        //System.out.println("Smell thresh"+smellThreshold);
+        //System.out.println("espérance de vie: "+(100/25-endurance));
 
         sprite=Toolkit.getDefaultToolkit().getImage("IMG/"+species+".png");
     }
@@ -146,7 +146,7 @@ public abstract class Animal {
     }
 
     public void setPosition(Point position) {
-        System.out.println("Moved");
+        //System.out.println("Moved");
         this.position = position;
     }
 
@@ -173,10 +173,10 @@ public abstract class Animal {
     public void decreaseHealth(int amount){
         this.health-= amount;
         if(this.isDead()){
-            System.out.println("In decreaseHealth");
+            //System.out.println("In decreaseHealth");
             MasterController.disposeAnimal(this);
 
-            MapData.addNewsList(this.getName() + " est malheureusement décédé!!");
+            //MapData.addNewsList(this.getName() + " est malheureusement décédé!!");
             masterController.victims();
         }
     }
@@ -258,49 +258,48 @@ public abstract class Animal {
 
 
         if (this.health <= this.MAX_HEALTH/4){
-            System.out.println(this.getName()+" is weak");
+            //System.out.println(this.getName()+" is weak");
             if (this.carriedFood > 0){
-                System.out.println(this.getName()+" is caryin");
+                //System.out.println(this.getName()+" is caryin");
                 this.restore();
                 virtualFutureAction = Behavior.skipTurn();
 
             }else {
-                System.out.println(this.getName()+" is NOT caryin");
-                //TODO Proposition: Ils ne peuvent pas manger de la base, c'est trop chien.
                 if (Behavior.isCloseTo(WildObject.FOOD_ID, this.position)){
-                    System.out.println(this.getName()+" is NFS");
+                    //System.out.println(this.getName()+" is NFS");
                     virtualFutureAction = Behavior.eatAdjacentFood(this.position);
-                }else{
-                    System.out.println(this.getName()+" Smells delicious FS");
+                }else if (Behavior.doesItSmell(this.filterSmells(), SmellType.FOOD)){
+                    //System.out.println(this.getName()+" Smells delicious FS");
                     virtualFutureAction = Behavior.scanForWildObject(this.filterSmells(), SmellType.FOOD, mostIntense);
                 }
             }
 
         }
         //Cherche à rentrer.
+        //TODO test with souts
         else if(this.carriedFood>0){
-            System.out.println(this.getName()+" is caryin");
+            //System.out.println(this.getName()+" is caryin");
             if (Behavior.isCloseTo(WildObject.HIVE_ID, this.position)){
-                System.out.println(this.getName()+" is NHive");
+                //System.out.println(this.getName()+" is NHive");
                 virtualFutureAction = Behavior.dropToHive(this.position);
             }
             else if(Behavior.doesItSmell(this.filterSmells(), SmellType.HIVE)){
-                System.out.println(this.getName()+" smells hive");
+                //System.out.println(this.getName()+" smells hive");
                 virtualFutureAction = Behavior.scanForWildObject(this.filterSmells(), SmellType.HIVE, mostIntense);
             }
             else if (Behavior.doesItSmell(this.filterSmells(), SmellType.ALLY)){
-                System.out.println(this.getName()+" smell ally");
+                //System.out.println(this.getName()+" smell ally");
                 virtualFutureAction = Behavior.scanForWildObject(this.filterSmells(), SmellType.ALLY, leastIntense);
             }
         }
         else {
-            System.out.println(this.getName()+" is not weak nor caryin");
+            //System.out.println(this.getName()+" is not weak nor caryin");
             if (Behavior.isCloseTo(WildObject.FOOD_ID, this.position)){
-                System.out.println(this.getName()+" is NFS");
+                //System.out.println(this.getName()+" is NFS");
                 virtualFutureAction = Behavior.pickUpFood(this.position);
             }
             else if (Behavior.doesItSmell(this.filterSmells(), SmellType.FOOD)){
-                System.out.println(this.getName()+" smells FS");
+                //System.out.println(this.getName()+" smells FS");
                 virtualFutureAction=Behavior.scanForWildObject(this.filterSmells(), SmellType.FOOD, mostIntense);
             }
         }
@@ -336,19 +335,18 @@ public abstract class Animal {
                 break;
             case GO_TO_LOCATION:
                 if (mission.getTargetLocation().x==mission.getTargetLocation().y&&mission.getTargetLocation().y==1){
-                    System.out.println("Loopin'");
+                    //System.out.println("Loopin'");
                 }
                 this.setToMove(true);
                 this.setPosition(target);
                 break;
             case PICKUP_FROM_LOCATION:
                 if (targetCase.getWildObject() instanceof FoodSource){
-                    System.out.println("Target:"+targetCase.getPosition().x+";"+targetCase.getPosition().y);
-                    System.out.println("grabqty: "+grabQuantity);
-                    System.out.println("carried:"+carriedFood);
+                    //System.out.println("Target:"+targetCase.getPosition().x+";"+targetCase.getPosition().y);
+                    //System.out.println("grabqty: "+grabQuantity);
+                    //System.out.println("carried:"+carriedFood);
                     boolean foodSourceDepleted=false;
                     while(carriedFood<this.getGrabQuantity()&&!foodSourceDepleted){
-                        System.out.println("wow Is food");
                         if(targetCase.decreaseFoodQuantity()){
                             foodSourceDepleted=true;
                             masterController.disposeWildObject(target);
@@ -390,7 +388,7 @@ public abstract class Animal {
     }
     public boolean isDead(){
         if (health<=0){
-            System.out.println("in isDead");
+            //System.out.println("in isDead");
             return true;
         }
         else {
