@@ -201,26 +201,6 @@ public class MapData {
 
     }
 
-    public static Case[][] getSmellableSubsection(Case[][] subsection, int smellThreshold){
-        Case[][] smellableSubsection=new Case[3][3];
-        for (int i=0; i<subsection.length;i++){
-            for (int j=0; j<subsection.length;j++){
-                smellableSubsection[i][j]=subsection[i][j].semiClone();
-            }
-        }
-        for (int i=0; i<subsection.length; i++){
-            for  (int j=0; j<subsection.length;j++){
-                ArrayList<Smell> smellInCase=(ArrayList<Smell>)subsection[i][j].getSortedSmellArrayList().clone();
-                for (int k=0; k<smellInCase.size();k++){
-                    if (smellInCase.get(k).getIntensity()<smellThreshold){
-                        smellInCase.remove(k);
-                        k--;
-                    }
-                }
-            }
-        }
-        return subsection;
-    }
 
     public static Case[][] getSubsection2(Point origin) {
         Case[][] subsection = new Case[3][3];

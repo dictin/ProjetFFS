@@ -1,5 +1,9 @@
 package ControllerPkg;
 
+import ModelPkg.MapData;
+import ModelPkg.WildObjects.FoodSource;
+import ViewPkg.VisualCase;
+
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -14,7 +18,7 @@ public class VisualCaseHandler implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        System.out.println(((FoodSource)MapData.getCase(((VisualCase) e.getSource()).getCaseCoord()).getWildObject()).getFoodQuantity());
     }
 
     @Override

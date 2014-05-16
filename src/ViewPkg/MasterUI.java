@@ -224,7 +224,7 @@ public class MasterUI extends JPanel implements Observer{
     }
     public void creationGeneticModifications(){
         System.out.println("Time to me creepy");
-        laboratoryLabel = new GeneticModifications(masterController);
+        //laboratoryLabel = new GeneticModifications(masterController);
         laboratoryLabel.setVisible(true);
         laboratoryLabel.setLocation(75,163);
         this.add(laboratoryLabel);

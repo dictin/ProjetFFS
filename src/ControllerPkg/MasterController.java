@@ -42,23 +42,12 @@ public class MasterController extends Thread{
 
     public static void disposeAnimal(Animal deadAnimal){
         Point targetPosition=deadAnimal.getPosition();
-        System.out.println("YOU ARE SUPPOSED TO DIE!");
-        Case coucou = MapData.getCase(targetPosition);
-        coucou.setOccupant(null);
+        Case targetCase = MapData.getCase(targetPosition);
+        targetCase.setOccupant(null);
         MapController.getAnimalList().remove(deadAnimal);
-        System.out.println( MapController.getAnimalList().isEmpty());
         deadAnimal=null;
         MapController.getAnimalList().remove(deadAnimal);
-        coucou.setOccupant(null);
-        for (int i=0; i<30; i++){
-            for (int j=0; j<30; j++){
-                Case selectedCase=MapData.getCase(new Point(i,j));
-                if (selectedCase==MapData.getCase(targetPosition)){
-
-                }
-            }
-        }
-
+        targetCase.setOccupant(null);
     }
     public void victims(){
         this.playerDataController.newVictime();
@@ -206,7 +195,6 @@ public class MasterController extends Thread{
 
             }else {
                 MapData.getCase(toMoveAnimals.get(0).getPosition()).setOccupant(null);
-                System.out.println("DIEEE");
             }
 
 

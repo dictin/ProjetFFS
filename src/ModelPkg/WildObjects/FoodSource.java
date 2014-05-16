@@ -22,4 +22,8 @@ public class FoodSource extends WildObject {
         this.getSmellSource().setIntensity(foodQuantity);
     }
 
+    public boolean decreaseFoodQuantity() {
+        this.foodQuantity--;
+        return foodQuantity==0;
+    }
 }

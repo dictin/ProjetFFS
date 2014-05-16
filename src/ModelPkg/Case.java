@@ -2,6 +2,7 @@ package ModelPkg;
 
 
 
+import ModelPkg.WildObjects.FoodSource;
 import ModelPkg.WildObjects.WildObject;
 import ObserverPkg.Observable;
 import ObserverPkg.Observer;
@@ -10,6 +11,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Case implements Observable {
+
+    private boolean passable=true;
 
     public Point getPosition() {
         return position;
@@ -28,6 +31,11 @@ public class Case implements Observable {
         this.occupant = occupant;
         this.terrain = terrain;
 
+    }
+
+    public Case(Point point, boolean passable){
+        this.position= new Point(point.x, point.y);
+        this.passable=passable;
     }
 
     public boolean caseContains(String thing){
@@ -60,9 +68,6 @@ public class Case implements Observable {
     }
 
     public void setOccupant(Animal occupant) {
-        if (occupant==null){
-            System.out.println("Set to null");
-        }
         this.occupant = occupant;
         this.updateObservers();
     }
@@ -183,8 +188,39 @@ public class Case implements Observable {
         smellArrayList=new ArrayList<>();
     }
 
-    public Case semiClone(){ //TODO Xav, don't fuck this up!
-        Case clone=new Case(getPosition(), getOccupant(), getWildObject());
-        return clone;
+
+    public void setWildObject(WildObject wildObject) {
+        this.terrain = wildObject;
+    }
+
+    public void setSortedArrayList(ArrayList<Smell> sortedArrayList) {
+        this.smellArrayList = sortedArrayList;
+    }
+
+    public boolean decreaseFoodQuantity() {
+        boolean noMoreFood=false;
+        if (((FoodSource)getWildObject()).decreaseFoodQuantity()){
+            noMoreFood=true;
+        }
+        updateObservers();
+        return noMoreFood;
+    }
+
+    public void setPassable(boolean passable){
+        this.passable=passable;
+    }
+
+    public boolean getPassable() {
+        return passable;
+    }
+
+    public boolean updateAndGetPassable(){
+        if (this.getWildObject().getType()!=WildObject.EMPTY_ID||this.getOccupant()!=null){
+            setPassable(false);
+        }
+        else{
+            setPassable(true);
+        }
+        return passable;
     }
 }

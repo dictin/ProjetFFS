@@ -18,36 +18,39 @@ public class Behavior {
 
     public static Point drunk(Point position){
         System.out.println("Hic! I'm drunk");
-        Point theoreticalPosition;
+        Point correctedObjective;
         Random random = new Random();
 
         int rndobjectifX = 0;
         int rndobjectifY = 0;
 
-        rndobjectifX = random.nextInt(3) - 1;
-        rndobjectifY = random.nextInt(3) - 1;
+        rndobjectifX = random.nextInt(3)-1;
+        rndobjectifY = random.nextInt(3)-1;
 
 
 
         objective = new Point(rndobjectifX,rndobjectifY);
-        theoreticalPosition = new Point(objective.x+position.x, objective.y+position.y);
+        correctedObjective = new Point(objective.x+position.x, objective.y+position.y);
 
-        if (!Behavior.isThereNowhereToGo(position)){
-            if (MapData.getCase(theoreticalPosition).getOccupant() == null && MapData.getCase(theoreticalPosition).getWildObject().getType() == WildObject.EMPTY_ID){
-                return objective;
-            }
+        if ((Behavior.isThereNowhereToGo(position))){
+            System.out.println("Drunk and blocked");
+            objective=position;
         }
         else{
-            return Behavior.drunk(position);
+            System.out.println("Drunk not blocked");
+            if (MapData.getCase(correctedObjective).getOccupant() != null || MapData.getCase(correctedObjective).getWildObject().getType() != WildObject.EMPTY_ID){
+                objective=Behavior.drunk(position);
+            }
         }
-        return null;
+        return objective;
     }
 
     private static boolean isThereNowhereToGo(Point origin) {
         boolean nowhereToGo = true;
         Case[][] subsection = MapData.getSubsection2(origin);
-        for(int i = 0; i < subsection.length; i++){
-            for(int j = 0; j < subsection[i].length; j++){
+        for(int i = 0; i < subsection.length&&nowhereToGo; i++){
+            for(int j = 0; j < subsection[i].length&&nowhereToGo; j++){
+                System.out.println("x;y"+origin.x+";"+origin.y);
                 if(subsection[i][j].getOccupant() == null && subsection[i][j].getWildObject().getType() == WildObject.EMPTY_ID){
                     nowhereToGo = false;
                 }
@@ -95,7 +98,7 @@ public class Behavior {
 
         for (int i = 0; i < subsection.length && !isClose; i++){
             for (int j = 0; j < subsection[i].length && !isClose; j++){
-                if (subsection[i][j].getWildObject().getType() == id){
+                if (subsection[i][j]!=null&&subsection[i][j].getWildObject().getType() == id){
                     isClose = true;
                 }
             }
@@ -149,19 +152,33 @@ public class Behavior {
             }
         }
 
-
-        if (targetPoint==null){
-            //TODO give drunk good point
-            System.out.println("Change this drunk behavior!");
-            targetPoint= drunk(new Point (0,0));
+        //TODO fix the fact that once food is removed, greatest food odor is where it used to be.
+        /*Proposition:
+        eliminateSmell(Object destroyedSource)
+        if  destroyedSource instanceOf Animal{
+        scan map[i][j].getSortedSmellSOURCEArrayList()
+        scan arrayList{
+        if selectedSmell.getID==destroyedSource.getID
+        stop arrayListScan, continue map scan
         }
 
+        if  destroyedSource instanceOf WildObject{
+        scan map[i][j].getSortedSmellSOURCEArrayList()
+        scan arrayList{
+        if selectedSmell.getID==destroyedSource.getID
+        stop arrayListScan, continue map scan
+        }
+         */
+
+        if (targetPoint!=null){
+        System.out.println("targetPoint: "+targetPoint.x+" y: "+targetPoint.y);
         correctedReferential=new Point(targetPoint.x-1,targetPoint.y-1);
+        }
         return new VirtualFutureAction(correctedReferential, ActionTypes.GO_TO_LOCATION);
     }
 
     public static VirtualFutureAction dropToHive(Point position) {
-        return new VirtualFutureAction(new Point(0,0), ActionTypes.DROP_TO_HIVE);
+        return new VirtualFutureAction(new Point(-1,-1), ActionTypes.DROP_TO_HIVE);
     }
 
     public static VirtualFutureAction pickUpFood(Point position) {
