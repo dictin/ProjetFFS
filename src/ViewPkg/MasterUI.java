@@ -67,8 +67,8 @@ public class MasterUI extends JLayeredPane implements Observer{
         this.setLayout(null);
 
         // Pour enlever les questions du chaman et/ou GeneticModification, mettre en commentaire ci-dessous
-        //this.creationQuestion();
-        this.creationGeneticModifications();
+        this.creationQuestion();
+      //  this.creationGeneticModifications();
 
 
 
