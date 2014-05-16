@@ -4,6 +4,7 @@ import ControllerPkg.CreationController;
 import ControllerPkg.HashtableController;
 import ControllerPkg.MasterController;
 import ControllerPkg.PlayerDataController;
+import ModelPkg.MapData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,10 +22,10 @@ public class CreationMenu extends ContextualMenu {
     private JButton fourmilier2 = new JButton();
     private JButton fourmilier3 = new JButton();
     private JButton fourmilier4 = new JButton();
-    private JLabel textfou1 = new JLabel(this.strings[0]);
-    private JLabel textfou2 = new JLabel(this.strings[1]);
-    private JLabel textfou3 = new JLabel(this.strings[2]);
-    private JLabel textfou4 = new JLabel (this.strings[3]);
+    private JLabel textfou1 = new JLabel(this.strings[1] + "   Coût: "+ MapData.getCostFourmilier(1));
+    private JLabel textfou2 = new JLabel(this.strings[1]+ "   Coût: "+ MapData.getCostFourmilier(1));
+    private JLabel textfou3 = new JLabel(this.strings[2]+ "   Coût: "+ MapData.getCostFourmilier(2));
+    private JLabel textfou4 = new JLabel (this.strings[3]+ "   Coût: "+ MapData.getCostFourmilier(3));
 
 
 

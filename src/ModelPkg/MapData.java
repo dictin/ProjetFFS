@@ -23,7 +23,7 @@ public class MapData {
     private static int[] fourmilierFixRaceStats1 = new int[]{13,13,13};
     private static int[] fourmilierFixRaceStats2= new int[]{13,13,13};
     private static int[] fourmilierFixRaxceStats3 = new int[]{13,13,13};
-
+    private static int [] costFourmilier = new int[]{100,100,100,100};
 
     public static void updateSmells() {
 
@@ -137,6 +137,8 @@ public class MapData {
         }
         return caseThatHaveASourceSmell;
     }
+
+
 
     private void initialize2(int nbOfTrees, int nbOfRocks, int nbOfWater, int nbOfHoles) {
         Random casePicker = new Random(30 * 30);
@@ -296,9 +298,7 @@ public class MapData {
     public static int[] getFourmilierActualRaceStats1Tab() {
     return fourmilierActualRaceStats;
     }
-    public static void setFourmilierActualRaceStats(int position, int stats) {
-        fourmilierActualRaceStats[position] = stats;
-    }
+
     public static int getFourmilierActualRaceStats(int position) {
         return fourmilierActualRaceStats[position];
     }
@@ -327,6 +327,15 @@ public class MapData {
         MapData.fourmilierFixRaxceStats3 = fourmilierFixRaxceStats3;
     }
 
+    public static int[] getCostFourmilierTab() {
+        return costFourmilier;
+    }
 
+    public static void setCostFourmilier(int position, int newCost) {
+        MapData.costFourmilier[position] = newCost;
+    }
+    public static int getCostFourmilier(int position){
+        return costFourmilier[position];
+    }
 
 }
