@@ -323,7 +323,7 @@ public abstract class Animal {
                 if (targetCase.getWildObject() instanceof FoodSource){
                     while (targetCase.getWildObject().getType()!=WildObject.EMPTY_ID&&this.getHealth()<100&&((FoodSource) targetCase.getWildObject()).getFoodQuantity()>0){
                         if(targetCase.decreaseFoodQuantity()){
-                            MapData.getCase(target).setWildObject(new WildObject(WildObject.EMPTY_ID, true));
+                            masterController.disposeWildObject(target);
                         }
                         if (this.health>=90){
                             this.setHealth(100);
@@ -351,8 +351,7 @@ public abstract class Animal {
                         System.out.println("wow Is food");
                         if(targetCase.decreaseFoodQuantity()){
                             foodSourceDepleted=true;
-                            MapData.getCase(target).setWildObject(null);
-                            MapData.getCase(target).setWildObject(new WildObject(WildObject.EMPTY_ID, true));
+                            masterController.disposeWildObject(target);
                         }
                         this.carriedFood++;
                     }
@@ -453,7 +452,7 @@ public abstract class Animal {
     public String getSpecies() {
         return species;
     }
-    public long getAnimalID() {
+    public long getID() {
         return animalID;
     }
 

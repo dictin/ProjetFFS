@@ -3,6 +3,7 @@ package ControllerPkg;
 import ModelPkg.*;
 import ModelPkg.PkgEvents.GameEventSunnyWeather;
 import ModelPkg.PkgEvents.LingeringGameEvents;
+import ModelPkg.WildObjects.WildObject;
 import ViewPkg.MasterFrame;
 import ViewPkg.MasterUI;
 
@@ -16,7 +17,7 @@ public class MasterController extends Thread{
 
     ItemController itemController = new ItemController(this);
     ShopInfoController shopInfoController = new ShopInfoController();
-    MapController mapController = new MapController();
+    static MapController mapController = new MapController();
     QuestionChamanController chamanController = new QuestionChamanController();
     PlayerDataController playerDataController = new PlayerDataController();
 
@@ -41,6 +42,7 @@ public class MasterController extends Thread{
     }
 
     public static void disposeAnimal(Animal deadAnimal){
+        mapController.removeSmellSourceOf(deadAnimal);
         Point targetPosition=deadAnimal.getPosition();
         Case targetCase = MapData.getCase(targetPosition);
         targetCase.setOccupant(null);
@@ -203,5 +205,9 @@ public class MasterController extends Thread{
 
 
         }
+    }
+
+    public void disposeWildObject(Point target) {
+        MapData.getCase(target).setWildObject(new WildObject(WildObject.EMPTY_ID, true));
     }
 }

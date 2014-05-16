@@ -9,7 +9,8 @@ import java.util.Random;
 
 public class MapData {
 
-    private static Case[][] map = new Case[30][30];
+    public static final int MAP_SIZE=30;
+    private static Case[][] map = new Case[MAP_SIZE][MAP_SIZE];
     private static int hivePosition;
     private static ArrayList<Animal> animalList = new ArrayList<Animal>();
     static ArrayList<Case> casesWithSmellSources = new ArrayList<Case>();
@@ -64,6 +65,17 @@ public class MapData {
                 disperseSmellSources(casesWithSmellSources.get(i));
                 casesWithSmellSources.get(i).fadeSourceSmells();
             }
+        }
+
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[i].length; j++) {
+                int ans=0;
+                if (map[i][j].getSortedSmellArrayList().isEmpty()){
+                    ans=1;
+                }
+                System.out.print(ans);
+            }
+            System.out.println();
         }
     }
 

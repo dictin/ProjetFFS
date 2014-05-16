@@ -22,6 +22,7 @@ public class SmellSource extends Smell implements Cloneable{
     @Override
     public SmellSource clone(){
         SmellSource clonedSmell=new SmellSource(getID(), getIntensity(), getTeam(), getType());
+        System.out.println("Clone intensity not 0:"+(clonedSmell.getIntensity()!=0));
         return clonedSmell;
     }
 }
