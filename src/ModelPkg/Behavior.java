@@ -9,8 +9,8 @@ import java.util.Random;
 
 public class Behavior {
 
-    //objectif est composé de -1,0 et 1. il indique le déplacement à faire. Donc coordonné + objectif = noulles coordonneé du fourmilier après le déplacement
-    private static Point objectif;
+    //objective est composé de -1,0 et 1. il indique le déplacement à faire. Donc coordonné + objective = noulles coordonneé du fourmilier après le déplacement
+    private static Point objective;
     private static final int SUBSECTION_SIZE = 3;
 
     public Behavior(){
@@ -29,22 +29,18 @@ public class Behavior {
 
 
 
-        objectif = new Point(rndobjectifX,rndobjectifY);
-        theoreticalPosition = new Point(objectif.x+position.x, objectif.y+position.y);
+        objective = new Point(rndobjectifX,rndobjectifY);
+        theoreticalPosition = new Point(objective.x+position.x, objective.y+position.y);
 
         if (!Behavior.isThereNowhereToGo(position)){
             if (MapData.getCase(theoreticalPosition).getOccupant() == null && MapData.getCase(theoreticalPosition).getWildObject().getType() == WildObject.EMPTY_ID){
-                return objectif;
-            }else{
-                return Behavior.drunk(position);
+                return objective;
             }
-        }else{
-            return new Point(0,0);
         }
-
-
-
-
+        else{
+            return Behavior.drunk(position);
+        }
+        return null;
     }
 
     private static boolean isThereNowhereToGo(Point origin) {
@@ -75,10 +71,6 @@ public class Behavior {
         }
 
         return !isEmpty;
-    }
-
-    public static VirtualFutureAction evaluateBestObjective(Point position, MentalStates mentalState, int moralValue, int sensitivityThreshold){
-
     }
 
     public static boolean moralCheck(int moralValue){
@@ -113,35 +105,6 @@ public class Behavior {
 
     }
 
-    public static VirtualFutureAction eatAdjacentFood(Point position) {
-        Case[][] subsection = MapData.getSubsection2(position);
-        Point foodLocation = null;
-        Point correctedFoodLocation; //referential of the fourmillier
-        int highestFoodValue = 0;
-
-
-        for (int i = 0; i < subsection.length; i++){
-            for (int j = 0; j < subsection[i].length; j++){
-                if (subsection[i][j].getWildObject() instanceof FoodSource){
-                    if (foodLocation == null){
-                        foodLocation = new Point(i,j);
-                        highestFoodValue = ((FoodSource) subsection[i][j].getWildObject()).getFoodQuantity();
-                    }else if (foodLocation != null && (((FoodSource) subsection[i][j].getWildObject()).getFoodQuantity()) > highestFoodValue){
-                        foodLocation = new Point(i,j);
-                        highestFoodValue = ((FoodSource) subsection[i][j].getWildObject()).getFoodQuantity();
-                    }
-                }
-            }
-
-        }
-
-        correctedFoodLocation = new Point(foodLocation.x-1, foodLocation.y-1);
-
-        return new VirtualFutureAction(correctedFoodLocation, ActionTypes.EAT_FROM_LOCATION);
-
-
-
-    }
 
     public static boolean doesItSmell(Case[][] subsection, SmellType smellType) {
         Case selectedCase = null;
@@ -164,34 +127,81 @@ public class Behavior {
     }
 
     public static VirtualFutureAction scanForWildObject(Case[][] cases, SmellType type, String desiredQuality) {
-        Point strongestSmellPoint = null;
+        Point targetPoint = null;
         int preferredIntensity=0;
         Point correctedReferential=null;
         for (int i = 0; i < cases.length; i++) {
             for (int j = 0; j < cases[i].length; j++) {
                 for (int k = 0; k < cases[i][j].getSortedSmellArrayList().size(); k++){
-                    if (strongestSmellPoint==null&&cases[i][j].getSortedSmellArrayList().get(k).getType()==type){
-                        strongestSmellPoint=new Point(i,j);
-                        preferredIntensity=cases[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(k).getIntensity();
+                    if (targetPoint==null&&cases[i][j].getSortedSmellArrayList().get(k).getType()==type){
+                        targetPoint=new Point(i,j);
+                        preferredIntensity=cases[targetPoint.x][targetPoint.y].getSortedSmellArrayList().get(k).getIntensity();
                     }
-                    else if(desiredQuality.equals("lesser")&&(strongestSmellPoint!=null&&cases[i][j].getSortedSmellArrayList().get(k).getIntensity()<preferredIntensity)){
-                        strongestSmellPoint=new Point(i,j);
-                        preferredIntensity=cases[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(k).getIntensity();
+                    else if(desiredQuality.equals("lesser")&&(targetPoint!=null&&cases[i][j].getSortedSmellArrayList().get(k).getIntensity()<preferredIntensity)){
+                        targetPoint=new Point(i,j);
+                        preferredIntensity=cases[targetPoint.x][targetPoint.y].getSortedSmellArrayList().get(k).getIntensity();
                     }
-                    else if(desiredQuality.equals("greater")&&(strongestSmellPoint!=null&&cases[i][j].getSortedSmellArrayList().get(k).getIntensity()>preferredIntensity)){
-                        strongestSmellPoint=new Point(i,j);
-                        preferredIntensity=cases[strongestSmellPoint.x][strongestSmellPoint.y].getSortedSmellArrayList().get(k).getIntensity();
+                    else if(desiredQuality.equals("greater")&&(targetPoint!=null&&cases[i][j].getSortedSmellArrayList().get(k).getIntensity()>preferredIntensity)){
+                        targetPoint=new Point(i,j);
+                        preferredIntensity=cases[targetPoint.x][targetPoint.y].getSortedSmellArrayList().get(k).getIntensity();
                     }
                 }
             }
         }
-        correctedReferential=new Point(strongestSmellPoint.x-1,strongestSmellPoint.y-1);
+
+
+        if (targetPoint==null){
+            //TODO give drunk good point
+            System.out.println("Change this drunk behavior!");
+            targetPoint= drunk(new Point (0,0));
+        }
+
+        correctedReferential=new Point(targetPoint.x-1,targetPoint.y-1);
         return new VirtualFutureAction(correctedReferential, ActionTypes.GO_TO_LOCATION);
     }
 
     public static VirtualFutureAction dropToHive(Point position) {
         return new VirtualFutureAction(new Point(0,0), ActionTypes.DROP_TO_HIVE);
     }
+
+    public static VirtualFutureAction pickUpFood(Point position) {
+        Point correctedFoodLocation = findFoodiestLocation(position);
+
+        return new VirtualFutureAction(correctedFoodLocation, ActionTypes.PICKUP_FROM_LOCATION);
+    }
+
+    public static VirtualFutureAction eatAdjacentFood(Point position) {
+        Point correctedFoodLocation = findFoodiestLocation(position);
+
+        return new VirtualFutureAction(correctedFoodLocation, ActionTypes.EAT_FROM_LOCATION);
+    }
+
+    public static Point findFoodiestLocation(Point position){
+        Case[][] subsection = MapData.getSubsection2(position);
+        Point foodLocation = null;
+        Point correctedFoodLocation; //referential of the fourmillier
+        int highestFoodValue = 0;
+
+
+        for (int i = 0; i < subsection.length; i++){
+            for (int j = 0; j < subsection[i].length; j++){
+                if (subsection[i][j].getWildObject() instanceof FoodSource){
+                    if (foodLocation == null){
+                        foodLocation = new Point(i,j);
+                        highestFoodValue = ((FoodSource) subsection[i][j].getWildObject()).getFoodQuantity();
+                    }else if (foodLocation != null && (((FoodSource) subsection[i][j].getWildObject()).getFoodQuantity()) > highestFoodValue){
+                        foodLocation = new Point(i,j);
+                        highestFoodValue = ((FoodSource) subsection[i][j].getWildObject()).getFoodQuantity();
+                    }
+                }
+            }
+
+        }
+
+        correctedFoodLocation = new Point(foodLocation.x-1, foodLocation.y-1);
+        return correctedFoodLocation;
+    }
+
 }
 
 

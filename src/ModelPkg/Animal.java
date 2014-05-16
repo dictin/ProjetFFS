@@ -9,7 +9,9 @@ import java.util.Random;
 public abstract class Animal {
 
 
-    private final String lesser="lesser";
+    private final String leastIntense="lesser";
+    private final String mostIntense="greater";
+
     private MasterController masterController;
     private final int MAX_HEALTH = 100;
     private long animalID;
@@ -261,8 +263,8 @@ public abstract class Animal {
             }else {
                 if (Behavior.isCloseTo(WildObject.FOOD_ID, this.position)){
                     virtualFutureAction = Behavior.eatAdjacentFood(this.position);
-                }else if (Behavior.doesItSmell(this.filterSmells(), SmellType.FOOD)){
-                    virtualFutureAction = Behavior.scanForWildObject(this.filterSmells(), SmellType.FOOD, "greater");
+                }else{
+                    virtualFutureAction = Behavior.scanForWildObject(this.filterSmells(), SmellType.FOOD, mostIntense);
 
                 }
             }
@@ -274,14 +276,25 @@ public abstract class Animal {
                 virtualFutureAction = Behavior.dropToHive(this.position);
             }
             else if(Behavior.doesItSmell(this.filterSmells(), SmellType.HIVE)){
-                virtualFutureAction = Behavior.scanForWildObject(this.filterSmells(), SmellType.HIVE, "greater");
+                virtualFutureAction = Behavior.scanForWildObject(this.filterSmells(), SmellType.HIVE, mostIntense);
             }
             else{
-                virtualFutureAction = Behavior.scanForWildObject(this.filterSmells(), SmellType.ALLY, "lesser");
+                virtualFutureAction = Behavior.scanForWildObject(this.filterSmells(), SmellType.ALLY, leastIntense);
+            }
+        }
+        else{
+            if (Behavior.isCloseTo(WildObject.FOOD_ID, this.position)){
+                virtualFutureAction = Behavior.pickUpFood(this.position);
+            }
+            else{
+                virtualFutureAction=Behavior.scanForWildObject(this.filterSmells(), SmellType.FOOD, mostIntense);
             }
         }
         this.objective = virtualFutureAction.getTargetLocation();
         this.actionToCommit = virtualFutureAction.getActionType();
+    }
+
+    public void accomplishMission(){
 
     }
 
@@ -300,7 +313,6 @@ public abstract class Animal {
 
     private void attackOpponent(Animal animal, int damageAmount) {
         animal.decreaseHealth(damageAmount);
-
     }
 
     private void realizeFutureAction(VirtualFutureAction virtualFutureAction) {
