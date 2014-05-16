@@ -29,5 +29,6 @@ public class FoodSource extends WildObject {
 
     public void decreaseFoodQuantity() {
         this.foodQuantity--;
+
     }
 }

@@ -211,10 +211,11 @@ public class MapData {
             }
         }
 
-        map[hivePosition][hivePosition] = new Case(new Point(hivePosition, hivePosition), null, new WildObject(5, true));
-        map[hivePosition + 1][hivePosition] = new Case(new Point(hivePosition + 1, hivePosition), null, new WildObject(5, true));
-        map[hivePosition][hivePosition + 1] = new Case(new Point(hivePosition, hivePosition + 1), null, new WildObject(5, true));
-        map[hivePosition + 1][hivePosition + 1] = new Case(new Point(hivePosition + 1, hivePosition + 1), null, new WildObject(5, true));
+        map[hivePosition][hivePosition] = new Case(new Point(hivePosition, hivePosition), null, new WildObject(WildObject.HIVE_ID, true));
+        map[hivePosition + 1][hivePosition] = new Case(new Point(hivePosition + 1, hivePosition), null, new WildObject(WildObject.HIVE_ID, true));
+        map[hivePosition][hivePosition + 1] = new Case(new Point(hivePosition, hivePosition + 1), null, new WildObject(WildObject.HIVE_ID, true));
+        map[hivePosition + 1][hivePosition + 1] = new Case(new Point(hivePosition + 1, hivePosition + 1), null, new WildObject(WildObject.HIVE_ID, true));
+        map[hivePosition + 2][hivePosition + 2] = new Case(new Point(hivePosition + 2, hivePosition + 2), null, new FoodSource(WildObject.FOOD_ID, random.nextInt(200)));
         newsList.add(0, "Bienvenu à FFS!");
         newsList.add(1, "Niveau 1");
         newsList.add(2, "#YOLO");
@@ -238,26 +239,7 @@ public class MapData {
         return subsection;
     }
 
-    public static Case[][] getSubsection(Point origin) {
-        int radius = 3;
-        Case[][] returnArray = new Case[(2 * radius) + 1][(2 * radius) + 1];
-        int subI = 0;
-        int subJ = 0;
 
-        for (int i = origin.x - radius; i <= origin.x + radius; i++) {
-            for (int j = origin.y - radius; j <= origin.y + radius; j++) {
-                try {
-                    returnArray[subI][subJ] = MapData.map[i][j];
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    returnArray[subI][subJ] = null;
-                }
-                subJ++;
-            }
-            subI++;
-        }
-
-        return returnArray;
-    }
 
     public static Point getSpawnPoint() {
         Point spawn = null;

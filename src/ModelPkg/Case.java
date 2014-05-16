@@ -201,12 +201,15 @@ public class Case implements Observable {
         this.smellArrayList = sortedArrayList;
     }
 
-    public boolean decreaseFoodQuantity() {
+    public void decreaseFoodQuantity() {
         FoodSource foodSource = ((FoodSource)getWildObject());
         foodSource.decreaseFoodQuantity();
+    }
+
+    public boolean emptyFoodSource(){
+        FoodSource foodSource = ((FoodSource)getWildObject());
         boolean noMoreFood;
         noMoreFood = foodSource.isEmpty() ? true : false;
-        updateObservers();
         return noMoreFood;
     }
 

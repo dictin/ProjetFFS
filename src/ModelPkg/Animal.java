@@ -319,7 +319,9 @@ public abstract class Animal {
             case EAT_FROM_LOCATION:
                 if (targetCase.getWildObject() instanceof FoodSource){
                     while (targetCase.getWildObject().getType()!=WildObject.EMPTY_ID&&this.getHealth()<100&&((FoodSource) targetCase.getWildObject()).getFoodQuantity()>0){
-                        if(targetCase.decreaseFoodQuantity()){
+                        targetCase.decreaseFoodQuantity();
+                        if(targetCase.emptyFoodSource()){
+                            System.out.println("When in doubt, sout");
                             masterController.disposeWildObject(target);
                         }
                         if (this.health>=90){
@@ -345,9 +347,11 @@ public abstract class Animal {
                     //System.out.println("carried:"+carriedFood);
                     boolean foodSourceDepleted=false;
                     while(carriedFood<this.getGrabQuantity()&&!foodSourceDepleted){
-                        if(targetCase.decreaseFoodQuantity()){
+                        targetCase.decreaseFoodQuantity();
+                        if(targetCase.emptyFoodSource()){
                             foodSourceDepleted=true;
                             masterController.disposeWildObject(target);
+
                         }
                         this.carriedFood++;
                     }
