@@ -194,6 +194,7 @@ public class Case implements Observable {
 
     public void setWildObject(WildObject wildObject) {
         this.terrain = wildObject;
+        this.updateObservers();
     }
 
     public void setSortedArrayList(ArrayList<Smell> sortedArrayList) {
@@ -201,10 +202,10 @@ public class Case implements Observable {
     }
 
     public boolean decreaseFoodQuantity() {
-        boolean noMoreFood=false;
-        if (((FoodSource)getWildObject()).decreaseFoodQuantity()){
-            noMoreFood=true;
-        }
+        FoodSource foodSource = ((FoodSource)getWildObject());
+        foodSource.decreaseFoodQuantity();
+        boolean noMoreFood;
+        noMoreFood = foodSource.isEmpty() ? true : false;
         updateObservers();
         return noMoreFood;
     }

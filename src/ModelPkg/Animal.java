@@ -227,8 +227,6 @@ public abstract class Animal {
         return grabQuantity;
     }
 
-//dgsfrjhfs
-
     public Image getSprite() {
         return sprite;
     }

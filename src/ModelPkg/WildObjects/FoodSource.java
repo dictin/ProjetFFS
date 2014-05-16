@@ -22,8 +22,12 @@ public class FoodSource extends WildObject {
         this.getSmellSource().setIntensity(foodQuantity);
     }
 
-    public boolean decreaseFoodQuantity() {
+    public boolean isEmpty(){
+        boolean isEmpty = (foodQuantity <= 0) ? true : false;
+        return isEmpty;
+    }
+
+    public void decreaseFoodQuantity() {
         this.foodQuantity--;
-        return foodQuantity==0;
     }
 }
