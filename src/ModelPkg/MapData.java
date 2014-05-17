@@ -67,7 +67,6 @@ public class MapData {
         }
     }
 
-
     public static int getSmellThreshold(Smell smell, Case selectedCase) {
         int threshold = 0;
         if (!selectedCase.getSortedSmellArrayList().isEmpty()) {
@@ -136,33 +135,6 @@ public class MapData {
             }
         }
         return caseThatHaveASourceSmell;
-    }
-
-
-
-    private void initialize2(int nbOfTrees, int nbOfRocks, int nbOfWater, int nbOfHoles) {
-        Random casePicker = new Random(30 * 30);
-        int nbOfSpecialCases = nbOfHoles + nbOfRocks + nbOfTrees + nbOfWater;
-        ArrayList<Integer> specialCases = new ArrayList<Integer>();
-        ArrayList<Integer> alreadyPicked = new ArrayList<Integer>();
-        for (int i = 0; i < nbOfSpecialCases; i++) {
-            boolean caseAlreadyFull = false;
-            do {
-                caseAlreadyFull = false;
-                int caseID = casePicker.nextInt();
-                if (alreadyPicked.size() != 0) {
-                    for (int j = 0; j < alreadyPicked.size(); j++) {
-                        if (caseID == alreadyPicked.get(j)) {
-                            caseAlreadyFull = true;
-                        }
-                    }
-                    if (!caseAlreadyFull) {
-                        specialCases.add(caseID);
-                    }
-                }
-            } while (caseAlreadyFull);
-        }
-        //TODO utiliser les ID du arrayList pour remplir les cases appropriées (posiX=ID%30, posiY=floor(ID/30))
     }
 
     public static void initialize() { //8% arbre 2% roche 3% eau 2% trou
@@ -286,14 +258,6 @@ public class MapData {
     public static ArrayList<String> getNewsList() {
         return newsList;
     }
-
-    public static void setAnimalList(ArrayList<Animal> animalList) {
-        MapData.animalList = animalList;
-    }
-
-
-
-
 
     public static int[] getFourmilierActualRaceStats1Tab() {
     return fourmilierActualRaceStats;
