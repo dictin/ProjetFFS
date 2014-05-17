@@ -3,6 +3,7 @@ package ControllerPkg;
 import ModelPkg.*;
 import ModelPkg.PkgEvents.GameEventSunnyWeather;
 import ModelPkg.PkgEvents.LingeringGameEvents;
+import ModelPkg.WildObjects.FoodSource;
 import ModelPkg.WildObjects.WildObject;
 import ViewPkg.MasterFrame;
 import ViewPkg.MasterUI;
@@ -67,7 +68,11 @@ public class MasterController extends Thread{
                 this.time++;
 
 
-
+                //TODO remove this
+                if (time>=5){
+                    MapData.getCase(new Point(18, 16)).setWildObject(new WildObject(WildObject.ROCK_ID, false));
+                    MapData.getCase(new Point(19, 16)).setWildObject(new FoodSource(300));
+                }
 
                 if (time!=0&&time%smellDecayTime==0){
                 MapData.updateSmells();

@@ -7,8 +7,8 @@ public class FoodSource extends WildObject {
 
     private int foodQuantity;
 
-    public FoodSource(int type, int quantity) {
-        super(type, true);
+    public FoodSource(int quantity) {
+        super(WildObject.FOOD_ID, true);
         this.foodQuantity=quantity;
         this.getSmellSource().setIntensity(getFoodQuantity());
     }

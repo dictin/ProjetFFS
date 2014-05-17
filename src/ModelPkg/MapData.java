@@ -196,7 +196,7 @@ public class MapData {
                     map[i][j] = new Case(new Point(i, j), null, new WildObject(WildObject.EMPTY_ID, true));
                 }
                 else if (caseType < 93) {
-                    map[i][j] = new Case(new Point(i, j), null, new FoodSource(WildObject.FOOD_ID, random.nextInt(200)));
+                    map[i][j] = new Case(new Point(i, j), null, new FoodSource(random.nextInt(200)));
                 } else if (caseType < 96) {
                     map[i][j] = new Case(new Point(i, j), null, new WildObject(WildObject.TREE_ID, true));
                 } else if (caseType < 97) {

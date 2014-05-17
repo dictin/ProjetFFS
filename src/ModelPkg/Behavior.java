@@ -199,10 +199,10 @@ public class Behavior {
                 }
                 else{
                     if (cases[targetPoint.x][0].getPassable()){
-                        correctedReferential=new Point(targetPoint.x, -1);
+                        correctedReferential=new Point(targetPoint.x-1, -1);
                     }
                     else if(cases[targetPoint.x][2].getPassable()){
-                        correctedReferential=new Point(targetPoint.x, 1);
+                        correctedReferential=new Point(targetPoint.x-1, 1);
                     }
                     else{
                         System.out.println("manque qqc");
