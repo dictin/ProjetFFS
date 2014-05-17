@@ -300,7 +300,6 @@ public class MasterUI extends JLayeredPane implements Observer{
         }
 
         if(Laboratory.isFinish()){
-        masterController.getPlayerDataController().setTheLevelFinish(false);
         laboratoryLabel.setVisible(false);
         }
     }
