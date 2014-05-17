@@ -11,8 +11,12 @@ public class QuestionsHandler implements MouseListener{
     private QuestionChaman actualQuestion;
     private JLabel answerClick = new JLabel();
     private Color answerColor;
-    public QuestionsHandler(QuestionChaman actualQuestion){
+    private MasterController controller;
+
+
+    public QuestionsHandler(QuestionChaman actualQuestion, MasterController controller){
         this.actualQuestion = actualQuestion;
+        this.controller = controller;
 
     }
 
@@ -21,10 +25,12 @@ public class QuestionsHandler implements MouseListener{
         answerClick = (JLabel)e.getSource();
         if(answerClick.getText().equals(actualQuestion.getAnswer2())){
             //TODO avertir joueur d'une bonne réponse avec son
+             controller.getPlayerDataController().modifyKarma(33);
              actualQuestion.setQuestionTaTuBienRepondu(1);
 
         }else{
             //TODO avertir joueur d'une mauvaise réponse avec son
+            controller.getPlayerDataController().modifyKarma(-33);
             actualQuestion.setQuestionTaTuBienRepondu(-1);
         }
 

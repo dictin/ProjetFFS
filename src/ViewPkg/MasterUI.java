@@ -10,6 +10,8 @@ import ViewPkg.Menus.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class MasterUI extends JLayeredPane implements Observer{
 
@@ -18,6 +20,7 @@ public class MasterUI extends JLayeredPane implements Observer{
     private MasterController masterController;
     private PlayerDataController playerDataController;
     private GotoMenuButton quitIcon;
+    private JLabel helpLabel = new JLabel("?");
 
     private VisualCase[][] visualCasesGrid;
 
@@ -46,7 +49,7 @@ public class MasterUI extends JLayeredPane implements Observer{
     JLabel labelFood = new JLabel("Nourriture: 300");
     JLabel labelDeaths = new JLabel("Victimes: 0");
     JLabel labelLevel = new JLabel("Niveau: 1");
-    JLabel labelScore = new JLabel("Score: 0");
+    JLabel labelKarma = new JLabel("Score: 0");
     JLabel labelPickUpFood = new JLabel("Food to pick up: 0");
     JLabel background = new JLabel();
 
@@ -66,7 +69,6 @@ public class MasterUI extends JLayeredPane implements Observer{
 
         hideMenus.setSize(320, 557);
         hideMenus.setOpaque(true);
-        hideMenus.setBackground(new Color(Integer.parseInt("314159", 16)));
         hideMenus.setLocation(650,20);
         hideMenus.setVisible(false);
         this.add(hideMenus, UILayers.MENUS);
@@ -91,6 +93,45 @@ public class MasterUI extends JLayeredPane implements Observer{
         quitIcon = new GotoMenuButton(masterController, "quit_button", new Dimension(25,25), new Color(Integer.parseInt("314159",16)));
         this.add(quitIcon, UILayers.MENUS);
         quitIcon.setLocation(this.getWidth()-quitIcon.getWidth(), 0);
+
+        helpLabel.setSize(20,20);
+        helpLabel.setLocation(this.getWidth()-quitIcon.getWidth()-20, 0);
+        helpLabel.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(null,"Bienvenue dans la section aide. \n\n" +
+                        "Le but de Fourmilier Fourmilière Simulator est de créer sa colonie de fourmilier et de survivre à travers les niveaux \n \n" +
+                        "Pour ce faire, vous devez jouer stratégiquement et utiliser judicieusement les objets du magasins.\n" +
+                        "Les fourmiliers vous aideront à récolter de la nourriture que vous pourrez utiliser pour créer d'autres fourmiliers\n" +
+                        "ou pour acheter des améliorations et objets au magasin.\n\n" +
+                        "Lorsque la quantité de nourriture nécessaire pour passer au prochain niveau est atteinte, le Chaman des fourmiliers \n" +
+                        "va vous posez 3questions pour déterminer si vous méritez sa bénédiction pour le prochain niveau. Une bonne réponse \n" +
+                        "augmentera votre chance d'avoir des bons événements et vis-versa pour une mauvaise réponse.\n\n" +
+                        "Après les 3 questions, Vous aurez la possibilité de créer votre nouvelle race de fourmiliers.\n\n" +
+                        "Bonne chance!");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+        this.add(helpLabel);
 
         gridEndPointX=25+xGridSize*VisualCase.CASE_SIDE_PIXEL_SIZE;
 
@@ -141,10 +182,10 @@ public class MasterUI extends JLayeredPane implements Observer{
         labelPickUpFood.setLocation(660,640);
         this.add(labelPickUpFood, UILayers.BACKGROUND);
         //Score
-        labelScore.setSize(87,9);
-        labelScore.setForeground(Color.white);
-        labelScore.setLocation(660,655);
-        this.add(labelScore, UILayers.BACKGROUND);
+        labelKarma.setSize(87,9);
+        labelKarma.setForeground(Color.white);
+        labelKarma.setLocation(660,655);
+        this.add(labelKarma, UILayers.BACKGROUND);
         //Fond derrière les label
         background.setOpaque(true);
         background.setBackground(new Color(Integer.parseInt("324159", 15)));
@@ -209,7 +250,7 @@ public class MasterUI extends JLayeredPane implements Observer{
         labelDeaths.setVisible(visible);
         labelLevel.setVisible(visible);
         labelPickUpFood.setVisible(visible);
-        labelScore.setVisible(visible);
+        labelKarma.setVisible(visible);
         background.setVisible(visible);
     }
 
@@ -291,7 +332,7 @@ public class MasterUI extends JLayeredPane implements Observer{
             }
         }
         numberOfNews = MapData.getNewsList().size();
-        if(actualQuestion != null && actualQuestion.getQuestionTaTuBienRepondu()==1 && Laboratory.isFinish() && masterController.getPlayerDataController().isItTimeForChaman()) {
+        if(actualQuestion != null && actualQuestion.getQuestionTaTuBienRepondu() !=0 && Laboratory.isFinish() && masterController.getPlayerDataController().isItTimeForChaman()) {
             masterController.getPlayerDataController().setQuestionNumber(masterController.getPlayerDataController().getQuestionNumber()+1);
             if(masterController.getPlayerDataController().getQuestionNumber()%4 ==0){
                 masterController.getPlayerDataController().setItTimeForChaman(false);
@@ -336,7 +377,7 @@ public class MasterUI extends JLayeredPane implements Observer{
     }
 
     private void updateNumericInfos(){
-        this.labelScore.setText("Score: "+this.playerDataController.getScore());
+        this.labelKarma.setText("Score: "+this.playerDataController.getScore());
         this.labelFood.setText("Nourriture: "+this.playerDataController.getFood());
         this.labelLevel.setText("Niveau: "+this.playerDataController.getLevel());
         this.labelPopulation.setText("Population: "+this.playerDataController.getPopulation());

@@ -28,7 +28,7 @@ public class Chaman extends JLabel{
 public Chaman(final MasterController controller, ModelPkg.QuestionChaman actualQuestion){
     this.actualQuestion = actualQuestion;
     this.controller=controller;
-    this.questionsHandler = new QuestionsHandler(this.actualQuestion);
+    this.questionsHandler = new QuestionsHandler(this.actualQuestion, controller);
     this.setOpaque(true);
     this.setBackground(new Color(Integer.parseInt("324159", 19)));
     this.setSize(505,375);
