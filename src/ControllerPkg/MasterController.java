@@ -74,7 +74,7 @@ public class MasterController extends Thread{
                 this.sleep(sleepTime);
                 this.time++;
 
-                if(time == 300){
+                if(this.getPlayerDataController().getNumberFoodToGo() == 0){
                     JOptionPane.showMessageDialog(null, "Vous avez ramassé toute la nourriture nécessaire pour passer au prochain niveau.\n " +
                             "Le Chaman va maintenant vous posez 3 questions.");
                     this.getPlayerDataController().setTheLevelFinish(true);
