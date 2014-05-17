@@ -9,9 +9,7 @@ import ViewPkg.MasterUI;
 import java.awt.*;
 import java.util.ArrayList;
 
-/**
- * Created by Xav on 24/02/14.
- */
+
 public class MasterController extends Thread{
 
     ItemController itemController = new ItemController(this);

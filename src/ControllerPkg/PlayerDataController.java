@@ -138,6 +138,16 @@ public class PlayerDataController {
     public void activateInstance(int index, int activatedType){
         this.playerData.activateInstance(index, activatedType);
     }
+    public void setLevel(int level) {
+        this.playerData.setLevel(level);
+    }
+    public boolean isTheLevelFinish() {
+        return this.playerData.isTheLevelFinish();
+    }
+
+    public void setTheLevelFinish(boolean finish) {
+        this.playerData.setTheLevelFinish(finish);
+    }
 
 
 }

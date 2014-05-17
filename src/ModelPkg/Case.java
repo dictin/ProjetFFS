@@ -188,5 +188,7 @@ public class Case implements Observable {
 
     public void setTerrain(WildObject terrain) {
         this.terrain = terrain;
-    }
+        this.updateObservers();
+        }
+
 }

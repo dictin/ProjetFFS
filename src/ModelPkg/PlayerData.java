@@ -32,6 +32,10 @@ public class PlayerData implements Observable {
     private int karma=0;
     private int nextEventGravity=1;
 
+
+
+    private boolean isTheLevelFinish = false;
+
     public static final int TEMP_ITEM = 0;
     public static final int PERM_ITEM = 1;
 
@@ -268,5 +272,16 @@ public class PlayerData implements Observable {
 
     public void setQuestionNumber(int questionNumber) {
         this.questionNumber = questionNumber;
+    }
+
+    public void setLevel(int newLevel){
+        this.level = newLevel;
+    }
+    public boolean isTheLevelFinish() {
+        return isTheLevelFinish;
+    }
+
+    public void setTheLevelFinish(boolean isTheLevelFinish) {
+        this.isTheLevelFinish = isTheLevelFinish;
     }
 }

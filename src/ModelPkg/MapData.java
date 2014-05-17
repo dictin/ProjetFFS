@@ -316,12 +316,13 @@ public class MapData {
         for (int i = 0; i < maxLength; i++) {
             for (int j = 0; j < maxLength; j++) {
                 int caseType = random.nextInt(100);
+                int foodQuantity = random.nextInt(200);
                 if (caseType < 90) {
                     map[i][j].setTerrain(new WildObject(WildObject.EMPTY_ID, true));
                 }
                 //TODO Retiré les commentaires si la création d'une nouvelle map fonctionne
                 else if (caseType < 93) {
-                    map[i][j].setTerrain(new FoodSource(WildObject.FOOD_ID, 1));
+                    map[i][j].setTerrain(new FoodSource(WildObject.FOOD_ID, foodQuantity));
                 } else if (caseType < 96) {
                     map[i][j].setTerrain(new WildObject(WildObject.TREE_ID, true));
                 } else if (caseType < 97) {
