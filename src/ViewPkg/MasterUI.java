@@ -118,39 +118,39 @@ public class MasterUI extends JLayeredPane implements Observer{
         labelFood.setSize(92,9);
         labelFood.setForeground(Color.white);
         labelFood.setLocation(660,590); // 10,525
-        this.add(labelFood, UILayers.MAP);
+        this.add(labelFood, 0);
         //population
         labelPopulation.setSize(87,16);
         labelPopulation.setForeground(Color.white);
         labelPopulation.setLocation(660,600);
-        this.add(labelPopulation, UILayers.MAP);
+        this.add(labelPopulation, UILayers.BACKGROUND);
         //Victimes
         labelDeaths.setSize(77,9);
         labelDeaths.setForeground(Color.white);
         labelDeaths.setLocation(660,617);
-        this.add(labelDeaths, UILayers.MAP);
+        this.add(labelDeaths, UILayers.BACKGROUND);
         //Level
         labelLevel.setSize(58,9);
         labelLevel.setForeground(Color.white);
         labelLevel.setLocation(660,630);
-        this.add(labelLevel, UILayers.MAP);
+        this.add(labelLevel, UILayers.BACKGROUND);
         //Nourriture qu'il reste à ramasser avant le prochain niveau
         labelPickUpFood.setText("Food to pick up: "+masterController.getPlayerDataController().getNumberFoodToGo());
         labelPickUpFood.setSize(120,14);
         labelPickUpFood.setForeground(Color.white);
         labelPickUpFood.setLocation(660,640);
-        this.add(labelPickUpFood, UILayers.MAP);
+        this.add(labelPickUpFood, UILayers.BACKGROUND);
         //Score
         labelScore.setSize(87,9);
         labelScore.setForeground(Color.white);
         labelScore.setLocation(660,655);
-        this.add(labelScore, UILayers.MAP);
+        this.add(labelScore, UILayers.BACKGROUND);
         //Fond derrière les label
         background.setOpaque(true);
         background.setBackground(new Color(Integer.parseInt("324159", 15)));
         background.setSize(127,95);
         background.setLocation(655,580);
-        this.add(background, UILayers.MENUS);
+        this.add(background, UILayers.BACKGROUND);
 
                 tvaNews.setText(MapData.getNewsList().remove(0));
         tvaNews.setSize(600, 20);
@@ -165,6 +165,7 @@ public class MasterUI extends JLayeredPane implements Observer{
     }
 
     public void popMenu(String menuName){
+        setInformationVisible(true);
         if (menuName.equals("main_menu")){
             selectedMenu=mainMenu;
             selectedMenu.setVisible(true);
@@ -193,12 +194,23 @@ public class MasterUI extends JLayeredPane implements Observer{
             selectedMenu=inventoryMenu;
             this.remove(selectedMenu);
             this.add(selectedMenu, UILayers.MENUS);
-            selectedMenu.setLocation(gridEndPointX+25, 25);
+            selectedMenu.setLocation(gridEndPointX + 25, 25);
             selectedMenu.setVisible(true);
+            setInformationVisible(false);
+
         }
         selectedMenu.invalidate();
         selectedMenu.repaint();
         menuTriggerZone.setVisible(false);
+    }
+    public void setInformationVisible(boolean visible){
+        labelFood.setVisible(visible);
+        labelPopulation.setVisible(visible);
+        labelDeaths.setVisible(visible);
+        labelLevel.setVisible(visible);
+        labelPickUpFood.setVisible(visible);
+        labelScore.setVisible(visible);
+        background.setVisible(visible);
     }
 
     public void setGridToActive(){
