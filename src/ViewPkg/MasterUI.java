@@ -68,7 +68,7 @@ public class MasterUI extends JLayeredPane implements Observer{
 
         // Pour enlever les questions du chaman et/ou GeneticModification, mettre en commentaire ci-dessous
         this.creationQuestion();
-        this.creationGeneticModifications();
+       // this.creationGeneticModifications();
 
 
 
@@ -221,7 +221,7 @@ public class MasterUI extends JLayeredPane implements Observer{
         questionLabel.setLocation(75, 163);
         this.add(questionLabel, UILayers.QUESTIONS);
         System.out.println("Layer" + UILayers.QUESTIONS.getLayerIndex());
-        System.out.println("LayerMap"+UILayers.MAP.getLayerIndex());
+        System.out.println("LayerMap" + UILayers.MAP.getLayerIndex());
     }
     public void creationGeneticModifications(){
         laboratoryLabel = new GeneticModifications(masterController);
@@ -285,9 +285,11 @@ public class MasterUI extends JLayeredPane implements Observer{
             else{
             actualQuestion = masterController.getChamanController().getQuestion();
             questionLabel.setVisible(false);
+            this.remove(questionLabel);
+
             creationQuestion();
-            questionLabel.invalidate();
-            questionLabel.repaint();
+                this.invalidate();
+                this.repaint();
             }
             }
 

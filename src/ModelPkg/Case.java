@@ -106,9 +106,7 @@ public class Case implements Observable {
             }
 
             return sortedSmellArrayList;
-
         }
-
     }
 
     public void eraseInferiorSmellOfSameID(Smell smell) {
