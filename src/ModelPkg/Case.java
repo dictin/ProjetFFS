@@ -113,9 +113,7 @@ public class Case implements Observable {
 
 
             return sortedSmellArrayList;
-
         }
-
     }
 
     public void eraseInferiorSmellOfSameID(Smell smell) {
@@ -245,4 +243,10 @@ public class Case implements Observable {
         this.smellArrayList.get(index).setIntensity(0);
         System.out.println("after:"+smellArrayList.get(index).getIntensity());
     }
+
+    public void setTerrain(WildObject terrain) {
+        this.terrain = terrain;
+        this.updateObservers();
+        }
+
 }

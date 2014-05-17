@@ -25,25 +25,7 @@ public class MapData {
     private static int[] fourmilierFixRaceStats1 = new int[]{13,13,13};
     private static int[] fourmilierFixRaceStats2= new int[]{13,13,13};
     private static int[] fourmilierFixRaxceStats3 = new int[]{13,13,13};
-
-    public static void afficheNmbrSmellsSources(){
-        for (int i = 0; i < map.length; i++) {
-            for (int j = 0; j < map[i].length; j++) {
-                System.out.print(map[i][j].getSortedSmellSourceArrayList().size());
-            }
-            System.out.println();
-        }
-    }
-
-    public static void afficheNmbrSmells(){
-        for (int i = 0; i < map.length; i++) {
-            for (int j = 0; j < map[i].length; j++) {
-                System.out.print(map[i][j].getSortedSmellArrayList().get(0).getIntensity());
-            }
-            System.out.println();
-        }
-    }
-
+    private static int [] costFourmilier = new int[]{100,100,100,100};
 
     public static void updateSmells() {
 
@@ -160,31 +142,6 @@ public class MapData {
         return caseThatHaveASourceSmell;
     }
 
-    private void initialize2(int nbOfTrees, int nbOfRocks, int nbOfWater, int nbOfHoles) {
-        Random casePicker = new Random(30 * 30);
-        int nbOfSpecialCases = nbOfHoles + nbOfRocks + nbOfTrees + nbOfWater;
-        ArrayList<Integer> specialCases = new ArrayList<Integer>();
-        ArrayList<Integer> alreadyPicked = new ArrayList<Integer>();
-        for (int i = 0; i < nbOfSpecialCases; i++) {
-            boolean caseAlreadyFull = false;
-            do {
-                caseAlreadyFull = false;
-                int caseID = casePicker.nextInt();
-                if (alreadyPicked.size() != 0) {
-                    for (int j = 0; j < alreadyPicked.size(); j++) {
-                        if (caseID == alreadyPicked.get(j)) {
-                            caseAlreadyFull = true;
-                        }
-                    }
-                    if (!caseAlreadyFull) {
-                        specialCases.add(caseID);
-                    }
-                }
-            } while (caseAlreadyFull);
-        }
-        //TODO utiliser les ID du arrayList pour remplir les cases appropriées (posiX=ID%30, posiY=floor(ID/30))
-    }
-
     public static void initialize() { //8% arbre 2% roche 3% eau 2% trou
         Random random = new Random();
         int maxLength = 30;
@@ -223,6 +180,26 @@ public class MapData {
 
     }
 
+    public static Case[][] getSmellableSubsection(Case[][] subsection, int smellThreshold){
+        Case[][] smellableSubsection=new Case[3][3];
+        for (int i=0; i<subsection.length;i++){
+            for (int j=0; j<subsection.length;j++){
+                smellableSubsection[i][j]=subsection[i][j].semiClone();
+            }
+        }
+        for (int i=0; i<subsection.length; i++){
+            for  (int j=0; j<subsection.length;j++){
+                ArrayList<Smell> smellInCase=(ArrayList<Smell>)subsection[i][j].getSortedSmellArrayList().clone();
+                for (int k=0; k<smellInCase.size();k++){
+                    if (smellInCase.get(k).getIntensity()<smellThreshold){
+                        smellInCase.remove(k);
+                        k--;
+                    }
+                }
+            }
+        }
+        return subsection;
+    }
 
     public static Case[][] getSubsection2(Point origin) {
         Case[][] subsection = new Case[3][3];
@@ -268,14 +245,6 @@ public class MapData {
         return newsList;
     }
 
-    public static void setAnimalList(ArrayList<Animal> animalList) {
-        MapData.animalList = animalList;
-    }
-
-
-
-
-
     public static int[] getFourmilierActualRaceStats1Tab() {
     return fourmilierActualRaceStats;
     }
@@ -310,9 +279,61 @@ public class MapData {
         MapData.fourmilierFixRaxceStats3 = fourmilierFixRaxceStats3;
     }
 
+    public static int[] getCostFourmilierTab() {
+        return costFourmilier;
+    }
 
     public static long getUniqueID(){
         uniqueIDCounter++;
         return uniqueIDCounter;
+    }
+    public static void setCostFourmilier(int position, int newCost) {
+        MapData.costFourmilier[position] = newCost;
+    }
+    public static int getCostFourmilier(int position){
+        return costFourmilier[position];
+    }
+    public static void changeLevel(){
+        System.out.println("Trying to update");
+        Case selectedCase = null;
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[i].length; j++) {
+                selectedCase = map[i][j];
+                selectedCase.setTerrain(new WildObject(WildObject.EMPTY_ID, true));
+            }
+        }
+        Random random = new Random();
+        int maxLength = 30;
+        MapData.hivePosition = maxLength / 2;
+        for (int i = 0; i < maxLength; i++) {
+            for (int j = 0; j < maxLength; j++) {
+                int caseType = random.nextInt(100);
+                int foodQuantity = random.nextInt(200);
+                if (caseType < 90) {
+                    map[i][j].setTerrain(new WildObject(WildObject.EMPTY_ID, true));
+                }
+                else if (caseType < 93) {
+                    map[i][j].setTerrain(new FoodSource(WildObject.FOOD_ID, foodQuantity));
+                } else if (caseType < 96) {
+                    map[i][j].setTerrain(new WildObject(WildObject.TREE_ID, true));
+                } else if (caseType < 97) {
+                    map[i][j].setTerrain(new WildObject(WildObject.WATER_ID, true));
+                } else if (caseType < 98) {
+                    map[i][j].setTerrain(new WildObject(WildObject.ROCK_ID, true));
+                } else if (caseType < 100) {
+                    map[i][j].setTerrain(new WildObject(WildObject.HOLE_ID, true));
+                } else {
+                    System.out.println("wtf");
+                    map[i][j] = new Case(new Point(i, j), null, new WildObject(0, true));
+                }
+
+            }
+        }
+        System.out.println("création de la base");
+        map[hivePosition][hivePosition].setTerrain(new WildObject(WildObject.HIVE_ID, true));
+        map[hivePosition+1][hivePosition].setTerrain(new WildObject(WildObject.HIVE_ID, true));
+        map[hivePosition][hivePosition+1].setTerrain(new WildObject(WildObject.HIVE_ID, true));
+        map[hivePosition+1][hivePosition+1].setTerrain(new WildObject(WildObject.HIVE_ID, true));
+        System.out.println("finish updating!");
     }
 }

@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Map;
 
 public class GeneticModifications extends JLabel {
     private JLabel laboratory = new JLabel();
@@ -28,16 +29,16 @@ public class GeneticModifications extends JLabel {
     private Color color = new Color(Integer.parseInt("510968", 19));
     private JButton finish = new JButton("Finish");
     private JButton reset = new JButton("Réinisialiser");
-    private JLabel cost = new JLabel("Coût futur de cette nouvelle race: "+ Laboratory.getCost());
-    private int modificationCost = 0;
+    private int modificationCost = 100;
+    private JLabel cost = new JLabel("Coût futur de cette nouvelle race: "+ modificationCost);
     private JLabel blocSlider = new JLabel();
-
     private JButton speed = new JButton("Vitesse");
     private JButton endurance = new JButton("Endurance");
     private JButton attack = new JButton("Attaque");
     private JButton defence = new JButton("Défence");
     private JButton sensitivity = new JButton("Odorat");
     private JButton smellStrength = new JButton("Odeur");
+    private JLabel pleaseWait = new JLabel("Veuillez patienter pendant la création d'un nouveau terrain.");
 
     public GeneticModifications(final MasterController controller){
         this.setOpaque(true);
@@ -45,6 +46,12 @@ public class GeneticModifications extends JLabel {
         this.setSize(500,375);
         this.controller=controller;
 
+        pleaseWait.setSize(350,100);
+        pleaseWait.setLocation(70, 150);
+        pleaseWait.setOpaque(true);
+        pleaseWait.setBackground(color.CYAN);
+        pleaseWait.setVisible(false);
+        this.add(pleaseWait); 
         blocSlider.setSize(270, 230);
         blocSlider.setLocation(112, 100);
         this.add(blocSlider);
@@ -201,34 +208,47 @@ public class GeneticModifications extends JLabel {
         cost.setSize(230,23);
         cost.setLocation(150,345);
         this.add(cost);
-        if(Laboratory.isMoving()){
-            System.out.println("Actual: " + speedEndurance.getValue());
-            Laboratory.setMoving(false);
-        }
+
     }
 
     public void finish(){
-        System.out.println("Cout: "+modificationCost);
         Laboratory.setFinish(true);
         Laboratory.setCost(modificationCost);
-        if(controller.getPlayerDataController().getLevel() ==2){
-            Laboratory.setSpeedEnduranceBefore(speedEndurance.getValue());
-            Laboratory.setAttackDefenceBefore(attackDefence.getValue());
-            Laboratory.setSensitivitySmellStrengthBefore(sensitivitySmellStrength.getValue());
-            int[] newStats= new int[]{speedEndurance.getValue(),attackDefence.getValue(),sensitivitySmellStrength.getValue()};
-            MapData.setFourmilierFixRaceStats1(newStats);
+        Laboratory.setSpeedEnduranceBefore(speedEndurance.getValue());
+        Laboratory.setAttackDefenceBefore(attackDefence.getValue());
+        Laboratory.setSensitivitySmellStrengthBefore(sensitivitySmellStrength.getValue());
+        int[] newStats= new int[]{speedEndurance.getValue(),attackDefence.getValue(),sensitivitySmellStrength.getValue()};
+        pleaseWait.setVisible(true);
+        switch(controller.getPlayerDataController().getLevel()){
+            case 2:
+                System.out.println("Création des 2ème fourmiliers");
+                MapData.setFourmilierFixRaceStats1(newStats);
+                MapData.setCostFourmilier(1,modificationCost);
+                break;
+            case 3:
+                System.out.println("Création des 3ème fourmiliers");
+                MapData.setFourmilierFixRaceStats2(newStats);
+                MapData.setCostFourmilier(2,modificationCost);
+                break;
+            case 4:
+                System.out.println("Création des 4ème fourmiliers");
+                MapData.setFourmilierFixRaxceStats3(newStats);
+                MapData.setCostFourmilier(3,modificationCost);
+                break;
         }
-
     }
+
     public void reset(){
         Laboratory.setReset(true);
         Laboratory.setCost(0);
-        cost.setText("Coût futur de cette nouvelle race: " + Laboratory.getCost());
+        cost.setText("Coût futur de cette nouvelle race: " +  100);
         speedEndurance.setValue(Laboratory.getSpeedEnduranceBefore());
         attackDefence.setValue(Laboratory.getAttackDefenceBefore());
         sensitivitySmellStrength.setValue(Laboratory.getSensitivitySmellStrengthBefore());
+        modificationCost = 100;
     }
     public void updateSlider(String statsName){
+        modificationCost = 100;
         switch (statsName){
             case "statsSpeed":
                 speedEndurance.setValue(speedEndurance.getValue()-1);

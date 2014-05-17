@@ -19,7 +19,9 @@ public class PlayerData implements Observable {
     private int dead = 0;
     private boolean selectInventory = false;
     private GameEvent currentEvent;
-    private ArrayList<TempItemInstance> passiveInstances = new ArrayList<TempItemInstance>(); //Contient les effects des items innactifs de l'inventaire du joueur
+    private int questionNumber = 1;
+    private ArrayList<TempItemInstance> passivePermInstances = new ArrayList<TempItemInstance>(); //Contient les effects des items innactifs de l'inventaire du joueur
+    private ArrayList<TempItemInstance> passiveTempInstances = new ArrayList<TempItemInstance>(); //Contient les effects des items innactifs de l'inventaire du joueur
     private ArrayList<String> consumablesInventory = new ArrayList<>();
     private ArrayList<String> permanentInventory = new ArrayList<>();
     private ArrayList<TempItemInstance> permanentInstances = new ArrayList<TempItemInstance>();
@@ -29,29 +31,65 @@ public class PlayerData implements Observable {
     private int pickUpFood = 0;
     private int karma=0;
     private int nextEventGravity=1;
+    private boolean isItTimeForChaman = false;
+
+
+
+    private boolean isTheLevelFinish = false;
+
+    public static final int TEMP_ITEM = 0;
+    public static final int PERM_ITEM = 1;
+
+    public static final int HP_STATID = 0;
+    public static final int SPD_STATID = 1;
+    public static final int ATK_STATID = 2;
+    public static final int SMS_STATID = 3;
+    public static final int SMT_STATID = 4;
+    public static final int DEF_STATID = 5;
+    public static final int END_STATID = 6;
+    public static final int GBTQ_STATID = 7;
 
     private ArrayList<Observer> observers = new ArrayList<>();
 
     public PlayerData(){
     }
 
-    public void addPassiveItem(TempItemInstance instance){
-        this.passiveInstances.add(instance);
-
-    }
-
-    public void activateInstance(int index){
-        this.addItemInstance(this.passiveInstances.get(index));
-        this.passiveInstances.remove(index);
-    }
-
-    private void addItemInstance(TempItemInstance itemInstance){
+    public void addPassiveItem(TempItemInstance itemInstance){
         if (itemInstance.getDuration() < 0){
-            this.permanentInstances.add(itemInstance);
+            this.passivePermInstances.add(itemInstance);
         }else{
-            this.tempItemInstances.add(itemInstance);
+            this.passiveTempInstances.add(itemInstance);
         }
+
     }
+
+    public void activateInstance(int index, int activatedType){
+        if (activatedType == PlayerData.PERM_ITEM){
+            this.permanentInstances.add(this.passivePermInstances.get(index));
+            this.passivePermInstances.remove(index);
+            System.out.printf("Item permanent active    ");
+
+        }else if (activatedType == PlayerData.TEMP_ITEM){
+            this.permanentInstances.add(this.passiveTempInstances.get(index));
+            this.passiveTempInstances.remove(index);
+            System.out.printf("Item temporary active    ");
+        }
+
+        this.removeItemFromInventory(index, activatedType);
+
+    }
+
+    public void removeItemFromInventory(int index, int activatedType) {
+
+        if (activatedType == PlayerData.TEMP_ITEM){
+            this.consumablesInventory.remove(index);
+        }else if (activatedType == PlayerData.PERM_ITEM){
+            this.permanentInventory.remove(index);
+        }
+
+        this.updateObservers();
+    }
+
 
     public void tempItemTurn(){
         for(int i = 0; i < this.tempItemInstances.size(); i++){
@@ -66,6 +104,7 @@ public class PlayerData implements Observable {
     public int getNextEventGravity() {
         return nextEventGravity;
     }
+
     public void setNextEventGravity(int nextEventGravity) {
         this.nextEventGravity=nextEventGravity;
     }
@@ -78,6 +117,17 @@ public class PlayerData implements Observable {
         this.karma+=number;
     }
 
+    public void activateInstancesForTurn(){
+        Iterator<TempItemInstance> iterator;
+        iterator = this.tempItemInstances.iterator();
+        while(iterator.hasNext()){
+            iterator.next().activate();
+        }
+        iterator = this.permanentInstances.iterator();
+        while(iterator.hasNext()){
+            iterator.next().activate();
+        }
+    }
 
     public void cleanTempItemInstances(){
         ArrayList<TempItemInstance> toClean = new ArrayList<TempItemInstance>();
@@ -89,18 +139,6 @@ public class PlayerData implements Observable {
             }
         }
         this.tempItemInstances.removeAll(toClean);
-    }
-
-    public void activateInstances(){
-        Iterator<TempItemInstance> iterator;
-        iterator = this.tempItemInstances.iterator();
-        while(iterator.hasNext()){
-            iterator.next().activate();
-        }
-        iterator = this.permanentInstances.iterator();
-        while(iterator.hasNext()){
-            iterator.next().activate();
-        }
     }
 
     public void addFood(int food) {
@@ -133,7 +171,6 @@ public class PlayerData implements Observable {
         this.updateObservers();
     }
 
-
     public static void addMod(int stat, int value){
         PlayerData.statModifiers[stat] += value;
     }
@@ -142,6 +179,11 @@ public class PlayerData implements Observable {
         for(int i = 0; i < this.statModifiers.length; i++){
             this.statModifiers[i] = 0;
         }
+    }
+
+    public void endOfTurnCleanUp(){
+        this.cleanTempItemInstances();
+        this.clearStatMod();
     }
 
     public int getStatMod(int stat){
@@ -184,6 +226,7 @@ public class PlayerData implements Observable {
     public int getScore() {
         return score;
     }
+
     public int getNumberFoodToGo(){
         return (this.numberFoodGoToNextLevel[(this.level)-1]-this.pickUpFood);
     }
@@ -238,4 +281,30 @@ public class PlayerData implements Observable {
         this.pickUpFood = pickUpFood;
     }
 
+    public int getQuestionNumber() {
+        return questionNumber;
+    }
+
+    public void setQuestionNumber(int questionNumber) {
+        this.questionNumber = questionNumber;
+    }
+
+    public void setLevel(int newLevel){
+        this.level = newLevel;
+    }
+    public boolean isTheLevelFinish() {
+        return isTheLevelFinish;
+    }
+
+    public void setTheLevelFinish(boolean isTheLevelFinish) {
+        this.isTheLevelFinish = isTheLevelFinish;
+    }
+
+    public boolean isItTimeForChaman() {
+        return isItTimeForChaman;
+    }
+
+    public void setItTimeForChaman(boolean isItTimeForChaman) {
+        this.isItTimeForChaman = isItTimeForChaman;
+    }
 }

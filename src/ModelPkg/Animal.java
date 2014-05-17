@@ -71,7 +71,7 @@ public abstract class Animal {
         this.nameGen = Name.getGen(noName);
         this.animalID = animalID;
 
-        this.name +=" le "+this.nameGen;
+        this.name +=this.nameGen;
         System.out.println(this.name);
 
 
@@ -91,12 +91,8 @@ public abstract class Animal {
         this.defence=25-mainStats[1];
         this.smellSensitivity=mainStats[2];
         this.smellStrengthStat =25-mainStats[2];
-
         this.grabQuantity=25;
-
-        //this.equipQuantity=25-mainStats[3];
-        this.moral = 25; //TODO determiner comment evaluer le moral;
-        //TODO balance this and add a smell
+        this.moral = 25;
         this.smellIntensity=this.getSmellStrengthStat()*8;
         this.smellThreshold=100/this.getSmellSensitivity();
 
@@ -104,9 +100,7 @@ public abstract class Animal {
 
         this.smell = new SmellSource(animalID, this.smellIntensity, this.team, smellType);
 
-        //System.out.println("stats:");
-        //System.out.println("Smell thresh"+smellThreshold);
-        //System.out.println("espérance de vie: "+(100/25-endurance));
+        
 
         sprite=Toolkit.getDefaultToolkit().getImage("IMG/"+species+".png");
     }
@@ -145,7 +139,6 @@ public abstract class Animal {
     }
 
     public void setPosition(Point position) {
-        //System.out.println("Moved");
         this.position = position;
     }
 
@@ -172,10 +165,8 @@ public abstract class Animal {
     public void decreaseHealth(int amount){
         this.health-= amount;
         if(this.isDead()){
-            //System.out.println("In decreaseHealth");
             MasterController.disposeAnimal(this);
-
-            //MapData.addNewsList(this.getName() + " est malheureusement décédé!!");
+            MapData.addNewsList(this.getName() + " est malheureusement décédé!!");
             masterController.victims();
         }
     }
@@ -191,6 +182,8 @@ public abstract class Animal {
     public int getNameGen() {
         return nameGen;
     }
+
+    //Number-Crunch Statistics
 
     public int getHealth() {
         return health;
@@ -226,6 +219,46 @@ public abstract class Animal {
         return grabQuantity;
     }
 
+    //Adjusted Crunch
+
+    public int getAdjustedHealth(){
+        return this.getHealth();
+    } //todo
+
+    public int getAdjustedSpeed(){
+        return this.speed + this.masterController.getPlayerDataController().getStatMod(PlayerData.SPD_STATID);
+    }
+
+    public int getAdjustedAttack(){
+        return this.attack + this.masterController.getPlayerDataController().getStatMod(PlayerData.ATK_STATID);
+    }
+
+    public int getAdjustedSmellSensitivity(){
+        return this.smellSensitivity + this.masterController.getPlayerDataController().getStatMod(PlayerData.SMS_STATID);
+    }
+
+    public int getAdjustedSmellThreshold(){
+        return this.smellThreshold + (100/this.getSmellSensitivity());
+    }
+
+    public int getAdjustedSmellStrength(){
+        return this.smellStrengthStat + this.masterController.getPlayerDataController().getStatMod(PlayerData.SMT_STATID);
+    }
+
+    public int getAdjustedDefence(){
+        return this.defence + this.masterController.getPlayerDataController().getStatMod(PlayerData.DEF_STATID);
+    }
+
+    public int getAdjustedEndurance(){
+        return this.endurance + this.masterController.getPlayerDataController().getStatMod(PlayerData.END_STATID);
+    }
+
+    public int getAdjustedGBTQ(){
+        return this.grabQuantity + this.masterController.getPlayerDataController().getStatMod(PlayerData.GBTQ_STATID);
+    }
+
+    //End of Number-Crunch Statistics
+
     public Image getSprite() {
         return sprite;
     }
@@ -248,7 +281,7 @@ public abstract class Animal {
     }
 
     public void activate(int time){
-        decreaseHealth(((25 - endurance) / 2));
+        
 
         VirtualFutureAction virtualFutureAction=null;
 
@@ -370,25 +403,20 @@ public abstract class Animal {
                 }
         }
 
+            decreaseHealth(((25 - endurance) / 2));
+}
 
-    }
+
 
     private void attackOpponent(Animal animal, int damageAmount) {
         animal.decreaseHealth(damageAmount);
     }
 
-    private void realizeFutureAction(VirtualFutureAction virtualFutureAction) {
-        this.objective = virtualFutureAction.getTargetLocation();
-        this.actionToCommit = virtualFutureAction.getActionType();
-        this.decideFutureMentalState(this.mentalState, this.actionToCommit);
-    }
 
-    private void decideFutureMentalState(MentalStates mentalState, ActionTypes actionToCommit) {
-
-    }
+    
     public boolean isDead(){
         if (health<=0){
-            //System.out.println("in isDead");
+            
             return true;
         }
         else {

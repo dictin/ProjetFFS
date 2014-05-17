@@ -1,6 +1,7 @@
 package ViewPkg.Menus;
 
 import ControllerPkg.*;
+import ModelPkg.PlayerData;
 import ObserverPkg.Observer;
 
 import javax.swing.*;
@@ -10,7 +11,7 @@ public class InventoryMenu extends ContextualMenu implements Observer{
 
     private GotoMenuButton consumables;
     private GotoMenuButton reusables;
-    private JLabel consumablesLabel = new JLabel("Objets consumables!");
+    private JLabel consumablesLabel = new JLabel("Objets consommables!");
     private JLabel reusablesLabel = new JLabel ("Objets réutilisables!");
     private JButton consumablesBuyButton = new JButton("Utiliser");
     private JButton reusablesBuyButton = new JButton("Activer");
@@ -24,7 +25,9 @@ public class InventoryMenu extends ContextualMenu implements Observer{
     JList<String> reusableShopList;
     JScrollPane reusableScrollPane;
 
-    private InventoryActivateButtonHandler InventoryActivateButtonHandler;
+    private InventoryActivateButtonHandler InventoryActivateTempButtonHandler;
+    private InventoryActivateButtonHandler InventoryActivatePermButtonHandler;
+
 
     public InventoryMenu(MasterController controller) {
         super(controller, "inventory_menu");
@@ -32,9 +35,8 @@ public class InventoryMenu extends ContextualMenu implements Observer{
         this.playerDataController = controller.getPlayerDataController();
         this.itemController = controller.getItemController();
         this.playerDataController.addObserver(this);
-        InventoryActivateButtonHandler = new InventoryActivateButtonHandler(this.masterController);
         consumablesLabel.setSize(400,35);
-        consumablesLabel.setLocation(25, 0);
+        consumablesLabel.setLocation(5, 0);
         consumablesLabel.setFont(new Font("Arial", Font.PLAIN, 30));
         consumables = new GotoMenuButton(controller, "consumables_button", new Dimension(this.getWidth()-10, this.getHeight()/2-10), Color.cyan);
         consumables.setLocation(5, 5);
@@ -59,7 +61,8 @@ public class InventoryMenu extends ContextualMenu implements Observer{
         this.consumablesBuyButton.setSize(100,30);
         this.consumablesBuyButton.setLocation(200,270);
         this.consumables.add(this.consumablesBuyButton);
-        this.consumablesBuyButton.addActionListener(InventoryActivateButtonHandler);
+        InventoryActivateTempButtonHandler = new InventoryActivateButtonHandler(this.masterController,this.consumableShopList, PlayerData.TEMP_ITEM);
+        this.consumablesBuyButton.addActionListener(InventoryActivateTempButtonHandler);
 
 
         //************************************************************************************
@@ -85,6 +88,7 @@ public class InventoryMenu extends ContextualMenu implements Observer{
         //this.reusableShopList.addListSelectionListener(new ShopListHandler(controller.getShopInfoController().getShopItemInfoData()));
         this.reusableShopList.addListSelectionListener(new InventoryListHandler(masterController));
 
+
         this.reusableScrollPane = new JScrollPane(this.reusableShopList, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         this.reusableScrollPane.setLocation(10,40);
         this.reusableScrollPane.setSize(300, 220);
@@ -94,7 +98,8 @@ public class InventoryMenu extends ContextualMenu implements Observer{
         this.reusablesBuyButton.setSize(100, 30);
         this.reusablesBuyButton.setLocation(200, 270);
         this.reusables.add(this.reusablesBuyButton);
-        this.reusablesBuyButton.addActionListener(InventoryActivateButtonHandler);
+        InventoryActivatePermButtonHandler = new InventoryActivateButtonHandler(this.masterController,this.reusableShopList, PlayerData.PERM_ITEM);
+        this.reusablesBuyButton.addActionListener(InventoryActivatePermButtonHandler);
 
     }
 

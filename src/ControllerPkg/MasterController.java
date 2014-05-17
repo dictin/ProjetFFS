@@ -3,24 +3,22 @@ package ControllerPkg;
 import ModelPkg.*;
 import ModelPkg.PkgEvents.GameEventSunnyWeather;
 import ModelPkg.PkgEvents.LingeringGameEvents;
-import ModelPkg.WildObjects.FoodSource;
 import ModelPkg.WildObjects.WildObject;
 import ViewPkg.MasterFrame;
 import ViewPkg.MasterUI;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-/**
- * Created by Xav on 24/02/14.
- */
+
 public class MasterController extends Thread{
 
-    ItemController itemController = new ItemController(this);
-    ShopInfoController shopInfoController = new ShopInfoController();
-    static MapController mapController = new MapController();
-    QuestionChamanController chamanController = new QuestionChamanController();
-    PlayerDataController playerDataController = new PlayerDataController();
+    private ItemController itemController = new ItemController(this);
+    private ShopInfoController shopInfoController = new ShopInfoController();
+    private static MapController mapController = new MapController();
+    private QuestionChamanController chamanController = new QuestionChamanController();
+    private PlayerDataController playerDataController = new PlayerDataController();
 
     private MasterFrame mF;
     private MasterUI mUI=null;
@@ -66,7 +64,25 @@ public class MasterController extends Thread{
                 this.sleep(sleepTime);
                 this.time++;
 
+                if(this.getPlayerDataController().getNumberFoodToGo() == 0){
+                    JOptionPane.showMessageDialog(null, "Vous avez ramassé toute la nourriture nécessaire pour passer au prochain niveau.\n " +
+                            "Le Chaman va maintenant vous posez 3 questions.");
+                    this.getPlayerDataController().setTheLevelFinish(true);
+                    mUI.disableMenus(true);
+                    mUI.creationQuestion();
+                    mUI.actualiser();
+                    this.getPlayerDataController().setLevel(this.playerDataController.getLevel() + 1);
 
+                }
+                if(this.getPlayerDataController().getQuestionNumber()%4 ==0 && Laboratory.isFinish() && this.getPlayerDataController().isTheLevelFinish()){
+                    System.out.println("Changement map");
+                    MapData.addNewsList("Niveau "+ this.getPlayerDataController().getLevel());
+                    MapData.changeLevel();
+                    mUI.update();
+                    this.getPlayerDataController().setTheLevelFinish(false);
+                    mUI.disableMenus(false);
+
+                }
 
                 if (time!=0&&time%smellDecayTime==0){
                 MapData.updateSmells();
