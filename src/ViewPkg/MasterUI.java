@@ -60,18 +60,16 @@ public class MasterUI extends JLayeredPane implements Observer{
         mainMenu= new MainMenu(masterController);
         shopMenu=new ShopMenu(masterController);
         creationMenu = new CreationMenu(masterController);
-
-        this.setOpaque(true);
-
         inventoryMenu= new InventoryMenu(masterController);
         this.setSize(MasterFrame.GAME_FRAME_SIZE);
         this.setBackground(new Color(Integer.parseInt("314159", 16)));
+
         hideMenus.setSize(320, 557);
         hideMenus.setOpaque(true);
         hideMenus.setBackground(new Color(Integer.parseInt("314159", 16)));
         hideMenus.setLocation(650,20);
         hideMenus.setVisible(false);
-       this.add(hideMenus, UILayers.MENUS);
+        this.add(hideMenus, UILayers.MENUS);
         this.setLocation(0,0);
         this.setLayout(null);
 
@@ -302,10 +300,12 @@ public class MasterUI extends JLayeredPane implements Observer{
             }
         }
 
-        if(Laboratory.isFinish() &&masterController.getPlayerDataController().getQuestionNumber()%4 == 0){
-        laboratoryLabel.setVisible(false);
-            System.out.println("Changement visibilité des fourmiliers");
-            creationMenu.actualiser();
+        if(Laboratory.isFinish() &&masterController.getPlayerDataController().getQuestionNumber()%4 == 0 ){
+         laboratoryLabel.setVisible(false);
+            if(masterController.getPlayerDataController().isTheLevelFinish()){
+                creationMenu.actualiser();
+            }
+
         }
     }
 
@@ -336,7 +336,7 @@ public class MasterUI extends JLayeredPane implements Observer{
     public void update() {
         this.updateNumericInfos();
     }
-    public void disableMenus(){
-        hideMenus.setVisible(true);
+    public void disableMenus(boolean invisible){
+        hideMenus.setVisible(invisible);
     }
 }

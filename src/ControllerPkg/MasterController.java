@@ -78,7 +78,7 @@ public class MasterController extends Thread{
                     JOptionPane.showMessageDialog(null, "Vous avez ramassé toute la nourriture nécessaire pour passer au prochain niveau.\n " +
                             "Le Chaman va maintenant vous posez 3 questions.");
                     this.getPlayerDataController().setTheLevelFinish(true);
-                    mUI.disableMenus();
+                    mUI.disableMenus(true);
                     mUI.creationQuestion();
                     mUI.actualiser();
                     this.getPlayerDataController().setLevel(this.playerDataController.getLevel() + 1);
@@ -90,6 +90,7 @@ public class MasterController extends Thread{
                     MapData.changeLevel();
                     mUI.update();
                     this.getPlayerDataController().setTheLevelFinish(false);
+                    mUI.disableMenus(false);
 
                 }
 
