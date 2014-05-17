@@ -18,31 +18,35 @@ public class Behavior {
 
     public static Point drunk(Point position){
         System.out.println("Hic! I'm drunk");
-        Point correctedObjective;
+        Point correctedObjective = null;
         Random random = new Random();
 
-        int rndobjectifX = 0;
-        int rndobjectifY = 0;
-
-        rndobjectifX = random.nextInt(3)-1;
-        rndobjectifY = random.nextInt(3)-1;
-
-
-
-        objective = new Point(rndobjectifX,rndobjectifY);
-        correctedObjective = new Point(objective.x+position.x, objective.y+position.y);
-
         if ((Behavior.isThereNowhereToGo(position))){
-            //System.out.println("Drunk and blocked");
             objective=position;
+        }else{
+            do {
+                int rndobjectifX = 0;
+                int rndobjectifY = 0;
+
+                rndobjectifX = random.nextInt(3)-1;
+                rndobjectifY = random.nextInt(3)-1;
+
+
+
+                objective = new Point(rndobjectifX,rndobjectifY);
+                correctedObjective = new Point(objective.x+position.x, objective.y+position.y);
+            }while (!Behavior.confirmObjective(correctedObjective));
         }
-        else{
-            //System.out.println("Drunk not blocked");
-            if (MapData.getCase(correctedObjective).getOccupant() != null || MapData.getCase(correctedObjective).getWildObject().getType() != WildObject.EMPTY_ID){
-                objective=Behavior.drunk(position);
-            }
-        }
+
         return objective;
+    }
+
+    private static boolean confirmObjective(Point objective) {
+        boolean isValidObjective;
+        Point caseToCheck = objective;
+        isValidObjective = (MapData.getCase(caseToCheck).getWildObject().getType() == WildObject.EMPTY_ID) ? true : false;
+
+        return isValidObjective;
     }
 
     private static boolean isThereNowhereToGo(Point origin) {

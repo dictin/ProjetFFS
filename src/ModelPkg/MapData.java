@@ -216,7 +216,6 @@ public class MapData {
         map[hivePosition + 1][hivePosition] = new Case(new Point(hivePosition + 1, hivePosition), null, new WildObject(WildObject.HIVE_ID, true));
         map[hivePosition][hivePosition + 1] = new Case(new Point(hivePosition, hivePosition + 1), null, new WildObject(WildObject.HIVE_ID, true));
         map[hivePosition + 1][hivePosition + 1] = new Case(new Point(hivePosition + 1, hivePosition + 1), null, new WildObject(WildObject.HIVE_ID, true));
-        map[hivePosition + 2][hivePosition + 2] = new Case(new Point(hivePosition + 2, hivePosition + 2), null, new FoodSource(WildObject.FOOD_ID, random.nextInt(200)));
         newsList.add(0, "Bienvenu à FFS!");
         newsList.add(1, "Niveau 1");
         newsList.add(2, "#YOLO");
