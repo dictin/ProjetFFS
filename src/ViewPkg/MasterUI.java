@@ -217,19 +217,21 @@ public class MasterUI extends JLayeredPane implements Observer{
     }
 
     public void creationQuestion(){
+        masterController.getPlayerDataController().setItTimeForChaman(true);
         actualQuestion = masterController.getChamanController().getQuestion();
         questionLabel = new Chaman(masterController, actualQuestion);
         questionLabel.setVisible(true);
         questionLabel.setLocation(75, 163);
+        resetLayers();
         this.add(questionLabel, UILayers.QUESTIONS);
-        System.out.println("Layer" + UILayers.QUESTIONS.getLayerIndex());
-        System.out.println("LayerMap" + UILayers.MAP.getLayerIndex());
+
     }
 
     public void creationGeneticModifications(){
         laboratoryLabel = new GeneticModifications(masterController);
         laboratoryLabel.setVisible(true);
         laboratoryLabel.setLocation(75,163);
+        resetLayers();
         this.add(laboratoryLabel, UILayers.QUESTIONS);
 
 
@@ -243,8 +245,6 @@ public class MasterUI extends JLayeredPane implements Observer{
     }
 
     public void actualiser(){
-
-
 
         if(MapData.getNewsList().size()>numberOfNews && !alreadyInMovement){
             mouvement = 1;
@@ -278,10 +278,13 @@ public class MasterUI extends JLayeredPane implements Observer{
             }
         }
         numberOfNews = MapData.getNewsList().size();
-
-        if(actualQuestion != null && actualQuestion.getQuestionTaTuBienRepondu()==1){
+        if(actualQuestion != null && actualQuestion.getQuestionTaTuBienRepondu()==1 && Laboratory.isFinish() && masterController.getPlayerDataController().isItTimeForChaman()) {
             masterController.getPlayerDataController().setQuestionNumber(masterController.getPlayerDataController().getQuestionNumber()+1);
-            if(masterController.getPlayerDataController().getQuestionNumber()%3 ==0){
+            if(masterController.getPlayerDataController().getQuestionNumber()%4 ==0){
+                masterController.getPlayerDataController().setItTimeForChaman(false);
+                System.out.println("Question over!");
+                questionLabel.setVisible(false);
+                this.remove(questionLabel);
                 Laboratory.setFinish(false);
                 creationGeneticModifications();
             }
@@ -289,7 +292,6 @@ public class MasterUI extends JLayeredPane implements Observer{
             actualQuestion = masterController.getChamanController().getQuestion();
             questionLabel.setVisible(false);
             this.remove(questionLabel);
-
             creationQuestion();
             this.invalidate();
             this.repaint();
@@ -298,11 +300,9 @@ public class MasterUI extends JLayeredPane implements Observer{
         }
 
         if(Laboratory.isFinish()){
+        masterController.getPlayerDataController().setTheLevelFinish(false);
         laboratoryLabel.setVisible(false);
         }
-
-
-
     }
 
     private void resetLayers(){
@@ -311,10 +311,12 @@ public class MasterUI extends JLayeredPane implements Observer{
                this.setLayer(this.visualCasesGrid[i][j], UILayers.MAP.getLayerIndex());
             }
         }
-
-        this.setLayer(this.questionLabel, UILayers.QUESTIONS.getLayerIndex());
-
-
+        if(Laboratory.isFinish()){
+            this.setLayer(this.questionLabel, UILayers.QUESTIONS.getLayerIndex());
+        }
+        else{
+        this.setLayer(this.laboratoryLabel,  UILayers.QUESTIONS.getLayerIndex());
+        }
     }
 
     private void updateNumericInfos(){

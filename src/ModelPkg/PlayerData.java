@@ -31,6 +31,7 @@ public class PlayerData implements Observable {
     private int pickUpFood = 0;
     private int karma=0;
     private int nextEventGravity=1;
+    private boolean isItTimeForChaman = false;
 
 
 
@@ -283,5 +284,13 @@ public class PlayerData implements Observable {
 
     public void setTheLevelFinish(boolean isTheLevelFinish) {
         this.isTheLevelFinish = isTheLevelFinish;
+    }
+
+    public boolean isItTimeForChaman() {
+        return isItTimeForChaman;
+    }
+
+    public void setItTimeForChaman(boolean isItTimeForChaman) {
+        this.isItTimeForChaman = isItTimeForChaman;
     }
 }

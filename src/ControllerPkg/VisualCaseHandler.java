@@ -18,7 +18,7 @@ public class VisualCaseHandler implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("Quantity :" + ((FoodSource) MapData.getCase(((VisualCase) e.getSource()).getCaseCoord()).getWildObject()).getFoodQuantity());
+        //System.out.println("Quantity :" + ((FoodSource) MapData.getCase(((VisualCase) e.getSource()).getCaseCoord()).getWildObject()).getFoodQuantity());
 
     }
 

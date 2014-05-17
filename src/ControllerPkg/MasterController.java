@@ -75,10 +75,13 @@ public class MasterController extends Thread{
 
                 if(time == 300){
                     System.out.println("Level finish!");
-                    this.getPlayerDataController().setLevel(this.playerDataController.getLevel() + 1);
                     this.getPlayerDataController().setTheLevelFinish(true);
+                    mUI.creationQuestion();
+                    mUI.actualiser();
+                    this.getPlayerDataController().setLevel(this.playerDataController.getLevel() + 1);
                     MapData.addNewsList("Niveau "+ this.getPlayerDataController().getLevel());
                     MapData.changeLevel();
+                    mUI.update();
                 }
 
                 if (time!=0&&time%smellDecayTime==0){

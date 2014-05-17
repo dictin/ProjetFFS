@@ -148,6 +148,12 @@ public class PlayerDataController {
     public void setTheLevelFinish(boolean finish) {
         this.playerData.setTheLevelFinish(finish);
     }
+    public boolean isItTimeForChaman() {
+        return this.playerData.isItTimeForChaman();
+    }
 
+    public void setItTimeForChaman(boolean isItTime) {
+        this.playerData.setItTimeForChaman(isItTime);
+    }
 
 }

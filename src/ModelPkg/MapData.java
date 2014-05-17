@@ -320,7 +320,6 @@ public class MapData {
                 if (caseType < 90) {
                     map[i][j].setTerrain(new WildObject(WildObject.EMPTY_ID, true));
                 }
-                //TODO Retiré les commentaires si la création d'une nouvelle map fonctionne
                 else if (caseType < 93) {
                     map[i][j].setTerrain(new FoodSource(WildObject.FOOD_ID, foodQuantity));
                 } else if (caseType < 96) {
