@@ -313,7 +313,7 @@ public class MapData {
                     map[i][j].setTerrain(new WildObject(WildObject.EMPTY_ID, true));
                 }
                 else if (caseType < 93) {
-                    map[i][j].setTerrain(new FoodSource(WildObject.FOOD_ID, foodQuantity));
+                    map[i][j].setTerrain(new FoodSource(foodQuantity));
                 } else if (caseType < 96) {
                     map[i][j].setTerrain(new WildObject(WildObject.TREE_ID, true));
                 } else if (caseType < 97) {

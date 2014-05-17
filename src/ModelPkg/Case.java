@@ -249,4 +249,7 @@ public class Case implements Observable {
         this.updateObservers();
         }
 
+    public Case semiClone() {
+        return null;
+    }
 }
