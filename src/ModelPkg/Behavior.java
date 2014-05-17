@@ -133,8 +133,7 @@ public class Behavior {
         return isItSmelling;
     }
 
-    public static VirtualFutureAction scanForWildObject(Case[][] cases, SmellType type, String desiredQuality) {
-
+    public static VirtualFutureAction scanForWildObject(Point position, Case[][] cases, SmellType type, String desiredQuality) {
         for (int i = 0; i < cases.length; i++) {
             for (int j = 0; j < cases[i].length; j++) {
                 System.out.println(new Point(i,j));
@@ -174,11 +173,47 @@ public class Behavior {
             }
         }
 
-        if (targetPoint!=null){
-        correctedReferential=new Point(targetPoint.x-1,targetPoint.y-1);
+        if (cases[targetPoint.x][targetPoint.y].getPassable()){
+            System.out.println("NP");
+            correctedReferential=new Point(targetPoint.x-1,targetPoint.y-1);
+        }
+        else{
+            System.out.println("oh oooooh oh");
+            if(Math.abs(targetPoint.x-1)==Math.abs(targetPoint.y-1)){
+                //C'est un coin
+                if (cases[1][targetPoint.y].getPassable()){
+                    correctedReferential=new Point(0, targetPoint.y-1);
+                }
+                else if(cases[targetPoint.x][1].getPassable()){
+                    correctedReferential=new Point(targetPoint.x-1, 0);
+                }
+            }
+            else{
+                if (targetPoint.x==1){
+                    if (cases[0][targetPoint.y].getPassable()){
+                        correctedReferential=new Point(-1, targetPoint.y-1);
+                    }
+                    else if(cases[2][targetPoint.y].getPassable()){
+                        correctedReferential=new Point(1, targetPoint.y-1);
+                    }
+                }
+                else{
+                    if (cases[targetPoint.x][0].getPassable()){
+                        correctedReferential=new Point(targetPoint.x, -1);
+                    }
+                    else if(cases[targetPoint.x][2].getPassable()){
+                        correctedReferential=new Point(targetPoint.x, 1);
+                    }
+                    else{
+                        System.out.println("manque qqc");
+                    }
+                }
+            }
         }
 
-
+        if (correctedReferential==null){
+            correctedReferential=drunk(position);
+        }
 
         return new VirtualFutureAction(correctedReferential, ActionTypes.GO_TO_LOCATION);
     }

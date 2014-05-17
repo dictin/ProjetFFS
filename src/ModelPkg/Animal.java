@@ -267,7 +267,7 @@ public abstract class Animal {
                     virtualFutureAction = Behavior.eatAdjacentFood(this.position);
                 }else if (Behavior.doesItSmell(this.filterSmells(), SmellType.FOOD)){
                     //System.out.println(this.getName()+" Smells delicious FS");
-                    virtualFutureAction = Behavior.scanForWildObject(this.filterSmells(), SmellType.FOOD, mostIntense);
+                    virtualFutureAction = Behavior.scanForWildObject(this.position, this.filterSmells(), SmellType.FOOD, mostIntense);
                 }
             }
 
@@ -282,7 +282,7 @@ public abstract class Animal {
             }
             else if(Behavior.doesItSmell(this.filterSmells(), SmellType.HIVE)){
                 //System.out.println(this.getName()+" smells hive");
-                virtualFutureAction = Behavior.scanForWildObject(this.filterSmells(), SmellType.HIVE, mostIntense);
+                virtualFutureAction = Behavior.scanForWildObject(this.position, this.filterSmells(), SmellType.HIVE, mostIntense);
             }
         }
         else {
@@ -293,7 +293,7 @@ public abstract class Animal {
             }
             else if (Behavior.doesItSmell(this.filterSmells(), SmellType.FOOD)){
                 //System.out.println(this.getName()+" smells FS");
-                virtualFutureAction=Behavior.scanForWildObject(this.filterSmells(), SmellType.FOOD, mostIntense);
+                virtualFutureAction=Behavior.scanForWildObject(this.position, this.filterSmells(), SmellType.FOOD, mostIntense);
             }
         }
 
