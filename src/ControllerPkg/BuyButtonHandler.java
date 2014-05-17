@@ -23,14 +23,15 @@ public class BuyButtonHandler implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         int selectedIndex = this.list.getSelectedIndex();
-        int playerFood = this.masterController.getPlayerDataController().getFood();
-        int price = Items.values()[selectedIndex].getPrice();
-        if (playerFood >= price){
-            itemController.addItemToInventory(Items.values()[selectedIndex]);
-            masterController.getPlayerDataController().spendFood(Items.values()[selectedIndex].getPrice());
-        }else {
-            JOptionPane.showMessageDialog(null, "Nourriture insuffisante");
+        if (selectedIndex != -1){
+            int playerFood = this.masterController.getPlayerDataController().getFood();
+            int price = Items.values()[selectedIndex].getPrice();
+            if (playerFood >= price){
+                itemController.addItemToInventory(Items.values()[selectedIndex]);
+                masterController.getPlayerDataController().spendFood(Items.values()[selectedIndex].getPrice());
+            }else {
+                JOptionPane.showMessageDialog(null, "Nourriture insuffisante");
+            }
         }
-
     }
 }

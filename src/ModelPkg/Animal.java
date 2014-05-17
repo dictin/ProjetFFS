@@ -187,6 +187,8 @@ public abstract class Animal {
         return nameGen;
     }
 
+    //Number-Crunch Statistics
+
     public int getHealth() {
         return health;
     }
@@ -221,7 +223,45 @@ public abstract class Animal {
         return grabQuantity;
     }
 
-//dgsfrjhfs
+    //Adjusted Crunch
+
+    public int getAdjustedHealth(){
+        return this.getHealth();
+    } //todo
+
+    public int getAdjustedSpeed(){
+        return this.speed + this.masterController.getPlayerDataController().getStatMod(PlayerData.SPD_STATID);
+    }
+
+    public int getAdjustedAttack(){
+        return this.attack + this.masterController.getPlayerDataController().getStatMod(PlayerData.ATK_STATID);
+    }
+
+    public int getAdjustedSmellSensitivity(){
+        return this.smellSensitivity + this.masterController.getPlayerDataController().getStatMod(PlayerData.SMS_STATID);
+    }
+
+    public int getAdjustedSmellThreshold(){
+        return this.smellThreshold + (100/this.getSmellSensitivity());
+    }
+
+    public int getAdjustedSmellStrength(){
+        return this.smellStrengthStat + this.masterController.getPlayerDataController().getStatMod(PlayerData.SMT_STATID);
+    }
+
+    public int getAdjustedDefence(){
+        return this.defence + this.masterController.getPlayerDataController().getStatMod(PlayerData.DEF_STATID);
+    }
+
+    public int getAdjustedEndurance(){
+        return this.endurance + this.masterController.getPlayerDataController().getStatMod(PlayerData.END_STATID);
+    }
+
+    public int getAdjustedGBTQ(){
+        return this.grabQuantity + this.masterController.getPlayerDataController().getStatMod(PlayerData.GBTQ_STATID);
+    }
+
+    //End of Number-Crunch Statistics
 
     public Image getSprite() {
         return sprite;
@@ -245,7 +285,7 @@ public abstract class Animal {
     }
 
     public void activate(int time){
-        decreaseHealth(((25 - endurance) / 2));
+        decreaseHealth(((25 - this.endurance) / 2));
 
         VirtualFutureAction virtualFutureAction;
         virtualFutureAction = Behavior.evaluateBestObjective(this.position, this.mentalState, this.moral, this.smellThreshold);
@@ -280,7 +320,7 @@ public abstract class Animal {
 
 
 
-            decreaseHealth(((25 - endurance) / 2));
+            decreaseHealth(((25 - this.endurance) / 2));
 }
 
     private void attackOpponent(Animal animal, int damageAmount) {

@@ -40,6 +40,15 @@ public class PlayerData implements Observable {
     public static final int TEMP_ITEM = 0;
     public static final int PERM_ITEM = 1;
 
+    public static final int HP_STATID = 0;
+    public static final int SPD_STATID = 1;
+    public static final int ATK_STATID = 2;
+    public static final int SMS_STATID = 3;
+    public static final int SMT_STATID = 4;
+    public static final int DEF_STATID = 5;
+    public static final int END_STATID = 6;
+    public static final int GBTQ_STATID = 7;
+
     private ArrayList<Observer> observers = new ArrayList<>();
 
     public PlayerData(){
@@ -95,6 +104,7 @@ public class PlayerData implements Observable {
     public int getNextEventGravity() {
         return nextEventGravity;
     }
+
     public void setNextEventGravity(int nextEventGravity) {
         this.nextEventGravity=nextEventGravity;
     }
@@ -107,6 +117,17 @@ public class PlayerData implements Observable {
         this.karma+=number;
     }
 
+    public void activateInstancesForTurn(){
+        Iterator<TempItemInstance> iterator;
+        iterator = this.tempItemInstances.iterator();
+        while(iterator.hasNext()){
+            iterator.next().activate();
+        }
+        iterator = this.permanentInstances.iterator();
+        while(iterator.hasNext()){
+            iterator.next().activate();
+        }
+    }
 
     public void cleanTempItemInstances(){
         ArrayList<TempItemInstance> toClean = new ArrayList<TempItemInstance>();
@@ -118,18 +139,6 @@ public class PlayerData implements Observable {
             }
         }
         this.tempItemInstances.removeAll(toClean);
-    }
-
-    public void activateInstances(){
-        Iterator<TempItemInstance> iterator;
-        iterator = this.tempItemInstances.iterator();
-        while(iterator.hasNext()){
-            iterator.next().activate();
-        }
-        iterator = this.permanentInstances.iterator();
-        while(iterator.hasNext()){
-            iterator.next().activate();
-        }
     }
 
     public void addFood(int food) {
@@ -162,7 +171,6 @@ public class PlayerData implements Observable {
         this.updateObservers();
     }
 
-
     public static void addMod(int stat, int value){
         PlayerData.statModifiers[stat] += value;
     }
@@ -171,6 +179,11 @@ public class PlayerData implements Observable {
         for(int i = 0; i < this.statModifiers.length; i++){
             this.statModifiers[i] = 0;
         }
+    }
+
+    public void endOfTurnCleanUp(){
+        this.cleanTempItemInstances();
+        this.clearStatMod();
     }
 
     public int getStatMod(int stat){
@@ -213,6 +226,7 @@ public class PlayerData implements Observable {
     public int getScore() {
         return score;
     }
+
     public int getNumberFoodToGo(){
         return (this.numberFoodGoToNextLevel[(this.level)-1]-this.pickUpFood);
     }
