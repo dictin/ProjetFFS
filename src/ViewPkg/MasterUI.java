@@ -240,9 +240,6 @@ public class MasterUI extends JLayeredPane implements Observer{
     }
 
     public void actualiser(){
-
-
-
         if(MapData.getNewsList().size()>numberOfNews && !alreadyInMovement){
             mouvement = 1;
             alreadyInMovement = true;
@@ -286,7 +283,6 @@ public class MasterUI extends JLayeredPane implements Observer{
             actualQuestion = masterController.getChamanController().getQuestion();
             questionLabel.setVisible(false);
             this.remove(questionLabel);
-
             creationQuestion();
                 this.invalidate();
                 this.repaint();
@@ -296,8 +292,6 @@ public class MasterUI extends JLayeredPane implements Observer{
         if(Laboratory.isFinish()){
         laboratoryLabel.setVisible(false);
         }
-
-
     }
 
     private void updateNumericInfos(){
