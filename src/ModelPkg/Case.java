@@ -185,4 +185,8 @@ public class Case implements Observable {
         Case clone=new Case(getPosition(), getOccupant(), getWildObject());
         return clone;
     }
+
+    public void setTerrain(WildObject terrain) {
+        this.terrain = terrain;
+    }
 }
