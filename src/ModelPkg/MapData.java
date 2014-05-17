@@ -14,6 +14,7 @@ public class MapData {
     private static int hivePosition;
     private static ArrayList<Animal> animalList = new ArrayList<Animal>();
     static ArrayList<Case> casesWithSmellSources = new ArrayList<Case>();
+    private static long uniqueIDCounter;
 
     public static ArrayList<Animal> getAnimalList() {
         return animalList;
@@ -311,5 +312,8 @@ public class MapData {
     }
 
 
-
+    public static long getUniqueID(){
+        uniqueIDCounter++;
+        return uniqueIDCounter;
+    }
 }

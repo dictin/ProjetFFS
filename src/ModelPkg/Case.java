@@ -228,6 +228,20 @@ public class Case implements Observable {
         else{
             setPassable(true);
         }
-        return passable;
+        return this.passable;
+    }
+
+    public void set0ToSmellSourceIntensityIndex(int index) {
+        getSortedSmellSourceArrayList();
+        System.out.println("before:"+smellSourceArrayList.get(index).getIntensity());
+        this.smellSourceArrayList.get(index).setIntensity(0);
+        System.out.println("after:"+smellSourceArrayList.get(index).getIntensity());
+    }
+
+    public void set0ToSmellIntensityIndex(int index) {
+        getSortedSmellArrayList();
+        System.out.println("before:"+smellArrayList.get(index).getIntensity());
+        this.smellArrayList.get(index).setIntensity(0);
+        System.out.println("after:"+smellArrayList.get(index).getIntensity());
     }
 }

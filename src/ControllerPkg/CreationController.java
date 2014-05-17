@@ -28,7 +28,7 @@ public class CreationController implements ActionListener {
             if(this.masterController.getPlayerDataController().getFood()>=100){
             animalType = CreationHashTable.getAssociatedValue(source);
             Point spawnPoint=MapData.getSpawnPoint();
-            long uniqueID = System.currentTimeMillis();
+            long uniqueID = MapData.getUniqueID();
             Fourmillier spawnedFourmilier=new Fourmillier(0, MapData.getFourmilierActualRaceStats1Tab(), animalType, spawnPoint, uniqueID, SmellType.ALLY,masterController);
             MapData.getAnimalList().add(spawnedFourmilier);
             MapData.getCase(spawnPoint).setOccupant(spawnedFourmilier);

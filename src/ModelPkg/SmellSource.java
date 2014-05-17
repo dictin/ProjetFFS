@@ -21,7 +21,7 @@ public class SmellSource extends Smell implements Cloneable{
 
     @Override
     public SmellSource clone(){
-        SmellSource clonedSmell=new SmellSource(getID(), getIntensity(), getTeam(), getType());
+        SmellSource clonedSmell=new SmellSource(this.getID(), this.getIntensity(), this.getTeam(), this.getType());
         return clonedSmell;
     }
 }

@@ -1,5 +1,6 @@
 package ModelPkg.WildObjects;
 
+import ModelPkg.MapData;
 import ModelPkg.SmellSource;
 import ModelPkg.SmellType;
 
@@ -44,19 +45,19 @@ public class WildObject {
         this.initializeImages();
         this.type = type;
         this.traversable = traversable;
-        this.smellSource=new SmellSource(System.currentTimeMillis(),0,-1,SmellType.NOTHING);
+        this.smellSource=new SmellSource(MapData.getUniqueID(),0,-1,SmellType.NOTHING);
         if (this.type==HIVE_ID) {
-            this.smellSource = new SmellSource(System.currentTimeMillis(), 100,-1, SmellType.HIVE);
+            this.smellSource = new SmellSource(MapData.getUniqueID(), 1000000,-1, SmellType.HIVE);
         }
         else if(this.type==ITEM_ID){
-            this.smellSource = new SmellSource(System.currentTimeMillis(), 50,-1,SmellType.ITEM);
+            this.smellSource = new SmellSource(MapData.getUniqueID(), 50,-1,SmellType.ITEM);
         }
         else if (this.type==FOOD_ID||this.type==CORPSE_ID){
             if (this.type==FOOD_ID) {
-                this.smellSource = new SmellSource(System.currentTimeMillis(), ((FoodSource) this).getFoodQuantity(), -1, SmellType.FOOD);
+                this.smellSource = new SmellSource(MapData.getUniqueID(), ((FoodSource) this).getFoodQuantity(), -1, SmellType.FOOD);
             }
             else{
-                this.smellSource = new SmellSource(System.currentTimeMillis(), ((FoodSource) this).getFoodQuantity(), -1, SmellType.CORPSE);
+                this.smellSource = new SmellSource(MapData.getUniqueID(), ((FoodSource) this).getFoodQuantity(), -1, SmellType.CORPSE);
             }
         }
     }

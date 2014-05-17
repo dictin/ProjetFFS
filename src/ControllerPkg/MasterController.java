@@ -208,6 +208,31 @@ public class MasterController extends Thread{
     }
 
     public void disposeWildObject(Point target) {
+        long defunctSmellID=MapData.getCase(target).getWildObject().getSmellSource().getID();
+
+        System.out.println("Test ids");
+        System.out.println("Target");
+        System.out.println(defunctSmellID);
+
+        System.out.println("Ids:");
+        for (int i=0; i<MapData.MAP_SIZE; i++){
+            for (int j=0; j<MapData.MAP_SIZE;j++){
+                Case selectedCase=MapData.getCase(new Point(i,j));
+                for (int k=0; k<selectedCase.getSortedSmellArrayList().size();k++){
+                    if (selectedCase.getSortedSmellArrayList().get(k).getID()==defunctSmellID){
+                        System.out.println("Befor:"+selectedCase.getSortedSmellArrayList().get(k).getIntensity());
+                        selectedCase.set0ToSmellIntensityIndex(k);
+                        System.out.println("After:"+selectedCase.getSortedSmellArrayList().get(k).getIntensity());
+                    }
+                }
+                for (int k=0; k<selectedCase.getSortedSmellSourceArrayList().size();k++){
+                    if (selectedCase.getSortedSmellSourceArrayList().get(k).getID()==defunctSmellID){
+                        selectedCase.set0ToSmellSourceIntensityIndex(k);
+                    }
+                }
+            }
+        }
+
         MapData.getCase(target).setWildObject(new WildObject(WildObject.EMPTY_ID, true));
     }
 }

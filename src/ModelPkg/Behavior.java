@@ -130,6 +130,13 @@ public class Behavior {
     }
 
     public static VirtualFutureAction scanForWildObject(Case[][] cases, SmellType type, String desiredQuality) {
+
+        for (int i = 0; i < cases.length; i++) {
+            for (int j = 0; j < cases[i].length; j++) {
+                System.out.println(new Point(i,j));
+                System.out.println(cases[i][j].getSortedSmellArrayList().get(0).getIntensity());
+            }
+        }
         System.out.println("I smell with my little nose "+type);
         Point targetPoint = null;
         int preferredIntensity=0;
@@ -140,40 +147,35 @@ public class Behavior {
                     if (targetPoint==null&&cases[i][j].getSortedSmellArrayList().get(k).getType()==type){
                         targetPoint=new Point(i,j);
                         preferredIntensity=cases[targetPoint.x][targetPoint.y].getSortedSmellArrayList().get(k).getIntensity();
+
+                        System.out.println(targetPoint);
+                        System.out.println("Intensity "+cases[i][j].getSortedSmellArrayList().get(k).getIntensity());
+
                     }
-                    else if(desiredQuality.equals("lesser")&&(targetPoint!=null&&cases[i][j].getSortedSmellArrayList().get(k).getIntensity()<preferredIntensity)){
+                    else if(desiredQuality.equals("lesser")&&(targetPoint!=null&&cases[i][j].getSortedSmellArrayList().get(k).getIntensity()<preferredIntensity&&cases[i][j].getSortedSmellArrayList().get(k).getType()==type)){
                         targetPoint=new Point(i,j);
                         preferredIntensity=cases[targetPoint.x][targetPoint.y].getSortedSmellArrayList().get(k).getIntensity();
+
+                        System.out.println(targetPoint);
+                        System.out.println("lesser Intensity "+cases[i][j].getSortedSmellArrayList().get(k).getIntensity());
                     }
-                    else if(desiredQuality.equals("greater")&&(targetPoint!=null&&cases[i][j].getSortedSmellArrayList().get(k).getIntensity()>preferredIntensity)){
+                    else if(desiredQuality.equals("greater")&&(targetPoint!=null&&cases[i][j].getSortedSmellArrayList().get(k).getIntensity()>preferredIntensity&&cases[i][j].getSortedSmellArrayList().get(k).getType()==type)){
                         targetPoint=new Point(i,j);
                         preferredIntensity=cases[targetPoint.x][targetPoint.y].getSortedSmellArrayList().get(k).getIntensity();
+
+                        System.out.println(targetPoint);
+                        System.out.println("greater Intensity "+cases[i][j].getSortedSmellArrayList().get(k).getIntensity());
                     }
                 }
             }
         }
 
-        //TODO fix the fact that once food is removed, greatest food odor is where it used to be.
-        /*Proposition:
-        eliminateSmell(Object destroyedSource)
-        if  destroyedSource instanceOf Animal{
-        scan map[i][j].getSortedSmellSOURCEArrayList()
-        scan arrayList{
-        if selectedSmell.getID==destroyedSource.getID
-        stop arrayListScan, continue map scan
-        }
-
-        if  destroyedSource instanceOf WildObject{
-        scan map[i][j].getSortedSmellSOURCEArrayList()
-        scan arrayList{
-        if selectedSmell.getID==destroyedSource.getID
-        stop arrayListScan, continue map scan
-        }
-         */
-
         if (targetPoint!=null){
         correctedReferential=new Point(targetPoint.x-1,targetPoint.y-1);
         }
+
+
+
         return new VirtualFutureAction(correctedReferential, ActionTypes.GO_TO_LOCATION);
     }
 

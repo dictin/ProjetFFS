@@ -99,7 +99,6 @@ public abstract class Animal {
         //TODO balance this and add a smell
         this.smellIntensity=this.getSmellStrengthStat()*8;
         this.smellThreshold=100/this.getSmellSensitivity();
-        //this.smell=new SmellSource(MasterController.getUniqueID(),);
 
 
 
@@ -285,10 +284,6 @@ public abstract class Animal {
                 //System.out.println(this.getName()+" smells hive");
                 virtualFutureAction = Behavior.scanForWildObject(this.filterSmells(), SmellType.HIVE, mostIntense);
             }
-            else if (Behavior.doesItSmell(this.filterSmells(), SmellType.ALLY)){
-                //System.out.println(this.getName()+" smell ally");
-                virtualFutureAction = Behavior.scanForWildObject(this.filterSmells(), SmellType.ALLY, leastIntense);
-            }
         }
         else {
             //System.out.println(this.getName()+" is not weak nor caryin");
@@ -302,7 +297,8 @@ public abstract class Animal {
             }
         }
 
-        if (virtualFutureAction==null||virtualFutureAction.getTargetLocation().equals(new Point(0,0))){
+
+        if (virtualFutureAction==null){
             virtualFutureAction=new VirtualFutureAction(Behavior.drunk(this.position), ActionTypes.GO_TO_LOCATION);
         }
         accomplishMission(virtualFutureAction);
@@ -334,9 +330,11 @@ public abstract class Animal {
                 }
                 break;
             case GO_TO_LOCATION:
-                if (mission.getTargetLocation().x==mission.getTargetLocation().y&&mission.getTargetLocation().y==1){
-                    //System.out.println("Loopin'");
+                if (mission.getTargetLocation().x==mission.getTargetLocation().y&&mission.getTargetLocation().y==0){
+                    System.out.println("error");
                 }
+                //if (mission.getTargetLocation().){
+                //}
                 this.setToMove(true);
                 this.setPosition(target);
                 break;
