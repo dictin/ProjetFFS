@@ -11,7 +11,7 @@ public class InventoryMenu extends ContextualMenu implements Observer{
 
     private GotoMenuButton consumables;
     private GotoMenuButton reusables;
-    private JLabel consumablesLabel = new JLabel("Objets consumables!");
+    private JLabel consumablesLabel = new JLabel("Objets consommables!");
     private JLabel reusablesLabel = new JLabel ("Objets réutilisables!");
     private JButton consumablesBuyButton = new JButton("Utiliser");
     private JButton reusablesBuyButton = new JButton("Activer");
@@ -36,7 +36,7 @@ public class InventoryMenu extends ContextualMenu implements Observer{
         this.itemController = controller.getItemController();
         this.playerDataController.addObserver(this);
         consumablesLabel.setSize(400,35);
-        consumablesLabel.setLocation(25, 0);
+        consumablesLabel.setLocation(5, 0);
         consumablesLabel.setFont(new Font("Arial", Font.PLAIN, 30));
         consumables = new GotoMenuButton(controller, "consumables_button", new Dimension(this.getWidth()-10, this.getHeight()/2-10), Color.cyan);
         consumables.setLocation(5, 5);
