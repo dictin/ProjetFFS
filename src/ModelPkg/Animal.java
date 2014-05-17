@@ -8,10 +8,13 @@ import java.util.Random;
 
 public abstract class Animal {
 
+
+    public static final String LEAST_INTENSE ="lesser";
+    public static final String MOST_INTENSE ="greater";
+
     private MasterController masterController;
-    private final int MAX_HEALTH = 100;
+    private int maxHealth = 100;
     private long animalID;
-    private Point objective = null;
     private int activationFrequency;
     private int birthday;
     private Point position;
@@ -87,21 +90,17 @@ public abstract class Animal {
         this.defence=25-mainStats[1];
         this.smellSensitivity=mainStats[2];
         this.smellStrengthStat =25-mainStats[2];
-        this.grabQuantity=mainStats[3];
-        this.equipQuantity=25-mainStats[3];
-        this.moral = 25; //TODO determiner comment evaluer le moral;
-        //TODO balance this and add a smell
+        this.grabQuantity=25;
+        this.moral = 25;
         this.smellIntensity=this.getSmellStrengthStat()*8;
         this.smellThreshold=100/this.getSmellSensitivity();
-        //this.smell=new SmellSource(MasterController.getUniqueID(),);
 
 
 
         this.smell = new SmellSource(animalID, this.smellIntensity, this.team, smellType);
 
-        System.out.println("stats:");
-        System.out.println("speed: "+speed);
-        System.out.println("endurance: "+endurance);
+        
+
         sprite=Toolkit.getDefaultToolkit().getImage("IMG/"+species+".png");
     }
 
@@ -139,7 +138,6 @@ public abstract class Animal {
     }
 
     public void setPosition(Point position) {
-        System.out.println("Moved");
         this.position = position;
     }
 
@@ -166,10 +164,7 @@ public abstract class Animal {
     public void decreaseHealth(int amount){
         this.health-= amount;
         if(this.isDead()){
-            System.out.println("In decreaseHealth");
             MasterController.disposeAnimal(this);
-
-            //TODO kill fourmilier
             MapData.addNewsList(this.getName() + " est malheureusement décédé!!");
             masterController.victims();
         }
@@ -187,7 +182,12 @@ public abstract class Animal {
         return nameGen;
     }
 
-    //Number-Crunch Statistics
+    //Number-Crunch Statistics------------------------------------------------------------------------------------------
+
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
 
     public int getHealth() {
         return health;
@@ -223,11 +223,16 @@ public abstract class Animal {
         return grabQuantity;
     }
 
-    //Adjusted Crunch
+    public int getActivationFrequency() {
+        return activationFrequency;
+    }
 
-    public int getAdjustedHealth(){
-        return this.getHealth();
-    } //todo
+
+    //Adjusted Crunch---------------------------------------------------------------------------------------------------
+
+    public  int getAdjustedMaxHealth(){
+        return this.maxHealth + this.masterController.getPlayerDataController().getStatMod(PlayerData.HP_STATID);
+    }
 
     public int getAdjustedSpeed(){
         return this.speed + this.masterController.getPlayerDataController().getStatMod(PlayerData.SPD_STATID);
@@ -261,7 +266,11 @@ public abstract class Animal {
         return this.grabQuantity + this.masterController.getPlayerDataController().getStatMod(PlayerData.GBTQ_STATID);
     }
 
-    //End of Number-Crunch Statistics
+    public int getAdjustedActivationFrequency() {
+        return 480/this.getAdjustedSpeed();
+    }
+
+    //End of Number-Crunch Statistics-----------------------------------------------------------------------------------
 
     public Image getSprite() {
         return sprite;
@@ -285,76 +294,142 @@ public abstract class Animal {
     }
 
     public void activate(int time){
-        decreaseHealth(((25 - this.endurance) / 2));
+        
 
-        VirtualFutureAction virtualFutureAction;
-        virtualFutureAction = Behavior.evaluateBestObjective(this.position, this.mentalState, this.moral, this.smellThreshold);
-        this.realizeFutureAction(virtualFutureAction);
+        VirtualFutureAction virtualFutureAction=null;
 
-            if (this.actionToCommit == ActionTypes.GO_TO_LOCATION || this.actionToCommit == ActionTypes.FLEE_TO_LOCATION || this.actionToCommit == ActionTypes.RUN_AT_ENEMY){
-                this.toMove = true;
-                this.oldPosition = this.position;
-                this.position = new Point(this.position.x+objective.x, this.position.y+objective.y);
+
+
+        if (this.health <= this.maxHealth/4){
+            //System.out.println(this.getName()+" is weak");
+            if (this.carriedFood > 0){
+                //System.out.println(this.getName()+" is caryin");
+                this.restore();
+                virtualFutureAction = Behavior.skipTurn();
+
             }else {
-                if (this.actionToCommit == ActionTypes.ATTACK_AT_LOCATION){
-                    this.attackOpponent(MapData.getCase(new Point(position.x+objective.x, position.y+objective.y)).getOccupant(), this.attack);
-                }else if (this.actionToCommit == ActionTypes.PICKUP_FROM_LOCATION){
-                    FoodSource foodSource = ((FoodSource)MapData.getCase(new Point(position.x+objective.x, position.y+objective.y)).getWildObject());
-                    int foodAvailable;
-                    foodAvailable = foodSource.getFoodQuantity();
-
-                    if (foodAvailable >= this.grabQuantity){
-                        this.foodCarried = this.grabQuantity;
-                        foodSource.setFoodQuantity(foodAvailable-this.grabQuantity);
-                    }else if (foodAvailable < this.grabQuantity){
-                        this.foodCarried = foodAvailable;
-                        foodSource.setFoodQuantity(0);
-
-                    }
-
-                }else if (this.actionToCommit == ActionTypes.DROP_TO_LOCATION){
-                    this.masterController.getPlayerDataController().addFood(this.foodCarried);
-                    this.foodCarried = 0;
+                if (Behavior.isCloseTo(WildObject.FOOD_ID, this.position)){
+                    //System.out.println(this.getName()+" is NFS");
+                    virtualFutureAction = Behavior.eatAdjacentFood(this.position);
+                }else if (Behavior.doesItSmell(this.filterSmells(), SmellType.FOOD)){
+                    //System.out.println(this.getName()+" Smells delicious FS");
+                    virtualFutureAction = Behavior.scanForWildObject(this.position, this.filterSmells(), SmellType.FOOD, MOST_INTENSE);
                 }
             }
 
+        }
+        //Cherche à rentrer.
+        //TODO test with souts
+        else if(this.carriedFood>0){
+            //System.out.println(this.getName()+" is caryin");
+            if (Behavior.isCloseTo(WildObject.HIVE_ID, this.position)){
+                //System.out.println(this.getName()+" is NHive");
+                virtualFutureAction = Behavior.dropToHive(this.position);
+            }
+            else if(Behavior.doesItSmell(this.filterSmells(), SmellType.HIVE)){
+                //System.out.println(this.getName()+" smells hive");
+                virtualFutureAction = Behavior.scanForWildObject(this.position, this.filterSmells(), SmellType.HIVE, MOST_INTENSE);
+            }
+        }
+        else {
+            //System.out.println(this.getName()+" is not weak nor caryin");
+            if (Behavior.isCloseTo(WildObject.FOOD_ID, this.position)){
+                //System.out.println(this.getName()+" is NFS");
+                virtualFutureAction = Behavior.pickUpFood(this.position);
+            }
+            else if (Behavior.doesItSmell(this.filterSmells(), SmellType.FOOD)){
+                //System.out.println(this.getName()+" smells FS");
+                virtualFutureAction=Behavior.scanForWildObject(this.position, this.filterSmells(), SmellType.FOOD, MOST_INTENSE);
+            }
+        }
 
 
-            decreaseHealth(((25 - this.endurance) / 2));
+        if (virtualFutureAction==null){
+            virtualFutureAction=new VirtualFutureAction(Behavior.drunk(this.position), ActionTypes.GO_TO_LOCATION);
+        }
+        accomplishMission(virtualFutureAction);
+    }
+
+    public void accomplishMission(VirtualFutureAction mission){
+        Point target=new Point(mission.getTargetLocation().x+this.position.x, mission.getTargetLocation().y+this.position.y);
+        Case targetCase=MapData.getCase(target);
+        switch(mission.getActionType()){
+            case DROP_TO_HIVE:
+                masterController.getPlayerDataController().addFood(carriedFood);
+                this.carriedFood=0;
+                break;
+            case EAT_FROM_LOCATION:
+                if (targetCase.getWildObject() instanceof FoodSource){
+                    while (targetCase.getWildObject().getType()!=WildObject.EMPTY_ID&&this.getHealth()<100&&((FoodSource) targetCase.getWildObject()).getFoodQuantity()>0){
+                        targetCase.decreaseFoodQuantity();
+                        if(targetCase.emptyFoodSource()){
+                            System.out.println("When in doubt, sout");
+                            masterController.disposeWildObject(target);
+                        }
+                        if (this.health>=(this.getAdjustedMaxHealth()-10)){
+                            this.setHealth(100);
+                        }
+                        else{
+                            this.setHealth(this.getHealth()+10);
+                        }
+                    }
+                }
+                break;
+            case GO_TO_LOCATION:
+                if (mission.getTargetLocation().x==mission.getTargetLocation().y&&mission.getTargetLocation().y==0){
+                    System.out.println("error");
+                }
+                //if (mission.getTargetLocation().){
+                //}
+                this.setToMove(true);
+                this.setPosition(target);
+                break;
+            case PICKUP_FROM_LOCATION:
+                if (targetCase.getWildObject() instanceof FoodSource){
+                    //System.out.println("Target:"+targetCase.getPosition().x+";"+targetCase.getPosition().y);
+                    //System.out.println("grabqty: "+grabQuantity);
+                    //System.out.println("carried:"+carriedFood);
+                    boolean foodSourceDepleted=false;
+                    while(carriedFood<this.getAdjustedGBTQ()&&!foodSourceDepleted){
+                        targetCase.decreaseFoodQuantity();
+                        if(targetCase.emptyFoodSource()){
+                            foodSourceDepleted=true;
+                            masterController.disposeWildObject(target);
+
+                        }
+                        this.carriedFood++;
+                    }
+                }
+                break;
+        }
+
+    }
+
+    private void restore(){
+        System.out.println("nom");
+        while (this.carriedFood > 0 && this.health < this.getAdjustedMaxHealth()){
+                carriedFood--;
+                if(this.health < 90){
+                    this.health+=10;
+                }else{
+                    this.health = this.getAdjustedMaxHealth();
+                }
+        }
+
+            decreaseHealth(((25 - this.getAdjustedEndurance()) / 2));
 }
+
+
 
     private void attackOpponent(Animal animal, int damageAmount) {
         animal.decreaseHealth(damageAmount);
-
     }
 
-    private void realizeFutureAction(VirtualFutureAction virtualFutureAction) {
-        this.objective = virtualFutureAction.getTargetLocation();
-        this.actionToCommit = virtualFutureAction.getActionType();
-        this.decideFutureMentalState(this.mentalState, this.actionToCommit);
-    }
 
-    private void decideFutureMentalState(MentalStates mentalState, ActionTypes actionToCommit) {
-        if ((mentalState == MentalStates.SCARED || mentalState == MentalStates.FLEEING) && actionToCommit == ActionTypes.FLEE_TO_LOCATION){
-            this.mentalState = MentalStates.FLEEING;
-        }else if((mentalState == MentalStates.SCARED || mentalState == MentalStates.FLEEING) && actionToCommit == ActionTypes.GO_TO_LOCATION){
-            this.mentalState = MentalStates.NEUTRAL;
-        }else if (mentalState == MentalStates.AGRESSIVE && (actionToCommit == ActionTypes.RUN_AT_ENEMY || actionToCommit == ActionTypes.ATTACK_AT_LOCATION)){
-            this.mentalState = MentalStates.AGRESSIVE;
-        }else if (mentalState == MentalStates.AGRESSIVE && actionToCommit == ActionTypes.FLEE_TO_LOCATION){
-            this.mentalState = MentalStates.FLEEING;
-        }else if (mentalState == MentalStates.RETURN_TO_BASE && actionToCommit == ActionTypes.DROP_TO_LOCATION){
-            this.mentalState = MentalStates.NEUTRAL;
-        }
-        if (this.health <= this.MAX_HEALTH/4){
-            this.mentalState = MentalStates.WEAK;
-        }else if (this.carriedFood > 0){
-            this.mentalState = MentalStates.RETURN_TO_BASE;
-        }
-    }
+    
     public boolean isDead(){
         if (health<=0){
-            System.out.println("in isDead");
+            
             return true;
         }
         else {
@@ -384,9 +459,43 @@ public abstract class Animal {
 
     public boolean isToMove(int time) {
         boolean answer=false;
-        if (time!=birthday&&(time-birthday)%activationFrequency==0){
+        if (time!=birthday&&(time-birthday)%this.getAdjustedActivationFrequency()==0){
             answer=true;
         }
         return answer;
+    }
+
+    private Case[][] filterSmells(){
+        Case[][] unfilteredSubsection = MapData.getSubsection2(this.position);
+        Case[][] filteredSubsection = new Case[unfilteredSubsection.length][unfilteredSubsection[0].length];
+        for (int i = 0; i < unfilteredSubsection.length; i++) {
+            for (int j = 0; j < unfilteredSubsection[i].length; j++) {
+                filteredSubsection[i][j]=new Case(unfilteredSubsection[i][j].getPosition(), unfilteredSubsection[i][j].updateAndGetPassable());
+                for (int k = 0; k < unfilteredSubsection[i][j].getSortedSmellArrayList().size(); k++){
+                    if (unfilteredSubsection[i][j].getSortedSmellArrayList().get(k).getIntensity() >= this.getAdjustedSmellThreshold()){
+                        filteredSubsection[i][j].addToSortedSmellArrayList(unfilteredSubsection[i][j].getSortedSmellArrayList().get(k));
+                    }
+                }
+            }
+        }
+        return filteredSubsection;
+    }
+
+    public int getTeam() {
+        return team;
+    }
+
+    public int[] getMeanStats() {
+        return meanStats;
+    }
+    public String getSpecies() {
+        return species;
+    }
+    public long getID() {
+        return animalID;
+    }
+
+    public MasterController getMasterController() {
+        return masterController;
     }
 }

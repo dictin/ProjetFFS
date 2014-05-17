@@ -9,10 +9,12 @@ import java.util.Random;
 
 public class MapData {
 
-    private static Case[][] map = new Case[30][30];
+    public static final int MAP_SIZE=30;
+    private static Case[][] map = new Case[MAP_SIZE][MAP_SIZE];
     private static int hivePosition;
     private static ArrayList<Animal> animalList = new ArrayList<Animal>();
     static ArrayList<Case> casesWithSmellSources = new ArrayList<Case>();
+    private static long uniqueIDCounter;
 
     public static ArrayList<Animal> getAnimalList() {
         return animalList;
@@ -58,6 +60,7 @@ public class MapData {
             }
         }
 
+
         casesWithSmellSources = getCasesWithSmellSources();
         if (!casesWithSmellSources.isEmpty()) {
             for (int i = 0; i < casesWithSmellSources.size(); i++) {
@@ -65,7 +68,9 @@ public class MapData {
                 casesWithSmellSources.get(i).fadeSourceSmells();
             }
         }
+
     }
+
 
     public static int getSmellThreshold(Smell smell, Case selectedCase) {
         int threshold = 0;
@@ -148,7 +153,7 @@ public class MapData {
                     map[i][j] = new Case(new Point(i, j), null, new WildObject(WildObject.EMPTY_ID, true));
                 }
                 else if (caseType < 93) {
-                    map[i][j] = new Case(new Point(i, j), null, new FoodSource(WildObject.FOOD_ID, random.nextInt(200)));
+                    map[i][j] = new Case(new Point(i, j), null, new FoodSource(random.nextInt(200)));
                 } else if (caseType < 96) {
                     map[i][j] = new Case(new Point(i, j), null, new WildObject(WildObject.TREE_ID, true));
                 } else if (caseType < 97) {
@@ -164,10 +169,10 @@ public class MapData {
             }
         }
 
-        map[hivePosition][hivePosition] = new Case(new Point(hivePosition, hivePosition), null, new WildObject(5, true));
-        map[hivePosition + 1][hivePosition] = new Case(new Point(hivePosition + 1, hivePosition), null, new WildObject(5, true));
-        map[hivePosition][hivePosition + 1] = new Case(new Point(hivePosition, hivePosition + 1), null, new WildObject(5, true));
-        map[hivePosition + 1][hivePosition + 1] = new Case(new Point(hivePosition + 1, hivePosition + 1), null, new WildObject(5, true));
+        map[hivePosition][hivePosition] = new Case(new Point(hivePosition, hivePosition), null, new WildObject(WildObject.HIVE_ID, true));
+        map[hivePosition + 1][hivePosition] = new Case(new Point(hivePosition + 1, hivePosition), null, new WildObject(WildObject.HIVE_ID, true));
+        map[hivePosition][hivePosition + 1] = new Case(new Point(hivePosition, hivePosition + 1), null, new WildObject(WildObject.HIVE_ID, true));
+        map[hivePosition + 1][hivePosition + 1] = new Case(new Point(hivePosition + 1, hivePosition + 1), null, new WildObject(WildObject.HIVE_ID, true));
         newsList.add(0, "Bienvenu à FFS!");
         newsList.add(1, "Niveau 1");
         newsList.add(2, "#YOLO");
@@ -211,26 +216,7 @@ public class MapData {
         return subsection;
     }
 
-    public static Case[][] getSubsection(Point origin) {
-        int radius = 3;
-        Case[][] returnArray = new Case[(2 * radius) + 1][(2 * radius) + 1];
-        int subI = 0;
-        int subJ = 0;
 
-        for (int i = origin.x - radius; i <= origin.x + radius; i++) {
-            for (int j = origin.y - radius; j <= origin.y + radius; j++) {
-                try {
-                    returnArray[subI][subJ] = MapData.map[i][j];
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    returnArray[subI][subJ] = null;
-                }
-                subJ++;
-            }
-            subI++;
-        }
-
-        return returnArray;
-    }
 
     public static Point getSpawnPoint() {
         Point spawn = null;
@@ -262,7 +248,9 @@ public class MapData {
     public static int[] getFourmilierActualRaceStats1Tab() {
     return fourmilierActualRaceStats;
     }
-
+    public static void setFourmilierActualRaceStats(int position, int stats) {
+        fourmilierActualRaceStats[position] = stats;
+    }
     public static int getFourmilierActualRaceStats(int position) {
         return fourmilierActualRaceStats[position];
     }
@@ -295,6 +283,10 @@ public class MapData {
         return costFourmilier;
     }
 
+    public static long getUniqueID(){
+        uniqueIDCounter++;
+        return uniqueIDCounter;
+    }
     public static void setCostFourmilier(int position, int newCost) {
         MapData.costFourmilier[position] = newCost;
     }
@@ -321,7 +313,7 @@ public class MapData {
                     map[i][j].setTerrain(new WildObject(WildObject.EMPTY_ID, true));
                 }
                 else if (caseType < 93) {
-                    map[i][j].setTerrain(new FoodSource(WildObject.FOOD_ID, foodQuantity));
+                    map[i][j].setTerrain(new FoodSource(foodQuantity));
                 } else if (caseType < 96) {
                     map[i][j].setTerrain(new WildObject(WildObject.TREE_ID, true));
                 } else if (caseType < 97) {

@@ -12,4 +12,5 @@ public class Critter extends Animal {
         super(team, meanStats, species, startingPosition, animalID, smellType,masterController);
         this.masterController=masterController;
     }
+
 }

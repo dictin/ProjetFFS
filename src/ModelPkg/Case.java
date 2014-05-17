@@ -2,6 +2,7 @@ package ModelPkg;
 
 
 
+import ModelPkg.WildObjects.FoodSource;
 import ModelPkg.WildObjects.WildObject;
 import ObserverPkg.Observable;
 import ObserverPkg.Observer;
@@ -10,6 +11,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Case implements Observable {
+
+    private boolean passable=true;
 
     public Point getPosition() {
         return position;
@@ -28,6 +31,11 @@ public class Case implements Observable {
         this.occupant = occupant;
         this.terrain = terrain;
 
+    }
+
+    public Case(Point point, boolean passable){
+        this.position= new Point(point.x, point.y);
+        this.passable=passable;
     }
 
     public boolean caseContains(String thing){
@@ -60,10 +68,8 @@ public class Case implements Observable {
     }
 
     public void setOccupant(Animal occupant) {
-        if (occupant==null){
-            System.out.println("Set to null");
-        }
         this.occupant = occupant;
+        this.passable=this.occupant!=null?true:false;
         this.updateObservers();
     }
 
@@ -105,6 +111,7 @@ public class Case implements Observable {
                 sortedSmellArrayList.add(unsortedSmellArrayList.remove(strongestIndex));
             }
 
+
             return sortedSmellArrayList;
         }
     }
@@ -134,10 +141,12 @@ public class Case implements Observable {
             while(!unsortedSmellSourceArrayList.isEmpty()){
                 int strongestSmellIntensity = 0;
                 int strongestIndex = 0;
-                for(int i = 0; i < unsortedSmellSourceArrayList.size(); i++){
+                boolean strongestFound=false;
+                for(int i = 0; i < unsortedSmellSourceArrayList.size()&&!strongestFound; i++){
                     if (unsortedSmellSourceArrayList.get(i).getIntensity()>= strongestSmellIntensity){
                         strongestSmellIntensity = unsortedSmellSourceArrayList.get(i).getIntensity();
                         strongestIndex = i;
+                        strongestFound=true;
                     }
                 }
                 sortedSmellSourceArrayList.add(unsortedSmellSourceArrayList.remove(strongestIndex));
@@ -181,9 +190,58 @@ public class Case implements Observable {
         smellArrayList=new ArrayList<>();
     }
 
-    public Case semiClone(){
-        Case clone=new Case(getPosition(), getOccupant(), getWildObject());
-        return clone;
+
+    public void setWildObject(WildObject wildObject) {
+        this.terrain = wildObject;
+        this.updateObservers();
+    }
+
+    public void setSortedArrayList(ArrayList<Smell> sortedArrayList) {
+        this.smellArrayList = sortedArrayList;
+    }
+
+    public void decreaseFoodQuantity() {
+        FoodSource foodSource = ((FoodSource)getWildObject());
+        foodSource.decreaseFoodQuantity();
+    }
+
+    public boolean emptyFoodSource(){
+        FoodSource foodSource = ((FoodSource)getWildObject());
+        boolean noMoreFood;
+        noMoreFood = foodSource.isEmpty() ? true : false;
+        return noMoreFood;
+    }
+
+    public void setPassable(boolean passable){
+        this.passable=passable;
+    }
+
+    public boolean getPassable() {
+        return passable;
+    }
+
+    public boolean updateAndGetPassable(){
+        if (this.getWildObject().getType()!=WildObject.EMPTY_ID||this.getOccupant()!=null){
+            setPassable(false);
+        }
+        else{
+            setPassable(true);
+        }
+        return this.passable;
+    }
+
+    public void set0ToSmellSourceIntensityIndex(int index) {
+        getSortedSmellSourceArrayList();
+        System.out.println("before:"+smellSourceArrayList.get(index).getIntensity());
+        this.smellSourceArrayList.get(index).setIntensity(0);
+        System.out.println("after:"+smellSourceArrayList.get(index).getIntensity());
+    }
+
+    public void set0ToSmellIntensityIndex(int index) {
+        getSortedSmellArrayList();
+        System.out.println("before:"+smellArrayList.get(index).getIntensity());
+        this.smellArrayList.get(index).setIntensity(0);
+        System.out.println("after:"+smellArrayList.get(index).getIntensity());
     }
 
     public void setTerrain(WildObject terrain) {
@@ -191,4 +249,8 @@ public class Case implements Observable {
         this.updateObservers();
         }
 
+    public Case semiClone() {
+        Case clone=new Case(getPosition(), getOccupant(), getWildObject());
+        return clone;
+    }
 }

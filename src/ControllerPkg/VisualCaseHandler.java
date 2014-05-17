@@ -1,11 +1,15 @@
 package ControllerPkg;
 
+
+
 import ModelPkg.MapData;
-import ModelPkg.WildObjects.FoodSource;
+import ModelPkg.Smell;
 import ViewPkg.VisualCase;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+
 
 public class VisualCaseHandler implements MouseListener {
 
@@ -18,7 +22,9 @@ public class VisualCaseHandler implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        //System.out.println("Quantity :" + ((FoodSource) MapData.getCase(((VisualCase) e.getSource()).getCaseCoord()).getWildObject()).getFoodQuantity());
+        ArrayList<Smell> smells= MapData.getCase(((VisualCase) e.getSource()).getCaseCoord()).getSortedSmellArrayList();
+        System.out.println("START");
+            System.out.println(smells.get(0).getType()+":"+smells.get(0).getIntensity());
 
     }
 

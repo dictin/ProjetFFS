@@ -3,6 +3,7 @@ package ControllerPkg;
 import ModelPkg.*;
 import ModelPkg.PkgEvents.GameEventSunnyWeather;
 import ModelPkg.PkgEvents.LingeringGameEvents;
+import ModelPkg.WildObjects.WildObject;
 import ViewPkg.MasterFrame;
 import ViewPkg.MasterUI;
 
@@ -13,11 +14,11 @@ import java.util.ArrayList;
 
 public class MasterController extends Thread{
 
-    ItemController itemController = new ItemController(this);
-    ShopInfoController shopInfoController = new ShopInfoController();
-    MapController mapController = new MapController();
-    QuestionChamanController chamanController = new QuestionChamanController();
-    PlayerDataController playerDataController = new PlayerDataController();
+    private ItemController itemController = new ItemController(this);
+    private ShopInfoController shopInfoController = new ShopInfoController();
+    private static MapController mapController = new MapController();
+    private QuestionChamanController chamanController = new QuestionChamanController();
+    private PlayerDataController playerDataController = new PlayerDataController();
 
     private MasterFrame mF;
     private MasterUI mUI=null;
@@ -40,24 +41,14 @@ public class MasterController extends Thread{
     }
 
     public static void disposeAnimal(Animal deadAnimal){
+        mapController.removeSmellSourceOf(deadAnimal);
         Point targetPosition=deadAnimal.getPosition();
-        System.out.println("YOU ARE SUPPOSED TO DIE!");
-        Case coucou = MapData.getCase(targetPosition);
-        coucou.setOccupant(null);
+        Case targetCase = MapData.getCase(targetPosition);
+        targetCase.setOccupant(null);
         MapController.getAnimalList().remove(deadAnimal);
-        System.out.println( MapController.getAnimalList().isEmpty());
         deadAnimal=null;
         MapController.getAnimalList().remove(deadAnimal);
-        coucou.setOccupant(null);
-        for (int i=0; i<30; i++){
-            for (int j=0; j<30; j++){
-                Case selectedCase=MapData.getCase(new Point(i,j));
-                if (selectedCase==MapData.getCase(targetPosition)){
-
-                }
-            }
-        }
-
+        targetCase.setOccupant(null);
     }
     public void victims(){
         this.playerDataController.newVictime();
@@ -68,8 +59,7 @@ public class MasterController extends Thread{
         while (true){
             try {
 
-                //TODO tester infinite loop (Si runnin arrete, break glass; it's an emergency)
-                //System.out.println("Runnin'");
+
 
                 this.sleep(sleepTime);
                 this.time++;
@@ -223,7 +213,6 @@ public class MasterController extends Thread{
 
             }else {
                 MapData.getCase(toMoveAnimals.get(0).getPosition()).setOccupant(null);
-                System.out.println("DIEEE");
             }
 
 
@@ -232,5 +221,34 @@ public class MasterController extends Thread{
 
 
         }
+    }
+
+    public void disposeWildObject(Point target) {
+        long defunctSmellID=MapData.getCase(target).getWildObject().getSmellSource().getID();
+
+        System.out.println("Test ids");
+        System.out.println("Target");
+        System.out.println(defunctSmellID);
+
+        System.out.println("Ids:");
+        for (int i=0; i<MapData.MAP_SIZE; i++){
+            for (int j=0; j<MapData.MAP_SIZE;j++){
+                Case selectedCase=MapData.getCase(new Point(i,j));
+                for (int k=0; k<selectedCase.getSortedSmellArrayList().size();k++){
+                    if (selectedCase.getSortedSmellArrayList().get(k).getID()==defunctSmellID){
+                        System.out.println("Befor:"+selectedCase.getSortedSmellArrayList().get(k).getIntensity());
+                        selectedCase.set0ToSmellIntensityIndex(k);
+                        System.out.println("After:"+selectedCase.getSortedSmellArrayList().get(k).getIntensity());
+                    }
+                }
+                for (int k=0; k<selectedCase.getSortedSmellSourceArrayList().size();k++){
+                    if (selectedCase.getSortedSmellSourceArrayList().get(k).getID()==defunctSmellID){
+                        selectedCase.set0ToSmellSourceIntensityIndex(k);
+                    }
+                }
+            }
+        }
+
+        MapData.getCase(target).setWildObject(new WildObject(WildObject.EMPTY_ID, true));
     }
 }

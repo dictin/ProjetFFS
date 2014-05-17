@@ -159,7 +159,7 @@ public class MasterUI extends JLayeredPane implements Observer{
         labelFood.setSize(92,9);
         labelFood.setForeground(Color.white);
         labelFood.setLocation(660,590); // 10,525
-        this.add(labelFood, 0);
+        this.add(labelFood, UILayers.BACKGROUND);
         //population
         labelPopulation.setSize(87,16);
         labelPopulation.setForeground(Color.white);
@@ -193,7 +193,7 @@ public class MasterUI extends JLayeredPane implements Observer{
         background.setLocation(655,580);
         this.add(background, UILayers.BACKGROUND);
 
-                tvaNews.setText(MapData.getNewsList().remove(0));
+        tvaNews.setText(MapData.getNewsList().remove(0));
         tvaNews.setSize(600, 20);
         tvaNews.setLocation(25, positionActualTvaNews);
         tvaNews.setOpaque(true);
@@ -280,8 +280,9 @@ public class MasterUI extends JLayeredPane implements Observer{
         this.add(questionLabel, UILayers.QUESTIONS);
 
     }
-
+    
     public void creationGeneticModifications(){
+        System.out.println("Time to me creepy");
         laboratoryLabel = new GeneticModifications(masterController);
         laboratoryLabel.setVisible(true);
         laboratoryLabel.setLocation(75,163);
@@ -389,6 +390,7 @@ public class MasterUI extends JLayeredPane implements Observer{
     public void update() {
         this.updateNumericInfos();
     }
+
     public void disableMenus(boolean invisible){
         hideMenus.setVisible(invisible);
     }

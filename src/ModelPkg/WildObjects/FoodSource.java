@@ -7,8 +7,8 @@ public class FoodSource extends WildObject {
 
     private int foodQuantity;
 
-    public FoodSource(int type, int quantity) {
-        super(type, true);
+    public FoodSource(int quantity) {
+        super(WildObject.FOOD_ID, true);
         this.foodQuantity=quantity;
         this.getSmellSource().setIntensity(getFoodQuantity());
     }
@@ -22,4 +22,13 @@ public class FoodSource extends WildObject {
         this.getSmellSource().setIntensity(foodQuantity);
     }
 
+    public boolean isEmpty(){
+        boolean isEmpty = (foodQuantity <= 0) ? true : false;
+        return isEmpty;
+    }
+
+    public void decreaseFoodQuantity() {
+        this.foodQuantity--;
+
+    }
 }
