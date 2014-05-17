@@ -9,8 +9,8 @@ import java.util.Random;
 public abstract class Animal {
 
 
-    private final String leastIntense="lesser";
-    private final String mostIntense="greater";
+    public static final String LEAST_INTENSE ="lesser";
+    public static final String MOST_INTENSE ="greater";
 
     private MasterController masterController;
     private final int MAX_HEALTH = 100;
@@ -267,7 +267,7 @@ public abstract class Animal {
                     virtualFutureAction = Behavior.eatAdjacentFood(this.position);
                 }else if (Behavior.doesItSmell(this.filterSmells(), SmellType.FOOD)){
                     //System.out.println(this.getName()+" Smells delicious FS");
-                    virtualFutureAction = Behavior.scanForWildObject(this.position, this.filterSmells(), SmellType.FOOD, mostIntense);
+                    virtualFutureAction = Behavior.scanForWildObject(this.position, this.filterSmells(), SmellType.FOOD, MOST_INTENSE);
                 }
             }
 
@@ -282,7 +282,7 @@ public abstract class Animal {
             }
             else if(Behavior.doesItSmell(this.filterSmells(), SmellType.HIVE)){
                 //System.out.println(this.getName()+" smells hive");
-                virtualFutureAction = Behavior.scanForWildObject(this.position, this.filterSmells(), SmellType.HIVE, mostIntense);
+                virtualFutureAction = Behavior.scanForWildObject(this.position, this.filterSmells(), SmellType.HIVE, MOST_INTENSE);
             }
         }
         else {
@@ -293,7 +293,7 @@ public abstract class Animal {
             }
             else if (Behavior.doesItSmell(this.filterSmells(), SmellType.FOOD)){
                 //System.out.println(this.getName()+" smells FS");
-                virtualFutureAction=Behavior.scanForWildObject(this.position, this.filterSmells(), SmellType.FOOD, mostIntense);
+                virtualFutureAction=Behavior.scanForWildObject(this.position, this.filterSmells(), SmellType.FOOD, MOST_INTENSE);
             }
         }
 

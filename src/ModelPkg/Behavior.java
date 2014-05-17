@@ -155,14 +155,14 @@ public class Behavior {
                         System.out.println("Intensity "+cases[i][j].getSortedSmellArrayList().get(k).getIntensity());
 
                     }
-                    else if(desiredQuality.equals("lesser")&&(targetPoint!=null&&cases[i][j].getSortedSmellArrayList().get(k).getIntensity()<preferredIntensity&&cases[i][j].getSortedSmellArrayList().get(k).getType()==type)){
+                    else if(desiredQuality.equals(Animal.LEAST_INTENSE)&&(targetPoint!=null&&cases[i][j].getSortedSmellArrayList().get(k).getIntensity()<preferredIntensity&&cases[i][j].getSortedSmellArrayList().get(k).getType()==type)){
                         targetPoint=new Point(i,j);
                         preferredIntensity=cases[targetPoint.x][targetPoint.y].getSortedSmellArrayList().get(k).getIntensity();
 
                         System.out.println(targetPoint);
                         System.out.println("lesser Intensity "+cases[i][j].getSortedSmellArrayList().get(k).getIntensity());
                     }
-                    else if(desiredQuality.equals("greater")&&(targetPoint!=null&&cases[i][j].getSortedSmellArrayList().get(k).getIntensity()>preferredIntensity&&cases[i][j].getSortedSmellArrayList().get(k).getType()==type)){
+                    else if(desiredQuality.equals(Animal.MOST_INTENSE)&&(targetPoint!=null&&cases[i][j].getSortedSmellArrayList().get(k).getIntensity()>preferredIntensity&&cases[i][j].getSortedSmellArrayList().get(k).getType()==type)){
                         targetPoint=new Point(i,j);
                         preferredIntensity=cases[targetPoint.x][targetPoint.y].getSortedSmellArrayList().get(k).getIntensity();
 
