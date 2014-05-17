@@ -20,7 +20,8 @@ public class PlayerData implements Observable {
     private boolean selectInventory = false;
     private GameEvent currentEvent;
     private int questionNumber = 1;
-    private ArrayList<TempItemInstance> passiveInstances = new ArrayList<TempItemInstance>(); //Contient les effects des items innactifs de l'inventaire du joueur
+    private ArrayList<TempItemInstance> passivePermInstances = new ArrayList<TempItemInstance>(); //Contient les effects des items innactifs de l'inventaire du joueur
+    private ArrayList<TempItemInstance> passiveTempInstances = new ArrayList<TempItemInstance>(); //Contient les effects des items innactifs de l'inventaire du joueur
     private ArrayList<String> consumablesInventory = new ArrayList<>();
     private ArrayList<String> permanentInventory = new ArrayList<>();
     private ArrayList<TempItemInstance> permanentInstances = new ArrayList<TempItemInstance>();
@@ -31,28 +32,50 @@ public class PlayerData implements Observable {
     private int karma=0;
     private int nextEventGravity=1;
 
+    public static final int TEMP_ITEM = 0;
+    public static final int PERM_ITEM = 1;
+
     private ArrayList<Observer> observers = new ArrayList<>();
 
     public PlayerData(){
     }
 
-    public void addPassiveItem(TempItemInstance instance){
-        this.passiveInstances.add(instance);
-
-    }
-
-    public void activateInstance(int index){
-        this.addItemInstance(this.passiveInstances.get(index));
-        this.passiveInstances.remove(index);
-    }
-
-    private void addItemInstance(TempItemInstance itemInstance){
+    public void addPassiveItem(TempItemInstance itemInstance){
         if (itemInstance.getDuration() < 0){
-            this.permanentInstances.add(itemInstance);
+            this.passivePermInstances.add(itemInstance);
         }else{
-            this.tempItemInstances.add(itemInstance);
+            this.passiveTempInstances.add(itemInstance);
         }
+
     }
+
+    public void activateInstance(int index, int activatedType){
+        if (activatedType == PlayerData.PERM_ITEM){
+            this.permanentInstances.add(this.passivePermInstances.get(index));
+            this.passivePermInstances.remove(index);
+            System.out.printf("Item permanent active    ");
+
+        }else if (activatedType == PlayerData.TEMP_ITEM){
+            this.permanentInstances.add(this.passiveTempInstances.get(index));
+            this.passiveTempInstances.remove(index);
+            System.out.printf("Item temporary active    ");
+        }
+
+        this.removeItemFromInventory(index, activatedType);
+
+    }
+
+    public void removeItemFromInventory(int index, int activatedType) {
+
+        if (activatedType == PlayerData.TEMP_ITEM){
+            this.consumablesInventory.remove(index);
+        }else if (activatedType == PlayerData.PERM_ITEM){
+            this.permanentInventory.remove(index);
+        }
+
+        this.updateObservers();
+    }
+
 
     public void tempItemTurn(){
         for(int i = 0; i < this.tempItemInstances.size(); i++){

@@ -122,6 +122,7 @@ public class PlayerDataController {
     public void increaseNextEventGravity(){
         this.playerData.increaseNextEventGravity();
     }
+
     public int getNumberFoodToGo(){
        return(this.playerData.getNumberFoodToGo());
     }
@@ -132,6 +133,10 @@ public class PlayerDataController {
 
     public void setQuestionNumber(int questionNumber) {
         this.playerData.setQuestionNumber(questionNumber);
+    }
+
+    public void activateInstance(int index, int activatedType){
+        this.playerData.activateInstance(index, activatedType);
     }
 
 
