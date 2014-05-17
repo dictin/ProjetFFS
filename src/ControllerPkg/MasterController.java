@@ -61,18 +61,12 @@ public class MasterController extends Thread{
         while (true){
             try {
 
-                //TODO tester infinite loop (Si runnin arrete, break glass; it's an emergency)
-                //System.out.println("Runnin'");
+
 
                 this.sleep(sleepTime);
                 this.time++;
 
 
-                //TODO remove this
-                if (time>=5){
-                    MapData.getCase(new Point(18, 16)).setWildObject(new WildObject(WildObject.ROCK_ID, false));
-                    MapData.getCase(new Point(19, 16)).setWildObject(new FoodSource(300));
-                }
 
                 if (time!=0&&time%smellDecayTime==0){
                 MapData.updateSmells();
