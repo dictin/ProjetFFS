@@ -301,5 +301,47 @@ public class MapData {
     public static int getCostFourmilier(int position){
         return costFourmilier[position];
     }
+    public static void changeLevel(){
+        System.out.println("Trying to update");
+        Case selectedCase = null;
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[i].length; j++) {
+                selectedCase = map[i][j];
+                selectedCase.setTerrain(new WildObject(WildObject.EMPTY_ID, true));
+            }
+        }
+        Random random = new Random();
+        int maxLength = 30;
+        MapData.hivePosition = maxLength / 2;
+        for (int i = 0; i < maxLength; i++) {
+            for (int j = 0; j < maxLength; j++) {
+                int caseType = random.nextInt(100);
+                if (caseType < 90) {
+                    map[i][j].setTerrain(new WildObject(WildObject.EMPTY_ID, true));
+                }
+                //TODO Retiré les commentaires si la création d'une nouvelle map fonctionne
+                else if (caseType < 93) {
+                    map[i][j].setTerrain(new FoodSource(WildObject.FOOD_ID, 1));
+                } else if (caseType < 96) {
+                    map[i][j].setTerrain(new WildObject(WildObject.TREE_ID, true));
+                } else if (caseType < 97) {
+                    map[i][j].setTerrain(new WildObject(WildObject.WATER_ID, true));
+                } else if (caseType < 98) {
+                    map[i][j].setTerrain(new WildObject(WildObject.ROCK_ID, true));
+                } else if (caseType < 100) {
+                    map[i][j].setTerrain(new WildObject(WildObject.HOLE_ID, true));
+                } else {
+                    System.out.println("wtf");
+                    map[i][j] = new Case(new Point(i, j), null, new WildObject(0, true));
+                }
 
+            }
+        }
+        System.out.println("création de la base");
+        map[hivePosition][hivePosition].setTerrain(new WildObject(WildObject.HIVE_ID, true));
+        map[hivePosition+1][hivePosition].setTerrain(new WildObject(WildObject.HIVE_ID, true));
+        map[hivePosition][hivePosition+1].setTerrain(new WildObject(WildObject.HIVE_ID, true));
+        map[hivePosition+1][hivePosition+1].setTerrain(new WildObject(WildObject.HIVE_ID, true));
+        System.out.println("finish updating!");
+    }
 }
