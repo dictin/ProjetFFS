@@ -250,6 +250,7 @@ public class Case implements Observable {
         }
 
     public Case semiClone() {
-        return null;
+        Case clone=new Case(getPosition(), getOccupant(), getWildObject());
+        return clone;
     }
 }
