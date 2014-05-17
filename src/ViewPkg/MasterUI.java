@@ -40,6 +40,7 @@ public class MasterUI extends JLayeredPane implements Observer{
     private int duration = 0;
     private boolean alreadyInMovement = false;
     private JLabel laboratoryLabel = new JLabel();
+    private JLabel hideMenus = new JLabel();
 
     JLabel labelPopulation = new JLabel("Population: 0");
     JLabel labelFood = new JLabel("Nourriture: 300");
@@ -60,19 +61,23 @@ public class MasterUI extends JLayeredPane implements Observer{
         shopMenu=new ShopMenu(masterController);
         creationMenu = new CreationMenu(masterController);
 
+        this.setOpaque(true);
 
         inventoryMenu= new InventoryMenu(masterController);
         this.setSize(MasterFrame.GAME_FRAME_SIZE);
         this.setBackground(new Color(Integer.parseInt("314159", 16)));
-
+        hideMenus.setSize(320, 557);
+        hideMenus.setOpaque(true);
+        hideMenus.setBackground(new Color(Integer.parseInt("314159", 16)));
+        hideMenus.setLocation(650,20);
+        hideMenus.setVisible(false);
+       this.add(hideMenus, UILayers.MENUS);
         this.setLocation(0,0);
         this.setLayout(null);
 
         // Pour enlever les questions du chaman et/ou GeneticModification, mettre en commentaire ci-dessous
       //  this.creationQuestion();
        // this.creationGeneticModifications();
-
-
 
         int xGridSize=30;
         int tailleYGrille=30;
@@ -95,8 +100,6 @@ public class MasterUI extends JLayeredPane implements Observer{
         this.add(selectedMenu, UILayers.MENUS);
         selectedMenu.setLocation(gridEndPointX+25, 25);
         selectedMenu.setVisible(true);
-
-
 
         menuTriggerZone =new MenuTriggerZone(masterController);
 //        gridTriggerZone= new GridTriggerZone(masterController, xGridSize);
@@ -299,8 +302,10 @@ public class MasterUI extends JLayeredPane implements Observer{
             }
         }
 
-        if(Laboratory.isFinish()){
+        if(Laboratory.isFinish() &&masterController.getPlayerDataController().getQuestionNumber()%4 == 0){
         laboratoryLabel.setVisible(false);
+            System.out.println("Changement visibilité des fourmiliers");
+            creationMenu.actualiser();
         }
     }
 
@@ -330,5 +335,8 @@ public class MasterUI extends JLayeredPane implements Observer{
     @Override
     public void update() {
         this.updateNumericInfos();
+    }
+    public void disableMenus(){
+        hideMenus.setVisible(true);
     }
 }
