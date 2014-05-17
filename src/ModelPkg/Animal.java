@@ -13,9 +13,8 @@ public abstract class Animal {
     public static final String MOST_INTENSE ="greater";
 
     private MasterController masterController;
-    private final int MAX_HEALTH = 100;
+    private int maxHealth = 100;
     private long animalID;
-    private Point objective = null;
     private int activationFrequency;
     private int birthday;
     private Point position;
@@ -183,7 +182,12 @@ public abstract class Animal {
         return nameGen;
     }
 
-    //Number-Crunch Statistics
+    //Number-Crunch Statistics------------------------------------------------------------------------------------------
+
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
 
     public int getHealth() {
         return health;
@@ -219,11 +223,16 @@ public abstract class Animal {
         return grabQuantity;
     }
 
-    //Adjusted Crunch
+    public int getActivationFrequency() {
+        return activationFrequency;
+    }
 
-    public int getAdjustedHealth(){
-        return this.getHealth();
-    } //todo
+
+    //Adjusted Crunch---------------------------------------------------------------------------------------------------
+
+    public  int getAdjustedMaxHealth(){
+        return this.maxHealth + this.masterController.getPlayerDataController().getStatMod(PlayerData.HP_STATID);
+    }
 
     public int getAdjustedSpeed(){
         return this.speed + this.masterController.getPlayerDataController().getStatMod(PlayerData.SPD_STATID);
@@ -257,7 +266,11 @@ public abstract class Animal {
         return this.grabQuantity + this.masterController.getPlayerDataController().getStatMod(PlayerData.GBTQ_STATID);
     }
 
-    //End of Number-Crunch Statistics
+    public int getAdjustedActivationFrequency() {
+        return 480/this.getAdjustedSpeed();
+    }
+
+    //End of Number-Crunch Statistics-----------------------------------------------------------------------------------
 
     public Image getSprite() {
         return sprite;
@@ -287,7 +300,7 @@ public abstract class Animal {
 
 
 
-        if (this.health <= this.MAX_HEALTH/4){
+        if (this.health <= this.maxHealth/4){
             //System.out.println(this.getName()+" is weak");
             if (this.carriedFood > 0){
                 //System.out.println(this.getName()+" is caryin");
@@ -353,7 +366,7 @@ public abstract class Animal {
                             System.out.println("When in doubt, sout");
                             masterController.disposeWildObject(target);
                         }
-                        if (this.health>=90){
+                        if (this.health>=(this.getAdjustedMaxHealth()-10)){
                             this.setHealth(100);
                         }
                         else{
@@ -377,7 +390,7 @@ public abstract class Animal {
                     //System.out.println("grabqty: "+grabQuantity);
                     //System.out.println("carried:"+carriedFood);
                     boolean foodSourceDepleted=false;
-                    while(carriedFood<this.getGrabQuantity()&&!foodSourceDepleted){
+                    while(carriedFood<this.getAdjustedGBTQ()&&!foodSourceDepleted){
                         targetCase.decreaseFoodQuantity();
                         if(targetCase.emptyFoodSource()){
                             foodSourceDepleted=true;
@@ -394,16 +407,16 @@ public abstract class Animal {
 
     private void restore(){
         System.out.println("nom");
-        while (this.carriedFood > 0 && this.health < this.MAX_HEALTH){
+        while (this.carriedFood > 0 && this.health < this.getAdjustedMaxHealth()){
                 carriedFood--;
                 if(this.health < 90){
                     this.health+=10;
                 }else{
-                    this.health = this.MAX_HEALTH;
+                    this.health = this.getAdjustedMaxHealth();
                 }
         }
 
-            decreaseHealth(((25 - endurance) / 2));
+            decreaseHealth(((25 - this.getAdjustedEndurance()) / 2));
 }
 
 
@@ -446,7 +459,7 @@ public abstract class Animal {
 
     public boolean isToMove(int time) {
         boolean answer=false;
-        if (time!=birthday&&(time-birthday)%activationFrequency==0){
+        if (time!=birthday&&(time-birthday)%this.getAdjustedActivationFrequency()==0){
             answer=true;
         }
         return answer;
@@ -459,7 +472,7 @@ public abstract class Animal {
             for (int j = 0; j < unfilteredSubsection[i].length; j++) {
                 filteredSubsection[i][j]=new Case(unfilteredSubsection[i][j].getPosition(), unfilteredSubsection[i][j].updateAndGetPassable());
                 for (int k = 0; k < unfilteredSubsection[i][j].getSortedSmellArrayList().size(); k++){
-                    if (unfilteredSubsection[i][j].getSortedSmellArrayList().get(k).getIntensity() >= this.smellThreshold){
+                    if (unfilteredSubsection[i][j].getSortedSmellArrayList().get(k).getIntensity() >= this.getAdjustedSmellThreshold()){
                         filteredSubsection[i][j].addToSortedSmellArrayList(unfilteredSubsection[i][j].getSortedSmellArrayList().get(k));
                     }
                 }
