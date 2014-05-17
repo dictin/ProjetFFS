@@ -19,6 +19,8 @@ public class MasterUI extends JLayeredPane implements Observer{
     private PlayerDataController playerDataController;
     private GotoMenuButton quitIcon;
 
+    private VisualCase[][] visualCasesGrid;
+
     private MenuTriggerZone menuTriggerZone;
     private ContextualMenu selectedMenu;
     private ContextualMenu mainMenu;
@@ -74,7 +76,7 @@ public class MasterUI extends JLayeredPane implements Observer{
 
         int xGridSize=30;
         int tailleYGrille=30;
-        VisualCase[][] visualCasesGrid=new VisualCase[xGridSize][tailleYGrille];
+        this.visualCasesGrid=new VisualCase[xGridSize][tailleYGrille];
         Point visualCasesGridOrigin= new Point(25, (MasterFrame.GAME_FRAME_SIZE.height-tailleYGrille*VisualCase.CASE_SIDE_PIXEL_SIZE)/2);
 
         for (int i=0; i<xGridSize; i++){
@@ -223,6 +225,7 @@ public class MasterUI extends JLayeredPane implements Observer{
         System.out.println("Layer" + UILayers.QUESTIONS.getLayerIndex());
         System.out.println("LayerMap" + UILayers.MAP.getLayerIndex());
     }
+
     public void creationGeneticModifications(){
         laboratoryLabel = new GeneticModifications(masterController);
         laboratoryLabel.setVisible(true);
@@ -288,14 +291,28 @@ public class MasterUI extends JLayeredPane implements Observer{
             this.remove(questionLabel);
 
             creationQuestion();
-                this.invalidate();
-                this.repaint();
+            this.invalidate();
+            this.repaint();
+            this.resetLayers();
             }
-            }
+        }
 
         if(Laboratory.isFinish()){
         laboratoryLabel.setVisible(false);
         }
+
+
+
+    }
+
+    private void resetLayers(){
+        for (int i=0; i<this.visualCasesGrid.length; i++){
+            for (int j=0; j<visualCasesGrid[i].length; j++){
+               this.setLayer(this.visualCasesGrid[i][j], UILayers.MAP.getLayerIndex());
+            }
+        }
+
+        this.setLayer(this.questionLabel, UILayers.QUESTIONS.getLayerIndex());
 
 
     }
