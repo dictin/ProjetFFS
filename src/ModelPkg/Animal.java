@@ -67,7 +67,7 @@ public abstract class Animal {
         this.nameGen = Name.getGen(noName);
         this.animalID = animalID;
 
-        this.name +=" le "+this.nameGen;
+        this.name +=this.nameGen;
         System.out.println(this.name);
 
 

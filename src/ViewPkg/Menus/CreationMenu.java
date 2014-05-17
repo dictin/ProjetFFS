@@ -22,7 +22,7 @@ public class CreationMenu extends ContextualMenu {
     private JButton fourmilier2 = new JButton();
     private JButton fourmilier3 = new JButton();
     private JButton fourmilier4 = new JButton();
-    private JLabel textfou1 = new JLabel(this.strings[1] + "   Coût: "+ MapData.getCostFourmilier(1));
+    private JLabel textfou1 = new JLabel(this.strings[0] + "   Coût: "+ MapData.getCostFourmilier(1));
     private JLabel textfou2 = new JLabel(this.strings[1]+ "   Coût: "+ MapData.getCostFourmilier(1));
     private JLabel textfou3 = new JLabel(this.strings[2]+ "   Coût: "+ MapData.getCostFourmilier(2));
     private JLabel textfou4 = new JLabel (this.strings[3]+ "   Coût: "+ MapData.getCostFourmilier(3));
@@ -106,25 +106,31 @@ public class CreationMenu extends ContextualMenu {
 
     @Override
     public void actualiser() {
-
+    changeFourmilierVisibility();
     }
     //TODO Faire le lien avec le changement de level et la visibilité des fourmiliers.
     public void changeFourmilierVisibility(){
         switch (controller.getPlayerDataController().getLevel()){
             case 1: break;
             case 2: fourmilier2.setVisible(true);
+                textfou2.setText(this.strings[1] + "   Coût: "+ MapData.getCostFourmilier(1));
                 textfou2.setVisible(true);
                 break;
             case 3: fourmilier2.setVisible(true);
+                textfou2.setText(this.strings[1] + "   Coût: "+ MapData.getCostFourmilier(1));
                 textfou2.setVisible(true);
                 fourmilier3.setVisible(true);
+                textfou3.setText(this.strings[2] + "   Coût: "+ MapData.getCostFourmilier(2));
                 textfou3.setVisible(true);
             case 4:
                 fourmilier2.setVisible(true);
+                textfou2.setText(this.strings[1] + "   Coût: "+ MapData.getCostFourmilier(1));
                 textfou2.setVisible(true);
                 fourmilier3.setVisible(true);
+                textfou2.setText(this.strings[2] + "   Coût: "+ MapData.getCostFourmilier(2));
                 textfou3.setVisible(true);
                 fourmilier4.setVisible(true);
+                textfou2.setText(this.strings[3] + "   Coût: "+ MapData.getCostFourmilier(3));
                 textfou4.setVisible(true);
         }
     }

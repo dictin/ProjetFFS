@@ -6,6 +6,7 @@ import ModelPkg.PkgEvents.LingeringGameEvents;
 import ViewPkg.MasterFrame;
 import ViewPkg.MasterUI;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -74,14 +75,22 @@ public class MasterController extends Thread{
                 this.time++;
 
                 if(time == 300){
-                    System.out.println("Level finish!");
+                    JOptionPane.showMessageDialog(null, "Vous avez ramassé toute la nourriture nécessaire pour passer au prochain niveau.\n " +
+                            "Le Chaman va maintenant vous posez 3 questions.");
                     this.getPlayerDataController().setTheLevelFinish(true);
+                    mUI.disableMenus();
                     mUI.creationQuestion();
                     mUI.actualiser();
                     this.getPlayerDataController().setLevel(this.playerDataController.getLevel() + 1);
+
+                }
+                if(this.getPlayerDataController().getQuestionNumber()%4 ==0 && Laboratory.isFinish() && this.getPlayerDataController().isTheLevelFinish()){
+                    System.out.println("Changement map");
                     MapData.addNewsList("Niveau "+ this.getPlayerDataController().getLevel());
                     MapData.changeLevel();
                     mUI.update();
+                    this.getPlayerDataController().setTheLevelFinish(false);
+
                 }
 
                 if (time!=0&&time%smellDecayTime==0){

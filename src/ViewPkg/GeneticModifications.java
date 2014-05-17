@@ -38,6 +38,7 @@ public class GeneticModifications extends JLabel {
     private JButton defence = new JButton("Défence");
     private JButton sensitivity = new JButton("Odorat");
     private JButton smellStrength = new JButton("Odeur");
+    private JLabel pleaseWait = new JLabel("Veuillez patienter pendant la création d'un nouveau terrain.");
 
     public GeneticModifications(final MasterController controller){
         this.setOpaque(true);
@@ -45,6 +46,12 @@ public class GeneticModifications extends JLabel {
         this.setSize(500,375);
         this.controller=controller;
 
+        pleaseWait.setSize(350,100);
+        pleaseWait.setLocation(70, 150);
+        pleaseWait.setOpaque(true);
+        pleaseWait.setBackground(color.CYAN);
+        pleaseWait.setVisible(false);
+        this.add(pleaseWait); 
         blocSlider.setSize(270, 230);
         blocSlider.setLocation(112, 100);
         this.add(blocSlider);
@@ -211,6 +218,7 @@ public class GeneticModifications extends JLabel {
         Laboratory.setAttackDefenceBefore(attackDefence.getValue());
         Laboratory.setSensitivitySmellStrengthBefore(sensitivitySmellStrength.getValue());
         int[] newStats= new int[]{speedEndurance.getValue(),attackDefence.getValue(),sensitivitySmellStrength.getValue()};
+        pleaseWait.setVisible(true);
         switch(controller.getPlayerDataController().getLevel()){
             case 2:
                 System.out.println("Création des 2ème fourmiliers");
@@ -233,7 +241,7 @@ public class GeneticModifications extends JLabel {
     public void reset(){
         Laboratory.setReset(true);
         Laboratory.setCost(0);
-        cost.setText("Coût futur de cette nouvelle race: " + Laboratory.getCost());
+        cost.setText("Coût futur de cette nouvelle race: " +  100);
         speedEndurance.setValue(Laboratory.getSpeedEnduranceBefore());
         attackDefence.setValue(Laboratory.getAttackDefenceBefore());
         sensitivitySmellStrength.setValue(Laboratory.getSensitivitySmellStrengthBefore());
