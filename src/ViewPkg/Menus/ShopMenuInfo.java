@@ -49,6 +49,11 @@ public class ShopMenuInfo extends JComponent implements Observer {
         graphics.drawImage(Toolkit.getDefaultToolkit().getImage("IMG/DESCRIPTION_BACKGROUND.jpg"),0,0,this);
     }
 
+    /**
+     * Méthode qui détermine le nom de la statistique
+     * @param statID statistique dont ont cherche le nom
+     * @return le nom de la statistique
+     */
     private String getStatTitle(int statID){
         String returnValue = "";
         switch (statID){

@@ -7,9 +7,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-/**
- * Created by Xav on 24/02/14.
- */
 public class GotoMenuButton extends JComponent {
 
     private MasterController controller;
@@ -24,8 +21,14 @@ public class GotoMenuButton extends JComponent {
     private int numberOfSprites;
     private int currentSpriteIndex=0;
     private String menuButtonName ="quit_button";
-    private MasterController masterController;
 
+    /**
+     * Constructeur du GotoMenuButton
+     * @param controller le contrôleur principal
+     * @param menuButtonName nom du button du menu
+     * @param buttonMaxSize dimension maximale du bouton
+     * @param numberOfSprites quantité d'image (de sprites)
+     */
     public GotoMenuButton(final MasterController controller, String menuButtonName, Dimension buttonMaxSize, int numberOfSprites){
         this.numberOfSprites=numberOfSprites;
         this.controller=controller;
@@ -60,24 +63,42 @@ public class GotoMenuButton extends JComponent {
         });
     }
 
+    /**
+     * Méthode qui modifie si l'animation est active
+     * @param isAnimatedNow  si l'animation est active
+     */
     public void setAnimated(boolean isAnimatedNow){
         this.animatedNow =isAnimatedNow;
     }
 
+    /**
+     * Méthode qui détermine le temps du début de l'animation
+     * @param anmtnStartTime temps du début de l'animation
+     */
     public void setAnmtnStartTime(int anmtnStartTime) {
         this.anmtnStartTime = anmtnStartTime;
     }
-
+//Delete?
+    /**
+     *
+     * @return
+     */
     public int getAnmtnStartTime() {
         return this.anmtnStartTime;
     }
 
+    /**
+     * Méthode qui actualise les sprites
+     */
     public void actualiser(){
         if ((((controller.getTime()-this.anmtnStartTime)%this.anmtnWaitTime)==0)){
             switchActiveSprite();
         }
     }
 
+    /**
+     * Méthode qui change le sprite
+     */
     public void switchActiveSprite(){
         if (currentSpriteIndex+1>= numberOfSprites){
             currentSpriteIndex=0;
@@ -97,10 +118,18 @@ public class GotoMenuButton extends JComponent {
         graphics.drawImage(Toolkit.getDefaultToolkit().getImage("IMG/"+menuButtonName + currentSpriteIndex + ".jpg"), 0, 0, this);
     }
 
+    /**
+     * Méthode qui retourne le  contrôleur principal
+     * @return le contrôleur principal
+     */
     public MasterController getMasterController() {
-        return masterController;
+        return controller;
     }
 
+    /**
+     * Méthode qui retourne si le button est animé en ce moment
+     * @return si le bouton est animé en ce moment
+     */
     public boolean isAnimatedNow() {
         return animatedNow;
     }

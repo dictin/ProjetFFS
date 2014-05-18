@@ -17,6 +17,10 @@ public class ShopMenu extends ContextualMenu{
     JScrollPane scrollPane;
     JButton buyButton=new JButton();
 
+    /**
+     * Constructeur du menu du magasin
+     * @param controller le contrôleur principal
+     */
     public ShopMenu(final MasterController controller){
         super(controller, "shop_menu");
 

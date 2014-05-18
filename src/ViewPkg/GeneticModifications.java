@@ -39,6 +39,10 @@ public class GeneticModifications extends JLabel {
     private JButton smellStrength = new JButton("Odeur");
     private JLabel pleaseWait = new JLabel("Veuillez patienter pendant la création d'un nouveau terrain.");
 
+    /**
+     * Constructeur des modifications génétiques
+     * @param controller le contrôleur principal
+     */
     public GeneticModifications(final MasterController controller){
         this.setOpaque(true);
         this.setBackground(color);
@@ -210,6 +214,9 @@ public class GeneticModifications extends JLabel {
 
     }
 
+    /**
+     * Méthode qui affecte les valeurs du slider aux statistiques de la nouvelle race créé
+     */
     public void finish(){
         Laboratory.setFinish(true);
         Laboratory.setCost(modificationCost);
@@ -220,25 +227,24 @@ public class GeneticModifications extends JLabel {
         pleaseWait.setVisible(true);
         switch(controller.getPlayerDataController().getLevel()){
             case 2:
-                System.out.println("Création des 2ème fourmiliers");
                 MapData.setFourmilierFixRaceStats1(newStats);
                 MapData.setCostFourmilier(1,modificationCost);
                 break;
             case 3:
-                System.out.println("Création des 3ème fourmiliers");
                 MapData.setFourmilierFixRaceStats2(newStats);
                 MapData.setCostFourmilier(2,modificationCost);
                 break;
             case 4:
-                System.out.println("Création des 4ème fourmiliers");
                 MapData.setFourmilierFixRaxceStats3(newStats);
                 MapData.setCostFourmilier(3,modificationCost);
                 break;
         }
     }
 
+    /**
+     * Méthode qui replace les slider à leurs positions initiales
+     */
     public void reset(){
-
         Laboratory.setCost(0);
         cost.setText("Coût futur de cette nouvelle race: " +  100);
         speedEndurance.setValue(Laboratory.getSpeedEnduranceBefore());
@@ -246,6 +252,11 @@ public class GeneticModifications extends JLabel {
         sensitivitySmellStrength.setValue(Laboratory.getSensitivitySmellStrengthBefore());
         modificationCost = 100;
     }
+
+    /**
+     * Méthode qui déplace un slider tout dépendamment de quel bouton a été clické
+     * @param statsName nom du bouton clické
+     */
     public void updateSlider(String statsName){
         modificationCost = 100;
         switch (statsName){

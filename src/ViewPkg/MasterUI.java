@@ -55,6 +55,10 @@ public class MasterUI extends JLayeredPane implements Observer{
     private JLabel labelPickUpFood = new JLabel("Food to pick up: 0");
     private JLabel playerStatsBackground = new JLabel();
 
+    /**
+     * Constructeur de l'interface d'utilisateur principale
+     * @param masterController le contrôleur principal
+     */
     public MasterUI(final MasterController masterController){
 
         this.masterController = masterController;
@@ -150,7 +154,7 @@ public class MasterUI extends JLayeredPane implements Observer{
 
         this.add(menuTriggerZone, UILayers.MENUS.getLayerIndex());
         menuTriggerZone.setLocation(gridEndPointX, 25);
-//TODO kill gridTriggerZone from all of existence.
+    //TODO kill gridTriggerZone from all of existence.
 //        this.add(gridTriggerZone);
 //        gridTriggerZone.setLocation(25, 25);
 
@@ -212,6 +216,10 @@ public class MasterUI extends JLayeredPane implements Observer{
         this.add(backgroundImage);
     }
 
+    /**
+     * Méthode pour déterminer le menu sélectionné
+     * @param menuName nom du menu
+     */
     public void popMenu(String menuName){
         setInformationVisible(true);
         if (menuName.equals("main_menu")){
@@ -251,6 +259,11 @@ public class MasterUI extends JLayeredPane implements Observer{
         selectedMenu.repaint();
         menuTriggerZone.setVisible(false);
     }
+
+    /**
+     * Méthode qui cache ou affiche les informations du joueur
+     * @param visible si on veut cacher ou afficher les informations du joueur
+     */
     public void setInformationVisible(boolean visible){
         labelFood.setVisible(visible);
         labelPopulation.setVisible(visible);
@@ -261,22 +274,33 @@ public class MasterUI extends JLayeredPane implements Observer{
         playerStatsBackground.setVisible(visible);
     }
 
+    /**
+     * Méthode qui rend visible le menuTriggerZone et ferme les menus
+     */
     public void setGridToActive(){
         closeMenus();
         menuTriggerZone.setVisible(true);
     }
-
+    /**
+     * Méthode qui ferme les menus
+     */
     public void closeMenus(){
         if (selectedMenu!=null){
         selectedMenu.setVisible(false);
         selectedMenu=null;
         }
     }
-
+//TODO What to write here?
+    /**
+     *
+     */
     public void showCaseContents(){
         //TODO link visualCases to contained items and display informations on them.
     }
 
+    /**
+     * Méthode qui crée une nouvelle question et qui l'ajoute à l'interface du joueur
+     */
     public void creationQuestion(){
         masterController.getPlayerDataController().setItTimeForChaman(true);
         actualQuestion = masterController.getChamanController().getQuestion();
@@ -287,7 +311,10 @@ public class MasterUI extends JLayeredPane implements Observer{
         this.add(questionLabel, UILayers.QUESTIONS.getLayerIndex());
 
     }
-    
+
+    /**
+     * Méthode qui crée une laboratoire de modification génétique et qui l'ajoute à l'interface du joueur
+     */
     public void creationGeneticModifications(){
         System.out.println("Time to me creepy");
         laboratoryLabel = new GeneticModifications(masterController);
@@ -299,6 +326,9 @@ public class MasterUI extends JLayeredPane implements Observer{
 
     }
 
+    /**
+     * Méthode qui actualise les image du bouton pour quitter et du menu sélectionné
+     */
     public void actualizeIcons(){
         if (quitIcon.isAnimatedNow()){
             quitIcon.actualiser();
@@ -308,8 +338,10 @@ public class MasterUI extends JLayeredPane implements Observer{
         }
     }
 
+    /**
+     * Méthode qui fait bougé les nouvelles de TVA et qui vérifie si l'on doit afficher les questions du chaman ou le laboratoire
+     */
     public void actualiser(){
-
         if(MapData.getNewsList().size()>numberOfNews && !alreadyInMovement){
             mouvement = 1;
             alreadyInMovement = true;
@@ -372,6 +404,9 @@ public class MasterUI extends JLayeredPane implements Observer{
         }
     }
 
+    /**
+     * Méthode qui replace les éléments de l'interface du joueur à leur bon Layer
+     */
     private void resetLayers(){
         for (int i=0; i<this.visualCasesGrid.length; i++){
             for (int j=0; j<visualCasesGrid[i].length; j++){
@@ -386,6 +421,9 @@ public class MasterUI extends JLayeredPane implements Observer{
         }
     }
 
+    /**
+     * Méthode qui actualise les informations sur le joueur
+     */
     private void updateNumericInfos(){
         this.labelScore.setText("Score: "+this.playerDataController.getScore());
         this.labelFood.setText("Nourriture: "+this.playerDataController.getFood());
@@ -399,7 +437,9 @@ public class MasterUI extends JLayeredPane implements Observer{
     public void update() {
         this.updateNumericInfos();
     }
-
+/**
+ * Méthode qui case les menus
+ */
     public void disableMenus(boolean invisible){
         hideMenus.setVisible(invisible);
     }

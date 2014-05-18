@@ -25,6 +25,11 @@ public class Chaman extends JLabel{
     private MasterController controller;
     private ModelPkg.QuestionChaman actualQuestion;
 
+    /**
+     * Constructeur du chaman
+     * @param controller le contrôleur principal
+     * @param actualQuestion question actuelle
+     */
 public Chaman(final MasterController controller, ModelPkg.QuestionChaman actualQuestion){
     this.actualQuestion = actualQuestion;
     this.controller=controller;
@@ -139,7 +144,7 @@ public Chaman(final MasterController controller, ModelPkg.QuestionChaman actualQ
     answer3.addMouseListener(questionsHandler) ;
 
 }
-
+//Delete?
 public void updateQuestion(){
     repaint();
     }

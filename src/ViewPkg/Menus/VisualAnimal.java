@@ -7,6 +7,10 @@ public class VisualAnimal extends JComponent {
 
     private Image sprite;
 
+    /**
+     * Constructeur du visuel des animaux
+     * @param animalSprite image de l'animal
+     */
     public VisualAnimal(Image animalSprite){
         sprite=animalSprite;
     }

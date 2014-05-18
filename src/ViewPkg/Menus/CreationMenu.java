@@ -28,8 +28,10 @@ public class CreationMenu extends ContextualMenu {
     private JLabel textfou4 = new JLabel (this.strings[3]+ "   Coût: "+ MapData.getCostFourmilier(3));
 
 
-
-
+    /**
+     * Constructeur de CreationMenu
+     * @param controller le contrôleur principal
+     */
     public CreationMenu(MasterController controller){
         super(controller, "creation_menu");
         this.creationController = new CreationController(controller);
@@ -104,11 +106,17 @@ public class CreationMenu extends ContextualMenu {
         super.paintComponent(graphics);
     }
 
+    /**
+     * Méthode qui actualise les fourmiliers visible dans le menu de création
+     */
     @Override
     public void actualiser() {
     changeFourmilierVisibility();
     }
-    //TODO Faire le lien avec le changement de level et la visibilité des fourmiliers.
+
+    /**
+     * Méthode qui vérifier quel est le level du joueur et qui modifie les fourmiliers disponible dans le menu creation
+     */
     public void changeFourmilierVisibility(){
         switch (controller.getPlayerDataController().getLevel()){
             case 1: break;

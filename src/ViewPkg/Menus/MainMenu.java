@@ -14,7 +14,10 @@ public class MainMenu extends ContextualMenu{
     private GotoMenuButton inventoryIcon;
     private GotoMenuButton creationButton;
 
-
+    /**
+     * Constructeur du menu principal
+     * @param controller le contrôleur principal
+     */
     public MainMenu(final MasterController controller){
         super(controller, "main_menu");
         shopIcon = new GotoMenuButton(controller, "shop_button", new Dimension(250,100), 2);
@@ -28,6 +31,9 @@ public class MainMenu extends ContextualMenu{
         creationButton.setLocation(0,400);
     }
 
+    /**
+     * Méthode qui actualise les images des menus
+     */
     public void actualiser(){
         if (shopIcon.isAnimatedNow()){
             shopIcon.actualiser();

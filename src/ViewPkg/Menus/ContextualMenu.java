@@ -5,14 +5,16 @@ import ControllerPkg.MasterController;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by Xav on 03/03/14.
- */
 public abstract class ContextualMenu extends JComponent {
 
     private String menuName;
     private Dimension menuZone=new Dimension(325,650);
 
+    /**
+     * Constructeur de ContextualMenu
+     * @param controller le contrôleur principal
+     * @param menuName nom du menu
+     */
     public ContextualMenu(final MasterController controller, String menuName){
         this.menuName=menuName;
 
@@ -20,10 +22,15 @@ public abstract class ContextualMenu extends JComponent {
 
         this.setVisible(false);
     }
-
+//Delete?
+    /**
+     * Méthode qui retourne le nom du menu
+     * @return le nom du menu
+     */
     public String getMenuName() {
         return menuName;
     }
+
 
     public abstract void actualiser();
 

@@ -28,7 +28,10 @@ public class InventoryMenu extends ContextualMenu implements Observer{
     private InventoryActivateButtonHandler InventoryActivateTempButtonHandler;
     private InventoryActivateButtonHandler InventoryActivatePermButtonHandler;
 
-
+    /**
+     * Constructeur d'InventoryMenu
+     * @param controller le contrôleur principal
+     */
     public InventoryMenu(MasterController controller) {
         super(controller, "inventory_menu");
         this.masterController = controller;
@@ -108,10 +111,12 @@ public class InventoryMenu extends ContextualMenu implements Observer{
 
     }
 
+
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
         graphics.drawImage(Toolkit.getDefaultToolkit().getImage("IMG/INVENTORY_BACKGROUND.jpg"), 0, 0, this);
     }
+
 
     @Override
     public void actualiser() {
@@ -121,6 +126,9 @@ public class InventoryMenu extends ContextualMenu implements Observer{
 
     }
 
+    /**
+     * Méthode qui actualise les listes des objets consumables et réutilisables
+     */
     @Override
     public void update() {
         this.consumableShopList.setModel(this.playerDataController.getConsumableInventoryDataModel());

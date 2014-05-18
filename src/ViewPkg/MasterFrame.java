@@ -5,9 +5,7 @@ import ControllerPkg.MasterController;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by Xav on 24/02/14.
- */
+
 public class MasterFrame extends JFrame {
     public static final Dimension GAME_FRAME_SIZE =new Dimension(1000,700);
     //TODO choisir taille fenetre.
@@ -19,6 +17,10 @@ public class MasterFrame extends JFrame {
 //    private JMenu menu1 = new JMenu("Menu");
 //    private JMenuItem quit = new JMenuItem("Quitter");
 
+    /**
+     * Constructeur de la fenêtre principale
+     * @param controller le contrôleur principal
+     */
     public MasterFrame(final MasterController controller){
         this.setSize(GAME_FRAME_SIZE);
         mUI =new MasterUI(controller);
@@ -34,16 +36,6 @@ public class MasterFrame extends JFrame {
         //TODO Implement load and save game.
 //        private JMenuItem load = new JMenuItem("Charger");
 //        private JMenuItem save = new JMenuItem("Sauvegarder");
-
-
-
-
-
-
-
-
-
-
 
         this.setVisible(true);
     }

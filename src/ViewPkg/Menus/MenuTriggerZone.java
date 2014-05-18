@@ -15,6 +15,10 @@ public class MenuTriggerZone extends JComponent{
     private MasterController controller;
     private int currentState=0;
 
+    /**
+     * Constructeur du MenuTriggerZone
+     * @param controller le contrôleur principal
+     */
     public MenuTriggerZone(final MasterController controller){
         this.controller=controller;
         this.setSize(new Dimension(350, 650));

@@ -20,7 +20,13 @@ public class VisualCase extends JComponent implements Observer {
     private Image backgroundImage;
 
 
-
+    /**
+     * Constructeur du visuel d'une case
+     * @param i coordonnée en x de la case
+     * @param j coordonnée en y de la case
+     * @param visualCaseOrigin point d'origine de la case
+     * @param controller le contrôleur principal
+     */
     public VisualCase(int i, int j, Point visualCaseOrigin, final MasterController controller){
         this.controller=controller;
         caseCoord=new Point(i, j);
@@ -33,6 +39,10 @@ public class VisualCase extends JComponent implements Observer {
         this.backgroundImage = this.controller.getMapController().getVisualWildObject(caseCoord);
     }
 
+    /**
+     * Méthode qui retourne le point avec les coordonnées de la case
+     * @return le point avec les coordonnées de la case
+     */
     public Point getCaseCoord(){
         return this.caseCoord;
     }

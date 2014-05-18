@@ -13,10 +13,15 @@ public enum UILayers {
     EVENTS(7);
 
     private int layerIndex;
-
+/**
+ * Constructeur des layers de l'interface de l'utilisateur
+ */
     private UILayers(int layerIndex){
         this.layerIndex=layerIndex;
     }
+    /**
+     * Méthode qui retourne l'index du layer
+     */
     public int getLayerIndex() {
         return layerIndex;
     }
