@@ -72,8 +72,11 @@ public class MasterController extends Thread{
     public void run(){
         while (true){
             try {
+                ArrayList<Animal> animalArrayList = MapData.getAnimalList();
                 this.sleep(sleepTime);
                 this.time++;
+                int i = 0;
+
 
                 if(this.getPlayerDataController().getNumberFoodToGo() <= 0){
                 //if(time == 300){
@@ -118,10 +121,10 @@ public class MasterController extends Thread{
                     }
                 }
 
+
                 mUI.actualiser();
                 mUI.invalidate();
                 mUI.repaint();
-
 
                 this.moveAnimals();//TODO fix me
 
@@ -301,9 +304,7 @@ public class MasterController extends Thread{
                 Case selectedCase=MapData.getCase(new Point(i,j));
                 for (int k=0; k<selectedCase.getSortedSmellArrayList().size();k++){
                     if (selectedCase.getSortedSmellArrayList().get(k).getID()==defunctSmellID){
-                        System.out.println("Befor:"+selectedCase.getSortedSmellArrayList().get(k).getIntensity());
                         selectedCase.set0ToSmellIntensityIndex(k);
-                        System.out.println("After:"+selectedCase.getSortedSmellArrayList().get(k).getIntensity());
                     }
                 }
                 for (int k=0; k<selectedCase.getSortedSmellSourceArrayList().size();k++){
@@ -352,6 +353,23 @@ public class MasterController extends Thread{
             animalArrayList.add(animalArrayListTemporaire.remove(0));
         }
     }
+    public void deadAnimal(){
+    ArrayList<Animal> animalArrayList = MapData.getAnimalList();
+        ArrayList<Integer> deadAnimalIndex = new ArrayList<>();
+    for(int i = 0; i< animalArrayList.size(); i++){
+            if (animalArrayList.get(i).getHealth() <= 0){
+                deadAnimalIndex.add(i);
+            }
+        }
+        for(int y = 0; y < deadAnimalIndex.size(); y++){
+            int animalIndex = deadAnimalIndex.get(y);
+            System.out.println("Goodbye");
+            disposeAnimal(animalArrayList.remove(animalIndex));
+        }
+    while(!deadAnimalIndex.isEmpty()){
+         deadAnimalIndex.remove(0);
+        }
     }
+}
 
 

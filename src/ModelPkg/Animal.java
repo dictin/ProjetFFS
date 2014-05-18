@@ -205,10 +205,11 @@ public abstract class Animal {
     public void decreaseHealth(int amount){
         this.health-= amount;
         if(this.isDead()){
-            masterController.disposeAnimal(this);
+        // masterController.disposeAnimal(this);
            // masterController.checkIfDeadFourmilier();
             MapData.addNewsList(this.getName() + " est malheureusement décédé!!");
             masterController.victims();
+
         }
     }
 
