@@ -23,7 +23,7 @@ public class EventController {
         goodGameEvents.add(new LingeringAlmightyBlessing());
         goodGameEvents.add(new InstantaneousHumanitarianHelp(masterController));
         neutralGameEvents.add(new GameEventSunnyWeather());
-        badGameEvents.add(new MassInstantaneousCombustion());
+        badGameEvents.add(new MassInstantaneousCombustion(masterController));
 
     }
 
@@ -50,7 +50,6 @@ public class EventController {
             nextGameEvent =chooseRandomEvent(neutralGameEvents);
             masterController.getPlayerDataController().increaseNextEventGravity();
         }
-        nextGameEvent = chooseRandomEvent(goodGameEvents);
         nextGameEvent.setGravity(eventFinalGravity);
         return nextGameEvent;
     }

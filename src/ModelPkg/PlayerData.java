@@ -171,6 +171,7 @@ public class PlayerData implements Observable {
     }
 
     public void death(){
+        System.out.println("1 de moins de population! 1 victime de plus!");
         this.population--;
         this.dead++;
         this.updateObservers();

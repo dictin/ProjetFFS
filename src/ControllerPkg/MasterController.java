@@ -73,7 +73,7 @@ public class MasterController extends Thread{
 
                 }
                 if(this.getPlayerDataController().getQuestionNumber()%4 ==0 && Laboratory.isFinish() && this.getPlayerDataController().isTheLevelFinish()){
-                    System.out.println("Changement map");
+                  removeAllFourmilier();
                     MapData.addNewsList("Niveau "+ this.getPlayerDataController().getLevel());
                     MapData.changeLevel();
                     mUI.update();
@@ -211,12 +211,7 @@ public class MasterController extends Thread{
             }else {
                 MapData.getCase(toMoveAnimals.get(0).getPosition()).setOccupant(null);
             }
-
-
-
             toMoveAnimals.remove(0);
-
-
         }
     }
 
@@ -248,4 +243,13 @@ public class MasterController extends Thread{
 
         MapData.getCase(target).setWildObject(new WildObject(WildObject.EMPTY_ID, true));
     }
+    public void removeAllFourmilier(){
+        ArrayList<Animal> animalArrayList = MapData.getAnimalList();
+        while(animalArrayList.size() !=0){
+            disposeAnimal(animalArrayList.remove(0));
+            this.getPlayerDataController().newVictime();
+
+        }
+    }
+
 }
