@@ -47,8 +47,6 @@ public class MasterController extends Thread{
         targetCase.setOccupant(null);
         MapController.getAnimalList().remove(deadAnimal);
         deadAnimal=null;
-        MapController.getAnimalList().remove(deadAnimal);
-        targetCase.setOccupant(null);
     }
     public void victims(){
         this.playerDataController.newVictime();
