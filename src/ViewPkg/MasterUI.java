@@ -211,8 +211,6 @@ public class MasterUI extends JLayeredPane implements Observer{
         backgroundImage.setSize(MasterFrame.GAME_FRAME_SIZE);
         backgroundImage.setLocation(0,0);
         this.add(backgroundImage);
-
-
     }
 
     public void popMenu(String menuName){
