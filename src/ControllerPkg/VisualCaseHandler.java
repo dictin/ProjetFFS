@@ -22,9 +22,6 @@ public class VisualCaseHandler implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        ArrayList<Smell> smells= MapData.getCase(((VisualCase) e.getSource()).getCaseCoord()).getSortedSmellArrayList();
-        System.out.println("START");
-            System.out.println(smells.get(0).getType()+":"+smells.get(0).getIntensity());
 
     }
 

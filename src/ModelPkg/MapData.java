@@ -323,7 +323,6 @@ public class MapData {
                 } else if (caseType < 100) {
                     map[i][j].setTerrain(new WildObject(WildObject.HOLE_ID, true));
                 } else {
-                    System.out.println("wtf");
                     map[i][j] = new Case(new Point(i, j), null, new WildObject(0, true));
                 }
 

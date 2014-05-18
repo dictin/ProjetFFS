@@ -15,7 +15,7 @@ public class GotoMenuButton extends JComponent {
     private MasterController controller;
     //TODO remove bgColor and put realz sprites
     private Color defBGColor;
-    private boolean isAnimatedNow=false;
+    private boolean animatedNow =false;
     private int anmtnStartTime=0;
     /**
      * # of frames the object will keep the same sprite.
@@ -26,7 +26,7 @@ public class GotoMenuButton extends JComponent {
     private String menuButtonName ="quit_button";
     private MasterController masterController;
 
-    public GotoMenuButton(final MasterController controller, String menuButtonName, Dimension buttonMaxSize, Color defBGColor, int numberOfSprites){
+    public GotoMenuButton(final MasterController controller, String menuButtonName, Dimension buttonMaxSize, int numberOfSprites){
         this.numberOfSprites=numberOfSprites;
         this.controller=controller;
         this.defBGColor=defBGColor;
@@ -61,7 +61,7 @@ public class GotoMenuButton extends JComponent {
     }
 
     public void setAnimated(boolean isAnimatedNow){
-        this.isAnimatedNow=isAnimatedNow;
+        this.animatedNow =isAnimatedNow;
     }
 
     public void setAnmtnStartTime(int anmtnStartTime) {
@@ -73,7 +73,7 @@ public class GotoMenuButton extends JComponent {
     }
 
     public void actualiser(){
-        if (isAnimatedNow&&(((controller.getTime()-this.anmtnStartTime)%this.anmtnWaitTime)==0)){
+        if ((((controller.getTime()-this.anmtnStartTime)%this.anmtnWaitTime)==0)){
             switchActiveSprite();
         }
     }
@@ -94,11 +94,14 @@ public class GotoMenuButton extends JComponent {
     @Override
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
-        graphics.fillRect(0, 0, this.getWidth(), this.getHeight());
         graphics.drawImage(Toolkit.getDefaultToolkit().getImage("IMG/"+menuButtonName + currentSpriteIndex + ".jpg"), 0, 0, this);
     }
 
     public MasterController getMasterController() {
         return masterController;
+    }
+
+    public boolean isAnimatedNow() {
+        return animatedNow;
     }
 }

@@ -17,33 +17,33 @@ public class MainMenu extends ContextualMenu{
 
     public MainMenu(final MasterController controller){
         super(controller, "main_menu");
-        shopIcon = new GotoMenuButton(controller, "shop_button", new Dimension(250,100), Color.cyan, 2);
-        inventoryIcon = new GotoMenuButton(controller, "inventory_button", new Dimension(250,100), Color.cyan, 8);
-        creationButton = new GotoMenuButton((controller),"creation_button", new Dimension(250,100), Color.cyan, 2);
+        shopIcon = new GotoMenuButton(controller, "shop_button", new Dimension(250,100), 2);
+        inventoryIcon = new GotoMenuButton(controller, "inventory_button", new Dimension(250,100), 8);
+        creationButton = new GotoMenuButton((controller),"creation_button", new Dimension(250,100), 8);
         this.add(inventoryIcon);
         this.add(shopIcon);
         this.add(creationButton);
         shopIcon.setLocation(0, 25);
         inventoryIcon.setLocation(0, 160);
         creationButton.setLocation(0,400);
-
     }
 
     public void actualiser(){
-        shopIcon.actualiser();
-        inventoryIcon.actualiser();
+        if (shopIcon.isAnimatedNow()){
+            shopIcon.actualiser();
+        }
+        else if(inventoryIcon.isAnimatedNow()){
+            inventoryIcon.actualiser();
+        }
+        else if(creationButton.isAnimatedNow()){
+            creationButton.actualiser();
+        }
         this.invalidate();
         this.repaint();
     }
 
     @Override
     public void paintComponent(Graphics graphics){
-
         super.paintComponent(graphics);
-        graphics.setColor(Color.BLUE);
-        graphics.fillRect(0,0,300,300);
-        graphics.setColor(Color.BLACK);
-        graphics.fillRect(0,350,300,200);
-
     }
 }

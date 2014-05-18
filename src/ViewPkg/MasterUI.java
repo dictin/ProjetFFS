@@ -94,7 +94,7 @@ public class MasterUI extends JLayeredPane implements Observer{
                 this.add(visualCasesGrid[i][j], UILayers.MAP.getLayerIndex());
             }
         }
-        quitIcon = new GotoMenuButton(masterController, "quit_button", new Dimension(25,25), new Color(Integer.parseInt("314159",16)),2);
+        quitIcon = new GotoMenuButton(masterController, "quit_button", new Dimension(25,25),2);
         this.add(quitIcon, UILayers.MENUS.getLayerIndex());
         quitIcon.setLocation(this.getWidth()-quitIcon.getWidth(), 0);
 
@@ -300,7 +300,9 @@ public class MasterUI extends JLayeredPane implements Observer{
     }
 
     public void actualizeIcons(){
-        quitIcon.actualiser();
+        if (quitIcon.isAnimatedNow()){
+            quitIcon.actualiser();
+        }
         if (selectedMenu!=null){
             selectedMenu.actualiser();
         }

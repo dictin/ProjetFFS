@@ -87,8 +87,8 @@ public class CreationMenu extends ContextualMenu {
 
         background.setVisible(true);
         background.setOpaque(true);
-        background.setSize(300,425);
-        background.setBackground(Color.ORANGE);
+        background.setSize(300, 425);
+        background.setIcon(new ImageIcon("IMG/CREATION_BACKGROUND.jpg"));
         background.setLocation(10,110);
         this.add(background);
 
