@@ -21,10 +21,10 @@ public class EventController {
     public EventController(final MasterController masterController){
         this.masterController=masterController;
         goodGameEvents.add(new LingeringAlmightyBlessing());
-        goodGameEvents.add(new InstantaneousHumanitarianHelp());
+        goodGameEvents.add(new InstantaneousHumanitarianHelp(masterController));
         neutralGameEvents.add(new GameEventSunnyWeather());
-
         badGameEvents.add(new MassInstantaneousCombustion());
+
     }
 
     public GameEvent whatIsTheWeather(){
@@ -50,6 +50,7 @@ public class EventController {
             nextGameEvent =chooseRandomEvent(neutralGameEvents);
             masterController.getPlayerDataController().increaseNextEventGravity();
         }
+        nextGameEvent = chooseRandomEvent(goodGameEvents);
         nextGameEvent.setGravity(eventFinalGravity);
         return nextGameEvent;
     }

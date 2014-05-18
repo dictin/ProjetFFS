@@ -143,7 +143,12 @@ public class PlayerData implements Observable {
 
     public void addFood(int food) {
         this.food += food;
+        if((pickUpFood += food) < 0){
+            this.pickUpFood = 0;
+        }
+        else{
         this.pickUpFood += food;
+        }
         this.updateObservers();
     }
 

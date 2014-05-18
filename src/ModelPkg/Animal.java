@@ -348,6 +348,7 @@ public abstract class Animal {
             virtualFutureAction=new VirtualFutureAction(Behavior.drunk(this.position), ActionTypes.GO_TO_LOCATION);
         }
         accomplishMission(virtualFutureAction);
+        decreaseHealth(((25 - this.getAdjustedEndurance()) / 2));
     }
 
     public void accomplishMission(VirtualFutureAction mission){
@@ -416,7 +417,6 @@ public abstract class Animal {
                 }
         }
 
-            decreaseHealth(((25 - this.getAdjustedEndurance()) / 2));
 }
 
 
