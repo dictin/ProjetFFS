@@ -13,11 +13,12 @@ public class Behavior {
     private static Point objective;
     private static final int SUBSECTION_SIZE = 3;
 
-    public Behavior(){
-    }
-
+    /**
+     * Méthode qui choissi aléatoirement l'objectif du fourmilier.
+     * @param position position actuelle du fourmilier
+     * @return l'objectif du fourmilier (l'endroit où il veut se déplacer)
+     */
     public static Point drunk(Point position){
-        System.out.println("Hic! I'm drunk");
         Point correctedObjective = null;
         Random random = new Random();
 
@@ -41,6 +42,11 @@ public class Behavior {
         return objective;
     }
 
+    /**
+     * Méthode qui vérifie si l'objectif du fourmilier est une case vide (où il n'y a pas d'obstacle)
+     * @param objective destination du fourmilier
+     * @return true si la case est valide, false si la case n'est pas valide
+     */
     private static boolean confirmObjective(Point objective) {
         boolean isValidObjective;
         Point caseToCheck = objective;
@@ -49,6 +55,11 @@ public class Behavior {
         return isValidObjective;
     }
 
+    /**
+     * Méthode qui détermine si le fourmilier n'a plus d'option de déplacement
+     * @param origin position initial du fourmilier
+     * @return true si le fourmilier ne peut plus bougé, false si le fourmilier peut encore bougé
+     */
     private static boolean isThereNowhereToGo(Point origin) {
         boolean nowhereToGo = true;
         Case[][] subsection = MapData.getSubsection2(origin);
@@ -64,7 +75,12 @@ public class Behavior {
 
         return nowhereToGo;
     }
-
+//Delete?
+    /**
+     *
+     * @param location
+     * @return
+     */
     private static boolean isThereASmell(Point location){
         Case[][] subsection = MapData.getSubsection2(location);
         boolean isEmpty = true;
@@ -79,7 +95,12 @@ public class Behavior {
 
         return !isEmpty;
     }
-
+//Delete?
+    /**
+     *
+     * @param moralValue
+     * @return
+     */
     public static boolean moralCheck(int moralValue){
         boolean returnValue;
         Random random = new Random();
@@ -87,15 +108,22 @@ public class Behavior {
 
         returnValue = rollResult < moralValue;
         return returnValue;
-
-
     }
 
-
+    /**
+     * Méthode qui fait empêche au fourmilier de se déplacer ce tour-ci
+     * @return l'action du fourmilier, c'est-à-dire DO_NOTHING
+     */
     public static VirtualFutureAction skipTurn() {
         return new VirtualFutureAction(new Point(0,0), ActionTypes.DO_NOTHING);
     }
 
+    /**
+     * Méthode qui véridie si le fourmilier est proche de l'objet qu'il cherche
+     * @param id identification de l'objet qu'il cherche
+     * @param position position actuelle du fourmilier
+     * @return true si le fourmilier est proche, false si le fourmilier n'est pas proche
+     */
     public static boolean isCloseTo(int id, Point position) {
         Case[][] subsection = MapData.getSubsection2(position);
         boolean isClose = false;
@@ -111,8 +139,13 @@ public class Behavior {
         return isClose;
 
     }
-
-
+// TODO what to write here?
+    /**
+     *
+     * @param subsection
+     * @param smellType
+     * @return
+     */
     public static boolean doesItSmell(Case[][] subsection, SmellType smellType) {
         Case selectedCase = null;
         boolean isItSmelling = false;
@@ -132,7 +165,15 @@ public class Behavior {
 
         return isItSmelling;
     }
-
+// TODO What to write here
+    /**
+     *
+     * @param position
+     * @param cases
+     * @param type
+     * @param desiredQuality
+     * @return
+     */
     public static VirtualFutureAction scanForWildObject(Point position, Case[][] cases, SmellType type, String desiredQuality) {
         for (int i = 0; i < cases.length; i++) {
             for (int j = 0; j < cases[i].length; j++) {
@@ -201,22 +242,42 @@ public class Behavior {
         return new VirtualFutureAction(correctedReferential, ActionTypes.GO_TO_LOCATION);
     }
 
+    /**
+     * Méthode qui déplace le fourmilier vers la base
+     * @param position position actuelle du fourmilier
+     * @return retourne la futur action du fourmilier
+     */
     public static VirtualFutureAction dropToHive(Point position) {
         return new VirtualFutureAction(new Point(-1,-1), ActionTypes.DROP_TO_HIVE);
     }
 
+    /**
+     * Méthode qui fait ramasser de la nourriture au fourmilier
+     * @param position position actuelle du fourmilier
+     * @return  retourne la futur action du fourmilier
+     */
     public static VirtualFutureAction pickUpFood(Point position) {
         Point correctedFoodLocation = findFoodiestLocation(position);
 
         return new VirtualFutureAction(correctedFoodLocation, ActionTypes.PICKUP_FROM_LOCATION);
     }
 
+    /**
+     * Méthode qui fait manger de la nourriture au fourmilier s'il se trouve à proximité d'une source de nourriture
+     * @param position position actuelle du fourmilier
+     * @return retourne la futur action du fourmilier
+     */
     public static VirtualFutureAction eatAdjacentFood(Point position) {
         Point correctedFoodLocation = findFoodiestLocation(position);
 
         return new VirtualFutureAction(correctedFoodLocation, ActionTypes.EAT_FROM_LOCATION);
     }
 
+    /**
+     * Méthode qui détermine la position de la nourriture avec la plus grande quantité
+     * @param position position actuelle du fourmilier
+     * @return la position où il y a le plus de nourriture
+     */
     public static Point findFoodiestLocation(Point position){
         Case[][] subsection = MapData.getSubsection2(position);
         Point foodLocation = null;
