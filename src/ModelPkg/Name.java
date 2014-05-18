@@ -14,6 +14,9 @@ public class Name {
     private static ArrayList<String> nameList = new ArrayList<String>();
     private static int[] genList = new int[25];
 
+    /**
+     * Méthode qui lit le fichier remplis de nom et qui les ajoutent à la list de nom
+     */
     public static void initialize(){
 
         String line="";
@@ -35,12 +38,22 @@ public class Name {
         }
     }
 
+    /**
+     * Méthode qui retourne le nom à l'index demandé
+     * @param index position du nom demandé
+     * @return le nom à l'index demandé
+     */
     public static String getName (int index){
 
         String name = Name.nameList.get(index);
         return name;
     }
 
+    /**
+     * Méthode qui retourne la génération du nom à l'index demandé
+     * @param index position de la génération demandé
+     * @return la génération à l'index demandé
+     */
     public static int getGen (int index){
 
         int generation = Name.genList[index];

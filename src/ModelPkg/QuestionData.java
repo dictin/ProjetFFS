@@ -14,6 +14,9 @@ public class QuestionData implements Observable {
     private QuestionChaman actualQuestion;
     private static ArrayList<QuestionChaman> questionList = new ArrayList<QuestionChaman>();
 
+    /**
+     * Méthode qui lit les questions et les réponses dans un fichier text et qui les ajoutent à une liste
+     */
     public static void initialize(){
 
         String line="";
@@ -62,18 +65,32 @@ public class QuestionData implements Observable {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Méthode qui retourne la liste avec toutes les questions du chaman
+     * @return la liste avec toutes les questions du chaman
+     */
     public static ArrayList<QuestionChaman> getQuestionList(){
         return questionList;
     }
+//Delete?
+    /**
+     *
+     * @param i
+     */
     public void chooseQuestion(int i){
         actualQuestion=questionList.get(i);
         updateObservers();
     }
-
+//TODO What to write here?
+    /**
+     *
+     * @param observer
+     */
     public void addObserver(Observer observer) {
         observers.add(observer);
     }
-
+    //TODO What to write here?
     public void updateObservers(){
         for(int i=0; i<observers.size();i++){
             observers.get(i).update();

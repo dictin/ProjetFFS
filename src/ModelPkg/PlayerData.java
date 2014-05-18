@@ -51,9 +51,10 @@ public class PlayerData implements Observable {
 
     private ArrayList<Observer> observers = new ArrayList<>();
 
-    public PlayerData(){
-    }
-
+    /**
+     * Méthode qui ajoute un objet temporaire à la bonne liste
+     * @param itemInstance objet à ajouter à la bonne liste
+     */
     public void addPassiveItem(TempItemInstance itemInstance){
         if (itemInstance.getDuration() < 0){
             this.passivePermInstances.add(itemInstance);
@@ -63,6 +64,11 @@ public class PlayerData implements Observable {
 
     }
 
+    /**
+     * Méthode qui active les effets d'un objet
+     * @param index position de l'objet dans la liste d'objet
+     * @param activatedType type de l'objet
+     */
     public void activateInstance(int index, int activatedType){
         if (activatedType == PlayerData.PERM_ITEM){
             this.permanentInstances.add(this.passivePermInstances.get(index));
@@ -79,6 +85,11 @@ public class PlayerData implements Observable {
 
     }
 
+    /**
+     * Méthode qui enlève un objet utilisé de l'inventaire
+     * @param index position de l'objet dans la liste d'objet
+     * @param activatedType type de l'objet
+     */
     public void removeItemFromInventory(int index, int activatedType) {
 
         if (activatedType == PlayerData.TEMP_ITEM){
@@ -89,34 +100,58 @@ public class PlayerData implements Observable {
 
         this.updateObservers();
     }
-
-
+//Delete?
+    /**
+     *
+     */
     public void tempItemTurn(){
         for(int i = 0; i < this.tempItemInstances.size(); i++){
             this.tempItemInstances.get(i).turn();
         }
     }
 
+    /**
+     * Méthode qui retourne le karma du joueur
+     * @return le karma du joueur
+     */
     public int getKarma() {
         return karma;
     }
 
+    /**
+     * Méthode qui retourne la gravité du prochain événement
+     * @return la gravité du prochain événement
+     */
     public int getNextEventGravity() {
         return nextEventGravity;
     }
 
+    /**
+     * Méthode qui modifie la gravité du prochain événement
+     * @param nextEventGravity  gravité du prochain événement
+     */
     public void setNextEventGravity(int nextEventGravity) {
         this.nextEventGravity=nextEventGravity;
     }
 
+    /**
+     * Méthode qui augmente la gravité du prochain événement
+     */
     public void increaseNextEventGravity() {
         this.nextEventGravity+=1;
     }
 
+    /**
+     * Méthode qui modifie le karma du joueur
+     * @param number nombre de karma à rajouter
+     */
     public void modifyKarma(int number) {
         this.karma+=number;
     }
-
+//Delete?
+    /**
+     *
+     */
     public void activateInstancesForTurn(){
         Iterator<TempItemInstance> iterator;
         iterator = this.tempItemInstances.iterator();
@@ -129,6 +164,9 @@ public class PlayerData implements Observable {
         }
     }
 
+    /**
+     * Méthode qui supprime toute les instance temporaire
+     */
     public void cleanTempItemInstances(){
         ArrayList<TempItemInstance> toClean = new ArrayList<TempItemInstance>();
         Iterator<TempItemInstance> iterator = this.tempItemInstances.iterator();
@@ -141,6 +179,11 @@ public class PlayerData implements Observable {
         this.tempItemInstances.removeAll(toClean);
     }
 
+    /**
+     * Méthode qui ajoute de la nourriture au joueur et qui diminue la quantité de nourriture à ramasser pour passer
+     * au prochain niveau
+     * @param food quantité de nourriture à rajouter
+     */
     public void addFood(int food) {
         this.food += food;
         if((pickUpFood += food) < 0){
@@ -152,6 +195,10 @@ public class PlayerData implements Observable {
         this.updateObservers();
     }
 
+    /**
+     * Méthode qui enlève de la nourriture
+     * @param food quantité de nourriture à enlever
+     */
     public void removeFood(int food){
         this.food -= food;
         if (this.food < 0){
@@ -159,43 +206,73 @@ public class PlayerData implements Observable {
         }
         this.updateObservers();
     }
+//Delete?
 
+    /**
+     *
+     * @param score
+     */
     public void setScore(int score) {
         this.score = (this.food * this.level) - (2*this.dead);
         this.updateObservers();
     }
 
+    /**
+     * Méthode qui augmente la population lorsqu'il y a un nouveau fourmilier de créer
+     */
     public void newBorn(){
         this.population++;
         this.updateObservers();
     }
 
+    /**
+     * Méthode qui augmente le nombre de mort et qui diminue le nombre de population
+     */
     public void death(){
-        System.out.println("1 de moins de population! 1 victime de plus!");
         this.population--;
         this.dead++;
         this.updateObservers();
     }
 
+    /**
+     * Méthode qui ajoute une modification de statistiques
+     * @param stat statistique à modifier
+     * @param value valeur à rajouter à cette statistique
+     */
     public static void addMod(int stat, int value){
         PlayerData.statModifiers[stat] += value;
     }
 
+    /**
+     * Méthode qui enlève toutes les modifications de statistique
+     */
     public void clearStatMod(){
         for(int i = 0; i < this.statModifiers.length; i++){
             this.statModifiers[i] = 0;
         }
     }
-
+//Delete?
+    /**
+     *
+     */
     public void endOfTurnCleanUp(){
         this.cleanTempItemInstances();
         this.clearStatMod();
     }
 
+    /**
+     * Méthode qui retourne la modification d'un statistique
+     * @param stat statistique qu'on veut avoir la modification
+     * @return la modification de la statistique
+     */
     public int getStatMod(int stat){
         return this.statModifiers[stat];
     }
 
+    /**
+     * Méthode qui ajoute un objet à l'inventaire
+     * @param item objet acheté
+     */
     public void addItemToInventory(Items item){
         TempItemInstance itemInstance;
 
@@ -217,44 +294,79 @@ public class PlayerData implements Observable {
 
     }
 
+    /**
+     * Méthode qui retourne la liste d'objet consumables dans l'inventaire
+     * @return la liste d'objet consumables dans l'inventaire
+     */
     public ArrayList<String> getConsumablesInventory() {
         return consumablesInventory;
     }
 
+    /**
+     * Méthode qui retourne la liste d'objet permanent dans l'inventaire
+     * @return la liste d'objet permanent dans l'inventaire
+     */
     public ArrayList<String> getPermanentInventory() {
         return permanentInventory;
     }
 
+    /**
+     * Méthode qui retourne la quantité de nourriture du joueur
+     * @return la quantité de nourriture du joueur
+     */
     public int getFood() {
         return food;
     }
 
+    /**
+     * Méthode qui retourne le pointage du joueur
+     * @return le pointage du joueur
+     */
     public int getScore() {
         return score;
     }
-
+    /**
+     * Méthode qui retourne la quantité de nourriture nécessaire pour passer au prochain niveau
+     * @return la quantité de nourriture nécessaire pour passer au prochain niveau
+     */
     public int getNumberFoodToGo(){
         return (this.numberFoodGoToNextLevel[(this.level)-1]-this.pickUpFood);
     }
-
+    /**
+     * Méthode qui retourne le niveau du joueur
+     * @return le niveau du joueur
+     */
     public int getLevel() {
         return level;
     }
-
+    /**
+     * Méthode qui retourne la population de la fourmilière
+     * @return la population de la fourmilière
+     */
     public int getPopulation() {
         return population;
     }
-
+    /**
+     * Méthode qui retourne le nombre de mort
+     * @return le nombre de mort
+     */
     public int getDead() {
         return dead;
     }
-
+//TODO What to write here
+    /**
+     *
+     * @param observer
+     */
     @Override
     public void addObserver(Observer observer) {
         this.observers.add(observer);
 
     }
-
+//TODO What to write here
+    /**
+     *
+     */
     @Override
     public void updateObservers() {
         for(int i = 0; i < observers.size(); i++){
@@ -263,53 +375,90 @@ public class PlayerData implements Observable {
 
     }
 
+    /**
+     * Méthode qui vérifie si un objet a été selectionner dans l'inventaire
+     * @return true si un objet a été sélectionné, false sinon
+     */
     public boolean isSelectInventory() {
         return selectInventory;
     }
 
+    /**
+     * Méthode qui modifie la valeur de si le joueur a sélectionné un objet dans l'inventaire
+     * @param selectInventory nouvelle valeur de si le joueur a sélectionné un objet dans l'inventaire
+     */
     public void setSelectInventory(boolean selectInventory) {
         this.selectInventory = selectInventory;
     }
 
+    /**
+     * Méthode qui retourne l'événement en cours
+     * @return l'événement en cours
+     */
     public GameEvent getCurrentEvent() {
         return currentEvent;
     }
 
+    /**
+     * Méthode qui modifie l'événement en cours
+     * @param currentEvent nouvel événement en cours
+     */
     public void setCurrentEvent(GameEvent currentEvent) {
         this.currentEvent = currentEvent;
     }
 
-    public int getPickUpFood() {
-        return pickUpFood;
-    }
-
-    public void setPickUpFood(int pickUpFood) {
-        this.pickUpFood = pickUpFood;
-    }
-
+    /**
+     * Méthode qui retourne le numéro de la question en cours
+     * @return le numéro de la question
+     */
     public int getQuestionNumber() {
         return questionNumber;
     }
 
+    /**
+     * Méthode qui modifie le numéro de la question en cours
+     * @param questionNumber nouveau numéro de la question en cours
+     */
     public void setQuestionNumber(int questionNumber) {
         this.questionNumber = questionNumber;
     }
 
+    /**
+     * Méthode qui modifie le niveau en cours
+     * @param newLevel nouveau niveau
+     */
     public void setLevel(int newLevel){
         this.level = newLevel;
     }
+
+    /**
+     * Méthode qui retourne si le niveau est terminé ou non
+     * @return si le niveau est terminé ou non
+     */
     public boolean isTheLevelFinish() {
         return isTheLevelFinish;
     }
 
+    /**
+     * Méthode qui modifie si le niveau est terminé ou non
+     * @param isTheLevelFinish nouvelle valeurs de si le niveau est terminé ou non
+     */
     public void setTheLevelFinish(boolean isTheLevelFinish) {
         this.isTheLevelFinish = isTheLevelFinish;
     }
 
+    /**
+     * Méthode qui retourne si c'est le temps pour afficher les questions du chaman
+     * @return si c'est le temps pour afficher les questions du chaman
+     */
     public boolean isItTimeForChaman() {
         return isItTimeForChaman;
     }
 
+    /**
+     * Méthode qui modifie si c'est le temps pour afficher les questions du chaman
+     * @param isItTimeForChaman nouvelle valeur pour si c'est le temps pour afficher les questions du chaman
+     */
     public void setItTimeForChaman(boolean isItTimeForChaman) {
         this.isItTimeForChaman = isItTimeForChaman;
     }
