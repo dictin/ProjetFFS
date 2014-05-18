@@ -7,7 +7,7 @@ public enum UILayers {
     BACKGROUND(1),
     BACK(2),
     MAP(3),
-    MENUS(4),
+    MENUS(new Integer(4)),
     QUESTIONS(5),
     EVENTS(6);
 

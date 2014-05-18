@@ -17,9 +17,9 @@ public class MainMenu extends ContextualMenu{
 
     public MainMenu(final MasterController controller){
         super(controller, "main_menu");
-        shopIcon = new GotoMenuButton(controller, "shop_button", new Dimension(250,100));
-        inventoryIcon = new GotoMenuButton(controller, "inventory_button", new Dimension(250,100));
-        creationButton = new GotoMenuButton((controller),"creation_button", new Dimension(250,100));
+        shopIcon = new GotoMenuButton(controller, "shop_button", new Dimension(250,100), Color.cyan, 2);
+        inventoryIcon = new GotoMenuButton(controller, "inventory_button", new Dimension(250,100), Color.cyan, 8);
+        creationButton = new GotoMenuButton((controller),"creation_button", new Dimension(250,100), Color.cyan, 2);
         this.add(inventoryIcon);
         this.add(shopIcon);
         this.add(creationButton);
@@ -31,6 +31,7 @@ public class MainMenu extends ContextualMenu{
 
     public void actualiser(){
         shopIcon.actualiser();
+        inventoryIcon.actualiser();
         this.invalidate();
         this.repaint();
     }

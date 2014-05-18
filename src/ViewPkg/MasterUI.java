@@ -20,6 +20,7 @@ public class MasterUI extends JLayeredPane implements Observer{
     private MasterController masterController;
     private PlayerDataController playerDataController;
     private GotoMenuButton quitIcon;
+    private GotoMenuButton selectedMenuButton=null;
     private JLabel helpLabel = new JLabel("?");
 
     private VisualCase[][] visualCasesGrid;
@@ -55,8 +56,14 @@ public class MasterUI extends JLayeredPane implements Observer{
     private JLabel labelPickUpFood = new JLabel("Food to pick up: 0");
     private JLabel playerStatsBackground = new JLabel();
 
-
     public MasterUI(final MasterController masterController){
+
+        backgroundImage.setIcon(new ImageIcon("IMG/Background.jpg"));
+        backgroundImage.setSize(MasterFrame.GAME_FRAME_SIZE);
+        backgroundImage.setLocation(0, 0);
+
+        //TODO fix background
+        //this.add(backgroundImage, UILayers.BACKGROUND);
 
         this.masterController = masterController;
         this.playerDataController = this.masterController.getPlayerDataController();
@@ -71,9 +78,9 @@ public class MasterUI extends JLayeredPane implements Observer{
         inventoryMenu= new InventoryMenu(masterController);
         this.setSize(MasterFrame.GAME_FRAME_SIZE);
 
-        hideMenus.setIcon(new ImageIcon("IMG/shaman.jpg"));
         hideMenus.setSize(320, 557);
         hideMenus.setOpaque(true);
+        hideMenus.setIcon(new ImageIcon("IMG/shaman.jpg"));
         hideMenus.setLocation(650,20);
         hideMenus.setVisible(false);
         this.add(hideMenus, UILayers.MENUS);
@@ -95,7 +102,7 @@ public class MasterUI extends JLayeredPane implements Observer{
                 this.add(visualCasesGrid[i][j], UILayers.MAP);
             }
         }
-        quitIcon = new GotoMenuButton(masterController, "quit_button", new Dimension(25,25));
+        quitIcon = new GotoMenuButton(masterController, "quit_button", new Dimension(25,25), new Color(Integer.parseInt("314159",16)),2);
         this.add(quitIcon, UILayers.MENUS);
         quitIcon.setLocation(this.getWidth()-quitIcon.getWidth(), 0);
 
@@ -206,11 +213,6 @@ public class MasterUI extends JLayeredPane implements Observer{
         tvaNews.setFont(new Font("Courier New", Font.PLAIN, 20));
         tvaNews.setForeground(Color.white);
         this.add(tvaNews, UILayers.MENUS);
-
-        backgroundImage.setIcon(new ImageIcon("IMG/Background.jpg"));
-        backgroundImage.setSize(MasterFrame.GAME_FRAME_SIZE);
-        backgroundImage.setLocation(0,0);
-        this.add(backgroundImage);
     }
 
     public void popMenu(String menuName){
@@ -301,7 +303,9 @@ public class MasterUI extends JLayeredPane implements Observer{
     }
 
     public void actualizeIcons(){
-        quitIcon.actualiser();
+        if (selectedMenuButton!=null){
+            selectedMenuButton.actualiser();
+        }
         if (selectedMenu!=null){
             selectedMenu.actualiser();
         }
@@ -401,5 +405,9 @@ public class MasterUI extends JLayeredPane implements Observer{
 
     public void disableMenus(boolean invisible){
         hideMenus.setVisible(invisible);
+    }
+
+    public void setSelectedMenuButton(GotoMenuButton selectedMenuButton) {
+        this.selectedMenuButton = selectedMenuButton;
     }
 }

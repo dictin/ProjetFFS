@@ -20,12 +20,14 @@ public class GotoMenuButton extends JComponent {
     /**
      * # of frames the object will keep the same sprite.
      */
-    private int anmtnWaitTime=10;
-    private int numberOfSprites =2;
+    private int anmtnWaitTime=5;
+    private int numberOfSprites;
     private int currentSpriteIndex=0;
     private String menuButtonName ="quit_button";
+    private MasterController masterController;
 
-    public GotoMenuButton(final MasterController controller, String menuButtonName, Dimension buttonMaxSize){
+    public GotoMenuButton(final MasterController controller, String menuButtonName, Dimension buttonMaxSize, Color defBGColor, int numberOfSprites){
+        this.numberOfSprites=numberOfSprites;
         this.controller=controller;
         this.defBGColor=defBGColor;
         this.menuButtonName= menuButtonName;
@@ -77,6 +79,7 @@ public class GotoMenuButton extends JComponent {
     }
 
     public void switchActiveSprite(){
+        System.out.println("animoo");
         if (currentSpriteIndex+1>= numberOfSprites){
             currentSpriteIndex=0;
         }
@@ -92,6 +95,11 @@ public class GotoMenuButton extends JComponent {
     @Override
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
-        graphics.drawImage(Toolkit.getDefaultToolkit().getImage("IMG/"+menuButtonName + currentSpriteIndex + ".gif"), 0, 0, this);
+        graphics.fillRect(0, 0, this.getWidth(), this.getHeight());
+        graphics.drawImage(Toolkit.getDefaultToolkit().getImage("IMG/"+menuButtonName + currentSpriteIndex + ".jpg"), 0, 0, this);
+    }
+
+    public MasterController getMasterController() {
+        return masterController;
     }
 }

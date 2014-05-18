@@ -38,7 +38,7 @@ public class InventoryMenu extends ContextualMenu implements Observer{
         consumablesLabel.setSize(400,35);
         consumablesLabel.setLocation(5, 0);
         consumablesLabel.setFont(new Font("Arial", Font.PLAIN, 30));
-        consumables = new GotoMenuButton(controller, "consumables_button", new Dimension(this.getWidth()-10, this.getHeight()/2-10));
+        consumables = new GotoMenuButton(controller, "consumables_button", new Dimension(this.getWidth()-10, this.getHeight()/2-10), Color.cyan,2);
         consumables.setLocation(5, 5);
         this.add(consumables);
         this.consumableShopList = new JList<String>();
@@ -73,7 +73,7 @@ public class InventoryMenu extends ContextualMenu implements Observer{
         reusablesLabel.setFont(new Font("Arial", Font.PLAIN, 30));
 
 
-        reusables = new GotoMenuButton(controller, "reusables_button", consumables.getSize());
+        reusables = new GotoMenuButton(controller, "reusables_button", consumables.getSize(), Color.cyan,2);
         reusables.setLocation(5, 5 + 10 + reusables.getHeight());
         this.add(reusables);
 
