@@ -1,8 +1,6 @@
 package ModelPkg;
 
-/**
- * Created by Chloé on 14-03-24.
- */
+//TODO Delete this?
 public class Time{
 
     // À chaque x tours, on change de jour

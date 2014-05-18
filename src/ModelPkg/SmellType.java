@@ -1,8 +1,7 @@
 package ModelPkg;
 
-/**
- * Created by Dictin on 14-05-07.
- */
+//TODO Does this need a javadoc?
+
 public enum SmellType{
     FOOD,
     HIVE,
