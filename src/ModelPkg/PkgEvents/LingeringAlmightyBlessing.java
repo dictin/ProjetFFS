@@ -10,12 +10,10 @@ public class LingeringAlmightyBlessing extends LingeringGameEvents {
 
     @Override
     public void firstTimeActivation() {
-        //TODO TVA news yay we've been blessed
     }
 
     @Override
     public void lingeringActivation() {
         int heal=getGravity()*10;
-        //TODO heal all friendly units by 'heal' hp
     }
 }

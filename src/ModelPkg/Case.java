@@ -34,7 +34,12 @@ public class Case implements Observable {
         this.terrain = terrain;
 
     }
-//TODO Why does Case has 2 constructeurs???
+
+    /**
+     * Constructeur utilisé lorsque l'on veut cloner une case
+     * @param point position de la case
+     * @param passable si la case est traversable ou non
+     */
     public Case(Point point, boolean passable){
         this.position= new Point(point.x, point.y);
         this.passable=passable;
@@ -171,10 +176,10 @@ public class Case implements Observable {
             System.out.println("ERROR");
         }
     }
-//TODO What's the difference with ggetSortedSmellArrayList() plus haut?
+
     /**
-     * Méthode qui retourne une liste d'odeur ordonnée
-     * @return
+     * Méthode qui retourne une liste d'odeur source ordonnée
+     * @return renvoit la liste d'odeurs source
      */
     public ArrayList<SmellSource> getSortedSmellSourceArrayList() {
         ArrayList<SmellSource> unsortedSmellSourceArrayList=new ArrayList<>();
@@ -345,10 +350,10 @@ public class Case implements Observable {
         this.terrain = terrain;
         this.updateObservers();
         }
-//TODO What to write here
+
     /**
-     *
-     * @return
+     *Fonction qui clone une case
+     * @return une nouvelle case
      */
     public Case semiClone() {
         Case clone=new Case(getPosition(), getOccupant(), getWildObject());

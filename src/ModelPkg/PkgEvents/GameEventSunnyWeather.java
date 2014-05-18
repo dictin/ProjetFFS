@@ -20,17 +20,14 @@ public class GameEventSunnyWeather extends InstantaneousGameEvent {
     public void firstTimeActivation() {
         if (getGravity()==1){
             MapData.addNewsList("Il ne se passe rien aujourd'hui.");
-            //TODO add appropriate tvanews
         }
         else if (getGravity()==2){
             MapData.addNewsList("Il fait un peu nuageux aujourd'hui!");
 
-            //TODO warn about UV rays
         }
         else{
             MapData.addNewsList("Il fait très soleil aujourd'hui!");
 
-            //TODO Highly recommand sunblock
         }
     }
 }

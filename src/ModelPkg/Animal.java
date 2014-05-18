@@ -54,7 +54,6 @@ public abstract class Animal {
     private String spriteName;
     private Image sprite;
 
-    private MentalStates mentalState = MentalStates.NEUTRAL;
     private ActionTypes actionToCommit = null;
 
     private boolean toMove = false;
@@ -204,12 +203,18 @@ public abstract class Animal {
      */
     public void decreaseHealth(int amount){
         this.health-= amount;
-        if(this.isDead()){
+       /* if(this.isDead()){
         // masterController.disposeAnimal(this);
            // masterController.checkIfDeadFourmilier();
             MapData.addNewsList(this.getName() + " est malheureusement décédé!!");
             masterController.victims();
 
+        }*/
+        if(this.isDead()){
+            System.out.println("In decreaseHealth");
+            MasterController.disposeAnimal(this);
+            MapData.addNewsList(this.getName() + " est malheureusement décédé!!");
+            masterController.victims();
         }
     }
 
@@ -359,13 +364,13 @@ public abstract class Animal {
     public int getAdjustedSmellSensitivity(){
         return this.smellSensitivity + this.masterController.getPlayerDataController().getStatMod(PlayerData.SMS_STATID);
     }
-//TODO What to write here?
+
     /**
-     *
+     *Retourne smellthreshold en tennant compte des modificateurs relatifs à l'utilisation d'objets
      * @return
      */
     public int getAdjustedSmellThreshold(){
-        return this.smellThreshold + (100/this.getSmellSensitivity());
+        return this.smellThreshold + (100/this.getAdjustedSmellSensitivity());
     }
 //Delete?
     /**
@@ -400,9 +405,9 @@ public abstract class Animal {
     public int getAdjustedGBTQ(){
         return this.grabQuantity + this.masterController.getPlayerDataController().getStatMod(PlayerData.GBTQ_STATID);
     }
-//TODO What to write here
+
     /**
-     *
+     * Retourne activationFrequency en prenant compte des modificateurs liés à l'utilisation d'ojets.
      * @return
      */
     public int getAdjustedActivationFrequency() {
@@ -472,7 +477,6 @@ public abstract class Animal {
 
         }
         //Cherche à rentrer.
-        //TODO test with souts
         else if(this.carriedFood>0){
             //System.out.println(this.getName()+" is caryin");
             if (Behavior.isCloseTo(WildObject.HIVE_ID, this.position)){

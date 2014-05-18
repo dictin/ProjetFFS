@@ -18,7 +18,6 @@ public class Critter extends Animal {
      * @param masterController  le contrôleur principal
      */
     public Critter(int team, int[] meanStats, String species, Point startingPosition, long animalID, SmellType smellType,final MasterController masterController){
-        //TODO remove placeholder int in constructor.
         super(team, meanStats, species, startingPosition, animalID, smellType,masterController);
         this.masterController=masterController;
     }

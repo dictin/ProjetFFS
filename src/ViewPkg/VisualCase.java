@@ -7,10 +7,6 @@ import ObserverPkg.Observer;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by Xav on 24/02/14.
- */
-
 public class VisualCase extends JComponent implements Observer {
 
     public static final int CASE_SIDE_PIXEL_SIZE=20;
@@ -33,7 +29,6 @@ public class VisualCase extends JComponent implements Observer {
         this.setSize(new Dimension(CASE_SIDE_PIXEL_SIZE, CASE_SIDE_PIXEL_SIZE));
         this.setLocation((int) (visualCaseOrigin.getX() + i * CASE_SIDE_PIXEL_SIZE), (int) (visualCaseOrigin.getY() + j * CASE_SIDE_PIXEL_SIZE));
         this.addMouseListener(new VisualCaseHandler(this.controller));
-
         this.controller.getMapController().addObserver(this);
 
         this.backgroundImage = this.controller.getMapController().getVisualWildObject(caseCoord);

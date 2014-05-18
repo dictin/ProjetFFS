@@ -10,8 +10,6 @@ import java.awt.event.MouseEvent;
 public class GotoMenuButton extends JComponent {
 
     private MasterController controller;
-    //TODO remove bgColor and put realz sprites
-    private Color defBGColor;
     private boolean animatedNow =false;
     private int anmtnStartTime=0;
     /**
@@ -32,7 +30,6 @@ public class GotoMenuButton extends JComponent {
     public GotoMenuButton(final MasterController controller, String menuButtonName, Dimension buttonMaxSize, int numberOfSprites){
         this.numberOfSprites=numberOfSprites;
         this.controller=controller;
-        this.defBGColor=defBGColor;
         this.menuButtonName= menuButtonName;
         this.setSize(buttonMaxSize);
 

@@ -1,10 +1,10 @@
 package ModelPkg;
 
 /**
- * Created by Dictin on 14-04-28.
+ * Enum qui contient les différents types d'action prévus qu'un fourmilier peut faire
  */
 public enum ActionTypes {
-//TODO Clean this up + Is javaDoc needed here?
+
     GO_TO_LOCATION,
     FLEE_TO_LOCATION,
     EAT_FROM_LOCATION,

@@ -60,10 +60,10 @@ public class PlayerDataController {
         this.playerData.addItemToInventory(items);
     }
 
-    //TODO What to write here?
+
     /**
-     *
-     * @return
+     * Ce getter retourne le modèle de données de la JList de l'inventaire du joueur
+     * @return le modèle de données de la JList de l'inventaire du joueur
      */
     public ListModel<String> getConsumableInventoryDataModel(){
         DefaultListModel<String> listModel = new DefaultListModel();
@@ -73,10 +73,10 @@ public class PlayerDataController {
 
         return listModel;
     }
-    //TODO What to write here?
+
     /**
-     *
-     * @return
+     *Ce getter retourne le modèle de données de la JList de l'inventaire des objets permanents du joueur
+     * @return le modèle de données de la JList de l'inventaire des objets permanents du joueur
      */
     public ListModel<String> getPermanentInventoryDataModel(){
         DefaultListModel<String> listModel = new DefaultListModel();
@@ -246,9 +246,10 @@ public class PlayerDataController {
         this.playerData.setQuestionNumber(questionNumber);
     }
 
-    //TODO what to write here?
+
     /**
-     *
+     *Cette méthode appel la méthode activateInstance de playerData
+     * @see ModelPkg.PlayerData
      * @param index
      * @param activatedType
      */

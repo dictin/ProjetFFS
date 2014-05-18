@@ -32,12 +32,10 @@ public class QuestionsHandler implements MouseListener{
     public void mouseClicked(MouseEvent e) {
         answerClick = (JLabel)e.getSource();
         if(answerClick.getText().equals(actualQuestion.getAnswer2())){
-            //TODO avertir joueur d'une bonne réponse avec son
              controller.getPlayerDataController().modifyKarma(33);
              actualQuestion.setQuestionTaTuBienRepondu(1);
 
         }else{
-            //TODO avertir joueur d'une mauvaise réponse avec son
             controller.getPlayerDataController().modifyKarma(-33);
             actualQuestion.setQuestionTaTuBienRepondu(-1);
         }

@@ -29,7 +29,6 @@ public class SmellSource extends Smell implements Cloneable{
     public enum SmellType2{
             food, animal, foe, item;
     }
-//TODO What to write here
     /**
      *
      * @return

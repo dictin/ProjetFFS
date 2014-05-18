@@ -54,13 +54,13 @@ public class MasterUI extends JLayeredPane implements Observer{
     private JLabel labelScore = new JLabel("Score: 0");
     private JLabel labelPickUpFood = new JLabel("Food to pick up: 0");
     private JLabel playerStatsBackground = new JLabel();
-
+    private JLabel hackEvent = new JLabel();
+    private ImageIcon myIcon = new ImageIcon("IMG/hackEvent.gif");
     /**
      * Constructeur de l'interface d'utilisateur principale
      * @param masterController le contrôleur principal
      */
     public MasterUI(final MasterController masterController){
-
         this.masterController = masterController;
         this.playerDataController = this.masterController.getPlayerDataController();
 
@@ -73,6 +73,12 @@ public class MasterUI extends JLayeredPane implements Observer{
         creationMenu = new CreationMenu(masterController);
         inventoryMenu= new InventoryMenu(masterController);
         this.setSize(MasterFrame.GAME_FRAME_SIZE);
+
+        hackEvent.setSize(350,500);
+        hackEvent.setLocation(650,10);
+        hackEvent.setIcon(myIcon);
+        this.add(hackEvent);
+        hackEvent.setVisible(false);
 
         hideMenus.setIcon(new ImageIcon("IMG/shaman.jpg"));
         hideMenus.setSize(320, 557);
@@ -149,20 +155,12 @@ public class MasterUI extends JLayeredPane implements Observer{
         selectedMenu.setVisible(true);
 
         menuTriggerZone =new MenuTriggerZone(masterController);
-//        gridTriggerZone= new GridTriggerZone(masterController, xGridSize);
 
 
         this.add(menuTriggerZone, UILayers.MENUS.getLayerIndex());
         menuTriggerZone.setLocation(gridEndPointX, 25);
-    //TODO kill gridTriggerZone from all of existence.
-//        this.add(gridTriggerZone);
-//        gridTriggerZone.setLocation(25, 25);
 
-        //TODO Ajouter éléments visuels d'un niveau de jeu.
-        System.out.println("Checking if empty");
 
-        //TODO lier les labels à leur valeur.
-        //labelFood.setText(labelFood.split(":")[0]+" "+nourriture);
 
         labelFood.setSize(92,9);
         labelFood.setForeground(Color.white);
@@ -290,13 +288,6 @@ public class MasterUI extends JLayeredPane implements Observer{
         selectedMenu=null;
         }
     }
-//TODO What to write here?
-    /**
-     *
-     */
-    public void showCaseContents(){
-        //TODO link visualCases to contained items and display informations on them.
-    }
 
     /**
      * Méthode qui crée une nouvelle question et qui l'ajoute à l'interface du joueur
@@ -316,7 +307,6 @@ public class MasterUI extends JLayeredPane implements Observer{
      * Méthode qui crée une laboratoire de modification génétique et qui l'ajoute à l'interface du joueur
      */
     public void creationGeneticModifications(){
-        System.out.println("Time to me creepy");
         laboratoryLabel = new GeneticModifications(masterController);
         laboratoryLabel.setVisible(true);
         laboratoryLabel.setLocation(75,163);
@@ -442,5 +432,8 @@ public class MasterUI extends JLayeredPane implements Observer{
  */
     public void disableMenus(boolean invisible){
         hideMenus.setVisible(invisible);
+    }
+    public void hackEvent(boolean activate){
+
     }
 }

@@ -73,9 +73,9 @@ public class MapData {
         }
 
     }
-//TODO What to write here
+
     /**
-     * Méthode qui
+     * Méthode qui vérifie s'il y une odeur identique et si oui, renvoit l'intensité de cette odeur
      * @param smell
      * @param selectedCase
      * @return
@@ -127,12 +127,6 @@ public class MapData {
                         } else if (smellThreshold < smell.getIntensity() * .5) {
                             dissipatedSmell.dissipateIntensity(50);
                         }
-
-                        //TODO remove this else all is all right
-                        else {
-                            System.out.println("ERROR");
-                        }
-
                         if (smellThreshold != 0) {
                             subsection[i + 1][j + 1].eraseInferiorSmellOfSameID(dissipatedSmell);
                         }
@@ -230,9 +224,9 @@ public class MapData {
         }
         return subsection;
     }
-//TODO What to write here?
+
     /**
-     *
+     *Renvoit un tableau contenant la case d'origine et ses cases adjacentes
      * @param origin
      * @return
      */

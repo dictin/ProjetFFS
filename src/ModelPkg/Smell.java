@@ -16,7 +16,6 @@ public class Smell implements Cloneable {
         this.intensity = intensity;
     }
 
-    //TODO remplacer le String ID par un int
 
     /**
      * Constructeur de smell
@@ -71,9 +70,10 @@ public class Smell implements Cloneable {
     public SmellType getType() {
         return type;
     }
-//TODO What to write here
+
+
     /**
-     *
+     *@see java.lang.Cloneable
      * @return
      */
     @Override

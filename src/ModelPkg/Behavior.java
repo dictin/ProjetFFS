@@ -139,12 +139,12 @@ public class Behavior {
         return isClose;
 
     }
-// TODO what to write here?
+
     /**
-     *
-     * @param subsection
-     * @param smellType
-     * @return
+     * Renvoit true ou fasle dépendamment de si le fourmilier détecte le type d'odeur donné en paramètre
+     * @param subsection cases à analyser
+     * @param smellType type d'odeur recherché
+     * @return boolean
      */
     public static boolean doesItSmell(Case[][] subsection, SmellType smellType) {
         Case selectedCase = null;
@@ -165,13 +165,13 @@ public class Behavior {
 
         return isItSmelling;
     }
-// TODO What to write here
+
     /**
-     *
-     * @param position
-     * @param cases
-     * @param type
-     * @param desiredQuality
+     * Méthode qui trouve un objetctif en fonction de l'odeur recherché par un fourmilier
+     * @param position position actuelle du fourmilier
+     * @param cases cases à analyser
+     * @param type type d'odeur recherché
+     * @param desiredQuality quelle puissance d'odeur cherche-t-on(odeur maximale ou odeur minimale)
      * @return
      */
     public static VirtualFutureAction scanForWildObject(Point position, Case[][] cases, SmellType type, String desiredQuality) {

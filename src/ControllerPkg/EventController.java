@@ -25,6 +25,7 @@ public class EventController {
         goodGameEvents.add(new InstantaneousHumanitarianHelp(masterController));
         neutralGameEvents.add(new GameEventSunnyWeather());
         badGameEvents.add(new MassInstantaneousCombustion(masterController));
+        badGameEvents.add(new LingeringHackTroll(masterController));
 
     }
 
@@ -57,6 +58,7 @@ public class EventController {
             masterController.getPlayerDataController().increaseNextEventGravity();
         }
         //TODO Enlever cette ligne pour avoir des bons et des mauvais événements
+        nextGameEvent = chooseRandomEvent(badGameEvents);
         masterController.deadAnimal();
         nextGameEvent.setGravity(eventFinalGravity);
         return nextGameEvent;
