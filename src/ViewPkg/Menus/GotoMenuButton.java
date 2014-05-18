@@ -79,7 +79,6 @@ public class GotoMenuButton extends JComponent {
     }
 
     public void switchActiveSprite(){
-        System.out.println("animoo");
         if (currentSpriteIndex+1>= numberOfSprites){
             currentSpriteIndex=0;
         }
