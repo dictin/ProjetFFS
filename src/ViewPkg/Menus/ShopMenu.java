@@ -15,7 +15,6 @@ public class ShopMenu extends ContextualMenu{
 
     JList<String> shopList;
     JScrollPane scrollPane;
-    ImageIcon buyButtonImage=new ImageIcon("IMG/BUY_BUTTON.ico");
     JButton buyButton=new JButton();
 
     public ShopMenu(final MasterController controller){

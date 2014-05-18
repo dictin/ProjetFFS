@@ -5,10 +5,11 @@ package ViewPkg;
  */
 public enum UILayers {
     BACKGROUND(1),
-    MAP(2),
-    MENUS(3),
-    QUESTIONS(4),
-    EVENTS(5);
+    BACK(2),
+    MAP(3),
+    MENUS(4),
+    QUESTIONS(5),
+    EVENTS(6);
 
     private int layerIndex;
 

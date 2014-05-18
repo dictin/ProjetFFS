@@ -25,7 +25,7 @@ public class GotoMenuButton extends JComponent {
     private int currentSpriteIndex=0;
     private String menuButtonName ="quit_button";
 
-    public GotoMenuButton(final MasterController controller, String menuButtonName, Dimension buttonMaxSize, Color defBGColor){
+    public GotoMenuButton(final MasterController controller, String menuButtonName, Dimension buttonMaxSize){
         this.controller=controller;
         this.defBGColor=defBGColor;
         this.menuButtonName= menuButtonName;
@@ -92,8 +92,6 @@ public class GotoMenuButton extends JComponent {
     @Override
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
-        graphics.setColor(defBGColor);
-        graphics.fillRect(0, 0, this.getWidth(), this.getHeight());
         graphics.drawImage(Toolkit.getDefaultToolkit().getImage("IMG/"+menuButtonName + currentSpriteIndex + ".gif"), 0, 0, this);
     }
 }

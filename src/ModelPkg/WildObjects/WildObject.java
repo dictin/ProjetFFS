@@ -71,7 +71,7 @@ public class WildObject {
         this.images[4] = ImageIO.read(new File("IMG/hole.gif"));
         this.images[5] = ImageIO.read(new File("IMG/colony.gif"));
         this.images[6] = ImageIO.read(new File("IMG/corpse.gif"));
-        this.images[7] = ImageIO.read(new File("IMG/food.gif"));
+        this.images[7] = ImageIO.read(new File("IMG/food.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

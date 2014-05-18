@@ -29,8 +29,8 @@ public Chaman(final MasterController controller, ModelPkg.QuestionChaman actualQ
     this.actualQuestion = actualQuestion;
     this.controller=controller;
     this.questionsHandler = new QuestionsHandler(this.actualQuestion, controller);
+    this.setIcon(new ImageIcon());
     this.setOpaque(true);
-    this.setBackground(new Color(Integer.parseInt("324159", 19)));
     this.setSize(505,375);
     JLabel numberQuestion = new JLabel("Question no"+ controller.getPlayerDataController().getQuestionNumber());
     numberQuestion.setFont(new Font("Impact", Font.PLAIN, 20));

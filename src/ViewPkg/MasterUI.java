@@ -45,28 +45,33 @@ public class MasterUI extends JLayeredPane implements Observer{
     private JLabel laboratoryLabel = new JLabel();
     private JLabel hideMenus = new JLabel();
 
-    JLabel labelPopulation = new JLabel("Population: 0");
-    JLabel labelFood = new JLabel("Nourriture: 300");
-    JLabel labelDeaths = new JLabel("Victimes: 0");
-    JLabel labelLevel = new JLabel("Niveau: 1");
-    JLabel labelKarma = new JLabel("Score: 0");
-    JLabel labelPickUpFood = new JLabel("Food to pick up: 0");
-    JLabel background = new JLabel();
+    private JLabel backgroundImage= new JLabel();
+
+    private JLabel labelPopulation = new JLabel("Population: 0");
+    private JLabel labelFood = new JLabel("Nourriture: 300");
+    private JLabel labelDeaths = new JLabel("Victimes: 0");
+    private JLabel labelLevel = new JLabel("Niveau: 1");
+    private JLabel labelScore = new JLabel("Score: 0");
+    private JLabel labelPickUpFood = new JLabel("Food to pick up: 0");
+    private JLabel playerStatsBackground = new JLabel();
 
 
     public MasterUI(final MasterController masterController){
+
         this.masterController = masterController;
         this.playerDataController = this.masterController.getPlayerDataController();
 
         this.playerDataController.addObserver(this);
+
+
 
         mainMenu= new MainMenu(masterController);
         shopMenu=new ShopMenu(masterController);
         creationMenu = new CreationMenu(masterController);
         inventoryMenu= new InventoryMenu(masterController);
         this.setSize(MasterFrame.GAME_FRAME_SIZE);
-        this.setBackground(new Color(Integer.parseInt("314159", 16)));
 
+        hideMenus.setIcon(new ImageIcon("IMG/shaman.jpg"));
         hideMenus.setSize(320, 557);
         hideMenus.setOpaque(true);
         hideMenus.setLocation(650,20);
@@ -90,7 +95,7 @@ public class MasterUI extends JLayeredPane implements Observer{
                 this.add(visualCasesGrid[i][j], UILayers.MAP);
             }
         }
-        quitIcon = new GotoMenuButton(masterController, "quit_button", new Dimension(25,25), new Color(Integer.parseInt("314159",16)));
+        quitIcon = new GotoMenuButton(masterController, "quit_button", new Dimension(25,25));
         this.add(quitIcon, UILayers.MENUS);
         quitIcon.setLocation(this.getWidth()-quitIcon.getWidth(), 0);
 
@@ -99,7 +104,7 @@ public class MasterUI extends JLayeredPane implements Observer{
         helpLabel.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                JOptionPane.showMessageDialog(null,"Bienvenue dans la section aide. \n\n" +
+                JOptionPane.showMessageDialog(null, "Bienvenue dans la section aide. \n\n" +
                         "Le but de Fourmilier Fourmilière Simulator est de créer sa colonie de fourmilier et de survivre à travers les niveaux \n \n" +
                         "Pour ce faire, vous devez jouer stratégiquement et utiliser judicieusement les objets du magasins.\n" +
                         "Les fourmiliers vous aideront à récolter de la nourriture que vous pourrez utiliser pour créer d'autres fourmiliers\n" +
@@ -159,39 +164,39 @@ public class MasterUI extends JLayeredPane implements Observer{
         labelFood.setSize(92,9);
         labelFood.setForeground(Color.white);
         labelFood.setLocation(660,590); // 10,525
-        this.add(labelFood, UILayers.BACKGROUND);
+        this.add(labelFood, UILayers.BACK);
         //population
         labelPopulation.setSize(87,16);
         labelPopulation.setForeground(Color.white);
         labelPopulation.setLocation(660,600);
-        this.add(labelPopulation, UILayers.BACKGROUND);
+        this.add(labelPopulation, UILayers.BACK);
         //Victimes
         labelDeaths.setSize(77,9);
         labelDeaths.setForeground(Color.white);
         labelDeaths.setLocation(660,617);
-        this.add(labelDeaths, UILayers.BACKGROUND);
+        this.add(labelDeaths, UILayers.BACK);
         //Level
         labelLevel.setSize(58,9);
         labelLevel.setForeground(Color.white);
         labelLevel.setLocation(660,630);
-        this.add(labelLevel, UILayers.BACKGROUND);
+        this.add(labelLevel, UILayers.BACK);
         //Nourriture qu'il reste à ramasser avant le prochain niveau
         labelPickUpFood.setText("Food to pick up: "+masterController.getPlayerDataController().getNumberFoodToGo());
         labelPickUpFood.setSize(120,14);
         labelPickUpFood.setForeground(Color.white);
         labelPickUpFood.setLocation(660,640);
-        this.add(labelPickUpFood, UILayers.BACKGROUND);
+        this.add(labelPickUpFood, UILayers.BACK);
         //Score
-        labelKarma.setSize(87,9);
-        labelKarma.setForeground(Color.white);
-        labelKarma.setLocation(660,655);
-        this.add(labelKarma, UILayers.BACKGROUND);
+        labelScore.setSize(87,9);
+        labelScore.setForeground(Color.white);
+        labelScore.setLocation(660,655);
+        this.add(labelScore, UILayers.BACK);
         //Fond derrière les label
-        background.setOpaque(true);
-        background.setBackground(new Color(Integer.parseInt("324159", 15)));
-        background.setSize(127,95);
-        background.setLocation(655,580);
-        this.add(background, UILayers.BACKGROUND);
+        playerStatsBackground.setOpaque(true);
+        playerStatsBackground.setBackground(new Color(Integer.parseInt("324159", 15)));
+        playerStatsBackground.setSize(127, 95);
+        playerStatsBackground.setLocation(655, 580);
+        this.add(playerStatsBackground, UILayers.BACK);
 
         tvaNews.setText(MapData.getNewsList().remove(0));
         tvaNews.setSize(600, 20);
@@ -202,7 +207,10 @@ public class MasterUI extends JLayeredPane implements Observer{
         tvaNews.setForeground(Color.white);
         this.add(tvaNews, UILayers.MENUS);
 
-
+        backgroundImage.setIcon(new ImageIcon("IMG/Background.jpg"));
+        backgroundImage.setSize(MasterFrame.GAME_FRAME_SIZE);
+        backgroundImage.setLocation(0,0);
+        this.add(backgroundImage);
     }
 
     public void popMenu(String menuName){
@@ -250,8 +258,8 @@ public class MasterUI extends JLayeredPane implements Observer{
         labelDeaths.setVisible(visible);
         labelLevel.setVisible(visible);
         labelPickUpFood.setVisible(visible);
-        labelKarma.setVisible(visible);
-        background.setVisible(visible);
+        labelScore.setVisible(visible);
+        playerStatsBackground.setVisible(visible);
     }
 
     public void setGridToActive(){
@@ -378,7 +386,7 @@ public class MasterUI extends JLayeredPane implements Observer{
     }
 
     private void updateNumericInfos(){
-        this.labelKarma.setText("Score: "+this.playerDataController.getScore());
+        this.labelScore.setText("Score: "+this.playerDataController.getScore());
         this.labelFood.setText("Nourriture: "+this.playerDataController.getFood());
         this.labelLevel.setText("Niveau: "+this.playerDataController.getLevel());
         this.labelPopulation.setText("Population: "+this.playerDataController.getPopulation());

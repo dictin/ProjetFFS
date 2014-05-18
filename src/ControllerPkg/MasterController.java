@@ -58,9 +58,6 @@ public class MasterController extends Thread{
     public void run(){
         while (true){
             try {
-
-
-
                 this.sleep(sleepTime);
                 this.time++;
 
