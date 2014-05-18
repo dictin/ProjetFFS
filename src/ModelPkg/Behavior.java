@@ -136,11 +136,8 @@ public class Behavior {
     public static VirtualFutureAction scanForWildObject(Point position, Case[][] cases, SmellType type, String desiredQuality) {
         for (int i = 0; i < cases.length; i++) {
             for (int j = 0; j < cases[i].length; j++) {
-                System.out.println(new Point(i,j));
-                System.out.println(cases[i][j].getSortedSmellArrayList().get(0).getIntensity());
             }
         }
-        System.out.println("I smell with my little nose "+type);
         Point targetPoint = null;
         int preferredIntensity=0;
         Point correctedReferential=null;
@@ -151,34 +148,23 @@ public class Behavior {
                         targetPoint=new Point(i,j);
                         preferredIntensity=cases[targetPoint.x][targetPoint.y].getSortedSmellArrayList().get(k).getIntensity();
 
-                        System.out.println(targetPoint);
-                        System.out.println("Intensity "+cases[i][j].getSortedSmellArrayList().get(k).getIntensity());
-
                     }
                     else if(desiredQuality.equals(Animal.LEAST_INTENSE)&&(targetPoint!=null&&cases[i][j].getSortedSmellArrayList().get(k).getIntensity()<preferredIntensity&&cases[i][j].getSortedSmellArrayList().get(k).getType()==type)){
                         targetPoint=new Point(i,j);
                         preferredIntensity=cases[targetPoint.x][targetPoint.y].getSortedSmellArrayList().get(k).getIntensity();
-
-                        System.out.println(targetPoint);
-                        System.out.println("lesser Intensity "+cases[i][j].getSortedSmellArrayList().get(k).getIntensity());
                     }
                     else if(desiredQuality.equals(Animal.MOST_INTENSE)&&(targetPoint!=null&&cases[i][j].getSortedSmellArrayList().get(k).getIntensity()>preferredIntensity&&cases[i][j].getSortedSmellArrayList().get(k).getType()==type)){
                         targetPoint=new Point(i,j);
                         preferredIntensity=cases[targetPoint.x][targetPoint.y].getSortedSmellArrayList().get(k).getIntensity();
-
-                        System.out.println(targetPoint);
-                        System.out.println("greater Intensity "+cases[i][j].getSortedSmellArrayList().get(k).getIntensity());
                     }
                 }
             }
         }
 
         if (cases[targetPoint.x][targetPoint.y].getPassable()){
-            System.out.println("NP");
             correctedReferential=new Point(targetPoint.x-1,targetPoint.y-1);
         }
         else{
-            System.out.println("oh oooooh oh");
             if(Math.abs(targetPoint.x-1)==Math.abs(targetPoint.y-1)){
                 //C'est un coin
                 if (cases[1][targetPoint.y].getPassable()){
@@ -203,9 +189,6 @@ public class Behavior {
                     }
                     else if(cases[targetPoint.x][2].getPassable()){
                         correctedReferential=new Point(targetPoint.x-1, 1);
-                    }
-                    else{
-                        System.out.println("manque qqc");
                     }
                 }
             }

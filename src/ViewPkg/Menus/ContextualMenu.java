@@ -10,13 +10,11 @@ import java.awt.*;
  */
 public abstract class ContextualMenu extends JComponent {
 
-    private Image backgroundImage;
     private String menuName;
     private Dimension menuZone=new Dimension(325,650);
 
     public ContextualMenu(final MasterController controller, String menuName){
         this.menuName=menuName;
-        backgroundImage=Toolkit.getDefaultToolkit().getImage(menuName+ ".jpg");
 
         this.setSize(menuZone);
 
@@ -32,6 +30,5 @@ public abstract class ContextualMenu extends JComponent {
     @Override
     public void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
-        graphics.drawImage(backgroundImage, 0, 0, this);
     }
 }

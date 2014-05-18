@@ -46,6 +46,7 @@ public class MasterController extends Thread{
         Case targetCase = MapData.getCase(targetPosition);
         targetCase.setOccupant(null);
         MapController.getAnimalList().remove(deadAnimal);
+        MapData.addNewsList(deadAnimal.getName() + " est malheureusement décédé!!");
         deadAnimal=null;
     }
     public void victims(){
