@@ -6,11 +6,16 @@ import ModelPkg.MapData;
  * Created by Xav on 08/05/14.
  */
 public class GameEventSunnyWeather extends InstantaneousGameEvent {
-
+    /**
+     * Constructeur de SunnyWeather. Il s'agit des événements neutres
+     */
     public GameEventSunnyWeather() {
         super(GameEventType.NEUTRAL);
     }
 
+    /**
+     * Méthode pour les événements neutres.
+     */
     @Override
     public void firstTimeActivation() {
         if (getGravity()==1){
@@ -18,7 +23,7 @@ public class GameEventSunnyWeather extends InstantaneousGameEvent {
             //TODO add appropriate tvanews
         }
         else if (getGravity()==2){
-            MapData.addNewsList("Au moins il fait soleil!");
+            MapData.addNewsList("Il fait un peu nuageux aujourd'hui!");
 
             //TODO warn about UV rays
         }

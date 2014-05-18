@@ -13,7 +13,7 @@ public class InstantaneousHumanitarianHelp extends InstantaneousGameEvent {
     private MasterController masterController;
 
     /**
-     * Constructeur pour l'événement d'aide humanitaire
+     * Constructeur pour l'événement d'aide humanitaire. Il s'agit d'un bon événement instantanné.
      * @param masterController constructeur principal qui va être utiliser pour modifier la quantité de nourriture du joueur.
      */
     public InstantaneousHumanitarianHelp(MasterController masterController) {

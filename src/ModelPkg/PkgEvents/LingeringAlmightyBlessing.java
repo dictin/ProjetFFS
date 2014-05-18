@@ -1,9 +1,9 @@
 package ModelPkg.PkgEvents;
 
-/**
- * Created by Xav on 08/05/14.
- */
 public class LingeringAlmightyBlessing extends LingeringGameEvents {
+    /**
+     * Constructeur pour l'événement de bénédiction des dieux. Il s'agit d'un bon événement avec une durée.
+     */
     public LingeringAlmightyBlessing() {
         super(GameEventType.GOOD, 2);
     }

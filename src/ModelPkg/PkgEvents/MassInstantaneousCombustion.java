@@ -11,11 +11,18 @@ import java.util.ArrayList;
  */
 public class MassInstantaneousCombustion extends InstantaneousGameEvent{
     private MasterController masterController;
+
+    /**
+     * Constructeur pour l'événement de chaleur extrême. Cet événement est mauvais et instantanné.
+     * @param masterController
+     */
     public MassInstantaneousCombustion(MasterController masterController) {
         super(GameEventType.BAD);
         this.masterController = masterController;
     }
-
+/**
+ * Méthode qui élimine une certaine quantité de fourmilier
+ */
     @Override
     public void firstTimeActivation() {
         int victimNumber=getGravity()*2;
