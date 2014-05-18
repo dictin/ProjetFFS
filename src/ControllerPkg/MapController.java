@@ -13,16 +13,27 @@ import java.util.ArrayList;
 public class MapController {
 
 
-
+    /**
+     * Constructeur de la création de la carte
+     */
     public MapController(){
         MapData.initialize();
     }
-
+//TODO What to write here?
+    /**
+     *
+     * @param visualCase
+     */
     public void addObserver(VisualCase visualCase){
         Case selectedCase = MapData.getCase(visualCase.getCaseCoord());
         selectedCase.addObserver(visualCase);
     }
 
+    /**
+     * Méthode pour vérifier si une case du terrain est occupée
+     * @param point position de la case à vérifier
+     * @return l'image de la case si elle est occupée, sinon retourne null
+     */
     public Image getOccupancy(Point point){
         Case selectedCase = MapData.getCase(point);
         if (selectedCase.getOccupant()!=null){
@@ -33,15 +44,28 @@ public class MapController {
         }
     }
 
+    /**
+     * Méthode pour avoir l'image d'un objet sauvage sur le terrain
+     * @param point position de la case de l'objet sauvage
+     * @return l'image de l'objet sauvage
+     */
     public Image getVisualWildObject(Point point){
         Case selectedCase = MapData.getCase(point);
         return selectedCase.getWildObject().getSprite();
     }
 
+    /**
+     * Méthode pour avoir la liste des animaux en vie
+     * @return la liste des animaux en vie
+     */
     public static ArrayList<Animal> getAnimalList(){
         return MapData.getAnimalList();
     }
 
+    /**
+     * Méthode pour retirer l'odeur d'un objet détruit
+     * @param destroyedObject l'objet détruit (soit un animal soit de la nourriture)
+     */
     public void removeSmellSourceOf(Object destroyedObject) {
         Animal deadAnimal=null;
         FoodSource depletedFoodSource=null;

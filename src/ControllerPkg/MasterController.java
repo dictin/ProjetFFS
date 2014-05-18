@@ -28,7 +28,10 @@ public class MasterController extends Thread{
     private int eventFrequency=300;
     private EventController eventRoller;
 
-
+    /**
+     * Constructeur du controller principal
+     * @param FPS vitesse du jeux
+     */
     public MasterController(int FPS){
         Name.initialize();
         eventRoller=new EventController(this);
@@ -40,6 +43,10 @@ public class MasterController extends Thread{
 
     }
 
+    /**
+     * Méthode pour supprimer un animal mort
+     * @param deadAnimal l'animal mort
+     */
     public static void disposeAnimal(Animal deadAnimal){
         mapController.removeSmellSourceOf(deadAnimal);
         Point targetPosition=deadAnimal.getPosition();
@@ -49,10 +56,18 @@ public class MasterController extends Thread{
         MapData.addNewsList(deadAnimal.getName() + " est malheureusement décédé!!");
         deadAnimal=null;
     }
+
+    /**
+     * Méthode pour diminuer de 1 la population et augmenter de 1 la quantitié de victimes
+     */
     public void victims(){
         this.playerDataController.newVictime();
     }
 
+    //TODO What to write here?
+    /**
+     *
+     */
     @Override
     public void run(){
         while (true){
@@ -121,23 +136,41 @@ public class MasterController extends Thread{
         }
     }
 
-
+    /**
+     * Méthode pour avoir le temps
+     * @return le temps
+     */
     public static int getTime(){
         return time;
     }
-
+//Delete?
+    /**
+     *
+     */
     public void openMainMenu(){
         mUI.popMenu("main_menu");
     }
 
+    /**
+     * Méthode pour modifier l'interface de l'utilisateur
+     * @param mUI nouvelle interface
+     */
     public void setMUI(MasterUI mUI){
         this.mUI=mUI;
     }
 
+    //Delete?
+    /**
+     *
+     */
     public void closeAllMenus(){
         mUI.closeMenus();
     }
 
+    /**
+     * Méthode pour vérifier quel bouton du menu a été clické
+     * @param menuButtonName nom du bouton clické
+     */
     public void menuButtonClick(String menuButtonName){
 
         if (menuButtonName=="quit_button"){
@@ -149,41 +182,79 @@ public class MasterController extends Thread{
         }
     }
 
+    /**
+     * Méthode pour déclencher le menu principal
+     */
     public void enterMenuTriggerZone(){
         mUI.popMenu("main_menu");
     }
 
+    //Delete?
+    /**
+     *
+     */
     public void pointAtVisualCase(){
         mUI.setGridToActive();
         mUI.showCaseContents();
     }
-
+    //Delete?
+    /**
+     *
+     * @param caseCoord
+     */
     public void clickVisualCase(Point caseCoord){
 
     }
 
+    /**
+     * Méthode pour activé la grille
+     */
     public void setGridToActive(){
         this.mUI.setGridToActive();
     }
 
+    /**
+     * Méthode pour avoir le controller des objets
+     * @return le controller des objets
+     */
     public ItemController getItemController() {
         return itemController;
     }
 
+    /**
+     * Méthode pour avoir les information sur le magasin
+     * @return le controller sur les information du magasin
+     */
     public ShopInfoController getShopInfoController() {
         return shopInfoController;
     }
 
+    /**
+     * Méthode pour avoir le contrôleur de la carte
+     * @return le  contrôleur de la carte
+     */
     public MapController getMapController() {
         return mapController;
     }
 
+    /**
+     * Méthode pour avoir le contrôleur des questions du Chaman
+     * @return le  contrôleur des questions du Chaman
+     */
     public QuestionChamanController getChamanController() { return chamanController;}
 
+    /**
+     * Méthode pour avoir le  contrôleur des données du joueur
+     * @return le  contrôleur des données du joueur
+     */
     public PlayerDataController getPlayerDataController() {
         return playerDataController;
     }
 
+    /**
+     * Méthode qui vérifie quels animaux doivent bougés et les ajoutent à une liste. Cette liste est ensuite parcouru
+     * en donnant une nouvelle position aux fourmiliers.
+     */
     public void moveAnimals(){
         ArrayList<Animal> animalArrayList = MapData.getAnimalList();
         ArrayList<Animal> toMoveAnimals = new ArrayList<>();
@@ -213,6 +284,10 @@ public class MasterController extends Thread{
         }
     }
 
+    /**
+     * Méthode pour supprimer un objet sauvage
+     * @param target position de l'objet à détruire
+     */
     public void disposeWildObject(Point target) {
         long defunctSmellID=MapData.getCase(target).getWildObject().getSmellSource().getID();
 
@@ -241,6 +316,10 @@ public class MasterController extends Thread{
 
         MapData.getCase(target).setWildObject(new WildObject(WildObject.EMPTY_ID, true));
     }
+
+    /**
+     * Méthode pour supprimer tous les fourmiliers de la carte (utilisé lors de la fin d'un niveau)
+     */
     public void removeAllFourmilier(){
         ArrayList<Animal> animalArrayList = MapData.getAnimalList();
         while(animalArrayList.size() !=0){
@@ -249,6 +328,11 @@ public class MasterController extends Thread{
 
         }
     }
+    //Delete?
+
+    /**
+     *
+     */
         public static void checkIfDeadFourmilier(){
         ArrayList<Animal> animalArrayList = MapData.getAnimalList();
         ArrayList<Animal> animalArrayListTemporaire = new ArrayList<>();

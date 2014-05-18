@@ -1,7 +1,5 @@
 package ControllerPkg;
 
-
-
 import ModelPkg.MapData;
 import ModelPkg.Smell;
 import ViewPkg.VisualCase;
@@ -10,12 +8,15 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-
 public class VisualCaseHandler implements MouseListener {
 
 
     MasterController controller;
-
+//TODO What to write here?
+    /**
+     *
+     * @param controller contrôleur principal
+     */
     public VisualCaseHandler(MasterController controller){
         this.controller = controller;
     }

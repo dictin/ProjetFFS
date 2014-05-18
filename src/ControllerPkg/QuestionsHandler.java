@@ -13,13 +13,21 @@ public class QuestionsHandler implements MouseListener{
     private Color answerColor;
     private MasterController controller;
 
-
+    /**
+     * Constructeur du contrôleur des réponses aux questions du Chaman
+     * @param actualQuestion question actuelle
+     * @param controller contrôleur principal
+     */
     public QuestionsHandler(QuestionChaman actualQuestion, MasterController controller){
         this.actualQuestion = actualQuestion;
         this.controller = controller;
-
     }
 
+    /**
+     * Méthode pour gérer lorsque le joueur click sur une réponse. ELle vérifie si c'est une bonne réponse ou non et ajuste
+     * le karma en conséquence
+     * @param e source du label clické
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         answerClick = (JLabel)e.getSource();
@@ -46,6 +54,10 @@ public class QuestionsHandler implements MouseListener{
 
     }
 
+    /**
+     * Méthode pour modifier la couleur du label d'une réponse lorsque la souri entre dans le label
+     * @param e source du label
+     */
     @Override
     public void mouseEntered(MouseEvent e) {
         answerClick = (JLabel)e.getSource();
@@ -53,6 +65,10 @@ public class QuestionsHandler implements MouseListener{
         answerClick.setBackground(Color.PINK);
     }
 
+    /**
+     * Méthode pour remmettre le label à sa couleur de base lorsque la souri quitte le label
+     * @param e source du label
+     */
     @Override
     public void mouseExited(MouseEvent e) {
         answerClick.setBackground(answerColor);

@@ -8,9 +8,10 @@ import java.util.Random;
 
 public class QuestionChamanController {
 
-    public QuestionChamanController(){
-
-    }
+    /**
+     * Méthode qui choisi aléatoirement une question du Chaman et qui vérifie que cette question n'a pas déjà été affichée
+     * @return la question choisi aléatoirement
+     */
     public QuestionChaman getQuestion(){
         int noQuestion;
         do{

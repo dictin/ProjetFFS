@@ -12,10 +12,18 @@ public class ShopListHandler implements ListSelectionListener {
 
     private ShopItemInfoData shopItemInfoData;
 
+    /**
+     * Constructeur du contrôleur de la liste d'objet du magasin
+     * @param itemInfoData information sur les objets du magasin
+     */
     public ShopListHandler(ShopItemInfoData itemInfoData){
         this.shopItemInfoData = itemInfoData;
     }
 
+    /**
+     * Méthode pour modifier les informations du magasin lorsque le joueur sélectionne un autre objet
+     * @param e source du nouvel objet sélectionné
+     */
     @Override
     public void valueChanged(ListSelectionEvent e) {
         JList<String> list = (JList<String>) e.getSource();

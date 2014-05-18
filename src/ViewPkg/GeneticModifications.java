@@ -2,7 +2,6 @@ package ViewPkg;
 
 
 import ControllerPkg.MasterController;
-import ControllerPkg.SliderListener;
 import ModelPkg.Laboratory;
 import ModelPkg.MapData;
 import ModelPkg.PlayerData;
