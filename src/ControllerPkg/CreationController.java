@@ -14,10 +14,18 @@ public class CreationController implements ActionListener {
     private int animalKind = 0;
     private Fourmillier spawnedFourmilier;
 
+    /**
+     * Constructeur pour le controller des créations de fourmiliers
+     * @param masterController controller principale
+     */
     public CreationController(final MasterController masterController){
         this.masterController = masterController;
     }
 
+    /**
+     *Pour gérer lorsqu'un fourmilier est sélectionné dans le menu création.
+     * @param e source
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         //MapData.getCase(coords).setOccupant(new Fourmillier(0, new int[]{13,13,13}, "Myrmidon"));
@@ -74,7 +82,7 @@ public class CreationController implements ActionListener {
                 MapData.getCase(spawnPoint).setOccupant(spawnedFourmilier);
                 this.masterController.getPlayerDataController().newBorn();
                 this.masterController.getPlayerDataController().spendFood(MapData.getCostFourmilier(animalKind));
-                MapData.addNewsList(spawnedFourmilier.getName() + " est né!!");
+               // MapData.addNewsList(spawnedFourmilier.getName() + " est né!!");
             }
             else{
                 JOptionPane.showMessageDialog(null, "Nourriture insuffisante");

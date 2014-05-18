@@ -80,6 +80,7 @@ public class MasterController extends Thread{
 
                 }
 
+
                 if (time!=0&&time%smellDecayTime==0){
                 MapData.updateSmells();
                 }
@@ -112,7 +113,7 @@ public class MasterController extends Thread{
                 mUI.actualiser();
                 mUI.invalidate();
                 mUI.repaint();
-
+               checkIfDeadFourmilier();
             } catch (InterruptedException ex) {
                 System.out.println("Interrupted Exception: ");
                 ex.printStackTrace();
@@ -120,7 +121,6 @@ public class MasterController extends Thread{
         }
     }
 
-//NOTE DE CHLOÉ: Cette méthode n'est plus nécessaire parce qu'elle existe déjà dans la classe Time. Est-ce que c'est ok de la supprimée?
 
     public static int getTime(){
         return time;
@@ -249,5 +249,25 @@ public class MasterController extends Thread{
 
         }
     }
+        public void checkIfDeadFourmilier(){
+        ArrayList<Animal> animalArrayList = MapData.getAnimalList();
+        ArrayList<Animal> animalArrayListTemporaire = new ArrayList<>();
+        while(animalArrayList.size() !=0){
+            System.out.println("longeur: "+ animalArrayList.size());
+            if(animalArrayList.get(0).getHealth() >0){
+                System.out.println("Not dead!");
+                animalArrayListTemporaire.add(animalArrayList.remove(0));
+            }
+            else{
+                System.out.println("Dead to remove");
+                disposeAnimal(animalArrayList.remove(0));
+            }
+        }
+        while(animalArrayListTemporaire.size() != 0){
+            System.out.println("Put it back!");
+            animalArrayList.add(animalArrayListTemporaire.remove(0));
+        }
+    }
+    }
 
-}
+

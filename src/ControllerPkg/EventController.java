@@ -5,9 +5,6 @@ import ModelPkg.PkgEvents.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Created by Xav on 08/05/14.
- */
 public class EventController {
 
     private MasterController masterController;
@@ -18,6 +15,10 @@ public class EventController {
     private int badThreshold=50;
     private int goodThreshold=150;
 
+    /**
+     * Constructeur du controller des événements
+     * @param masterController controller principal
+     */
     public EventController(final MasterController masterController){
         this.masterController=masterController;
         goodGameEvents.add(new LingeringAlmightyBlessing());
@@ -50,6 +51,7 @@ public class EventController {
             nextGameEvent =chooseRandomEvent(neutralGameEvents);
             masterController.getPlayerDataController().increaseNextEventGravity();
         }
+        nextGameEvent = chooseRandomEvent(goodGameEvents);
         nextGameEvent.setGravity(eventFinalGravity);
         return nextGameEvent;
     }

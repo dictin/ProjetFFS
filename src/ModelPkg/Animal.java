@@ -164,7 +164,7 @@ public abstract class Animal {
     public void decreaseHealth(int amount){
         this.health-= amount;
         if(this.isDead()){
-            MasterController.disposeAnimal(this);
+           // MasterController.disposeAnimal(this);
             MapData.addNewsList(this.getName() + " est malheureusement décédé!!");
             masterController.victims();
         }
@@ -407,7 +407,6 @@ public abstract class Animal {
     }
 
     private void restore(){
-        System.out.println("nom");
         while (this.carriedFood > 0 && this.health < this.getAdjustedMaxHealth()){
                 carriedFood--;
                 if(this.health < 90){

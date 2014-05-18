@@ -12,6 +12,11 @@ public class BuyButtonHandler implements ActionListener {
     JList<String> list;
     ItemController itemController;
 
+    /**
+     * Constructeur pour le controller du bouton d'achat dans le magasin
+     * @param list liste des objets dans le magasin
+     * @param controller le controller principale
+     */
     public BuyButtonHandler(JList<String> list, final MasterController controller){
         super();
         this.masterController = controller;
@@ -20,6 +25,11 @@ public class BuyButtonHandler implements ActionListener {
 
 
     }
+
+    /**
+     * Pour gérer lorsque le bouton d'achat est clické dans le magasin
+     * @param e source
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         int selectedIndex = this.list.getSelectedIndex();
