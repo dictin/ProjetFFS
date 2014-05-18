@@ -113,7 +113,6 @@ public class MasterController extends Thread{
                 mUI.actualiser();
                 mUI.invalidate();
                 mUI.repaint();
-               checkIfDeadFourmilier();
             } catch (InterruptedException ex) {
                 System.out.println("Interrupted Exception: ");
                 ex.printStackTrace();
@@ -249,7 +248,7 @@ public class MasterController extends Thread{
 
         }
     }
-        public void checkIfDeadFourmilier(){
+        public static void checkIfDeadFourmilier(){
         ArrayList<Animal> animalArrayList = MapData.getAnimalList();
         ArrayList<Animal> animalArrayListTemporaire = new ArrayList<>();
         while(animalArrayList.size() !=0){

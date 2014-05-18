@@ -28,6 +28,11 @@ public class EventController {
 
     }
 
+    /**
+     * Méthode pour déterminer si l'événement est positif, négatif ou neutre. Un événement aléatoire de cette cathégorie
+     * est ensuite sélectionner.
+     * @return le prochain événement
+     */
     public GameEvent whatIsTheWeather(){
         int rollResult=rnd.nextInt(200)+1;
 
@@ -51,11 +56,16 @@ public class EventController {
             nextGameEvent =chooseRandomEvent(neutralGameEvents);
             masterController.getPlayerDataController().increaseNextEventGravity();
         }
-        nextGameEvent = chooseRandomEvent(goodGameEvents);
         nextGameEvent.setGravity(eventFinalGravity);
         return nextGameEvent;
     }
 
+    /**
+     * Méthode qui choisi un chiffre aléatoire pour déterminer le prochain événement. Les limites du random sont
+     * déterminées par la longeure de la liste d'événements.
+     * @param appropriateGameEventList la liste d'événement dans laquelle on veut un événement aléatoire.
+     * @return un événement aléatoire de la liste
+     */
     public GameEvent chooseRandomEvent(ArrayList<GameEvent> appropriateGameEventList){
         int eventIndex=rnd.nextInt(appropriateGameEventList.size());
         return appropriateGameEventList.get(eventIndex);

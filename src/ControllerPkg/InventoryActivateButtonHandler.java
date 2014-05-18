@@ -13,14 +13,23 @@ public class InventoryActivateButtonHandler implements ActionListener {
     int indexOfItemToBuy;
     private int buttonType;
 
+    /**
+     * Constructeur du controller pour les boutons de l'inventaire
+     * @param masterController le controller principal
+     * @param associatedList liste qui est associé au bouton (soit les objets consommables, soit les objets permanents)
+     * @param buttonType type du bouton clické (0 ou 1)
+     */
     public InventoryActivateButtonHandler(MasterController masterController, JList<String> associatedList, int buttonType){
         this.masterController = masterController;
         this.associatedList = associatedList;
         this.buttonType = buttonType;
 
-
     }
 
+    /**
+     * Pour gérer lorsque les boutons sont clickés.
+     * @param e source du bouton clické
+     */
     @Override
     public void actionPerformed(ActionEvent e){
         if (associatedList.getListSelectionListeners()[0] instanceof InventoryListHandler){

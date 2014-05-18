@@ -28,7 +28,7 @@ public class MassInstantaneousCombustion extends InstantaneousGameEvent{
         else{
             int populationAfter = animalArrayList.size()-victimNumber;
             while((animalArrayList.size()) != populationAfter){
-                masterController.disposeAnimal(animalArrayList.remove(0));
+              masterController.disposeAnimal(animalArrayList.remove(0));
             }
         }
 

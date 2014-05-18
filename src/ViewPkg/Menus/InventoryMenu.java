@@ -48,7 +48,7 @@ public class InventoryMenu extends ContextualMenu implements Observer{
         this.consumableShopList.setFixedCellHeight(25);
         this.consumableShopList.setSize(new Dimension(300, 220));
         this.consumableShopList.setLocation(10, 12);
-       // this.consumableShopList.addListSelectionListener(new ShopListHandler(controller.getShopInfoController().getShopItemInfoData()));
+        // this.consumableShopList.addListSelectionListener(new ShopListHandler(controller.getShopInfoController().getShopItemInfoData()));
         this.consumableShopList.addListSelectionListener(new InventoryListHandler(masterController));
 
 
