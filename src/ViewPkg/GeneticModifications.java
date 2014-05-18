@@ -238,7 +238,7 @@ public class GeneticModifications extends JLabel {
     }
 
     public void reset(){
-        Laboratory.setReset(true);
+
         Laboratory.setCost(0);
         cost.setText("Coût futur de cette nouvelle race: " +  100);
         speedEndurance.setValue(Laboratory.getSpeedEnduranceBefore());

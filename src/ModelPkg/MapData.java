@@ -27,6 +27,9 @@ public class MapData {
     private static int[] fourmilierFixRaxceStats3 = new int[]{13,13,13};
     private static int [] costFourmilier = new int[]{100,100,100,100};
 
+    /**
+     * Méthode qui actualise les odeurs dans toutes les cases
+     */
     public static void updateSmells() {
 
         Case selectedCase = null;
@@ -70,8 +73,13 @@ public class MapData {
         }
 
     }
-
-
+//TODO What to write here
+    /**
+     * Méthode qui
+     * @param smell
+     * @param selectedCase
+     * @return
+     */
     public static int getSmellThreshold(Smell smell, Case selectedCase) {
         int threshold = 0;
         if (!selectedCase.getSortedSmellArrayList().isEmpty()) {
@@ -84,6 +92,10 @@ public class MapData {
         return threshold;
     }
 
+    /**
+     * Méthode qui vérifie si l'intensité d'une source est assez grande pour disperser son odeur
+     * @param selectedCase case d'où provient la source
+     */
     public static void disperseSmellSources(Case selectedCase) {
         for (int i = 0; i < selectedCase.getSortedSmellSourceArrayList().size(); i++) {
             Smell smell = selectedCase.getSortedSmellSourceArrayList().get(i).clone();
@@ -94,6 +106,11 @@ public class MapData {
         }
     }
 
+    /**
+     * Méthode qui disperse l'odeur d'une source aux cases autours de la source
+     * @param sourceCase Source de l'odeur
+     * @param smell Odeur de la case
+     */
     public static void disperseSmell(Case sourceCase, Smell smell) {
 
         Case[][] subsection = getSubsection2(sourceCase.getPosition());
@@ -129,6 +146,10 @@ public class MapData {
         }
     }
 
+    /**
+     *Méthode qui retourne une liste avec les cases qui ont des sources d'odeur
+     * @return liste de case qui sont des sources d'odeur
+     */
     private static ArrayList<Case> getCasesWithSmellSources() {
         ArrayList<Case> caseThatHaveASourceSmell = new ArrayList<Case>();
         for (int i = 0; i < map.length; i++) {
@@ -142,6 +163,9 @@ public class MapData {
         return caseThatHaveASourceSmell;
     }
 
+    /**
+     * Méthode qui place aléatoirement des objets sauvages sur la carte et qui place la base au milieu
+     */
     public static void initialize() { //8% arbre 2% roche 3% eau 2% trou
         Random random = new Random();
         int maxLength = 30;
@@ -179,7 +203,13 @@ public class MapData {
 
 
     }
-
+//Delete?
+    /**
+     *
+     * @param subsection
+     * @param smellThreshold
+     * @return
+     */
     public static Case[][] getSmellableSubsection(Case[][] subsection, int smellThreshold){
         Case[][] smellableSubsection=new Case[3][3];
         for (int i=0; i<subsection.length;i++){
@@ -200,7 +230,12 @@ public class MapData {
         }
         return subsection;
     }
-
+//TODO What to write here?
+    /**
+     *
+     * @param origin
+     * @return
+     */
     public static Case[][] getSubsection2(Point origin) {
         Case[][] subsection = new Case[3][3];
         for (int i = 0; i < 3; i++) {
@@ -217,7 +252,10 @@ public class MapData {
     }
 
 
-
+    /**
+     * Méthode qui retourne la position où a été créé le fourmilier
+     * @return position du fourmilier
+     */
     public static Point getSpawnPoint() {
         Point spawn = null;
         for (int i = -1; i < 3; i++) {
@@ -232,67 +270,125 @@ public class MapData {
         return spawn;
     }
 
+    /**
+     * Méthode qui retourne une case à une position donnée
+     * @param point position de la case demandé
+     * @return la case à la position demandé
+     */
     public static Case getCase(Point point) {
         return MapData.map[point.x][point.y];
 
     }
 
+    /**
+     * Méthode qui ajoute des information à la liste de nouvelles
+     * @param news information à afficher
+     */
     public static void addNewsList(String news) {
         newsList.add(news);
     }
 
+    /**
+     * Méthode qui retourne la liste de nouvelles
+     * @return liste des nouvelles
+     */
     public static ArrayList<String> getNewsList() {
         return newsList;
     }
 
+    /**
+     * Méthode qui retourne les stats du fourmilier de base
+     * @return un tableau avec les statistiques du fourmilier de base
+     */
     public static int[] getFourmilierActualRaceStats1Tab() {
     return fourmilierActualRaceStats;
     }
-    public static void setFourmilierActualRaceStats(int position, int stats) {
-        fourmilierActualRaceStats[position] = stats;
-    }
+
+    /**
+     * Méthode qui retourne la statistique du fourmilier de base
+     * @param position position de la statistique dans le tableau de statistique
+     * @return la statistique
+     */
     public static int getFourmilierActualRaceStats(int position) {
         return fourmilierActualRaceStats[position];
     }
 
+    /**
+     * Méthode qui retourne les statistiques de la race1
+     * @return un tableau avec des statistiques
+     */
     public static int[] getFourmilierFixRaceStats1() {
         return fourmilierFixRaceStats1;
     }
 
+    /**
+     * Méthode qui modifie les statistique de la race1
+     * @param fourmilierFixRaceStats1 nouvelles statistiques de la race1
+     */
     public static void setFourmilierFixRaceStats1(int[] fourmilierFixRaceStats1) {
         MapData.fourmilierFixRaceStats1 = fourmilierFixRaceStats1;
     }
 
+    /**
+     * Méthode qui retourne les statistiques de la race2
+     * @return un tableau avec des statistiques
+     */
     public static int[] getFourmilierFixRaceStats2() {
         return fourmilierFixRaceStats2;
     }
-
+    /**
+     * Méthode qui modifie les statistique de la race2
+     * @param fourmilierFixRaceStats2 nouvelles statistiques de la race2
+     */
     public static void setFourmilierFixRaceStats2(int[] fourmilierFixRaceStats2) {
         MapData.fourmilierFixRaceStats2 = fourmilierFixRaceStats2;
     }
-
+    /**
+     * Méthode qui retourne les statistiques de la race3
+     * @return un tableau avec des statistiques
+     */
     public static int[] getFourmilierFixRaxceStats3() {
         return fourmilierFixRaxceStats3;
     }
-
-    public static void setFourmilierFixRaxceStats3(int[] fourmilierFixRaxceStats3) {
+    /**
+     * Méthode qui modifie les statistique de la race3
+     * @param fourmilierFixRaceStats3 nouvelles statistiques de la race3
+     */
+    public static void setFourmilierFixRaxceStats3(int[] fourmilierFixRaceStats3) {
         MapData.fourmilierFixRaxceStats3 = fourmilierFixRaxceStats3;
     }
 
-    public static int[] getCostFourmilierTab() {
-        return costFourmilier;
-    }
-
+    /**
+     * Méthode qui modifie et qui retourne un nouvel identification
+     * @return indentification
+     */
     public static long getUniqueID(){
         uniqueIDCounter++;
         return uniqueIDCounter;
     }
+
+    /**
+     * Méthode qui modifie le coût d'une race de fourmilier
+     * @param position position de la race à modifier le prix dans le tableau des prix
+     * @param newCost nouveau prix des fourmiliers de cette race
+     */
     public static void setCostFourmilier(int position, int newCost) {
         MapData.costFourmilier[position] = newCost;
     }
+
+    /**
+     * Méthode qui retourne le coût de la race de fourmilier à la position dans le tableau de prix
+     * @param position position de la race à modifier le prix dans le tableau des prix
+     * @return
+     */
     public static int getCostFourmilier(int position){
         return costFourmilier[position];
     }
+
+    /**
+     * Méthode qui enlève tous les objets sauvages de la carte puis qui remplie la map avec des nouveaux objets sauvages à
+     * des endroits différents.
+     */
     public static void changeLevel(){
         System.out.println("Trying to update");
         Case selectedCase = null;

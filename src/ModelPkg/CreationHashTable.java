@@ -4,9 +4,14 @@ import javax.swing.*;
 import java.util.Hashtable;
 
 public class CreationHashTable {
-
+//TODO What iz this (+ javadoc)
     private static Hashtable<JButton,String> creationHashtable = new Hashtable<JButton, String>();
 
+    /**
+     *
+     * @param jButtons
+     * @param strings
+     */
     public static void initialize(JButton[] jButtons, String[] strings){
         int length = jButtons.length;
 
@@ -15,6 +20,11 @@ public class CreationHashTable {
         }
     }
 
+    /**
+     *
+     * @param jButton
+     * @return
+     */
     public static String getAssociatedValue(JButton jButton){
         return CreationHashTable.creationHashtable.get(jButton);
     }
