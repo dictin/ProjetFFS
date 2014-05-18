@@ -27,6 +27,7 @@ public class CreationController implements ActionListener {
         Point spawn = MapData.getSpawnPoint();
 
         if (spawn != null){
+            enougthFood = true;
             animalType = CreationHashTable.getAssociatedValue(source);
             Point spawnPoint=MapData.getSpawnPoint();
             long uniqueID = System.currentTimeMillis();
