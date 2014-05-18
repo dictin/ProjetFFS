@@ -6,9 +6,7 @@ import ModelPkg.MapData;
 
 import java.util.ArrayList;
 
-/**
- * Created by Xav on 13/05/14.
- */
+
 public class MassInstantaneousCombustion extends InstantaneousGameEvent{
     private MasterController masterController;
 
