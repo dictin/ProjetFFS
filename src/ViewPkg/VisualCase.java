@@ -53,6 +53,9 @@ public class VisualCase extends JComponent implements Observer {
         graphics.drawRect(0, 0, CASE_SIDE_PIXEL_SIZE-1, CASE_SIDE_PIXEL_SIZE-1);
     }
 
+    /**
+     * Cette méthode met à jour les informations de la case visuelle avec celles de son homologue du Model
+     */
     @Override
     public void update() {
         this.backgroundImage = controller.getMapController().getVisualWildObject(caseCoord);

@@ -19,11 +19,7 @@ public class MapController {
     public MapController(){
         MapData.initialize();
     }
-//TODO What to write here?
-    /**
-     *
-     * @param visualCase
-     */
+
     public void addObserver(VisualCase visualCase){
         Case selectedCase = MapData.getCase(visualCase.getCaseCoord());
         selectedCase.addObserver(visualCase);

@@ -43,11 +43,7 @@ public class PlayerDataController {
     public ArrayList<String> getPermanentInventory() {
         return playerData.getConsumablesInventory();
     }
-//TODO What to write here?
-    /**
-     *
-     * @param observer
-     */
+
     public void addObserver(Observer observer){
         this.playerData.addObserver(observer);
     }

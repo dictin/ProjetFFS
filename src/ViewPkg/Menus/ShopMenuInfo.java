@@ -79,6 +79,9 @@ public class ShopMenuInfo extends JComponent implements Observer {
         return returnValue;
     }
 
+    /**
+     * Cette méthode met à jour les informations relatives aux joueurs selon celles récupérées du modèle
+     */
     @Override
     public void update() {
 
