@@ -115,17 +115,16 @@ public class MasterController extends Thread{
                         getPlayerDataController().setCurrentEvent(new GameEventSunnyWeather());
                     }
                     else{
+                        if (getPlayerDataController().getCurrentEvent() instanceof LingeringGameEvents){
+                            ((LingeringGameEvents)getPlayerDataController().getCurrentEvent()).lingeringActivation();
+                        }
                         int duration=getPlayerDataController().getCurrentEvent().getDuration();
                         if (duration==0){
-                            if (getPlayerDataController().getCurrentEvent() instanceof LingeringHackTroll){
-                                this.activateHackView(false);
-                            }
                             getPlayerDataController().setCurrentEvent(eventRoller.whatIsTheWeather());
                             getPlayerDataController().getCurrentEvent().firstTimeActivation();
                         }
                         else{
                             getPlayerDataController().getCurrentEvent().decreaseDuration();
-                            ((LingeringGameEvents)getPlayerDataController().getCurrentEvent()).lingeringActivation();
                         }
                     }
                 }

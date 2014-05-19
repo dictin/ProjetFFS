@@ -21,7 +21,7 @@ public class EventController {
      */
     public EventController(final MasterController masterController){
         this.masterController=masterController;
-        goodGameEvents.add(new LingeringAlmightyBlessing(masterController));
+        goodGameEvents.add(new HolyFourmilierEvent(masterController));
         goodGameEvents.add(new InstantaneousHumanitarianHelp(masterController));
         neutralGameEvents.add(new GameEventSunnyWeather());
         badGameEvents.add(new MassInstantaneousCombustion(masterController));

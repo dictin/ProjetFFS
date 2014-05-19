@@ -5,6 +5,11 @@ public abstract class GameEvent {
     private GameEventType type;
     private String description; //Description qui va apparaître pour le joueur
     private int gravity=0;
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
     private int duration=0;
 
     /**
