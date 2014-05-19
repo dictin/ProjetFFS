@@ -73,7 +73,7 @@ public class QuestionData implements Observable {
     public static ArrayList<QuestionChaman> getQuestionList(){
         return questionList;
     }
-//Delete?
+
     /**
      *
      * @param i

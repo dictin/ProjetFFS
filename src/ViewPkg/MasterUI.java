@@ -56,6 +56,7 @@ public class MasterUI extends JLayeredPane implements Observer{
     private JLabel playerStatsBackground = new JLabel();
     private JLabel hackEvent = new JLabel();
     private ImageIcon myIcon = new ImageIcon("IMG/hackEvent.gif");
+    private boolean oneClickForTRoll = false;
     /**
      * Constructeur de l'interface d'utilisateur principale
      * @param masterController le contrôleur principal
@@ -79,6 +80,35 @@ public class MasterUI extends JLayeredPane implements Observer{
         hackEvent.setIcon(myIcon);
         this.add(hackEvent);
         hackEvent.setVisible(false);
+        hackEvent.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(!oneClickForTRoll){
+                MapData.addNewsList("Trololololololol!");
+                    oneClickForTRoll = true;
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
 
         hideMenus.setIcon(new ImageIcon("IMG/shaman.jpg"));
         hideMenus.setSize(320, 557);
@@ -231,7 +261,6 @@ public class MasterUI extends JLayeredPane implements Observer{
             this.add(selectedMenu, UILayers.MENUS.getLayerIndex());
             selectedMenu.setLocation(gridEndPointX + 25, 25);
             selectedMenu.setVisible(true);
-            System.out.println("Creation!");
         }
         else if (menuName.equals("shop_menu")){
             selectedMenu.setVisible(false);
@@ -240,8 +269,6 @@ public class MasterUI extends JLayeredPane implements Observer{
             this.add(selectedMenu, UILayers.MENUS.getLayerIndex());
             selectedMenu.setLocation(gridEndPointX + 25, 25);
             selectedMenu.setVisible(true);
-            System.out.println("potatost");
-            System.out.println(selectedMenu.getBackground());
         }
         else if (menuName.equals("inventory_menu")){
             selectedMenu.setVisible(false);
@@ -343,7 +370,7 @@ public class MasterUI extends JLayeredPane implements Observer{
                 duration = MasterController.getTime();
             }
         }
-        if(MasterController.getTime() -duration == 150){
+        if(MasterController.getTime() -duration == 100){
         mouvement = -1;
         }
         if(mouvement ==-1){
@@ -368,7 +395,6 @@ public class MasterUI extends JLayeredPane implements Observer{
             masterController.getPlayerDataController().setQuestionNumber(masterController.getPlayerDataController().getQuestionNumber()+1);
             if(masterController.getPlayerDataController().getQuestionNumber()%4 ==0){
                 masterController.getPlayerDataController().setItTimeForChaman(false);
-                System.out.println("Question over!");
                 questionLabel.setVisible(false);
                 this.remove(questionLabel);
                 Laboratory.setFinish(false);
@@ -436,6 +462,9 @@ public class MasterUI extends JLayeredPane implements Observer{
         hideMenus.setVisible(invisible);
     }
     public void hackEvent(boolean activate){
+        if(activate){
+            oneClickForTRoll = false;
+        }
     hackEvent.setVisible(activate);
     }
 }

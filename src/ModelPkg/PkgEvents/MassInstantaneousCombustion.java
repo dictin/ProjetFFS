@@ -23,7 +23,7 @@ public class MassInstantaneousCombustion extends InstantaneousGameEvent{
  */
     @Override
     public void firstTimeActivation() {
-        int victimNumber=getGravity()*2;
+        int victimNumber=getGravity();
         MapData.addNewsList("La température est de 100C! Tous aux abris!");
         ArrayList<Animal> animalArrayList = MapData.getAnimalList();
         if (animalArrayList.size() <= victimNumber){

@@ -82,16 +82,15 @@ public class MasterController extends Thread{
 
                 for(int y = 0; y<animalArrayList.size(); y++){
                     if(animalArrayList.get(y).getHealth()<=0){
-                        removeAllFourmilier();
-                        System.out.println("u dead");
-                       // deadAnimalArrayList.add(animalArrayList.get(y));
+                      //  removeAllFourmilier();
+                        deadAnimalArrayList.add(animalArrayList.get(y));
                     }
                 }
-               // removeOneFourmilier(deadAnimalArrayList);
+               removeOneFourmilier(deadAnimalArrayList);
                // deadAnimal();
 
-                if(this.getPlayerDataController().getNumberFoodToGo() <= 0){
-                //if(time == 300){
+                //if(this.getPlayerDataController().getNumberFoodToGo() <= 0){
+                if(time == 300){
                     JOptionPane.showMessageDialog(null, "Vous avez ramassé toute la nourriture nécessaire pour passer au prochain niveau.\n " +
                             "Le Chaman va maintenant vous posez 3 questions.");
                     this.getPlayerDataController().setTheLevelFinish(true);
@@ -158,7 +157,7 @@ public class MasterController extends Thread{
     public static int getTime(){
         return time;
     }
-//Delete?
+
     /**
      *
      */
@@ -174,7 +173,7 @@ public class MasterController extends Thread{
         this.mUI=mUI;
     }
 
-    //Delete?
+
     /**
      *
      */
@@ -289,11 +288,7 @@ public class MasterController extends Thread{
     public void disposeWildObject(Point target) {
         long defunctSmellID=MapData.getCase(target).getWildObject().getSmellSource().getID();
 
-        System.out.println("Test ids");
-        System.out.println("Target");
-        System.out.println(defunctSmellID);
 
-        System.out.println("Ids:");
         for (int i=0; i<MapData.MAP_SIZE; i++){
             for (int j=0; j<MapData.MAP_SIZE;j++){
                 Case selectedCase=MapData.getCase(new Point(i,j));
@@ -326,13 +321,12 @@ public class MasterController extends Thread{
     }
     public void removeOneFourmilier( ArrayList<Animal> animalArrayList){
         while(animalArrayList.size() !=0){
-            System.out.println("please disparait");
             MapData.addNewsList(animalArrayList.get(0).getName() + " est malheureusement décédé!!");
             disposeAnimal(animalArrayList.remove(0));
 
         }
         }
-    //Delete?
+
 
     /**
      *
@@ -341,18 +335,14 @@ public class MasterController extends Thread{
         ArrayList<Animal> animalArrayList = MapData.getAnimalList();
         ArrayList<Animal> animalArrayListTemporaire = new ArrayList<>();
         while(animalArrayList.size() !=0){
-            System.out.println("longeur: "+ animalArrayList.size());
             if(animalArrayList.get(0).getHealth() >0){
-                System.out.println("Not dead!");
                 animalArrayListTemporaire.add(animalArrayList.remove(0));
             }
             else{
-                System.out.println("Dead to remove");
                 disposeAnimal(animalArrayList.remove(0));
             }
         }
         while(animalArrayListTemporaire.size() != 0){
-            System.out.println("Put it back!");
             animalArrayList.add(animalArrayListTemporaire.remove(0));
         }
     }
@@ -366,7 +356,6 @@ public class MasterController extends Thread{
         }
         for(int y = 0; y < deadAnimalIndex.size(); y++){
             int animalIndex = deadAnimalIndex.get(y);
-            System.out.println("Goodbye");
             animalArrayList.remove(animalIndex);
         }
     while(!deadAnimalIndex.isEmpty()){

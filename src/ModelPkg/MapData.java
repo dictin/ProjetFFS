@@ -181,7 +181,6 @@ public class MapData {
                 } else if (caseType < 100) {
                     map[i][j] = new Case(new Point(i, j), null, new WildObject(WildObject.HOLE_ID, true));
                 } else {
-                    System.out.println("wtf");
                     map[i][j] = new Case(new Point(i, j), null, new WildObject(0, true));
                 }
             }
@@ -197,7 +196,7 @@ public class MapData {
 
 
     }
-//Delete?
+
     /**
      *
      * @param subsection
@@ -384,7 +383,6 @@ public class MapData {
      * des endroits différents.
      */
     public static void changeLevel(){
-        System.out.println("Trying to update");
         Case selectedCase = null;
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
@@ -418,11 +416,9 @@ public class MapData {
 
             }
         }
-        System.out.println("création de la base");
         map[hivePosition][hivePosition].setTerrain(new WildObject(WildObject.HIVE_ID, true));
         map[hivePosition+1][hivePosition].setTerrain(new WildObject(WildObject.HIVE_ID, true));
         map[hivePosition][hivePosition+1].setTerrain(new WildObject(WildObject.HIVE_ID, true));
         map[hivePosition+1][hivePosition+1].setTerrain(new WildObject(WildObject.HIVE_ID, true));
-        System.out.println("finish updating!");
     }
 }

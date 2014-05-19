@@ -80,7 +80,6 @@ public abstract class Animal {
         this.animalID = animalID;
 
         this.name +=this.nameGen;
-        System.out.println(this.name);
 
 
         this.team = team;
@@ -165,7 +164,7 @@ public abstract class Animal {
     public void setHealth(int health) {
         this.health = health;
     }
-//Delete?
+
     /**
      *
      * @param speed
@@ -173,14 +172,14 @@ public abstract class Animal {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-//Delete?
+
     /**
      *
      */
     public  void smellSurroundings(){
 
     }
-//Delete?
+
     /**
      *
      * @param location
@@ -188,7 +187,7 @@ public abstract class Animal {
     public void grab(Point location){
 
     }
-//Delete?
+
     /**
      *
      * @param location
@@ -211,7 +210,6 @@ public abstract class Animal {
 
         }*/
         if(this.isDead()){
-            System.out.println("In decreaseHealth");
             //MasterController.disposeAnimal(this);
             masterController.victims();
 
@@ -233,7 +231,7 @@ public abstract class Animal {
     public String getName() {
         return name;
     }
-//Delete?
+
     /**
      *
      * @return
@@ -243,7 +241,7 @@ public abstract class Animal {
     }
 
     //Number-Crunch Statistics------------------------------------------------------------------------------------------
-//Delete?
+
     /**
      *
      * @return
@@ -259,7 +257,7 @@ public abstract class Animal {
     public int getHealth() {
         return health;
     }
-//Delete?
+
     /**
      *
      * @return
@@ -267,7 +265,7 @@ public abstract class Animal {
     public int getSpeed() {
         return speed;
     }
-//Delete?
+
     /**
      *
      * @return
@@ -283,7 +281,7 @@ public abstract class Animal {
     public int getSmellSensitivity() {
         return smellSensitivity;
     }
-//Delete?
+
     /**
      *
      * @return
@@ -297,7 +295,7 @@ public abstract class Animal {
     public int getSmellStrengthStat() {
         return smellStrengthStat;
     }
-//Delete?
+
     /**
      *
      * @return
@@ -305,7 +303,7 @@ public abstract class Animal {
     public int getDefence() {
         return defence;
     }
-//Delete?
+
     /**
      *
      * @return
@@ -313,7 +311,7 @@ public abstract class Animal {
     public int getEndurance() {
         return endurance;
     }
-//Delete?
+
     /**
      *
      * @return
@@ -321,7 +319,7 @@ public abstract class Animal {
     public int getGrabQuantity() {
         return grabQuantity;
     }
-//Delete?
+
     /**
      *
      * @return
@@ -348,7 +346,7 @@ public abstract class Animal {
     public int getAdjustedSpeed(){
         return this.speed + this.masterController.getPlayerDataController().getStatMod(PlayerData.SPD_STATID);
     }
-//Delete?
+
     /**
      *
      * @return
@@ -356,7 +354,7 @@ public abstract class Animal {
     public int getAdjustedAttack(){
         return this.attack + this.masterController.getPlayerDataController().getStatMod(PlayerData.ATK_STATID);
     }
-//Delete?
+
     /**
      *
      * @return
@@ -372,7 +370,7 @@ public abstract class Animal {
     public int getAdjustedSmellThreshold(){
         return this.smellThreshold + (100/this.getAdjustedSmellSensitivity());
     }
-//Delete?
+
     /**
      *
      * @return
@@ -380,7 +378,7 @@ public abstract class Animal {
     public int getAdjustedSmellStrength(){
         return this.smellStrengthStat + this.masterController.getPlayerDataController().getStatMod(PlayerData.SMT_STATID);
     }
-//Delete?
+
     /**
      *
      * @return
@@ -443,7 +441,7 @@ public abstract class Animal {
             //eatCarriedFood();
         }
     }
-//Delete?
+
     /**
      *
      */
@@ -459,18 +457,14 @@ public abstract class Animal {
     public void activate(int time){
         VirtualFutureAction virtualFutureAction=null;
         if (this.health <= this.maxHealth/4){
-            //System.out.println(this.getName()+" is weak");
             if (this.carriedFood > 0){
-                //System.out.println(this.getName()+" is caryin");
                 this.restore();
                 virtualFutureAction = Behavior.skipTurn();
 
             }else {
                 if (Behavior.isCloseTo(WildObject.FOOD_ID, this.position)){
-                    //System.out.println(this.getName()+" is NFS");
                     virtualFutureAction = Behavior.eatAdjacentFood(this.position);
                 }else if (Behavior.doesItSmell(this.filterSmells(), SmellType.FOOD)){
-                    //System.out.println(this.getName()+" Smells delicious FS");
                     virtualFutureAction = Behavior.scanForWildObject(this.position, this.filterSmells(), SmellType.FOOD, MOST_INTENSE);
                 }
             }
@@ -478,24 +472,18 @@ public abstract class Animal {
         }
         //Cherche à rentrer.
         else if(this.carriedFood>0){
-            //System.out.println(this.getName()+" is caryin");
             if (Behavior.isCloseTo(WildObject.HIVE_ID, this.position)){
-                //System.out.println(this.getName()+" is NHive");
                 virtualFutureAction = Behavior.dropToHive(this.position);
             }
             else if(Behavior.doesItSmell(this.filterSmells(), SmellType.HIVE)){
-                //System.out.println(this.getName()+" smells hive");
                 virtualFutureAction = Behavior.scanForWildObject(this.position, this.filterSmells(), SmellType.HIVE, MOST_INTENSE);
             }
         }
         else {
-            //System.out.println(this.getName()+" is not weak nor caryin");
             if (Behavior.isCloseTo(WildObject.FOOD_ID, this.position)){
-                //System.out.println(this.getName()+" is NFS");
                 virtualFutureAction = Behavior.pickUpFood(this.position);
             }
             else if (Behavior.doesItSmell(this.filterSmells(), SmellType.FOOD)){
-                //System.out.println(this.getName()+" smells FS");
                 virtualFutureAction=Behavior.scanForWildObject(this.position, this.filterSmells(), SmellType.FOOD, MOST_INTENSE);
             }
         }
@@ -525,7 +513,6 @@ public abstract class Animal {
                     while (targetCase.getWildObject().getType()!=WildObject.EMPTY_ID&&this.getHealth()<100&&((FoodSource) targetCase.getWildObject()).getFoodQuantity()>0){
                         targetCase.decreaseFoodQuantity();
                         if(targetCase.emptyFoodSource()){
-                            System.out.println("When in doubt, sout");
                             masterController.disposeWildObject(target);
                         }
                         if (this.health>=(this.getAdjustedMaxHealth()-10)){
@@ -539,7 +526,6 @@ public abstract class Animal {
                 break;
             case GO_TO_LOCATION:
                 if (mission.getTargetLocation().x==mission.getTargetLocation().y&&mission.getTargetLocation().y==0){
-                    System.out.println("error");
                 }
                 //if (mission.getTargetLocation().){
                 //}
@@ -548,9 +534,6 @@ public abstract class Animal {
                 break;
             case PICKUP_FROM_LOCATION:
                 if (targetCase.getWildObject() instanceof FoodSource){
-                    //System.out.println("Target:"+targetCase.getPosition().x+";"+targetCase.getPosition().y);
-                    //System.out.println("grabqty: "+grabQuantity);
-                    //System.out.println("carried:"+carriedFood);
                     boolean foodSourceDepleted=false;
                     while(carriedFood<this.getAdjustedGBTQ()&&!foodSourceDepleted){
                         targetCase.decreaseFoodQuantity();
@@ -582,7 +565,7 @@ public abstract class Animal {
 
 }
 
-//Delete?
+
     /**
      *
      * @param animal
@@ -606,7 +589,7 @@ public abstract class Animal {
             return false;
         }
     }
-//Delete?
+
     /**
      *
      * @return
@@ -622,7 +605,7 @@ public abstract class Animal {
     public SmellSource getSmell() {
         return smell;
     }
-//Delete?
+
     /**
      *
      * @return
@@ -630,7 +613,7 @@ public abstract class Animal {
     public boolean isToMove() {
         return toMove;
     }
-//Delete?
+
     /**
      *
      * @return
@@ -679,7 +662,7 @@ public abstract class Animal {
         }
         return filteredSubsection;
     }
-//Delete?
+
     /**
      *
      * @return

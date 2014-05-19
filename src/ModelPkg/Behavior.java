@@ -65,7 +65,6 @@ public class Behavior {
         Case[][] subsection = MapData.getSubsection2(origin);
         for(int i = 0; i < subsection.length&&nowhereToGo; i++){
             for(int j = 0; j < subsection[i].length&&nowhereToGo; j++){
-                //System.out.println("x;y"+origin.x+";"+origin.y);
                 if((!((i==j)&&i==0))&&subsection[i][j].getOccupant() == null && subsection[i][j].getWildObject().getType() == WildObject.EMPTY_ID){
                     nowhereToGo = false;
                 }
@@ -75,7 +74,7 @@ public class Behavior {
 
         return nowhereToGo;
     }
-//Delete?
+
     /**
      *
      * @param location
@@ -95,7 +94,7 @@ public class Behavior {
 
         return !isEmpty;
     }
-//Delete?
+
     /**
      *
      * @param moralValue

@@ -44,7 +44,7 @@ public class Case implements Observable {
         this.position= new Point(point.x, point.y);
         this.passable=passable;
     }
-//Delete?
+
     /**
      *
      * @param thing
@@ -166,7 +166,6 @@ public class Case implements Observable {
             }
         }
         if (inferiorSmellNotFound){
-            System.out.println("ERROR");
         }
     }
 

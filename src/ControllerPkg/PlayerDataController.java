@@ -27,7 +27,7 @@ public class PlayerDataController {
     public void spendFood(int price){
         this.playerData.removeFood(price);
     }
-//Delete?
+
     /**
      *
      * @return
@@ -35,7 +35,7 @@ public class PlayerDataController {
     public ArrayList<String> getConsumablesInventory() {
         return playerData.getConsumablesInventory();
     }
-//Delete?
+
     /**
      *
      * @return
@@ -145,7 +145,7 @@ public class PlayerDataController {
     {
         this.playerData.death();
     }
-    //Delete?
+
     /**
      *
      * @return
@@ -153,7 +153,7 @@ public class PlayerDataController {
     public boolean isSelectedItem(){
         return(this.playerData.isSelectInventory());
     }
-    //Delete?
+
     /**
      *
      * @param select

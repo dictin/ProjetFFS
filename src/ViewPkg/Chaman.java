@@ -44,9 +44,13 @@ public Chaman(final MasterController controller, ModelPkg.QuestionChaman actualQ
     this.add(numberQuestion);
     question.setText(this.actualQuestion.getQuestion());
     if(this.actualQuestion.getQuestionSize() > 55){
-        //TODO Si on a le temps, s'assurer que le changement de ligne ne se fait pas au milieu d'un mot
         String question1 = this.actualQuestion.getQuestion().substring(0,55);
-        String question2 = this.actualQuestion.getQuestion().substring(55);
+        int lastSpace = question1.lastIndexOf(" ");
+        int lastSpace2 = 0;
+        int lastSpace3 = 0;
+        System.out.println(lastSpace);
+        question1 = this.actualQuestion.getQuestion().substring(0,lastSpace);
+        String question2 = this.actualQuestion.getQuestion().substring(lastSpace-3);
         String question3,question4;
         question.setText(question1);
         questionNext.setText(question2);
@@ -54,8 +58,10 @@ public Chaman(final MasterController controller, ModelPkg.QuestionChaman actualQ
         questionNext.setSize(495,20);
         questionNext.setLocation(5, 70);
         if(this.actualQuestion.getQuestionSize() > 110){
-            question2 = this.actualQuestion.getQuestion().substring(55,110);
-            question3 = this.actualQuestion.getQuestion().substring(110);
+            question2 = this.actualQuestion.getQuestion().substring(lastSpace,110);
+            lastSpace2 = lastSpace+question2.lastIndexOf(" ");
+            question2 = this.actualQuestion.getQuestion().substring(lastSpace,lastSpace2);
+            question3 = this.actualQuestion.getQuestion().substring(lastSpace2);
             questionNext.setText(question2);
             questionNext2.setText(question3);
             questionNext2.setFont(new Font("Courier New", Font.PLAIN, 15));
@@ -63,8 +69,10 @@ public Chaman(final MasterController controller, ModelPkg.QuestionChaman actualQ
             questionNext2.setLocation(5, 90);
         }
         if(this.actualQuestion.getQuestionSize() > 165){
-            question3 = this.actualQuestion.getQuestion().substring(110,165);
-            question4 = this.actualQuestion.getQuestion().substring(165);
+            question3 = this.actualQuestion.getQuestion().substring(lastSpace2,165);
+            lastSpace3 = lastSpace2+question3.lastIndexOf(" ");
+            question3 = this.actualQuestion.getQuestion().substring(lastSpace2,lastSpace3);
+            question4 = this.actualQuestion.getQuestion().substring(lastSpace3);
             questionNext2.setText(question3);
             questionNext3.setText(question4);
             questionNext3.setFont(new Font("Courier New", Font.PLAIN, 15));
@@ -144,7 +152,7 @@ public Chaman(final MasterController controller, ModelPkg.QuestionChaman actualQ
     answer3.addMouseListener(questionsHandler) ;
 
 }
-//Delete?
+
 public void updateQuestion(){
     repaint();
     }

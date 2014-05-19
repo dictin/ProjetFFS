@@ -22,7 +22,7 @@ public class SmellSource extends Smell implements Cloneable{
     public void fade() {
         setIntensity(getIntensity() - 10);
     }
-//Delete?
+
     /**
      *
      */

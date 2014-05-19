@@ -12,9 +12,9 @@ public class VisualCaseHandler implements MouseListener {
 
 
     MasterController controller;
-//TODO What to write here?
+
     /**
-     *
+     *Méthode qui rend la grille active lorsque la souri du joueur quitte les menus
      * @param controller contrôleur principal
      */
     public VisualCaseHandler(MasterController controller){

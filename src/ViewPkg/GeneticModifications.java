@@ -202,7 +202,6 @@ public class GeneticModifications extends JLabel {
         reset.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("time to reset!");
                 reset();
             }
         });

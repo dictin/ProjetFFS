@@ -75,7 +75,7 @@ public class GotoMenuButton extends JComponent {
     public void setAnmtnStartTime(int anmtnStartTime) {
         this.anmtnStartTime = anmtnStartTime;
     }
-//Delete?
+
     /**
      *
      * @return

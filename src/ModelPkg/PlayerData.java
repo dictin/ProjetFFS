@@ -73,12 +73,10 @@ public class PlayerData implements Observable {
         if (activatedType == PlayerData.PERM_ITEM){
             this.permanentInstances.add(this.passivePermInstances.get(index));
             this.passivePermInstances.remove(index);
-            System.out.printf("Item permanent active    ");
 
         }else if (activatedType == PlayerData.TEMP_ITEM){
             this.permanentInstances.add(this.passiveTempInstances.get(index));
             this.passiveTempInstances.remove(index);
-            System.out.printf("Item temporary active    ");
         }
 
         this.removeItemFromInventory(index, activatedType);
@@ -100,7 +98,7 @@ public class PlayerData implements Observable {
 
         this.updateObservers();
     }
-//Delete?
+
     /**
      *
      */
@@ -148,7 +146,7 @@ public class PlayerData implements Observable {
     public void modifyKarma(int number) {
         this.karma+=number;
     }
-//Delete?
+
     /**
      *
      */
@@ -186,8 +184,9 @@ public class PlayerData implements Observable {
      */
     public void addFood(int food) {
         this.food += food;
-        if((pickUpFood += food) < 0){
-            this.pickUpFood = 0;
+        if((pickUpFood += food) > getLevel()*1000){
+            this.pickUpFood = 1000;
+
         }
         else{
         this.pickUpFood += food;
@@ -206,7 +205,7 @@ public class PlayerData implements Observable {
         }
         this.updateObservers();
     }
-//Delete?
+
 
     /**
      *
@@ -251,7 +250,7 @@ public class PlayerData implements Observable {
             this.statModifiers[i] = 0;
         }
     }
-//Delete?
+
     /**
      *
      */

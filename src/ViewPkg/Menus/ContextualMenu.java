@@ -22,7 +22,7 @@ public abstract class ContextualMenu extends JComponent {
 
         this.setVisible(false);
     }
-//Delete?
+
     /**
      * Méthode qui retourne le nom du menu
      * @return le nom du menu

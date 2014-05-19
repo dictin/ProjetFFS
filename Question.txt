@@ -16,9 +16,26 @@ Brun
 Napoléon avait un poney
 C'est qui Napoléon?
 *
-Deux charges sont placés sur l’axe des x avec une distance r entre les deux. La première a une charge de Q et la deuxième a une charge de -Q. À quel endroit le champ électrique sera t-il nul?
-À la gauche de q1
-À la droite de q2
-Au centre entre q1 et q2
-À l'infini!
+Lorsqu’on approche la sphère C de la sphère B, elle est attirée. Lorsqu’on approche la sphère C de la sphère A, elle est aussi attirée. Quelle est la charge de la sphère C?
+Elle est positive
+Elle est négative
+Elle est neutre
+Elle est joyeuse
 *
+Dans un tiroir, il y a 10 chaussettes blanches et 10 chausettes noires. Combien de chausettes faut-il piger pour en avoir au moins 2 de la même couleur?
+11 chaussettes
+20 chaussettes
+3 chausettes
+4 chaussettes
+*
+Dans un terrier, un fourmilier annonce fièrement que toutes les fourmiliers mentent toujours. Cette affirmation est-elle possible?
+Peut-être?
+Oui
+Non
+JAMAIS DE LA VIE!
+*
+Quelle est l'intégrale de 3(n^2)?
+n^3
+3n^3
+n^3+c
+6n
