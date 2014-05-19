@@ -28,12 +28,5 @@ public class LingeringHackTroll extends LingeringGameEvents{
      */
     @Override
     public void lingeringActivation() {
-        if(twice){
-        masterController.activateHackView(false);
-            twice = false;
-        }
-        else{
-            twice = true;
-        }
     }
 }

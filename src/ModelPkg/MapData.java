@@ -319,6 +319,7 @@ public class MapData {
      * @param fourmilierFixRaceStats1 nouvelles statistiques de la race1
      */
     public static void setFourmilierFixRaceStats1(int[] fourmilierFixRaceStats1) {
+        System.out.println(fourmilierFixRaceStats1[0]);
         MapData.fourmilierFixRaceStats1 = fourmilierFixRaceStats1;
     }
 

@@ -3,6 +3,7 @@ package ControllerPkg;
 import ModelPkg.*;
 import ModelPkg.PkgEvents.GameEventSunnyWeather;
 import ModelPkg.PkgEvents.LingeringGameEvents;
+import ModelPkg.PkgEvents.LingeringHackTroll;
 import ModelPkg.WildObjects.WildObject;
 import ViewPkg.MasterFrame;
 import ViewPkg.MasterUI;
@@ -116,6 +117,9 @@ public class MasterController extends Thread{
                     else{
                         int duration=getPlayerDataController().getCurrentEvent().getDuration();
                         if (duration==0){
+                            if (getPlayerDataController().getCurrentEvent() instanceof LingeringHackTroll){
+                                this.activateHackView(false);
+                            }
                             getPlayerDataController().setCurrentEvent(eventRoller.whatIsTheWeather());
                             getPlayerDataController().getCurrentEvent().firstTimeActivation();
                         }
