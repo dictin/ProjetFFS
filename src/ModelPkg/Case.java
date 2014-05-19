@@ -104,19 +104,12 @@ public class Case implements Observable {
         this.passable=this.occupant!=null?true:false;
         this.updateObservers();
     }
-//TODO What to write here?
-    /**
-     *
-     * @param observer
-     */
+
     @Override
     public void addObserver(Observer observer) {
         this.observers.add(observer);
     }
-//TODO What to write here?
-    /**
-     *
-     */
+
     @Override
     public void updateObservers() {
         for(int i = 0; i< observers.size(); i++){

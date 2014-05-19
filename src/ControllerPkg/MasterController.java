@@ -121,15 +121,15 @@ public class MasterController extends Thread{
                         getPlayerDataController().setCurrentEvent(new GameEventSunnyWeather());
                     }
                     else{
-                    int duration=getPlayerDataController().getCurrentEvent().getDuration();
-                    if (duration==0){
-                        getPlayerDataController().setCurrentEvent(eventRoller.whatIsTheWeather());
-                        getPlayerDataController().getCurrentEvent().firstTimeActivation();
-                    }
-                    else{
-                        getPlayerDataController().getCurrentEvent().decreaseDuration();
-                        ((LingeringGameEvents)getPlayerDataController().getCurrentEvent()).lingeringActivation();
-                    }
+                        int duration=getPlayerDataController().getCurrentEvent().getDuration();
+                        if (duration==0){
+                            getPlayerDataController().setCurrentEvent(eventRoller.whatIsTheWeather());
+                            getPlayerDataController().getCurrentEvent().firstTimeActivation();
+                        }
+                        else{
+                            getPlayerDataController().getCurrentEvent().decreaseDuration();
+                            ((LingeringGameEvents)getPlayerDataController().getCurrentEvent()).lingeringActivation();
+                        }
                     }
                 }
 

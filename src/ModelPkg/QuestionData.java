@@ -82,15 +82,10 @@ public class QuestionData implements Observable {
         actualQuestion=questionList.get(i);
         updateObservers();
     }
-//TODO What to write here?
-    /**
-     *
-     * @param observer
-     */
+
     public void addObserver(Observer observer) {
         observers.add(observer);
     }
-    //TODO What to write here?
     public void updateObservers(){
         for(int i=0; i<observers.size();i++){
             observers.get(i).update();

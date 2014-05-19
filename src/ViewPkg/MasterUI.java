@@ -423,13 +423,15 @@ public class MasterUI extends JLayeredPane implements Observer{
         this.labelPickUpFood.setText("Food to pick up: "+masterController.getPlayerDataController().getNumberFoodToGo());
     }
 
+
+    /**
+     * Méthode qui case les menus
+     */
     @Override
     public void update() {
         this.updateNumericInfos();
     }
-/**
- * Méthode qui case les menus
- */
+
     public void disableMenus(boolean invisible){
         hideMenus.setVisible(invisible);
     }

@@ -54,11 +54,7 @@ public class ShopInfoController {
     public boolean isPermanent(){
         return this.shopItemInfoData.isPermanent();
     }
-//TODO What to write here
-    /**
-     *
-     * @param observer
-     */
+
     public void addObserver(Observer observer){
         this.getShopItemInfoData().addObserver(observer);
     }

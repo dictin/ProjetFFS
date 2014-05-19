@@ -72,20 +72,13 @@ public class ShopItemInfoData implements Observable {
     public boolean isPermanent() {
         return isPermanent;
     }
-//TODO What to write here?
-    /**
-     *
-     * @param observer
-     */
+
     @Override
     public void addObserver(Observer observer) {
         this.observers.add(observer);
 
     }
-//TODO What to write here?
-    /**
-     *
-     */
+
     @Override
     public void updateObservers() {
         for (int i =0; i< this.observers.size(); i++){
