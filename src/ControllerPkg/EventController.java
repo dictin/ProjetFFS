@@ -58,7 +58,7 @@ public class EventController {
             masterController.getPlayerDataController().increaseNextEventGravity();
         }
         //TODO Enlever cette ligne pour avoir des bons et des mauvais événements
-        nextGameEvent = chooseRandomEvent(goodGameEvents);
+        nextGameEvent = chooseRandomEvent(badGameEvents);
         masterController.deadAnimal();
         nextGameEvent.setGravity(eventFinalGravity);
         return nextGameEvent;

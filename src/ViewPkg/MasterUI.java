@@ -75,7 +75,7 @@ public class MasterUI extends JLayeredPane implements Observer{
         this.setSize(MasterFrame.GAME_FRAME_SIZE);
 
         hackEvent.setSize(350,500);
-        hackEvent.setLocation(650,10);
+        hackEvent.setLocation(620,10);
         hackEvent.setIcon(myIcon);
         this.add(hackEvent);
         hackEvent.setVisible(false);
@@ -434,6 +434,6 @@ public class MasterUI extends JLayeredPane implements Observer{
         hideMenus.setVisible(invisible);
     }
     public void hackEvent(boolean activate){
-
+    hackEvent.setVisible(activate);
     }
 }

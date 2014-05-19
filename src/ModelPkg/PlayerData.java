@@ -429,6 +429,7 @@ public class PlayerData implements Observable {
      */
     public void setLevel(int newLevel){
         this.level = newLevel;
+        this.pickUpFood = 0;
     }
 
     /**

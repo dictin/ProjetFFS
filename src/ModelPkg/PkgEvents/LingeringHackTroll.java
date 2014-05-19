@@ -6,6 +6,7 @@ import ModelPkg.MapData;
 
 public class LingeringHackTroll extends LingeringGameEvents{
     private MasterController masterController;
+    private boolean twice = false;
     /**
      * Constructeur pour l'événement de piratage. Cet événement est mauvais et avec une durée.
      */
@@ -20,12 +21,19 @@ public class LingeringHackTroll extends LingeringGameEvents{
     @Override
     public void firstTimeActivation() {
         MapData.addNewsList("Erreur! Un virus essaye de prendre le contrôle!");
+        masterController.activateHackView(true);
     }
     /**
      * Méthode qui vérifie si l'événement est terminé.
      */
     @Override
     public void lingeringActivation() {
-
+        if(twice){
+        masterController.activateHackView(false);
+            twice = false;
+        }
+        else{
+            twice = true;
+        }
     }
 }
