@@ -48,19 +48,15 @@ public class MasterController extends Thread{
      * @param deadAnimal l'animal mort
      */
     public static void disposeAnimal(Animal deadAnimal){
-       /* mapController.removeSmellSourceOf(deadAnimal);
-        Point targetPosition=deadAnimal.getPosition();
-        Case targetCase = MapData.getCase(targetPosition);
-        targetCase.setOccupant(null);
-        MapController.getAnimalList().remove(deadAnimal);
+        mapController.removeSmellSourceOf(deadAnimal);
         MapData.addNewsList(deadAnimal.getName() + " est malheureusement décédé!!");
-        deadAnimal=null;*/
         mapController.removeSmellSourceOf(deadAnimal);
         Point targetPosition=deadAnimal.getPosition();
         Case targetCase = MapData.getCase(targetPosition);
         targetCase.setOccupant(null);
         MapController.getAnimalList().remove(deadAnimal);
         deadAnimal=null;
+
     }
 
     /**
@@ -196,16 +192,6 @@ public class MasterController extends Thread{
      */
     public void enterMenuTriggerZone(){
         mUI.popMenu("main_menu");
-    }
-
-
-    //Delete?
-    /**
-     *
-     * @param caseCoord
-     */
-    public void clickVisualCase(Point caseCoord){
-
     }
 
     /**

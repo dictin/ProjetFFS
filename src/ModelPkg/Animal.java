@@ -203,6 +203,7 @@ public abstract class Animal {
      */
     public void decreaseHealth(int amount){
         this.health-= amount;
+        Point popo =new Point(0,0);
        /* if(this.isDead()){
         // masterController.disposeAnimal(this);
            // masterController.checkIfDeadFourmilier();
@@ -211,10 +212,11 @@ public abstract class Animal {
 
         }*/
         if(this.isDead()){
+
             System.out.println("In decreaseHealth");
             MasterController.disposeAnimal(this);
-            MapData.addNewsList(this.getName() + " est malheureusement décédé!!");
             masterController.victims();
+
         }
     }
 
