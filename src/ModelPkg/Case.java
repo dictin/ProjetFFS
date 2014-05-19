@@ -101,7 +101,7 @@ public class Case implements Observable {
      */
     public void setOccupant(Animal occupant) {
         this.occupant = occupant;
-        this.passable=this.occupant!=null?true:false;
+        this.passable=this.occupant!=null;
         this.updateObservers();
     }
 

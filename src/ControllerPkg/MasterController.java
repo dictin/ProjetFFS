@@ -21,7 +21,7 @@ public class MasterController extends Thread{
     private PlayerDataController playerDataController = new PlayerDataController();
 
     private MasterFrame mF;
-    private MasterUI mUI=null;
+    private static MasterUI mUI=null;
     private int sleepTime;
     private static int time =0;
     private int smellDecayTime=60;
@@ -49,12 +49,12 @@ public class MasterController extends Thread{
      */
     public static void disposeAnimal(Animal deadAnimal){
         mapController.removeSmellSourceOf(deadAnimal);
-        mapController.removeSmellSourceOf(deadAnimal);
         Point targetPosition=deadAnimal.getPosition();
         Case targetCase = MapData.getCase(targetPosition);
         targetCase.setOccupant(null);
         MapController.getAnimalList().remove(deadAnimal);
         deadAnimal=null;
+
 
     }
 
@@ -80,17 +80,11 @@ public class MasterController extends Thread{
                 int i = 0;
 
 
-                for(int y = 0; y<animalArrayList.size(); y++){
-                    if(animalArrayList.get(y).getHealth()<=0){
-                      //  removeAllFourmilier();
-                        deadAnimalArrayList.add(animalArrayList.get(y));
-                    }
-                }
-               removeOneFourmilier(deadAnimalArrayList);
+
                // deadAnimal();
 
-                //if(this.getPlayerDataController().getNumberFoodToGo() <= 0){
-                if(time == 300){
+                if(this.getPlayerDataController().getNumberFoodToGo() <= 0){
+                //if(time == 300){
                     JOptionPane.showMessageDialog(null, "Vous avez ramassé toute la nourriture nécessaire pour passer au prochain niveau.\n " +
                             "Le Chaman va maintenant vous posez 3 questions.");
                     this.getPlayerDataController().setTheLevelFinish(true);

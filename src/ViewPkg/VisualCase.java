@@ -48,6 +48,8 @@ public class VisualCase extends JComponent implements Observer {
 
         if (this.occupantImage != null){
             graphics.drawImage(this.occupantImage,0,0,this);
+        }else{
+            graphics.drawImage(this.backgroundImage,0,0,this);
         }
         graphics.setColor(new Color(Integer.parseInt("FFFFF0", 16)));
         graphics.drawRect(0, 0, CASE_SIDE_PIXEL_SIZE-1, CASE_SIDE_PIXEL_SIZE-1);
