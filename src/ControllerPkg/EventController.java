@@ -7,12 +7,33 @@ import java.util.Random;
 
 public class EventController {
 
+    /**
+     * Contrôleur principal
+     */
     private MasterController masterController;
+    /**
+     * Chiffre aléatoire
+     */
     private Random rnd=new Random();
+    /**
+     * Liste des événements positifs
+     */
     private ArrayList<GameEvent> goodGameEvents = new ArrayList<>();
+    /**
+     * Liste des événements négatifs
+     */
     private ArrayList<GameEvent> badGameEvents = new ArrayList<>();
+    /**
+     * Liste des événements neutres
+     */
     private ArrayList<GameEvent> neutralGameEvents = new ArrayList<>();
+    /**
+     * Chance qu'un événement négatif arrive
+     */
     private int badThreshold=50;
+    /**
+     * Chance qu'un événement positif arrive
+     */
     private int goodThreshold=150;
 
     /**

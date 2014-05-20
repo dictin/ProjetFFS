@@ -7,10 +7,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class InventoryActivateButtonHandler implements ActionListener {
-
+    /**
+     * Contrôleur principal
+     */
     MasterController masterController;
+    /**
+     * Liste des objets du type sélectionné (permanent ou non)
+     */
     JList<String> associatedList;
+    /**
+     * Position de l'objet sélectionné dans la liste
+     */
     int indexOfItemToBuy;
+    /**
+     * Numéro du bouton
+     */
     private int buttonType;
 
     /**

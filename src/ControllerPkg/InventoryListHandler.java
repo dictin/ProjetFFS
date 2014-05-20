@@ -8,8 +8,13 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 public class InventoryListHandler implements ListSelectionListener {
-
+    /**
+     * Contrôleur principal
+     */
     private MasterController masterController;
+    /**
+     * Index de l'objet sélectionné
+     */
     private int selectedItemIndex = -1;
 
     /**

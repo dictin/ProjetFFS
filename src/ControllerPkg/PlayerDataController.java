@@ -11,6 +11,9 @@ import java.util.ArrayList;
 
 public class PlayerDataController {
 
+    /**
+     * Données du joueur
+     */
     private PlayerData playerData;
 
     /**
