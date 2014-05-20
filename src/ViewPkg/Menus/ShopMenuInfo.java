@@ -8,11 +8,26 @@ import java.awt.*;
 
 public class ShopMenuInfo extends JComponent implements Observer {
 
+    /**
+     * JLabel contenant le nom de l'objet sélectionné.
+     */
     private JLabel itemName = new JLabel("Nom: ---");
+    /**
+     * JLabel contenant le prix de l'objet sélectionné.
+     */
     private JLabel itemCost = new JLabel("Co\u00FBt: ---");
+    /**
+     * JLabel contenant le type de bonus associé à l'objet sélectionné.
+     */
     private JLabel boost = new JLabel("Bonus: ---");
+    /**
+     * JLabel informant si l'objet sélectionné est permanent ou temporaire.
+     */
     private JLabel permanant = new JLabel("Permanant: ---");
 
+    /**
+     * Contrôleur actualisant les informations affichée dans ShopMenuInfo.
+     */
     private ShopInfoController shopInfoController;
 
     public ShopMenuInfo(ShopInfoController shopInfoController){

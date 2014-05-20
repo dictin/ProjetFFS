@@ -16,47 +16,142 @@ import java.awt.event.MouseListener;
 public class MasterUI extends JLayeredPane implements Observer{
 
 
+    /**
+     * Coordonnées en X où se termine la grille de VisualCases
+     */
     private int gridEndPointX;
+    /**
+     * Contrôleur principal
+     */
     private MasterController masterController;
+    /**
+     * Contrôleur gérant les statistiques et informations de la partie en cours non liées à la carte.
+     */
     private PlayerDataController playerDataController;
+    /**
+     * GotoMenuButton mettant fin au programme lorsque cliqué.
+     */
     private GotoMenuButton quitIcon;
+    /**
+     * JLabel affichant de l'aide lorsque cliqué.
+     */
     private JLabel helpLabel = new JLabel("?");
-
+    /**
+     * Grille des cases visuelles de la carte du jeu.
+     */
     private VisualCase[][] visualCasesGrid;
-
+    /**
+     * MenuTriggerZone ouvrant le menu principal lorsque la souris passe au-dessus.
+     */
     private MenuTriggerZone menuTriggerZone;
+    /**
+     * ContextualMenu présentement actif et affiché.
+     */
     private ContextualMenu selectedMenu;
+    /**
+     * menu principal.
+     */
     private ContextualMenu mainMenu;
+    /**
+     * menu du magasin
+     */
     private ContextualMenu shopMenu;
+    /**
+     * menu de l'inventaire du joueur.
+     */
     private ContextualMenu inventoryMenu;
+    /**
+     * Menu permettant de faire apparaître de nouveaux fourmiliers.
+     */
     private ContextualMenu creationMenu;
-
-    private int numberQuestion =1;
+    /**
+     * JLabel de la question du chaman fourmilier.
+     */
     private JLabel questionLabel = new JLabel();
+    /**
+     * Modèle de la question du chaman.
+     */
     private QuestionChaman actualQuestion;
+    /**
+     * Barre de nouvelles
+     */
     private JLabel tvaNews = new JLabel();
+    /**
+     * Position la plus haute de la barre de nouvelles.
+     */
     private int positionMinTvaNews = 660;
+    /**
+     * Position la plus basse de la barre de nouvelles.
+     */
     private int positionMaxTvaNews = 701;
+    /**
+     * Position actuelle de la barre de nouvelles.
+     */
     private int positionActualTvaNews = 701;
+    /**
+     * Nombre de nouvelles dans la barre de nouvelles.
+     */
     private int numberOfNews = 0;
+    /**
+     * Vitesse de la barre de nouvelles.
+     */
     private int mouvement = 0;
+    /**
+     * Temps d'attente où la barre de nouvelle reste immobile.
+     */
     private int duration = 0;
-    private boolean alreadyInMovement = false;
+    /**
+     * JLabel contenant le laboratoire permettant de créer une nouvelle espèce de fourmilier
+     */
     private JLabel laboratoryLabel = new JLabel();
+    /**
+     * JLabel montrant le chaman. Utilisé pour cacher les menus pendant qu'il pose ses questions.
+     */
     private JLabel hideMenus = new JLabel();
-
+    /**
+     * JLabel contenant le fond visuel du jeu.
+     */
     private JLabel backgroundImage= new JLabel();
-
+    /**
+     * JLabel contenant le nombre de Fourmiliers vivants créés par le joueur moins le nombre de victimes total.
+     */
     private JLabel labelPopulation = new JLabel("Population: 0");
+    /**
+     * JLabel contenant la quantité de nourriture que le joueur a.
+     */
     private JLabel labelFood = new JLabel("Nourriture: 300");
+    /**
+     * JLabel contenant le nombre de Fourmiliers morts depuis le début du jeu.
+     */
     private JLabel labelDeaths = new JLabel("Victimes: 0");
+    /**
+     * JLabel affichant le niveau actuel.
+     */
     private JLabel labelLevel = new JLabel("Niveau: 1");
+    /**
+     * JLabel contenant le score du joueur.
+     */
     private JLabel labelScore = new JLabel("Score: 0");
-    private JLabel labelPickUpFood = new JLabel("Food to pick up: 0");
+    /**
+     * JLabel contenant le nombre de nourriture restant à amasser pour passer au prochain niveau.
+     */
+    private JLabel labelPickUpFood = new JLabel("Prochain niveau: 0");
+    /**
+     * JLabel contenant l'image de fond derrière les Jlabels de statistiques.
+     */
     private JLabel playerStatsBackground = new JLabel();
+    /**
+     * JLabel contenant l'image du troll. Activé par LingeringHackTroll.
+     */
     private JLabel hackEvent = new JLabel();
+    /**
+     * Image du troll dans le JLabel précédent.
+     */
     private ImageIcon myIcon = new ImageIcon("IMG/hackEvent.gif");
-    private boolean oneClickForTRoll = false;
+    /**
+     * Booléen permettant de déterminer si le troll a déjà été cliqué.
+     */
+    private boolean oneClickForTroll = false;
     /**
      * Constructeur de l'interface d'utilisateur principale
      * @param masterController le contrôleur principal
@@ -83,9 +178,9 @@ public class MasterUI extends JLayeredPane implements Observer{
         hackEvent.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(!oneClickForTRoll){
+                if(!oneClickForTroll){
                 MapData.addNewsList("Trololololololol!");
-                    oneClickForTRoll = true;
+                    oneClickForTroll = true;
                 }
             }
 
@@ -359,9 +454,8 @@ public class MasterUI extends JLayeredPane implements Observer{
      * Méthode qui fait bougé les nouvelles de TVA et qui vérifie si l'on doit afficher les questions du chaman ou le laboratoire
      */
     public void actualiser(){
-        if(MapData.getNewsList().size()>numberOfNews && !alreadyInMovement){
+        if(MapData.getNewsList().size()>numberOfNews){
             mouvement = 1;
-            alreadyInMovement = true;
         }
         if(mouvement ==1){
             tvaNews.setLocation(25,positionActualTvaNews--);
@@ -384,7 +478,6 @@ public class MasterUI extends JLayeredPane implements Observer{
 
                 }
                 else if(MapData.getNewsList().size() ==0){
-                    alreadyInMovement = false;
                     tvaNews.setText("Nouvelle de dernière heure!");
                 }
 
@@ -463,7 +556,7 @@ public class MasterUI extends JLayeredPane implements Observer{
     }
     public void hackEvent(boolean activate){
         if(activate){
-            oneClickForTRoll = false;
+            oneClickForTroll = false;
         }
     hackEvent.setVisible(activate);
     }

@@ -4,7 +4,6 @@ package ViewPkg;
 import ControllerPkg.MasterController;
 import ModelPkg.Laboratory;
 import ModelPkg.MapData;
-import ModelPkg.PlayerData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,31 +11,95 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Map;
 
 public class GeneticModifications extends JLabel {
-    private JLabel laboratory = new JLabel();
+    /**
+     * Contrôleur principal.
+     */
     private MasterController controller;
+    /**
+     * JSlider permettant de régler la vitesse et l'endurance des fourmiliers.
+     */
     private JSlider speedEndurance;
+    /**
+     * JSlider permettant de régler la défense et l'attaque.
+     */
     private JSlider attackDefence;
+    /**
+     * JSlider permettant de régler l'odorat et l'odeur.
+     */
     private JSlider sensitivitySmellStrength;
-    private JLabel laboratoryTitle = new JLabel("Bienvenu au laboratoire de modification génétique!");
-    private JLabel laboratoryExplination1 = new JLabel("Chaque déplacement du curseur coûte 10 nourritures.");
-    private JLabel laboratoryExplination2 = new JLabel("Plus le curseur se rapporche d'une compétence, plus cette compétence sera forte.");
+    /**
+     * Label contenant le texte de bienvenue.
+     */
+    private JLabel laboratoryTitle = new JLabel("Bienvenue au laboratoire de modification génétique!");
+    /**
+     * Explication du fonctionnement du laboratoire, partie 1.
+     */
+    private JLabel laboratoryExplanation1 = new JLabel("Chaque déplacement du curseur coûte 10 nourritures.");
+    /**
+     * Explication du fonctionnement du laboratoire, partie 2.
+     */
+    private JLabel laboratoryExplanation2 = new JLabel("Plus le curseur se rapporche d'une compétence, plus cette compétence sera forte.");
+    /**
+     * Première police utilisée
+     */
     private Font font = new Font("Serif", Font.ITALIC, 12);
+    /**
+     * Seconde police utilisée
+     */
     private Font font2 = new Font("Couriel", Font.BOLD, 18);
+    /**
+     * Couleur de fond du laboratoire.
+     */
     private Color color = new Color(Integer.parseInt("510968", 19));
-    private JButton finish = new JButton("Finish");
+    /**
+     * Bouton confirmant les choix du joueur.
+     */
+    private JButton finish = new JButton("Fini!");
+    /**
+     * Bouton réinitialisant les JSliders.
+     */
     private JButton reset = new JButton("Réinisialiser");
+    /**
+     * Cout du fourmilier
+     */
     private int modificationCost = 100;
+    /**
+     * JLabel affichant le coût de l'espèce générée.
+     */
     private JLabel cost = new JLabel("Coût futur de cette nouvelle race: "+ modificationCost);
+    /**
+     *
+     */
     private JLabel blocSlider = new JLabel();
+    /**
+     * Bouton augmentant la vitesse au détriment de l'endurance.
+     */
     private JButton speed = new JButton("Vitesse");
+    /**
+     * Bouton augmentant l'endurance au détriment de la vitesse.
+     */
     private JButton endurance = new JButton("Endurance");
+    /**
+     * Bouton augmentant l'attaque au détriment de la défense.
+     */
     private JButton attack = new JButton("Attaque");
-    private JButton defence = new JButton("Défence");
+    /**
+     * Bouton augmentant l'attaque au détriment de la défense.
+     */
+    private JButton defence = new JButton("Défense");
+    /**
+     * Bouton augmentant l'odorat au détriment de l'intensité de l'odeur du fourmilier.
+     */
     private JButton sensitivity = new JButton("Odorat");
+    /**
+     * Bouton augmentant l'intensité de l'odeur du fourmilier au détriment de l'odorat.
+     */
     private JButton smellStrength = new JButton("Odeur");
+    /**
+     * JLabel priant le joueur de patienter pendant la mise à jour du nouveau terrain.
+     */
     private JLabel pleaseWait = new JLabel("Veuillez patienter pendant la création d'un nouveau terrain.");
 
     /**
@@ -61,7 +124,7 @@ public class GeneticModifications extends JLabel {
         blocSlider.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+                System.out.println("this is bloc slider");
             }
 
             @Override
@@ -85,15 +148,15 @@ public class GeneticModifications extends JLabel {
         });
 
         laboratoryTitle.setSize(450,23);
-        laboratoryExplination1.setSize(400,20);
-        laboratoryExplination2.setSize(475,20);
+        laboratoryExplanation1.setSize(400, 20);
+        laboratoryExplanation2.setSize(475, 20);
         laboratoryTitle.setLocation(5, 5);
-        laboratoryExplination1.setLocation(5,30);
-        laboratoryExplination2.setLocation(5,50);
+        laboratoryExplanation1.setLocation(5, 30);
+        laboratoryExplanation2.setLocation(5, 50);
         laboratoryTitle.setFont(font2);
         this.add(laboratoryTitle);
-        this.add(laboratoryExplination1);
-        this.add(laboratoryExplination2);
+        this.add(laboratoryExplanation1);
+        this.add(laboratoryExplanation2);
 
         speed.setSize(90, 30);
         speed.setLocation(20, 95);

@@ -9,15 +9,33 @@ import java.awt.event.MouseEvent;
 
 public class GotoMenuButton extends JComponent {
 
+    /**
+     * Contrôleur principal.
+     */
     private MasterController controller;
+    /**
+     * Si le bouton est présentement animé.
+     */
     private boolean animatedNow =false;
+    /**
+     * Contrôleur temps ou l'image a changé pour la dernière fois.
+     */
     private int anmtnStartTime=0;
     /**
-     * # of frames the object will keep the same sprite.
+     * Nombres de tours de thread où l'image ne change pas.
      */
     private int anmtnWaitTime=5;
+    /**
+     * Nombres d'image dans une boucle d'animation.
+     */
     private int numberOfSprites;
+    /**
+     * Numéro de l'image à afficher.
+     */
     private int currentSpriteIndex=0;
+    /**
+     * Nom du bouton.
+     */
     private String menuButtonName ="quit_button";
 
     /**

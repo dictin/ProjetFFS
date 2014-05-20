@@ -9,23 +9,65 @@ import java.awt.*;
 
 public class InventoryMenu extends ContextualMenu implements Observer{
 
-    private GotoMenuButton consumables;
-    private GotoMenuButton reusables;
+    /**
+     * JComponent contenant le menu d'objet consommables.
+     */
+    private JComponent consumables;
+    /**
+     * JComponent contenant le menu d'objet consommables.
+     */
+    private JComponent reusables;
+    /**
+     * JLabel informant le joueur que la liste est la liste d'objets temporaires dans son inventaire.
+     */
     private JLabel consumablesLabel = new JLabel("Bonus temporaires!");
+    /**
+     * JLabel informant le joueur que la liste est la liste d'objets permanents dans son inventaire.
+     */
     private JLabel reusablesLabel = new JLabel ("Bonus permanents!");
+    /**
+     * Bouton activant le bonus d'un objet temporaire.
+     */
     private JButton consumablesBuyButton = new JButton("Utiliser");
+    /**
+     * Bouton activant le bonus d'un objet permanent.
+     */
     private JButton reusablesBuyButton = new JButton("Activer");
-    ItemController itemController;
-    PlayerDataController playerDataController;
-    MasterController masterController;
-
-    JList<String> consumableShopList;
+    /**
+     * Contrôleur gérant les objets.
+     */
+    private ItemController itemController;
+    /**
+     * Contrôleur gérant des informations sur la partie en cours.
+     */
+    private PlayerDataController playerDataController;
+    /**
+     * Contrôleur principal.
+     */
+    private MasterController masterController;
+    /**
+     * Liste des noms des objets consommables.
+     */
+    private JList<String> consumableShopList;
+    /**
+     * Panneau défilant contenant les objets temporaires achetés par le joueur non activés.
+     */
     JScrollPane consumableScrollPane;
-
-    JList<String> reusableShopList;
-    JScrollPane reusableScrollPane;
-
+    /**
+     * Panneau défilant contenant les objets permanents achetés par le joueur non activés.
+     */
+    private JList<String> reusableShopList;
+    /**
+     * Panneau défilant contenant les objets permanents achetés par le joueur non activés.
+     */
+    private JScrollPane reusableScrollPane;
+    /**
+     * Contrôleur gérant l'activation d'objets temporaires.
+     */
     private InventoryActivateButtonHandler InventoryActivateTempButtonHandler;
+    /**
+     * Contrôleur gérant l'activation d'objets permanents.
+     */
     private InventoryActivateButtonHandler InventoryActivatePermButtonHandler;
 
     /**

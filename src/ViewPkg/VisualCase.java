@@ -9,10 +9,25 @@ import java.awt.*;
 
 public class VisualCase extends JComponent implements Observer {
 
+    /**
+     * Taille d'un côté de la case.
+     */
     public static final int CASE_SIDE_PIXEL_SIZE=20;
+    /**
+     * Point contenant les coordonnées de la case dans la grille de jeu.
+     */
     private Point caseCoord;
+    /**
+     * Contrôleur principal
+     */
     private MasterController controller;
+    /**
+     * Image de l'animal présent dans la case.
+     */
     private Image occupantImage = null;
+    /**
+     * Image de l'objet de décor présent dans la case.
+     */
     private Image backgroundImage;
 
 

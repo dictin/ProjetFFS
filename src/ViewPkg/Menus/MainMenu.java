@@ -10,8 +10,17 @@ import java.awt.*;
  */
 public class MainMenu extends ContextualMenu{
 
+    /**
+     * Bouton menant au menu magasin.
+     */
     private GotoMenuButton shopIcon;
+    /**
+     * Bouton menant au menu inventaire.
+     */
     private GotoMenuButton inventoryIcon;
+    /**
+     * Bouton menant au menu création.
+     */
     private GotoMenuButton creationButton;
 
     /**

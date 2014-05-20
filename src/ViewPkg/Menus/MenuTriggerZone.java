@@ -12,11 +12,13 @@ import java.awt.event.MouseEvent;
  */
 public class MenuTriggerZone extends JComponent{
 
+    /**
+     * Contrôleur principal.
+     */
     private MasterController controller;
-    private int currentState=0;
 
     /**
-     * Constructeur du MenuTriggerZone
+     * Constructeur du MenuTriggerZone, zone invisible faisant apparaître le menu principal lorsque survolée.
      * @param controller le contrôleur principal
      */
     public MenuTriggerZone(final MasterController controller){

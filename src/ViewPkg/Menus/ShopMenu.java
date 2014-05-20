@@ -10,11 +10,25 @@ import java.awt.*;
 
 public class ShopMenu extends ContextualMenu{
 
+    /**
+     * Contrôleur gérant les objets
+     */
     ItemController itemController;
+    /**
+     * Composant contenant les informations sur l'objet sélectionné dans le magasin.
+     */
     JComponent shopInfoMenu;
-
+    /**
+     * Liste des objets dans le magasin.
+     */
     JList<String> shopList;
+    /**
+     * Panneau défilant affichant les objets de la liste.
+     */
     JScrollPane scrollPane;
+    /**
+     * Bouton confirmant l'achat d'un objet.
+     */
     JButton buyButton=new JButton();
 
     /**
