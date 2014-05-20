@@ -10,7 +10,9 @@ import java.util.ArrayList;
 
 public class VisualCaseHandler implements MouseListener {
 
-
+    /**
+     * Contrôleur principal
+     */
     MasterController controller;
 
     /**

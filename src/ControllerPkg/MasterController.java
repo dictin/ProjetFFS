@@ -14,19 +14,53 @@ import java.util.ArrayList;
 
 
 public class MasterController extends Thread{
-
+    /**
+     * Contrôleur des objets
+     */
     private ItemController itemController = new ItemController(this);
+    /**
+     * Contrôleur des informations du magasin
+     */
     private ShopInfoController shopInfoController = new ShopInfoController();
+    /**
+     * Contrôleur du terrain de jeu
+     */
     private static MapController mapController = new MapController();
+    /**
+     * Contrôleur des questions du Chaman
+     */
     private QuestionChamanController chamanController = new QuestionChamanController();
+    /**
+     * Contrôleur des données du joueur
+     */
     private PlayerDataController playerDataController = new PlayerDataController();
-
+    /**
+     * Fenêtre principale
+     */
     private MasterFrame mF;
+    /**
+     * Interface principale du joueur
+     */
     private static MasterUI mUI=null;
+    /**
+     * Temps entre les tours du Thread
+     */
     private int sleepTime;
+    /**
+     * Temps du jeu
+     */
     private static int time =0;
+    /**
+     * diminution des odeurs
+     */
     private int smellDecayTime=60;
+    /**
+     * Fréquence des événements
+     */
     private int eventFrequency=300;
+    /**
+     * Contrôleur des événements
+     */
     private EventController eventRoller;
 
     /**
@@ -82,10 +116,10 @@ public class MasterController extends Thread{
 
 
 
-               // deadAnimal();
 
-                if(this.getPlayerDataController().getNumberFoodToGo() <= 0){
-                //if(time == 300){
+
+                //if(this.getPlayerDataController().getNumberFoodToGo() <= 0){
+                if(time == 300){
                     JOptionPane.showMessageDialog(null, "Vous avez ramassé toute la nourriture nécessaire pour passer au prochain niveau.\n " +
                             "Le Chaman va maintenant vous posez 3 questions.");
                     this.getPlayerDataController().setTheLevelFinish(true);
@@ -316,33 +350,7 @@ public class MasterController extends Thread{
 
         }
     }
-    public void removeOneFourmilier( ArrayList<Animal> animalArrayList){
-        while(animalArrayList.size() !=0){
-            MapData.addNewsList(animalArrayList.get(0).getName() + " est malheureusement décédé!!");
-            disposeAnimal(animalArrayList.remove(0));
 
-        }
-        }
-
-
-    /**
-     *
-     */
-        public static void checkIfDeadFourmilier(){
-        ArrayList<Animal> animalArrayList = MapData.getAnimalList();
-        ArrayList<Animal> animalArrayListTemporaire = new ArrayList<>();
-        while(animalArrayList.size() !=0){
-            if(animalArrayList.get(0).getHealth() >0){
-                animalArrayListTemporaire.add(animalArrayList.remove(0));
-            }
-            else{
-                disposeAnimal(animalArrayList.remove(0));
-            }
-        }
-        while(animalArrayListTemporaire.size() != 0){
-            animalArrayList.add(animalArrayListTemporaire.remove(0));
-        }
-    }
     public void deadAnimal(){
     ArrayList<Animal> animalArrayList = MapData.getAnimalList();
     ArrayList<Integer> deadAnimalIndex = new ArrayList<>();

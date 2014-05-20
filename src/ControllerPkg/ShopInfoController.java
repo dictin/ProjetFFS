@@ -4,7 +4,9 @@ import ModelPkg.ShopItemInfoData;
 import ObserverPkg.Observer;
 
 public class ShopInfoController {
-
+    /**
+     * Information sur les objets du magasin
+     */
     ShopItemInfoData shopItemInfoData = new ShopItemInfoData();
 
     /**

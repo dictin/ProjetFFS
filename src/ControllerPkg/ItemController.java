@@ -5,8 +5,13 @@ import ModelPkg.PkgItems.Items;
 import java.util.ArrayList;
 
 public class ItemController {
-
+    /**
+     * Contrôleur principal
+     */
     MasterController masterController;
+    /**
+     * Liste des objets achetés
+     */
     ArrayList<Integer> objetBougthList = new ArrayList<Integer>();
 
     /**

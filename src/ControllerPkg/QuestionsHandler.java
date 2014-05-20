@@ -8,9 +8,21 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class QuestionsHandler implements MouseListener{
+    /**
+     * Question actuelle du Chaman
+     */
     private QuestionChaman actualQuestion;
+    /**
+     * Réponse sélectionnée
+     */
     private JLabel answerClick = new JLabel();
+    /**
+     * Couleur de la réponse sélectionné
+     */
     private Color answerColor;
+    /**
+     * Contrôleur principal
+     */
     private MasterController controller;
 
     /**

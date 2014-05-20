@@ -9,9 +9,21 @@ import java.awt.event.ActionListener;
 
 public class CreationController implements ActionListener {
 
+    /**
+     * Contrôleur principal
+     */
     private MasterController masterController;
+    /**
+     * boolean qui vérifie si le joueur a assez de nourriture
+     */
     private boolean enougthFood = true;
+    /**
+     * Type du fourmilier sélectionné
+     */
     private int animalKind = 0;
+    /**
+     * Fourmilier qui va être créé
+     */
     private Fourmillier spawnedFourmilier;
 
     /**
