@@ -5,8 +5,11 @@ import ControllerPkg.MasterController;
 import ModelPkg.MapData;
 
 public class LingeringHackTroll extends LingeringGameEvents{
+
+    /**
+     * Instance de MasterController
+     */
     private MasterController masterController;
-    private boolean twice = false;
     /**
      * Constructeur pour l'événement de piratage. Cet événement est mauvais et avec une durée.
      */

@@ -8,6 +8,10 @@ import java.util.ArrayList;
 
 
 public class MassInstantaneousCombustion extends InstantaneousGameEvent{
+
+    /**
+     * Instance de MasterController
+     */
     private MasterController masterController;
 
     /**

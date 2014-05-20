@@ -12,14 +12,34 @@ import java.util.ArrayList;
 
 public class Case implements Observable {
 
+    /**
+     * La case peut-elle être traversée
+     */
     private boolean passable=true;
 
-
+    /**
+     * Position de la case dans le tableau
+     */
     private Point position;
+    /**
+     * Occupant de la case
+     */
     private Animal occupant=null;
+    /**
+     * Terrain remplissant la case
+     */
     private WildObject terrain;
+    /**
+     * Odeurs contenues dans la case
+     */
     private ArrayList<Smell> smellArrayList = new ArrayList<Smell>();
+    /**
+     * Sources d'odeurs présentes dans la case
+     */
     private ArrayList<SmellSource> smellSourceArrayList = new ArrayList<SmellSource>();
+    /**
+     * Observateurs de la case
+     */
     private ArrayList<Observer> observers = new ArrayList<Observer>();
 
     /**

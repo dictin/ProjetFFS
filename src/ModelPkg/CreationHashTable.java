@@ -5,6 +5,9 @@ import java.util.Hashtable;
 
 public class CreationHashTable {
 
+    /**
+     * Hashtable liant un boutton à l'identifiant de l'animal à créer
+     */
     private static Hashtable<JButton,String> creationHashtable = new Hashtable<JButton, String>();
 
     /**

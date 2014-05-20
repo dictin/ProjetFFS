@@ -10,8 +10,17 @@ import java.util.ArrayList;
 
 public class QuestionData implements Observable {
 
+    /**
+     * Observateurs de la classe
+     */
     private ArrayList<Observer> observers = new ArrayList<Observer>();
+    /**
+     * Question du chaman
+     */
     private QuestionChaman actualQuestion;
+    /**
+     * Liste des questions possibles
+     */
     private static ArrayList<QuestionChaman> questionList = new ArrayList<QuestionChaman>();
 
     /**

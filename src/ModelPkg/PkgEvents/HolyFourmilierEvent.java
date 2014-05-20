@@ -9,12 +9,23 @@ import javax.swing.*;
 import java.awt.*;
 
 public class HolyFourmilierEvent extends InstantaneousGameEvent {
+
+    /**
+     * Instance de MasterController
+     */
+    private MasterController masterController;
+    /**
+     * Fourmillier crée par l'évènement
+     */
+    private Fourmillier spawnedAngelFourmilier;
+    /**
+     * Durée spécifique de l'évènement
+     */
+    int duration = 0;
+
     /**
      * Constructeur pour l'événement de bénédiction des dieux. Il s'agit d'un bon événement avec une durée.
      */
-    private MasterController masterController;
-    private Fourmillier spawnedAngelFourmilier;
-    int duration = 0;
     public HolyFourmilierEvent(MasterController masterController) {
         super(GameEventType.GOOD);
         this.masterController = masterController;

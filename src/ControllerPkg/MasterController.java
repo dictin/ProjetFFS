@@ -140,6 +140,8 @@ public class MasterController extends Thread{
                 mUI.actualiser();
                 mUI.invalidate();
                 mUI.repaint();
+
+                this.playerDataController.activateInstancesForTurn();
             } catch (InterruptedException ex) {
                 System.out.println("Interrupted Exception: ");
                 ex.printStackTrace();

@@ -9,7 +9,14 @@ import java.util.Random;
 
 
 public class InstantaneousHumanitarianHelp extends InstantaneousGameEvent {
+
+    /**
+     * Image à afficher lors du déclenchement de l'évènement
+     */
     private ImageIcon carePackage = new ImageIcon("IMG/care package.jpg");
+    /**
+     * Instance de MasterController
+     */
     private MasterController masterController;
 
     /**

@@ -5,6 +5,9 @@ package ModelPkg.WildObjects;
  */
 public class FoodSource extends WildObject {
 
+    /**
+     * Quantité de nourriture présente dans cette source.
+     */
     private int foodQuantity;
 
     public FoodSource(int quantity) {
@@ -23,7 +26,7 @@ public class FoodSource extends WildObject {
     }
 
     public boolean isEmpty(){
-        boolean isEmpty = (foodQuantity <= 0) ? true : false;
+        boolean isEmpty = (foodQuantity <= 0);
         return isEmpty;
     }
 

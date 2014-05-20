@@ -3,13 +3,27 @@ package ModelPkg;
 
 public class Laboratory {
 
+    /**
+     * Valeur vitesse/endurance de départ
+     */
     private static int speedEnduranceBefore = MapData.getFourmilierActualRaceStats(0);
+    /**
+     * Valeur attaque/défence de départ
+     */
     private static int attackDefenceBefore = MapData.getFourmilierActualRaceStats(1);
+    /**
+     * Valeur sensibilité/puissabce des odeurs de départ
+     */
     private static int sensitivitySmellStrengthBefore = MapData.getFourmilierActualRaceStats(2);
+    /**
+     * Coût dre l'animal
+     */
     private static int cost = 0;
 
+    /**
+     * L'animal est-il terminé
+     */
     private static boolean isFinish = true;
-    private static boolean reset = false;
 
     /**
      * Retourne la valeur de la compétence vitesse/endurance avant les modifications

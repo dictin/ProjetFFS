@@ -4,7 +4,13 @@ import java.awt.*;
 
 public class VirtualFutureAction {
 
+    /**
+     * Endroit ciblé par l'action
+     */
     private Point targetLocation = null;
+    /**
+     * Action à faire en direction de l'endroit ciblé
+     */
     private ActionTypes actionType;
 
     /**

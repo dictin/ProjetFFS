@@ -9,53 +9,150 @@ import java.util.Random;
 public abstract class Animal {
 
 
+    /**
+     * Valeur représentant le fait que l'animal cherche l'odeur la plus intense
+     */
     public static final String LEAST_INTENSE ="lesser";
+    /**
+     * Valeur représentant le fait que l'animal cherche l'odeur la moins intense
+     */
     public static final String MOST_INTENSE ="greater";
-
+    /**
+     * Instance de MasterController
+     */
     private MasterController masterController;
+    /**
+     * Vie maximale de l'animal
+     */
     private int maxHealth = 100;
+    /**
+     * Identifian unique de l'animal
+     */
     private long animalID;
+    /**
+     * Fréquence à laquelle l'animal est permis d'agir
+     */
     private int activationFrequency;
+    /**
+     * Temps de création
+     */
     private int birthday;
+    /**
+     * Position actuelle
+     */
     private Point position;
+    /**
+     * Position lors du dernier tour
+     */
     private Point oldPosition = null;
+    /**
+     * Case occupé
+     */
     private Case occupiedCase;
+    /**
+     * Statistiques moyennes de tous les animaux
+     */
     private int[] meanStats;
+    /**
+     * Statistiques uniques à cette instance d'animal
+     */
     private int[] mainStats;
+    /**
+     * Nom de l'animal
+     */
     private String name;
-    //NameGen = génération du nom ex: Eustache IIème du nom
+    /**
+     * Génération de l'animal
+     * Ex: George le IIe du nom
+     */
     private int nameGen;
+    /**
+     * Vie actuelle de l'animal
+     */
     private int health;
+    /**
+     * Moral de l'animal
+     * Non implémenté
+     */
     private int moral;
+    /**
+     * Odeur que propage l'animal
+     */
     private SmellSource smell;
+    /**
+     * Nom de l'espèce de l'animal
+     */
     private String species;
+    /**
+     * Nourriture transportée par l'animal
+     * Structure dynamique de cette variable non implémentée
+     */
     private int foodCarried = 0;
 
 
-    //The stats are paired by opposition. One plus the opposed should be 25 before any bonuses.
+    /**
+     * Vitesse de l'animal
+     */
     private int speed;
+    /**
+     * Endurance de l'animal
+     */
     private int endurance;
 
+    /**
+     * Puissance d'ataque de l'animal
+     */
     private int attack;
+    /**
+     * Défence de l'animal
+     */
     private int defence;
 
+    /**
+     * Sensibilité aux odeurs
+     */
     private int smellSensitivity;
+    /**
+     * Puisance minimal en-dessous de laquelle l'animal ne sent rien
+     */
     private int smellThreshold;
+    /**
+     * Statistique représentant la puissance de l'odeur émise par l'animal
+     */
     private int smellStrengthStat;
+    /**
+     * Valeur modifiée représentant l'intensité "réelle" de l'odeur émise
+     */
     private int smellIntensity;
 
+    /**
+     * Quantité d'odeur que peut tenir l'animal
+     */
     private int grabQuantity;
+    /**
+     * Quantité de nourriture présentement tenue par l'animal
+     */
     private int carriedFood = 0;
-    private int equipQuantity;
 
+    /**
+     * Équipe dans laquelle se trouve l'animal
+     */
     private int team; // -1: player, 1: enemy 1, 2: enemy 2
-    private int action =1; // par défaut, ils cherchent de la nourriture
 
-    private String spriteName;
+
+    /**
+     * Sprite de l'animal
+     */
     private Image sprite;
 
+    /**
+     * Action que doit commetre l'animal
+     */
     private ActionTypes actionToCommit = null;
 
+    /**
+     * L'animal doit-il bouger
+     */
     private boolean toMove = false;
 
     /**
@@ -70,7 +167,6 @@ public abstract class Animal {
      * @param masterController contrôleur principal
      */
     public Animal(int team, int[] meanStats, String species, Point startingPosition, long animalID, SmellType smellType,final MasterController masterController){
-    //Création du nom de l'animal
         this.masterController = masterController;
         this.birthday= MasterController.getTime();
         Random random = new Random();
