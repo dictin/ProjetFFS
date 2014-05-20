@@ -89,6 +89,10 @@ public class MasterUI extends JLayeredPane implements Observer{
      */
     private int positionActualTvaNews = 701;
     /**
+     * Boolean définissant si la tva news est déjà en mouvement.
+     */
+    private boolean alreadyMoving;
+    /**
      * Nombre de nouvelles dans la barre de nouvelles.
      */
     private int numberOfNews = 0;
@@ -152,6 +156,7 @@ public class MasterUI extends JLayeredPane implements Observer{
      * Booléen permettant de déterminer si le troll a déjà été cliqué.
      */
     private boolean oneClickForTroll = false;
+
     /**
      * Constructeur de l'interface d'utilisateur principale
      * @param masterController le contrôleur principal
@@ -175,35 +180,6 @@ public class MasterUI extends JLayeredPane implements Observer{
         hackEvent.setIcon(myIcon);
         this.add(hackEvent);
         hackEvent.setVisible(false);
-        hackEvent.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if(!oneClickForTroll){
-                MapData.addNewsList("Trololololololol!");
-                    oneClickForTroll = true;
-                }
-            }
-
-            @Override
-            public void mousePressed(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
 
         hideMenus.setIcon(new ImageIcon("IMG/shaman.jpg"));
         hideMenus.setSize(320, 557);
@@ -467,8 +443,9 @@ public class MasterUI extends JLayeredPane implements Observer{
         if(MasterController.getTime() -duration == 100){
         mouvement = -1;
         }
-        if(mouvement ==-1){
+        if(mouvement ==-1 && !alreadyMoving){
             tvaNews.setLocation(25,positionActualTvaNews++);
+            alreadyMoving=false;
 
             if(positionActualTvaNews == positionMaxTvaNews){
                 mouvement = 0;
@@ -479,6 +456,7 @@ public class MasterUI extends JLayeredPane implements Observer{
                 }
                 else if(MapData.getNewsList().size() ==0){
                     tvaNews.setText("Nouvelle de dernière heure!");
+                    alreadyMoving=true;
                 }
 
             }
@@ -555,9 +533,6 @@ public class MasterUI extends JLayeredPane implements Observer{
         hideMenus.setVisible(invisible);
     }
     public void hackEvent(boolean activate){
-        if(activate){
-            oneClickForTroll = false;
-        }
     hackEvent.setVisible(activate);
     }
 }
