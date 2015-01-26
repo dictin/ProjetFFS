@@ -9,18 +9,38 @@ import java.util.Random;
 
 public class MapData {
 
+    /**
+     * Variable contenant la taille en largeur et longueur de la map
+     */
     public static final int MAP_SIZE=30;
+    /**
+     * Tableau contenant les cases de jeu
+     */
     private static Case[][] map = new Case[MAP_SIZE][MAP_SIZE];
+    /**
+     * Position de de la ruche
+     */
     private static int hivePosition;
+    /**
+     * Liste d'animaux actifs
+     */
     private static ArrayList<Animal> animalList = new ArrayList<Animal>();
+    /**
+     * ArrayList de sources d'odeur actives
+     */
     static ArrayList<Case> casesWithSmellSources = new ArrayList<Case>();
+    /**
+     * Identifiant unique affecté à toutes les odeurs
+     */
     private static long uniqueIDCounter;
 
-    public static ArrayList<Animal> getAnimalList() {
-        return animalList;
-    }
-
+    /**
+     *  ArrayList contenant les nouvelles à afficher à l'écran
+     */
     private static ArrayList<String> newsList = new ArrayList<String>();
+    /**
+     * Tableau
+     */
     private static int[] fourmilierActualRaceStats= new int[]{13,13,13};
     private static int[] fourmilierFixRaceStats1 = new int[]{13,13,13};
     private static int[] fourmilierFixRaceStats2= new int[]{13,13,13};
@@ -421,5 +441,13 @@ public class MapData {
         map[hivePosition+1][hivePosition].setTerrain(new WildObject(WildObject.HIVE_ID, true));
         map[hivePosition][hivePosition+1].setTerrain(new WildObject(WildObject.HIVE_ID, true));
         map[hivePosition+1][hivePosition+1].setTerrain(new WildObject(WildObject.HIVE_ID, true));
+    }
+
+    /**
+     * Retourne le ArrayList contenant les animaux actifsé
+     * @return ArrayList
+     */
+    public static ArrayList<Animal> getAnimalList() {
+        return animalList;
     }
 }

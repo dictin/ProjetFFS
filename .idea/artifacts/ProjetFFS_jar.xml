@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ProjetFFS:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProjetFFS_jar</output-path>
+    <root id="archive" name="ProjetFFS.jar">
+      <element id="module-output" name="ProjetFFS" />
+    </root>
+  </artifact>
+</component>
