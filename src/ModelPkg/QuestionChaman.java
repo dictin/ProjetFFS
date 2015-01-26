@@ -6,13 +6,36 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class QuestionChaman {
+
+    /**
+     * Question du chaman
+     */
     private String question;
+    /**
+     * 1ere réponse possible
+     */
     private String answer0;
+    /**
+     * 2eme réponse possible
+     */
     private String answer1;
+    /**
+     * 3eme réponse possible
+     */
     private String answer2;
+    /**
+     * 4eme réponse possible
+     */
     private String answer3;
+    /**
+     * Taille de la question
+     */
     private int questionSize;
-    private int questionTaTuBienRepondu = 0; // 0:= aucune réponse -1:= mauvaise réponse 1:= bonne réponse
+    /**
+     * S'agit-il de la bonne réponse
+     * 0:= aucune réponse, -1 := mauvaise réponse, 1 := bonne réponse
+     */
+    private int questionTaTuBienRepondu = 0; //
 
     /**
      * Constructeur d'une question du chaman

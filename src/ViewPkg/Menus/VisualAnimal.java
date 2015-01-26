@@ -5,6 +5,9 @@ import java.awt.*;
 
 public class VisualAnimal extends JComponent {
 
+    /**
+     * Image de l'animal.
+     */
     private Image sprite;
 
     /**

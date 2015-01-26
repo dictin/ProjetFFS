@@ -12,33 +12,103 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class PlayerData implements Observable {
+    /**
+     * Nourriture que possède le joueur
+     */
     private int food = 300;
+    /**
+     * Score du joueur
+     */
     private int score = 0;
+    /**
+     * Niveau du joueur
+     */
     private int level = 1;
+    /**
+     * Population du joueur
+     */
     private int population = 0;
+    /**
+     * Nombre de morts sous le joueur
+     */
     private int dead = 0;
+    /**
+     * Un item de l'inventaire a-t-il été sélectionné
+     */
     private boolean selectInventory = false;
+    /**
+     * Évènement courrant
+     */
     private GameEvent currentEvent;
+    /**
+     * Question à laque;;e est rendue le joueur
+     */
     private int questionNumber = 1;
-    private ArrayList<TempItemInstance> passivePermInstances = new ArrayList<TempItemInstance>(); //Contient les effects des items innactifs de l'inventaire du joueur
-    private ArrayList<TempItemInstance> passiveTempInstances = new ArrayList<TempItemInstance>(); //Contient les effects des items innactifs de l'inventaire du joueur
+    /**
+     * Contient les effets des items permanents innactifs de l'inventaire du joueur
+     */
+    private ArrayList<TempItemInstance> passivePermInstances = new ArrayList<TempItemInstance>();
+    /**
+     * Contient les effects des items permanants innactifs de l'inventaire du joueur
+     */
+    private ArrayList<TempItemInstance> passiveTempInstances = new ArrayList<TempItemInstance>();
+    /**
+     * Liste des noms des items temporaires dans l'inventaire du joueur
+     */
     private ArrayList<String> consumablesInventory = new ArrayList<>();
+    /**
+     * Liste des noms des items permanents dans l'inventaire du joueur
+     */
     private ArrayList<String> permanentInventory = new ArrayList<>();
+    /**
+     * Contient les effects actifs des items permanants de l'inventaire du joueur
+     */
     private ArrayList<TempItemInstance> permanentInstances = new ArrayList<TempItemInstance>();
+    /**
+     * Contient les effects actifs des items temporaires de l'inventaire du joueur
+     */
     private ArrayList<TempItemInstance> tempItemInstances = new ArrayList<TempItemInstance>();
+    /**
+     * Modificateurs des statistiques liés aux items
+     */
     private static int[] statModifiers = new int[]{0,0,0,0,0,0,0,0};
+    /**
+     * Nourriture à obtenir avant le prochain niveau
+     */
     private static int[] numberFoodGoToNextLevel = new int[]{1000,2000,3000,4000};
+    /**
+     * Nourriture ramassée, en total, par le joueur
+     */
     private int pickUpFood = 0;
+    /**
+     * Karma du joueur
+     */
     private int karma=0;
+    /**
+     * Gravité du prochain évènement pour le joueur
+     */
     private int nextEventGravity=1;
+    /**
+     * Faut-il poser une question
+     */
     private boolean isItTimeForChaman = false;
 
+    /**
+     * Le niveau est-il terminé
+     */
+    private boolean isTheLevelFinished = false;
 
-
-    private boolean isTheLevelFinish = false;
-
+    /**
+     * Identifiant pour les items temporaires
+     */
     public static final int TEMP_ITEM = 0;
+    /**
+     * Identifiant pour les items temporaires
+     */
     public static final int PERM_ITEM = 1;
+
+
+    //Identifiants pour chaque statistiques-----------------------------------------------------------------------------
 
     public static final int HP_STATID = 0;
     public static final int SPD_STATID = 1;
@@ -49,6 +119,11 @@ public class PlayerData implements Observable {
     public static final int END_STATID = 6;
     public static final int GBTQ_STATID = 7;
 
+    //------------------------------------------------------------------------------------------------------------------
+
+    /**
+     * Observateurs de la classe
+     */
     private ArrayList<Observer> observers = new ArrayList<>();
 
     /**
@@ -100,7 +175,7 @@ public class PlayerData implements Observable {
     }
 
     /**
-     *
+     * Réduit d'un tour la durée restante des items
      */
     public void tempItemTurn(){
         for(int i = 0; i < this.tempItemInstances.size(); i++){
@@ -148,7 +223,7 @@ public class PlayerData implements Observable {
     }
 
     /**
-     *
+     * Active les effets des instances pour le tour
      */
     public void activateInstancesForTurn(){
         Iterator<TempItemInstance> iterator;
@@ -276,7 +351,6 @@ public class PlayerData implements Observable {
         TempItemInstance itemInstance;
 
         if (item.getEffect() instanceof BoostEffect){
-            item.firstActivation();
             itemInstance = (((BoostEffect) item.getEffect()).getTempInstance());
             this.addPassiveItem(itemInstance);
 
@@ -428,16 +502,16 @@ public class PlayerData implements Observable {
      * Méthode qui retourne si le niveau est terminé ou non
      * @return si le niveau est terminé ou non
      */
-    public boolean isTheLevelFinish() {
-        return isTheLevelFinish;
+    public boolean isTheLevelFinished() {
+        return isTheLevelFinished;
     }
 
     /**
      * Méthode qui modifie si le niveau est terminé ou non
      * @param isTheLevelFinish nouvelle valeurs de si le niveau est terminé ou non
      */
-    public void setTheLevelFinish(boolean isTheLevelFinish) {
-        this.isTheLevelFinish = isTheLevelFinish;
+    public void setTheLevelFinished(boolean isTheLevelFinish) {
+        this.isTheLevelFinished = isTheLevelFinish;
     }
 
     /**

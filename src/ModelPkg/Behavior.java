@@ -9,9 +9,11 @@ import java.util.Random;
 
 public class Behavior {
 
-    //objective est composé de -1,0 et 1. il indique le déplacement à faire. Donc coordonné + objective = noulles coordonneé du fourmilier après le déplacement
+    /**
+     * Cette valeur contient l'objectif vers lequel l'animal veut se déplacer
+     * objective est composé de -1,0 et 1. il indique le déplacement à faire. Donc coordonné + objective = noulles coordonneé du fourmilier après le déplacement
+     */
     private static Point objective;
-    private static final int SUBSECTION_SIZE = 3;
 
     /**
      * Méthode qui choissi aléatoirement l'objectif du fourmilier.

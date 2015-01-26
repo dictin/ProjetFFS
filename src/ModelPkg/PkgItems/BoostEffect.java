@@ -3,6 +3,9 @@ package ModelPkg.PkgItems;
 
 import ModelPkg.PlayerData;
 
+/**
+ * Cet énum contient les types d'effets que peuvent avoir les items du jeu
+ */
 public enum BoostEffect implements ItemEffect {
 
     LOW_HP_BOOST(0, 3, -1),
@@ -76,9 +79,17 @@ public enum BoostEffect implements ItemEffect {
     TEMP_SUPER_GBQT_BOOST(7, 50, 12);
 
 
-
+    /**
+     * Puissance de l'augmentation donnée
+     */
     private int boostValue;
+    /**
+     * Statistique à augmenter
+     */
     private int statID;
+    /**
+     * Durée pour laquelle augmenter la statistique
+     */
     private int duration;
 
     private BoostEffect(int statID, int boostValue, int duration){
@@ -87,6 +98,9 @@ public enum BoostEffect implements ItemEffect {
         this.duration = duration;
     }
 
+    /**
+     * Ajoute le modificateur au jeu
+     */
     @Override
     public void activate(){
         PlayerData.addMod(this.statID, this.boostValue);

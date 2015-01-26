@@ -11,9 +11,25 @@ import java.io.IOException;
 
 public class WildObject {
 
+    /**
+     * L'obstacle peut-il être traversé
+     */
     private boolean traversable;
+    /**
+     * De quel type d'obstacle s'agit-il
+     */
     private int type = 0;
+    /**
+     * Quel type d'odeur émet l'obstacle
+     */
     private SmellSource smellSource;
+    /**
+     * Quelle image représente cet obstacle
+     */
+    private Image[] images = new Image[8];
+
+
+    //Identifiants uniques pour chaque type d'obstacle------------------------------------------------------------------
 
     public static final int ROCK_ID = 1;
     public static final int TREE_ID = 2;
@@ -24,21 +40,10 @@ public class WildObject {
     public static final int FOOD_ID = 7;
     public static final int ITEM_ID = 8;
     public static final int EMPTY_ID = 0;
-    /*
-     * 1: Rock  - Climb
-     * 2: Tree  - Impassable
-     * 3: Water - Swim
-     * 4: Hole  - Fly
-     * 5: Hive  - Impassable
-     * 6:
-     * 7: Food
-     * 8: item
-     * 0: Nothing
-     *
-     *
-     */
 
-    private Image[] images = new Image[8];
+    //------------------------------------------------------------------------------------------------------------------
+
+
 
 
     public WildObject(int type, boolean traversable){

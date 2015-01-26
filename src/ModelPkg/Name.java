@@ -11,7 +11,13 @@ import java.util.ArrayList;
 
 public class Name {
 
+    /**
+     * Liste des noms possibles
+     */
     private static ArrayList<String> nameList = new ArrayList<String>();
+    /**
+     * Liste des générations associés aux noms
+     */
     private static int[] genList = new int[25];
 
     /**

@@ -1,6 +1,9 @@
 package ModelPkg.PkgItems;
 
 
+/**
+ * Cet énum contient tous les objets du jeu
+ */
 public enum Items {
 
     //Équipement permanent qui peut être installé entre les niveaux pour un boost constant
@@ -75,11 +78,25 @@ public enum Items {
     POTION_GBQT_51(51, "Potion de portage, super", BoostEffect.TEMP_SUPER_GBQT_BOOST,80),;
 
 
-
+    /**
+     * Identifiant de l'item
+     */
     private int itemID;
+    /**
+     * Nom de l'item
+     */
     private String name;
+    /**
+     * Effet que possède l'item
+     */
     private ItemEffect effect;
+    /**
+     * S'il s'agit d'un billet de lotterie, quelle est la valeur du prix
+     */
     private int winnings = 0;
+    /**
+     * Coût d'achat de l'item
+     */
     private int price;
 
 
@@ -92,18 +109,6 @@ public enum Items {
 
     public ItemEffect getEffect() {
         return effect;
-    }
-
-
-
-    public void firstActivation(){
-        ItemEffect effect = this.getEffect();
-        if (effect instanceof BoostEffect){
-            TempItemInstance instance = ((BoostEffect) effect).getTempInstance();
-            //Ajouter l'instance temporaire au arraylist du joueur
-        }else if (effect instanceof LotteryEffects){
-            this.winnings = ((LotteryEffects) effect).activateLottery();
-        }
     }
 
     public String getName() {

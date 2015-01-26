@@ -9,7 +9,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 public class ShopListHandler implements ListSelectionListener {
-
+    /**
+     * Information sur les objets du magasin
+     */
     private ShopItemInfoData shopItemInfoData;
 
     /**

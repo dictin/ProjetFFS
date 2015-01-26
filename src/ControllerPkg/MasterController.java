@@ -14,19 +14,53 @@ import java.util.ArrayList;
 
 
 public class MasterController extends Thread{
-
+    /**
+     * Contrôleur des objets
+     */
     private ItemController itemController = new ItemController(this);
+    /**
+     * Contrôleur des informations du magasin
+     */
     private ShopInfoController shopInfoController = new ShopInfoController();
+    /**
+     * Contrôleur du terrain de jeu
+     */
     private static MapController mapController = new MapController();
+    /**
+     * Contrôleur des questions du Chaman
+     */
     private QuestionChamanController chamanController = new QuestionChamanController();
+    /**
+     * Contrôleur des données du joueur
+     */
     private PlayerDataController playerDataController = new PlayerDataController();
-
+    /**
+     * Fenêtre principale
+     */
     private MasterFrame mF;
+    /**
+     * Interface principale du joueur
+     */
     private static MasterUI mUI=null;
+    /**
+     * Temps entre les tours du Thread
+     */
     private int sleepTime;
+    /**
+     * Temps du jeu
+     */
     private static int time =0;
+    /**
+     * diminution des odeurs
+     */
     private int smellDecayTime=60;
+    /**
+     * Fréquence des événements
+     */
     private int eventFrequency=300;
+    /**
+     * Contrôleur des événements
+     */
     private EventController eventRoller;
 
     /**
@@ -82,7 +116,7 @@ public class MasterController extends Thread{
 
 
 
-               // deadAnimal();
+
 
                 if(this.getPlayerDataController().getNumberFoodToGo() <= 0){
                 //if(time == 300){
@@ -115,17 +149,16 @@ public class MasterController extends Thread{
                         getPlayerDataController().setCurrentEvent(new GameEventSunnyWeather());
                     }
                     else{
+                        if (getPlayerDataController().getCurrentEvent() instanceof LingeringGameEvents){
+                            ((LingeringGameEvents)getPlayerDataController().getCurrentEvent()).lingeringActivation();
+                        }
                         int duration=getPlayerDataController().getCurrentEvent().getDuration();
                         if (duration==0){
-                            if (getPlayerDataController().getCurrentEvent() instanceof LingeringHackTroll){
-                                this.activateHackView(false);
-                            }
                             getPlayerDataController().setCurrentEvent(eventRoller.whatIsTheWeather());
                             getPlayerDataController().getCurrentEvent().firstTimeActivation();
                         }
                         else{
                             getPlayerDataController().getCurrentEvent().decreaseDuration();
-                            ((LingeringGameEvents)getPlayerDataController().getCurrentEvent()).lingeringActivation();
                         }
                     }
                 }
@@ -141,6 +174,8 @@ public class MasterController extends Thread{
                 mUI.actualiser();
                 mUI.invalidate();
                 mUI.repaint();
+
+                this.playerDataController.activateInstancesForTurn();
             } catch (InterruptedException ex) {
                 System.out.println("Interrupted Exception: ");
                 ex.printStackTrace();
@@ -317,33 +352,7 @@ public class MasterController extends Thread{
 
         }
     }
-    public void removeOneFourmilier( ArrayList<Animal> animalArrayList){
-        while(animalArrayList.size() !=0){
-            MapData.addNewsList(animalArrayList.get(0).getName() + " est malheureusement décédé!!");
-            disposeAnimal(animalArrayList.remove(0));
 
-        }
-        }
-
-
-    /**
-     *
-     */
-        public static void checkIfDeadFourmilier(){
-        ArrayList<Animal> animalArrayList = MapData.getAnimalList();
-        ArrayList<Animal> animalArrayListTemporaire = new ArrayList<>();
-        while(animalArrayList.size() !=0){
-            if(animalArrayList.get(0).getHealth() >0){
-                animalArrayListTemporaire.add(animalArrayList.remove(0));
-            }
-            else{
-                disposeAnimal(animalArrayList.remove(0));
-            }
-        }
-        while(animalArrayListTemporaire.size() != 0){
-            animalArrayList.add(animalArrayListTemporaire.remove(0));
-        }
-    }
     public void deadAnimal(){
     ArrayList<Animal> animalArrayList = MapData.getAnimalList();
     ArrayList<Integer> deadAnimalIndex = new ArrayList<>();

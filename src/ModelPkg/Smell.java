@@ -1,15 +1,32 @@
 package ModelPkg;
 
 public class Smell implements Cloneable {
+
+    /**
+     * Identifian unique de l'odeur
+     */
     private long iD;
+    /**
+     * Intensité de l'odeur
+     */
     private int intensity;
+
+    //Identifiants des types d'odeurs-----------------------------------------------------------------------------------
+
     public static final int FOOD_ODOR = 1;
     public static final int ENEMY_ODOR = 2;
     public static final int ALLY_ODOR = 3;
     public static final int HIVE_ODOR = 4;
 
+    //------------------------------------------------------------------------------------------------------------------
 
+    /**
+     * Équipe appartenant à l'odeur
+     */
     private int team;
+    /**
+     * Type d'odeur
+     */
     private SmellType type;
 
     public void setIntensity(int intensity) {

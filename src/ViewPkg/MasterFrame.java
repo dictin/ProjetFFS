@@ -9,6 +9,9 @@ import java.awt.*;
 public class MasterFrame extends JFrame {
     public static final Dimension GAME_FRAME_SIZE =new Dimension(1000,700);
 
+    /**
+     * Panneau principal et unique du jeu
+     */
     private MasterUI mUI;
 
     /**

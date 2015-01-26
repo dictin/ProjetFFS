@@ -7,15 +7,23 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class BuyButtonHandler implements ActionListener {
-
+    /**
+     * le Contrôleur principal
+     */
     MasterController masterController;
+    /**
+     * liste des objets dans le magasin
+     */
     JList<String> list;
+    /**
+     * Contrôleur des objets du magasin
+     */
     ItemController itemController;
 
     /**
      * Constructeur pour le controller du bouton d'achat dans le magasin
      * @param list liste des objets dans le magasin
-     * @param controller le controller principale
+     * @param controller le Contrôleur principal
      */
     public BuyButtonHandler(JList<String> list, final MasterController controller){
         super();

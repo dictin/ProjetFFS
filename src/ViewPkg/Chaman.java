@@ -11,18 +11,53 @@ import java.awt.event.MouseEvent;
 import java.util.Random;
 
 public class Chaman extends JLabel{
+    /**
+     * Numéro de la question.
+     */
     private int noQuestion;
-
+    /**
+     * JLabel contenant la première partie de la question à laquelle il faut répondre.
+     */
     private JLabel question = new JLabel();
+    /**
+     * Suite de question.
+     */
     private JLabel questionNext = new JLabel();
+    /**
+     * Suite de questionNext.
+     */
     private JLabel questionNext2 = new JLabel();
+    /**
+     * Suite de questionNext2.
+     */
     private JLabel questionNext3 = new JLabel();
+    /**
+     * Premier choix de réponse.
+     */
     private JLabel answer0 = new JLabel();
+    /**
+     * Second choix de réponse.
+     */
     private JLabel answer1 = new JLabel();
+    /**
+     * Troisième choix de réponse.
+     */
     private JLabel answer2 = new JLabel();
+    /**
+     * Quatrième choix de réponse.
+     */
     private JLabel answer3 = new JLabel();
+    /**
+     * Contrôleur gérant les questions
+     */
     private QuestionsHandler questionsHandler;
+    /**
+     * Contrôleur principal
+     */
     private MasterController controller;
+    /**
+     * Modèle de la question.
+     */
     private ModelPkg.QuestionChaman actualQuestion;
 
     /**

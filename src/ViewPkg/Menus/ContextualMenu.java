@@ -7,7 +7,13 @@ import java.awt.*;
 
 public abstract class ContextualMenu extends JComponent {
 
+    /**
+     * Nom du menu afin de l'identifier dans le code.
+     */
     private String menuName;
+    /**
+     * Taille du menu.
+     */
     private Dimension menuZone=new Dimension(325,650);
 
     /**

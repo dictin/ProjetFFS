@@ -7,12 +7,30 @@ import java.util.ArrayList;
 
 public class ShopItemInfoData implements Observable {
 
+    /**
+     * Nom de l'item
+     */
     private String name = "";
+    /**
+     * Coût de l'item
+     */
     private int cost = 0;
+    /**
+     * Statistique modifiée par l'item
+     */
     private int modifiedStatID = 0;
+    /**
+     * Quantitée modifiée
+     */
     private int modifiedValue = 0;
+    /**
+     * S'agit-il d'un item permanent
+     */
     private boolean isPermanent = false;
 
+    /**
+     * Observateurs de la classe
+     */
     private ArrayList<Observer> observers = new ArrayList<Observer>();
 
     /**

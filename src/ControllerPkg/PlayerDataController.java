@@ -11,6 +11,9 @@ import java.util.ArrayList;
 
 public class PlayerDataController {
 
+    /**
+     * Données du joueur
+     */
     private PlayerData playerData;
 
     /**
@@ -266,7 +269,7 @@ public class PlayerDataController {
      * @return si le niveau est terminé ou non
      */
     public boolean isTheLevelFinish() {
-        return this.playerData.isTheLevelFinish();
+        return this.playerData.isTheLevelFinished();
     }
 
     /**
@@ -274,7 +277,7 @@ public class PlayerDataController {
      * @param finish nouvelle valeur qui détermine si le niveau est terminé
      */
     public void setTheLevelFinish(boolean finish) {
-        this.playerData.setTheLevelFinish(finish);
+        this.playerData.setTheLevelFinished(finish);
     }
 
     /**
@@ -300,6 +303,13 @@ public class PlayerDataController {
      */
     public int getStatMod(int statID){
         return this.playerData.getStatMod(statID);
+    }
+
+    /**
+     * Réduit d'un tour la durée restante des effets temporaires.
+     */
+    public void activateInstancesForTurn(){
+        this.playerData.tempItemTurn();
     }
 
 }

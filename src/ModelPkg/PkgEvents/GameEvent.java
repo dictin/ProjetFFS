@@ -2,9 +2,26 @@ package ModelPkg.PkgEvents;
 
 public abstract class GameEvent {
 
+    /**
+     * Type d'évènement déclenché
+     */
     private GameEventType type;
+    /**
+     * Description de l'évènement déclenché
+     */
     private String description; //Description qui va apparaître pour le joueur
+
+    /**
+     * Valeur numérique représentant la gravité de l'évènement à venir
+     */
     private int gravity=0;
+
+
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
     private int duration=0;
 
     /**
