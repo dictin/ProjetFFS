@@ -1,4 +1,4 @@
-package ModelPkg;
+﻿package ModelPkg;
 
 import ModelPkg.WildObjects.FoodSource;
 import ModelPkg.WildObjects.WildObject;
@@ -10,6 +10,28 @@ import java.util.Random;
 public class MapData {
 
     /**
+
+     * Variable contenant la taille en largeur et longueur de la map
+     */
+    public static final int MAP_SIZE=30;
+    /**
+     * Tableau contenant les cases de jeu
+     */
+    private static Case[][] map = new Case[MAP_SIZE][MAP_SIZE];
+    /**
+     * Position de de la ruche
+     */
+    private static int hivePosition;
+    /**
+     * Liste d'animaux actifs
+     */
+    private static ArrayList<Animal> animalList = new ArrayList<Animal>();
+    /**
+     * ArrayList de sources d'odeur actives
+     */
+    static ArrayList<Case> casesWithSmellSources = new ArrayList<Case>();
+    /**
+     * Identifiant unique affecté à toutes les odeurs
      * Taille x/y du tableau de cases
      */
     public static final int MAP_SIZE=30;
@@ -31,15 +53,24 @@ public class MapData {
     static ArrayList<Case> casesWithSmellSources = new ArrayList<Case>();
     /**
      * Identifiant unique à une case
+
      */
     private static long uniqueIDCounter;
 
     /**
+
+     *  ArrayList contenant les nouvelles à afficher à l'écran
+     */
+    private static ArrayList<String> newsList = new ArrayList<String>();
+    /**
+     * Tableau
+
      * Liste des nouvelles à afficher
      */
     private static ArrayList<String> newsList = new ArrayList<String>();
     /**
      * Statistiques de base des fourmilliers
+
      */
     private static int[] fourmilierActualRaceStats= new int[]{13,13,13};
     /**
@@ -455,6 +486,11 @@ public class MapData {
         map[hivePosition+1][hivePosition+1].setTerrain(new WildObject(WildObject.HIVE_ID, true));
     }
 
+
+    /**
+     * Retourne le ArrayList contenant les animaux actifsé
+     * @return ArrayList
+     */
     public static ArrayList<Animal> getAnimalList() {
         return animalList;
     }
